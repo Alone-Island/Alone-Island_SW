@@ -26,14 +26,17 @@ public class PlayerAction : MonoBehaviour
 
     void Update()
     {
-        h = Input.GetAxisRaw("Horizontal");     // C : 입력된 수평 이동을 대입 (-1, 0, 1)
-        v = Input.GetAxisRaw("Vertical");       // C : 입력된 수직 이동을 대입 (-1, 0, 1)
+        // C : 입력된 수평/수직 이동을 대입 (-1, 0, 1)
+        // C : GameManager의 isTPShow를 사용하여 talkPanel이 보여지고 있을 때는 플레이어의 이동을 제한
+        h = manager.isTPShow ? 0 : Input.GetAxisRaw("Horizontal");
+        v = manager.isTPShow ? 0 : Input.GetAxisRaw("Vertical");
 
         // C : 키보드 입력(down, up)이 horizontal인지 vertical인지 확인
-        bool hDown = Input.GetButtonDown("Horizontal");
-        bool hUp = Input.GetButtonUp("Horizontal");
-        bool vDown = Input.GetButtonDown("Vertical");
-        bool vUp = Input.GetButtonUp("Vertical");
+        // C : GameManager의 isTPShow를 사용하여 talkPanel이 보여지고 있을 때는 플레이어의 이동을 제한
+        bool hDown = manager.isTPShow ? false : Input.GetButtonDown("Horizontal");
+        bool hUp = manager.isTPShow ? false : Input.GetButtonUp("Horizontal");
+        bool vDown = manager.isTPShow ? false : Input.GetButtonDown("Vertical");
+        bool vUp = manager.isTPShow ? false : Input.GetButtonUp("Vertical");
 
         // C : isHorizonMove 값 설정
         if (hDown)           // C : 수평 키를 누르면 isHorizonMove는 true

@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerAction : MonoBehaviour
 {
     public float speed;     // C : Dr.Kim 이동 속력
+    public GameManager manager;         // C : player에서 GameManager의 함수를 호출할 수 있도록 manager 변수 생성
 
     float h;    // C : horizontal (수평 이동)
     float v;    // C : vertical (수직 이동)
@@ -68,7 +69,7 @@ public class PlayerAction : MonoBehaviour
 
         // C : scanObject 출력
         if (Input.GetButtonDown("Jump") && scanObject != null)      // C : 스페이스바를 눌렀고, scanObject가 있으면
-            Debug.Log("this is :" + scanObject.name);
+            manager.Action(scanObject);     // C : 맵의 대화창에 적절한 메세지가 뜰 수 있도록 Action()함수 실행
     }
 
     void FixedUpdate()

@@ -13,11 +13,20 @@ public class GameManager : MonoBehaviour
     public TalkManager talkManager; // C : GameManager에서 TalkManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public int talkIndex;           // C : 필요한 talkIndex를 저장하기 위한 변수 생성
 
+    int randomNum = 0;                  // C : AI와의 대화 시, 랜덤한 대화 내용을 출력하기 위한 변수 생성
+
     // C : 플레이어가 Object에 대해 조사 시(플레이어의 액션 발생 시) 적절한 내용을 포함한 대화창 띄워주기
     public void Action(GameObject scanObj)
     {
         scanObject = scanObj;               // C : parameter로 들어온 스캔된 game object를 public 변수인 scanObject에 대입
         ObjectData objData = scanObject.GetComponent<ObjectData>();     // C : scanObject의 ObjectData instance 가져오기
+
+        if (objData.id == 1000 && randomNum == 0)      // C : objData가 AI이고, 대화 첫 시작이면
+        {
+            System.Random rand = new System.Random();
+            randomNum = rand.Next(1, 11);                  // C : 1~10까지의 난수를 대입
+        }
+
         Talk(objData.id);                   // C : 필요한 talkPanel text 값 가져오기
 
         talkPanel.SetActive(isTPShow);      // C : talkPanel 숨기거나 보여주기
@@ -26,12 +35,14 @@ public class GameManager : MonoBehaviour
     // C : 상황에 따라 적절하게 필요한 talkPanel text 값 대화창에 띄우기
     void Talk(int id)
     {
-        string talkData = talkManager.GetTalkData(id, talkIndex);     // C : 조사한 object에 해당하는 talkData 중 talkIndex 위치의 string을 가져오기
+        // C : 조사한 object에 해당하는 talkData 중 talkIndex 위치의 string을 가져오기
+        string talkData = talkManager.GetTalkData(id + randomNum, talkIndex);
 
         if (talkData == null)           // C : 해당하는 id의 talkData string들을 모두 가져왔다면
         {
             isTPShow = false;           // C : talkPanel의 show 상태 false로 저장
             talkIndex = 0;              // C : 다음 Talk()함수 사용을 위해 talkIndex를 0으로 초기화
+            randomNum = 0;              // C : 다음 Talk()함수 사용을 위해 randomNum을 0으로 초기화
             return;
         }
         

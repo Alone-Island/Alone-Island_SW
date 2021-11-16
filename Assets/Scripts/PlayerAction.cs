@@ -12,10 +12,13 @@ public class PlayerAction : MonoBehaviour
     bool isHorizonMove;     // 수평 이동이면 true, 수직 이동이면 false
 
     Rigidbody2D rigid;  // 물리 제어
+    Animator anim;      // 애니메이션 제어
 
     void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();    // component instance 생성
+        // component instance 생성
+        rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -30,10 +33,27 @@ public class PlayerAction : MonoBehaviour
         bool vUp = Input.GetButtonUp("Vertical");
 
         // isHorizonMove 값 설정
-        if (hDown || vUp)           // 수평 키를 누르거나 수직 키를 떼면 isHorizonMove는 true
+        if (hDown)           // 수평 키를 누르면 isHorizonMove는 true
             isHorizonMove = true;
-        else if (vDown || hUp)      // 수직 키를 누르거나 수평 키를 떼면 isHorizonMove는 false
+        else if (vDown)      // 수직 키를 누르면 isHorizonMove는 false
             isHorizonMove = false;
+        else if (hUp || vUp)        // 수평 키나 수직 키의 양 쪽(e.g.(<- && ->))을 둘 다 눌렀다 뗐을 때도 고려
+            isHorizonMove = h != 0;
+
+        // Animation - moving
+        if (anim.GetInteger("hAxisRaw") != h)       // "hAxisRaw" 값이 현재 h 값과 다를 때
+        {
+            anim.SetBool("isChange", true);
+            anim.SetInteger("hAxisRaw", (int)h);    // animation "hAxisRaw" parameter 값 설정
+        }
+        else if (anim.GetInteger("vAxisRaw") != v)  // "vAxisRaw" 값이 현재 v 값과 다를 때
+        {
+            anim.SetBool("isChange", true);
+            anim.SetInteger("vAxisRaw", (int)v);    // animation "vAxisRaw" parameter 값 설정
+        }
+        else
+            anim.SetBool("isChange", false);        // 방향 변화를 위한 animation parameter 값을 false로 설정
+
     }
 
     void FixedUpdate()

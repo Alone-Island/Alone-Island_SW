@@ -7,6 +7,7 @@ public class PlayerAction : MonoBehaviour
 {
     public float speed;     // C : Dr.Kim 이동 속력
     public GameManager manager;         // C : player에서 GameManager의 함수를 호출할 수 있도록 manager 변수 생성
+    public SpecialEventManager specialManager;  // J : player에서 SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
 
     float h;    // C : horizontal (수평 이동)
     float v;    // C : vertical (수직 이동)
@@ -70,9 +71,14 @@ public class PlayerAction : MonoBehaviour
         if (hDown && h == 1)                // C : 수평 키를 눌렀고, 입력된 수평 값이 1이면
             dirVec = Vector3.right;         // C : dirVec 값은 right
 
-        // C : scanObject 출력
-        if (Input.GetButtonDown("Jump") && scanObject != null)      // C : 스페이스바를 눌렀고, scanObject가 있으면
-            manager.Action(scanObject);     // C : 맵의 대화창에 적절한 메세지가 뜰 수 있도록 Action()함수 실행
+        // J : 스페이스바 누름
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (specialManager.AItalk)  // J : 스페셜 이벤트 진행 중이라면
+                specialManager.Talk();  // J : specialManager의 Talk 함수 호출
+            else if (scanObject != null)        // J : 스페셜 이벤트 진행 중이 아니고 scanObject가 있으면
+                manager.Action(scanObject);     // C : 맵의 대화창에 적절한 메세지가 뜰 수 있도록 Action()함수 실행
+        }
     }
 
     void FixedUpdate()

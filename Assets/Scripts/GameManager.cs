@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     public GameObject talkPanel;    // C : 대화창
     public bool isTPShow;           // C : talkPanel의 상태 저장 (보여주기 or 숨기기)
     public TalkManager talkManager; // C : GameManager에서 TalkManager의 함수를 호출할 수 있도록 talkManager 변수 생성
-    public int talkIndex;           // C : 필요한 talkIndex를 저장하기 위한 변수 생성+
+    public int talkIndex;           // C : 필요한 talkIndex를 저장하기 위한 변수 생성
+
+    public SpecialEventManager specialManager; // J : GameManager에서 SpecialEventManager의 함수를 호출할 수 있도록 talkManager 변수 생성
 
     int randomNum = 0;                  // C : AI와의 대화 시, 랜덤한 대화 내용을 출력하기 위한 변수 생성
     
@@ -19,7 +21,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator SpecialEvent(float delayTime)
     {
         yield return new WaitForSeconds(delayTime); // J : delayTime(10)을 기다린 후 재개
-        //SpecialEvent 함수 코드
+        specialManager.Action();            // J : specialManager의 Action 함수 호출
         StartCoroutine("SpecialEvent", 10); // J : SpecialEvent 함수 호출
     }
 

@@ -6,16 +6,18 @@ using UnityEngine;
 public class TalkManager : MonoBehaviour
 {
     Dictionary<int, string[]> talkData;       // C : 대화 데이터를 저장하는 dictionary 변수
+    Dictionary<int, string[]> selectData;     // J : 선택지 데이터를 저장하는 dictionary 변수
 
     void Awake()
     {
         // C : dictionary instance 생성
         talkData = new Dictionary<int, string[]>();
-        GenerateTalkData();
+        selectData = new Dictionary<int, string[]>();
+        GenerateData();
     }
 
     // C : talkData 생성
-    void GenerateTalkData()
+    void GenerateData()
     {
         // C : key가 1000~1009이면 AI와의 dialogue data (Dr.Kim이 AI에게 대화를 걸 때), 즉 공감 학습
         talkData.Add(1001, new string[] { "제 생일은 언제일까요~?" });
@@ -34,6 +36,26 @@ public class TalkManager : MonoBehaviour
         talkData.Add(200, new string[] { "건축을 학습하시겠습니까?", "건축을 학습합니다." });
         talkData.Add(300, new string[] { "공예를 학습하시겠습니까?", "공예를 학습합니다." });
         talkData.Add(400, new string[] { "공학을 학습하시겠습니까?", "공학을 학습합니다." });
+
+        // J : key가 10001~10013이면 스페셜 이벤트에 대한 text data (10001~10004 : 선택지 2개, 10011~10013 : 선택지 3개)
+        talkData.Add(10001, new string[] { "배터리가 많이 닳았어요ㅠㅠ", "하루만 아무것도 안하고 싶어요.." });
+        talkData.Add(10002, new string[] { "박사님을 위해 새로운 열매를 따왔어요!" });
+        talkData.Add(10003, new string[] { "저기 야생동물이 있는 것 같아요!", "잡아서 구워먹을까요?" });
+        talkData.Add(10004, new string[] { "저기 야생동물이 있는 것 같아요!", "잡아서 구워먹을까요?" });
+        talkData.Add(10011, new string[] { "이 꽃 너무 이쁘지 않아요??" });
+        talkData.Add(10012, new string[] { "(AI가 물에 빠졌다)" });
+        talkData.Add(10013, new string[] { "(나무가 쓰러져서 AI가 다쳤다. 어떻게 할까?)" });
+        talkData.Add(10014, new string[] { "*추후 추가 예정*" });
+
+        // J : key가 10001~10013이면 스페셜 이벤트에 대한 선택지 data
+        selectData.Add(10001, new string[] { "그래 하루 쉬자", "안돼안돼 지금 바로 일 해야돼!" });
+        selectData.Add(10002, new string[] { "고마워~ 먹어보자!", "고맙지만 처음보는 열매는 위험해! " });
+        selectData.Add(10003, new string[] { "얼마만의 고기야! 당장 가자!", "야생동물은 너무 위험해. 가지말자" });
+        selectData.Add(10004, new string[] { "얼마만의 고기야! 당장 가자!", "야생동물은 너무 위험해. 가지말자" });
+        selectData.Add(10011, new string[] { "꽃보다 너가 더 예뻐", "예쁘네~", "별로..." });
+        selectData.Add(10012, new string[] { "바로 손을 내밀자!", "알아서 나올거야", "너무 멀어! 나뭇가지를 찾아서 구해야겠다!" });
+        selectData.Add(10013, new string[] { "고장난 곳이 있는지 하루동안 찬찬히 살펴보자", "대충 괜찮은지 확인하자", "나무를 치워주고 다시 작업을 시작하자" });
+        selectData.Add(10014, new string[] { "선택지1", "선택지2", "선택지3" });
     }
 
     // C : 필요한 TalkData를 return
@@ -43,5 +65,14 @@ public class TalkManager : MonoBehaviour
             return null;
 
         return talkData[id][talkIndex];     // C : 필요한 문장을 id와 index를 통해 return
+    }
+
+    // J : 필요한 SelectData를 return
+    public string GetSelectData(int id, int selectIndex)
+    {
+        if (selectIndex == selectData[id].Length)       // J : selectIndex가 selectData[id]의 마지막 index + 1이면
+            return null;
+
+        return selectData[id][selectIndex];     // J : 필요한 문장을 id와 index를 통해 return
     }
 }

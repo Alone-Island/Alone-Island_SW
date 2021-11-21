@@ -38,8 +38,10 @@ public class SpecialEventManager : MonoBehaviour
         if (talkData == null)   // J : 해당 talkID의 talkData를 모두 가져왔다면
         {
             AItalk = false;     // J : Jump키를 눌렀을 때 object scan을 할 수 있게 함
+            talkIndex = 0;      // J : talk index 초기화
             talkPanel.SetActive(false);  //선택지 함수 구현 전까지 임시 코드
             //선택지 함수 호출
+            return;
         }
         talkText.text = talkData;       // J : talkPanel의 text를 talkData로 설정
         talkIndex++;                    // J : 해당 talkID의 다음 talkData string을 가져오기 위해

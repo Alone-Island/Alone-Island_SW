@@ -41,6 +41,7 @@ public class SpecialEventManager : MonoBehaviour
             talkIndex = 0;      // J : talk index 초기화
             talkPanel.SetActive(false);  //선택지 함수 구현 전까지 임시 코드
             //선택지 함수 호출
+            return;
         }
         talkText.text = talkData;       // J : talkPanel의 text를 talkData로 설정
         talkIndex++;                    // J : 해당 talkID의 다음 talkData string을 가져오기 위해

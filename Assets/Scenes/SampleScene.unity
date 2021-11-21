@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e5ddcc3a9d2f34bbc3063acef173e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 1163355727}
   talkManager: {fileID: 121161932}
   talkPanel: {fileID: 1036663247}
   talkText: {fileID: 315433220}
@@ -2737,6 +2738,7 @@ MonoBehaviour:
   talkManager: {fileID: 121161932}
   talkIndex: 0
   specialManager: {fileID: 488290411}
+  playerTalk: 0
 --- !u!4 &1163355728
 Transform:
   m_ObjectHideFlags: 0

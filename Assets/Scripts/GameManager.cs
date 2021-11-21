@@ -15,13 +15,22 @@ public class GameManager : MonoBehaviour
 
     public SpecialEventManager specialManager; // J : GameManager에서 SpecialEventManager의 함수를 호출할 수 있도록 talkManager 변수 생성
 
+    bool playerTalk = false;            // J : 플레이어가 대화하는 중에는 special event를 유예하도록 변수 생성
     int randomNum = 0;                  // C : AI와의 대화 시, 랜덤한 대화 내용을 출력하기 위한 변수 생성
     
     // J :IEnumerator 타입(WaitForSeconds)를 반환하는 함수
     private IEnumerator SpecialEvent(float delayTime)
     {
         yield return new WaitForSeconds(delayTime); // J : delayTime(10)을 기다린 후 재개
-        specialManager.Action();            // J : specialManager의 Action 함수 호출
+        // J : 플레이어의 대화가 끝날 때까지 대기
+        while (true) {
+            if (!playerTalk) {              // J : player가 대화 중이 아니면
+                specialManager.Action();    // J : special event 발동
+                break;
+            }
+            yield return null;
+        }
+        //specialManager.Action();            // J : specialManager의 Action 함수 호출
         StartCoroutine("SpecialEvent", 10); // J : SpecialEvent 함수 호출
     }
 
@@ -35,6 +44,7 @@ public class GameManager : MonoBehaviour
     // C : 플레이어가 Object에 대해 조사 시(플레이어의 액션 발생 시) 적절한 내용을 포함한 대화창 띄워주기
     public void Action(GameObject scanObj)
     {
+        playerTalk = true;                  // J : 플레이어가 대화하는 중에는 special event를 유예하도록 설정
         scanObject = scanObj;               // C : parameter로 들어온 스캔된 game object를 public 변수인 scanObject에 대입
         ObjectData objData = scanObject.GetComponent<ObjectData>();     // C : scanObject의 ObjectData instance 가져오기
 
@@ -57,6 +67,7 @@ public class GameManager : MonoBehaviour
 
         if (talkData == null)           // C : 해당하는 id의 talkData string들을 모두 가져왔다면
         {
+            playerTalk = false;         // J : 정상적으로 special event가 발동하도록 설정
             isTPShow = false;           // C : talkPanel의 show 상태 false로 저장
             talkIndex = 0;              // C : 다음 Talk()함수 사용을 위해 talkIndex를 0으로 초기화
             randomNum = 0;              // C : 다음 Talk()함수 사용을 위해 randomNum을 0으로 초기화

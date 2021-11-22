@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public bool isTPShow;           // C : talkPanel의 상태 저장 (보여주기 or 숨기기)
     public TalkManager talkManager; // C : GameManager에서 TalkManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public int talkIndex;           // C : 필요한 talkIndex를 저장하기 위한 변수 생성
+    public int day = 10;            // J : 하루는 10초
 
     public SpecialEventManager specialManager; // J : GameManager에서 SpecialEventManager의 함수를 호출할 수 있도록 talkManager 변수 생성
 
@@ -30,13 +31,12 @@ public class GameManager : MonoBehaviour
             }
             yield return null;
         }
-        //specialManager.Action();            // J : specialManager의 Action 함수 호출
-        StartCoroutine("SpecialEvent", 10); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", day); // J : SpecialEvent 함수 호출
     }
 
     private void Start()
     {
-        StartCoroutine("SpecialEvent", 10); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", day); // J : SpecialEvent 함수 호출
     }
 
     

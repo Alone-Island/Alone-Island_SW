@@ -959,6 +959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   manager: {fileID: 1163355727}
+  screenManager: {fileID: 1163355729}
   specialManager: {fileID: 488290411}
 --- !u!50 &513927969
 Rigidbody2D:
@@ -4683,6 +4684,7 @@ MonoBehaviour:
   isTPShow: 0
   talkManager: {fileID: 121161932}
   talkIndex: 0
+  day: 10
   specialManager: {fileID: 488290411}
 --- !u!4 &1163355728
 Transform:
@@ -6412,7 +6414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d016041f94fb834a805ddcaa92f7c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  book: {fileID: 3702795318498546317, guid: c7a0d716f5964f946b6ac78badbbb0d7, type: 3}
+  book: {fileID: 2089972090860118588, guid: c7a0d716f5964f946b6ac78badbbb0d7, type: 3}
+  gameManager: {fileID: 1163355727}
 --- !u!4 &1905733199
 Transform:
   m_ObjectHideFlags: 0

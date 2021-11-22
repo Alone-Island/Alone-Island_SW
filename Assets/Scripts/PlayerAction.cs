@@ -78,6 +78,8 @@ public class PlayerAction : MonoBehaviour
                 specialManager.Talk();  // J : specialManager의 Talk 함수 호출
             else if (scanObject != null)        // J : 스페셜 이벤트 진행 중이 아니고 scanObject가 있으면
                 manager.Action(scanObject);     // C : 맵의 대화창에 적절한 메세지가 뜰 수 있도록 Action()함수 실행
+            else    // J : 아무 상태도 아니거나 책 찾았다는 대화창이 뜬 상태..
+                manager.talkPanel.SetActive(false); // J : 대화창 끄기
         }
     }
 
@@ -99,5 +101,15 @@ public class PlayerAction : MonoBehaviour
         }
         else
             scanObject = null;
+    }
+
+    // J : 책을 찾았을 때
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.name == "Book(Clone)") {   // J : 부딪힌 오브젝트가 책인 경우
+            coll.gameObject.SetActive(false);   // J : Book Object 비활성화
+            manager.talkPanel.SetActive(true);  // J : 대화창 활성화
+            manager.talkText.text = "책을 찾았습니다!";    // J : 대화창 텍스트 적용
+        }
     }
 }

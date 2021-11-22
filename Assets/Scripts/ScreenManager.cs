@@ -6,7 +6,6 @@ using TMPro;
 
 public class ScreenManager : MonoBehaviour
 {
-
     public PlayerStat hungerStat; // N : ¹è°íÇÄ ½ºÅÈ
     public PlayerStat happyStat; // N : Çàº¹ ½ºÅÈ
     public PlayerStat temperatureStat; // N : Ã¼¿Â ½ºÅÈ
@@ -22,6 +21,8 @@ public class ScreenManager : MonoBehaviour
     private int bookNum = 0;
     [SerializeField] private TextMeshProUGUI calender;
     [SerializeField] private TextMeshProUGUI book;
+
+    public EndingManager endingManager;
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +60,11 @@ public class ScreenManager : MonoBehaviour
         hungerStat.fCurrValue -= 10;
         happyStat.fCurrValue -= 5;
         temperatureStat.fCurrValue -= 10;
-        dangerStat.fCurrValue -= 10;
+        //dangerStat.fCurrValue -= 10;
+
+        if (hungerStat.fCurrValue < 1) endingManager.failHungry();
+        else if (happyStat.fCurrValue <= 0) endingManager.failLonely();
+        else if (temperatureStat.fCurrValue <= 0) endingManager.failCold();
 
         Invoke("dayAfter", 20.0f);
     }

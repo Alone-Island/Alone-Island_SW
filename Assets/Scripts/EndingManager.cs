@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class EndingManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject panel;
+    public GameObject badHungry;
+
+    public void failHungry()
     {
-        
+        Debug.Log("Hungry,,,");
+        panel.SetActive(true);
+        badHungry.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void failLonely()
     {
-        
+
+    }
+
+    public void failCold()
+    {
+
     }
 }

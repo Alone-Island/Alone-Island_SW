@@ -8,7 +8,7 @@ using TMPro;
 // K : 텍스트에 효과를 주기 위한 매니저입니다.
 public class TextManager : MonoBehaviour
 {
-    [SerializeField] public TextMeshProUGUI dialog; // K : text 오브젝트를 받아오기 위한 변수입니다.
+    [SerializeField] public TextMeshProUGUI dialog; // K : text 오브젝트를 받아오기 위한 변수입니다. > using TMPro;
 
     // K : synopsys의 텍스트들(여러 문장)의 배열입니다.
     public string[] synopsysFullText = { 
@@ -40,51 +40,51 @@ public class TextManager : MonoBehaviour
         {
             if (!isTyping)  // K : 현재 글자가 화면에 타이핑 되고 있지 않을 때
             {
-                // 스페이스바를 눌렀을 때 현재 글자가 화면에 타이핑 되고 있지 않는다면, 다음 문장 타이핑하기 위한 코드
+                // K : 스페이스바를 눌렀을 때 현재 글자가 화면에 타이핑 되고 있지 않는다면, 다음 문장 타이핑하기 위한 코드
                 StartCoroutine("TypingAction", 0); 
             }
             else
             {
-                // 스페이스바를 눌렀을 때 현재 글자가 화면에 타이핑 되고 있다면, 부분 스킵을 위해 isSkipPart true로 변경하는 코드
+                // K : 스페이스바를 눌렀을 때 현재 글자가 화면에 타이핑 되고 있다면, 부분 스킵을 위해 isSkipPart true로 변경하는 코드
                 isSkipPart = true;
             }
         }
     }
 
-    public void GoToGameScreen() 
+    public void GoToGameScreen() // K : 게임 신으로 가는 함수입니다.
     {
-        // 모든 변수 초기화
+        // K : 모든 변수 초기화
         currentPoint = 0;
         subText = "";
         isTyping = true;
         isSkipPart = false;
 
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SampleScene"); // K : 게임 신으로 가게 하는 함수입니다. > using UnityEngine.SceneManagement;
     }
 
     IEnumerator TypingAction() {
-        if (currentPoint >= synopsysFullText.Length)    // 모든 텍스트들을 타이핑 했을 때
+        if (currentPoint >= synopsysFullText.Length)    // K : 모든 텍스트들을 타이핑 했을 때
         {
             Debug.Log("게임 시작"); // K : 모든 텍스트를 출력 완료, 게임 플레이 신으로 이동
             GoToGameScreen();
         }
 
-        dialog.text = "";   // Text 오브젝트의 text 초기화
-        isTyping = true;    // 텍스트 화면에 타이핑을 시작했기 때문에, isTyping true
+        dialog.text = "";   // K : Text 오브젝트의 text 초기화
+        isTyping = true;    // K : 텍스트 화면에 타이핑을 시작했기 때문에, isTyping true
 
-        for (int i = 0; i < synopsysFullText[currentPoint].Length; i++) // 텍스트 한 문장의 한 글자 한 글자를 화면에 나타나게 하기 위한 반복문
+        for (int i = 0; i < synopsysFullText[currentPoint].Length; i++) // K : 텍스트 한 문장의 한 글자 한 글자를 화면에 나타나게 하기 위한 반복문
         {
-            yield return new WaitForSeconds(0.15f); // 텍스트 한 글자 한 글자 사이의 딜레이
+            yield return new WaitForSeconds(0.15f); // K : 텍스트 한 글자 한 글자 사이의 딜레이
 
-            subText += synopsysFullText[currentPoint].Substring(0, i);  // 텍스트의 인덱스 0~i까지 자름
-            dialog.text = subText;                                      // Text 오브젝트에 subText 적용 
-            subText = "";                                               // subText 초기화
+            subText += synopsysFullText[currentPoint].Substring(0, i);  // K : 텍스트의 인덱스 0~i까지 자름
+            dialog.text = subText;                                      // K : Text 오브젝트에 subText 적용 
+            subText = "";                                               // K : subText 초기화
 
-            if (isSkipPart)                                             // 부분 스킵이 true면
+            if (isSkipPart)                                             // K : 부분 스킵이 true면
             {
-                dialog.text = synopsysFullText[currentPoint];           // Text 오브젝트에 전체 텍스트 문장을 띄운다
-                isSkipPart = false;                                     // isSkipPart 초기화
-                isTyping = false;                                       // isTyping 초기화
+                dialog.text = synopsysFullText[currentPoint];           // K : Text 오브젝트에 전체 텍스트 문장을 띄운다
+                isSkipPart = false;                                     // K : isSkipPart 초기화
+                isTyping = false;                                       // K : isTyping 초기화
                 break;
             }
         }

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// Scene : AI의 Rigidbody 2D > body type > kinetic
-// Scene : AI에 AiAcition 추가
-public class AiAction : MonoBehaviour
+// K : Scene > AI > Rigidbody 2D > body type > kinetic
+// K : Scene > AI > AiAcition script 추가
+public class AIAction : MonoBehaviour
 {
     Rigidbody2D rigid;
     SpecialEventManager specialManager; // K : SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
-    public int nextAIMoveX;             // K : ai의 다음 X축 방향 변후
-    public int nextAIMoveY;             // K : ai의 다음 Y축 방향 변후
+    public int nextAIMoveX = 0;             // K : ai의 다음 X축 방향 변후
+    public int nextAIMoveY = 0;             // K : ai의 다음 Y축 방향 변후
     // public bool isAICollision = false;
 
-    void nextAiMoveDirection()              // K : ai가 랜덤하게 움직이도록 랜덤한 방향을 결정해주는 함수
+    void NextAiMoveDirection()              // K : ai가 랜덤하게 움직이도록 랜덤한 방향을 결정해주는 함수
     {
         int random = Random.Range(1, 6);    // K : ai가 움직이 방향 랜덤 설정
         int vel = 1;                        // K : ai 이동 속도 조절 
@@ -45,7 +45,7 @@ public class AiAction : MonoBehaviour
                 break;
         }
 
-        Invoke("nextAiMoveDirection", 5);   // K : 재귀함수, 5초 후 자기 자신을 재실행 
+        Invoke("NextAiMoveDirection", 5);   // K : 재귀함수, 5초 후 자기 자신을 재실행 
     }
 
     void Awake()
@@ -58,7 +58,7 @@ public class AiAction : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
 
-        Invoke("nextAiMoveDirection", 5);   // K : 5초 후 ai가 움직일 방향 결정 함수 실행
+        Invoke("NextAiMoveDirection", 5);   // K : 5초 후 ai가 움직일 방향 결정 함수 실행
     }
 
     void FixedUpdate()

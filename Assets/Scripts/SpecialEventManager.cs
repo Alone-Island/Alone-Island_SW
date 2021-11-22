@@ -11,7 +11,11 @@ public class SpecialEventManager : MonoBehaviour
     public int talkIndex;           // J : talkIndex를 저장하기 위한 변수
     public bool AItalk = false;     // J : AI가 스페셜 이벤트 대화를 하는지 여부
     public bool special = false;    // J : 스페셜 이벤트 진행 중 여부
+    public Text selectText0, selectText1, selectText2;
+    public Button selectPanel0, selectPanel1, selectPanel2;
 
+    List<Text> selectText;
+    List<Button> selectPanel;
     int talkID;                     // J : TalkManager로부터 talkData를 가져오기 위한 변수
     int firstRandomNum;             // J : 랜덤 스페셜 이벤트를 위한 변수1 (0 : 선택지 2개, 1: 선택지 3개)
     int secondRandomNum;            // J : 랜덤 스페셜 이벤트를 위한 변수2
@@ -40,17 +44,94 @@ public class SpecialEventManager : MonoBehaviour
             AItalk = false;     // J : Jump키를 눌렀을 때 object scan을 할 수 있게 함
             talkIndex = 0;      // J : talk index 초기화
             talkPanel.SetActive(false);  //선택지 함수 구현 전까지 임시 코드
-            //선택지 함수 호출
+            Select();
             return;
         }
         talkText.text = talkData;       // J : talkPanel의 text를 talkData로 설정
         talkIndex++;                    // J : 해당 talkID의 다음 talkData string을 가져오기 위해
     }
 
+    void Select()
+    {
+        string selectData;        
+        for (int selectIndex = 0; (selectData = talkManager.GetSelectData(talkID, selectIndex)) != null; selectIndex++)
+        {
+            selectText[selectIndex].text = selectData;
+            selectPanel[selectIndex].gameObject.SetActive(true);
+        }
+    }
+
+    public void Select1()
+    {
+        switch (firstRandomNum) 
+        {
+            case 0:
+                switch (secondRandomNum)
+                {
+                    case 1:
+                        // 하루 바로 지나기
+                        // 공감 능력 1레벨 상승
+                        break;
+                    case 2:
+                        // 독열매 사망
+                        break;
+                    case 3:
+                        // 공감 능력 1레벨 상승
+                        break;
+                    case 4:
+                        // 멧돼지 사망
+                        break;
+
+                }
+                break;
+            case 1:
+                switch (secondRandomNum)
+                {
+                    case 1:
+                        // AI가 이해하지 못해서 사망
+                        break;
+                    case 2:
+                        // 감전사 사망
+                        break;
+                    case 3:
+                        // 하루 바로 지나기
+                        // 공감 능력 2레벨 상승
+                        break;
+                    case 4:
+                        // 나중에 추가
+                        break;
+                }
+                break;
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            selectPanel[i].gameObject.SetActive(false);
+        }
+        talkPanel.SetActive(false);
+    }
+
+    public void Select2()
+    {
+
+    }
+
+    public void Select3()
+    {
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        selectText = new List<Text>();
+        selectText.Add(selectText0);
+        selectText.Add(selectText1);
+        selectText.Add(selectText2);
+
+        selectPanel = new List<Button>();
+        selectPanel.Add(selectPanel0);
+        selectPanel.Add(selectPanel1);
+        selectPanel.Add(selectPanel2);
     }
 
     // Update is called once per frame

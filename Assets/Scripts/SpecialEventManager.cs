@@ -79,7 +79,7 @@ public class SpecialEventManager : MonoBehaviour
                         // 독열매 사망
                         break;
                     case 3: // J : 저기 야생동물이 있는 것 같아요! 잡아서 구워먹을까요?
-                        // 공감 능력 1레벨 상승
+                        screenManager.HeartStudy(1); // J : 공감 1레벨 상승
                         break;
                     case 4: // J : 저기 야생동물이 있는 것 같아요! 잡아서 구워먹을까요?
                         // 멧돼지 사망
@@ -124,7 +124,7 @@ public class SpecialEventManager : MonoBehaviour
                         // 변화없음
                         break;
                     case 2: // J : (AI가 물에 빠졌다)
-                        // 공감 능력 1레벨 하락
+                        screenManager.HeartStudy(-1); // J : 공감 1레벨 하락
                         break;
                     case 3: // J : (나무가 쓰러져서 AI가 다쳤다. 어떻게 할까?)
                         // 변화없음

@@ -4683,6 +4683,7 @@ MonoBehaviour:
   isTPShow: 0
   talkManager: {fileID: 121161932}
   talkIndex: 0
+  day: 10
   specialManager: {fileID: 488290411}
 --- !u!4 &1163355728
 Transform:
@@ -6413,6 +6414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   book: {fileID: 3702795318498546317, guid: c7a0d716f5964f946b6ac78badbbb0d7, type: 3}
+  gameManager: {fileID: 1163355727}
 --- !u!4 &1905733199
 Transform:
   m_ObjectHideFlags: 0

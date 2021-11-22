@@ -26,7 +26,7 @@ public class SpecialEventManager : MonoBehaviour
         AItalk = true;  // J : Jump키를 눌렀을 때 object scan을 할 수 없게 함
 
         System.Random rand = new System.Random();
-        firstRandomNum = rand.Next(1);      // J : 0-1까지의 난수 생성 (0 : 선택지 2개, 1: 선택지 3개)
+        firstRandomNum = rand.Next(2);      // J : 0-1까지의 난수 생성 (0 : 선택지 2개, 1: 선택지 3개)
         secondRandomNum = rand.Next(1, 5);  // J : 1-4까지의 난수 생성
 
         talkID = 10000 + 10 * firstRandomNum + secondRandomNum; // J : talkData를 갖고 오기 위해 talkID 계산
@@ -103,23 +103,63 @@ public class SpecialEventManager : MonoBehaviour
                 }
                 break;
         }
-        for (int i = 0; i < 3; i++)
-        {
-            selectPanel[i].gameObject.SetActive(false);
-        }
-        talkPanel.SetActive(false);
+        SelectComplete();
     }
 
     public void Select2()
     {
-
+        switch (firstRandomNum)
+        {
+            case 0:
+                // 공감 능력 1레벨 하락
+                break;
+            case 1:
+                switch (secondRandomNum)
+                {
+                    case 1:
+                        // 변화없음
+                        break;
+                    case 2:
+                        // 공감 능력 1레벨 하락
+                        break;
+                    case 3:
+                        // 변화없음
+                        break;
+                    case 4:
+                        // 나중에 추가
+                        break;
+                }
+                break;
+        }
+        SelectComplete();
     }
 
     public void Select3()
     {
-
+        switch (secondRandomNum)
+        {
+            case 1:
+                // 공감 능력 1레벨 하락
+                break;
+            case 2:
+                // 구조 성공
+                break;
+            case 3:
+                // 알고보니 심각한 손상을 입은 AI 고장 -> 사망
+                break;
+            case 4:
+                // 나중에 추가
+                break;
+        }
+        SelectComplete();
     }
 
+    void SelectComplete()
+    {
+        for (int i = 0; i < 3; i++)
+            selectPanel[i].gameObject.SetActive(false);
+        talkPanel.SetActive(false);
+    }
     // Start is called before the first frame update
     void Start()
     {

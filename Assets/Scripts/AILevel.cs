@@ -22,8 +22,8 @@ public class AILevel : MonoBehaviour
             else currValue = value;
 
             // N : 현재 레벨에 따른 텍스트 수정
-            if (currValue == maxValue) currText = "LV.M"; // N : 현재 레벨이 최대 레벨이면 M으로 표시
-            else currText = "LV." + currValue.ToString();
+            if (currValue == maxValue) currText = "Lv.M"; // N : 현재 레벨이 최대 레벨이면 M으로 표시
+            else currText = "Lv." + currValue.ToString();
         }
     }
     public void initLv(float curr, float max)

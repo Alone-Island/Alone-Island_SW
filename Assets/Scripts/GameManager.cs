@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine("SpecialEvent", 1000); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", 10); // J : SpecialEvent 함수 호출
     }
 
     

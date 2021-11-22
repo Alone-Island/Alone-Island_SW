@@ -8,6 +8,7 @@ using UnityEngine;
 public class AIAction : MonoBehaviour
 {
     Rigidbody2D rigid;
+    Animator anim;                          // C : 애니메이션 제어
     SpecialEventManager specialManager; // K : SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
     public int nextAIMoveX = 0;             // K : ai의 다음 X축 방향 변후
     public int nextAIMoveY = 0;             // K : ai의 다음 Y축 방향 변후
@@ -50,6 +51,8 @@ public class AIAction : MonoBehaviour
 
     void Awake()
     {
+        // C : Animator component instance 생성
+        anim = GetComponent<Animator>();
         // K : SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수를 불러오기 위해 호출
         specialManager = GameObject.Find("SpecialEventManager").GetComponent<SpecialEventManager>();
     }
@@ -59,6 +62,19 @@ public class AIAction : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
 
         Invoke("NextAiMoveDirection", 5);   // K : 5초 후 ai가 움직일 방향 결정 함수 실행
+    }
+
+    void Update()
+    {
+        // C : ai 이동(NextAiMoveDirection의 결과)값에 따라 애니메이션 적용
+        if (anim.GetInteger("hAxisRaw") != nextAIMoveX)
+        {
+            anim.SetInteger("hAxisRaw", (int)nextAIMoveX);
+        }
+        else if (anim.GetInteger("vAxisRaw") != nextAIMoveY)
+        {
+            anim.SetInteger("vAxisRaw", (int)nextAIMoveY);
+        }
     }
 
     void FixedUpdate()

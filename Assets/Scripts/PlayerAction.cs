@@ -7,6 +7,7 @@ public class PlayerAction : MonoBehaviour
 {
     public float speed;     // C : Dr.Kim 이동 속력
     public GameManager manager;         // C : player에서 GameManager의 함수를 호출할 수 있도록 manager 변수 생성
+    public ScreenManager screenManager;         // J : 책을 주웠을 때 책 개수 증가를 위해 ScreenManager 변수 생성
     public SpecialEventManager specialManager;  // J : player에서 SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
 
     float h;    // C : horizontal (수평 이동)
@@ -106,10 +107,11 @@ public class PlayerAction : MonoBehaviour
     // J : 책을 찾았을 때
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.name == "Book(Clone)") {   // J : 부딪힌 오브젝트가 책인 경우
-            coll.gameObject.SetActive(false);   // J : Book Object 비활성화
-            manager.talkPanel.SetActive(true);  // J : 대화창 활성화
-            manager.talkText.text = "책을 찾았습니다!";    // J : 대화창 텍스트 적용
+        if (coll.gameObject.name == "Book(Clone)") {        // J : 부딪힌 오브젝트가 책인 경우
+            coll.gameObject.SetActive(false);               // J : Book Object 비활성화
+            manager.talkPanel.SetActive(true);              // J : 대화창 활성화
+            manager.talkText.text = "책을 찾았습니다!";     // J : 대화창 텍스트 적용
+            screenManager.getBook();                        // J : 책 개수 증가
         }
     }
 }

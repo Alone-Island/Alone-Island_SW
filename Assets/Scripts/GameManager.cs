@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     bool playerTalk = false;            // J : 플레이어가 대화하는 중에는 special event를 유예하도록 변수 생성
     int randomNum = 0;                  // C : AI와의 대화 시, 랜덤한 대화 내용을 출력하기 위한 변수 생성
-    
+
     // J :IEnumerator 타입(WaitForSeconds)를 반환하는 함수
     private IEnumerator SpecialEvent(float delayTime)
     {

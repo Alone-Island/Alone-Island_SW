@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dr.Kim_Right
+  m_Name: Dr.K_Up_Walk
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300022, guid: 4ee5843fc71c6954ab9daafa40de566c, type: 3}
+      value: {fileID: 21300000, guid: f0f40512696cb884da860ccea82d0a18, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300026, guid: 4ee5843fc71c6954ab9daafa40de566c, type: 3}
+      value: {fileID: 21300000, guid: 35098bf1ab19c2647b79f9508c18e924, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,8 +42,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300022, guid: 4ee5843fc71c6954ab9daafa40de566c, type: 3}
-    - {fileID: 21300026, guid: 4ee5843fc71c6954ab9daafa40de566c, type: 3}
+    - {fileID: 21300000, guid: f0f40512696cb884da860ccea82d0a18, type: 3}
+    - {fileID: 21300000, guid: 35098bf1ab19c2647b79f9508c18e924, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

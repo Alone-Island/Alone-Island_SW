@@ -12,15 +12,15 @@ public class TextManager : MonoBehaviour
 
     // K : synopsys의 텍스트들(여러 문장)의 배열입니다.
     public string[] synopsysFullText = { 
-        "나는 로봇공학자 K...\nAI 로봇을 개발하기 위해 연구실에서만 지낸 시간이 수년...", 
+        "나는 로봇공학자 K...\nAI 로봇을 개발하기 위해\n연구실에서만 지낸 시간이 수년...", 
         "드디어... 완성했다...",
-        " 나의 역작, AI 로봇 NJ-C!!!!",
+        "나의 역작, AI 로봇 NJ-C!!!!",
         "이제 세상에 공개할 때가 왔군",
         "아니...뭐지?",
         "연구실 밖의 상황을 살펴보니…",
         "통신은 모두 끊겨있고..\n사람들은 전혀 보이지 않는다!!",
-        "설마 내가 이세상 남은 유일한 인간인건가?!?",
-        "이제 식량도 거의 다 떨어지고…\n이렇게 죽는가...",
+        "설마 내가 이 세상 남은 유일한 인간인건가?!?",
+        "이제 식량도 거의 다 떨어지고...\n이렇게 죽는건가...",
         "하지만 나에게는 NJ-C가 있어!",
         "아직 깡통에 불과하는 이 로봇을 학습시켜서\n이 황폐화된 세상에서 살아남아 보자!"
     };
@@ -49,11 +49,6 @@ public class TextManager : MonoBehaviour
                 isSkipPart = true;
             }
         }
-        if (currentPoint >= synopsysFullText.Length)    // 모든 텍스트들을 타이핑 했을 때
-        {
-            Debug.Log("게임 시작"); // K : 모든 텍스트를 출력 완료, 게임 플레이 신으로 이동
-            GoToGameScreen();
-        }
     }
 
     void GoToGameScreen() 
@@ -68,6 +63,12 @@ public class TextManager : MonoBehaviour
     }
 
     IEnumerator TypingAction() {
+        if (currentPoint >= synopsysFullText.Length)    // 모든 텍스트들을 타이핑 했을 때
+        {
+            Debug.Log("게임 시작"); // K : 모든 텍스트를 출력 완료, 게임 플레이 신으로 이동
+            GoToGameScreen();
+        }
+
         dialog.text = "";   // Text 오브젝트의 text 초기화
         isTyping = true;    // 텍스트 화면에 타이핑을 시작했기 때문에, isTyping true
 

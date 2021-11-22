@@ -6,6 +6,7 @@ using UnityEngine.UI;   // J : UI 프로그래밍을 위해 추가 (Text 등)
 public class SpecialEventManager : MonoBehaviour
 {
     public TalkManager talkManager; // J : GameManager에서 TalkManager의 함수를 호출할 수 있도록 talkManager 변수 생성
+    public ScreenManager screenManager; // N : 레벨 관리를 위해 호출
     public GameObject talkPanel;    // J : 대화창
     public Text talkText;           // J : 대화창의 text
     public int talkIndex;           // J : talkIndex를 저장하기 위한 변수
@@ -70,7 +71,7 @@ public class SpecialEventManager : MonoBehaviour
                 {
                     case 1:
                         // 하루 바로 지나기
-                        // 공감 능력 1레벨 상승
+                        screenManager.HeartStudy(1); // N : 공감 1레벨 상승
                         break;
                     case 2:
                         // 독열매 사망
@@ -95,7 +96,8 @@ public class SpecialEventManager : MonoBehaviour
                         break;
                     case 3:
                         // 하루 바로 지나기
-                        // 공감 능력 2레벨 상승
+                        screenManager.HeartStudy(2); // N : 공감 2레벨 상승
+
                         break;
                     case 4:
                         // 나중에 추가

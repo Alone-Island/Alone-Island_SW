@@ -17,28 +17,32 @@ public class ScreenManager : MonoBehaviour
     public AILevel engineerLv; // N : 공학 레벨
     public AILevel heartLv; // N : 공감 레벨
 
-    private int day = 1;
-    private int bookNum = 0;
-    [SerializeField] private TextMeshProUGUI calender;
-    [SerializeField] private TextMeshProUGUI book;
+    private int day = 1; // N : 날짜
+    private int bookNum = 0; // N : 책 개수
+    [SerializeField] private TextMeshProUGUI calender; // N : 날짜 텍스트
+    [SerializeField] private TextMeshProUGUI book; // N : 책 개수 텍스트
 
     public EndingManager endingManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        // N : 스탯 초기화
         hungerStat.initStat(10, 100);
         happyStat.initStat(50, 100);
         temperatureStat.initStat(100, 100);
         //dangerStat.initStat(100, 100);
 
+        // N : 레벨 초기화
         farmLv.initLv(1, 10);
         houseLv.initLv(1, 10);
         craftLv.initLv(1, 10);
         engineerLv.initLv(1, 10);
         heartLv.initLv(1, 10);
 
+        // N : 캘린더 초기화
         calender.text = "day 01";
+        // N : 책 개수 초기화
         book.text = "0 books";
 
         Invoke("dayAfter", 20.0f);
@@ -50,22 +54,26 @@ public class ScreenManager : MonoBehaviour
 
     }
 
-    //하루의 변화
+    // N : 날짜 변화
     public void dayAfter()
     {
+        // N : 캘린더 관리
         day++;
         if (day < 10) calender.text = "day " + "0" + day.ToString();
         else calender.text = "day " + day.ToString();
 
+        // N : 스탯 관리
         hungerStat.fCurrValue -= 10;
         happyStat.fCurrValue -= 5;
         temperatureStat.fCurrValue -= 10;
         //dangerStat.fCurrValue -= 10;
 
+        // N : 엔딩 처리
         if (hungerStat.fCurrValue < 1) endingManager.failHungry();
         else if (happyStat.fCurrValue <= 0) endingManager.failLonely();
         else if (temperatureStat.fCurrValue <= 0) endingManager.failCold();
 
+        // N : 20초마다 호출
         Invoke("dayAfter", 20.0f);
     }
 
@@ -115,10 +123,10 @@ public class ScreenManager : MonoBehaviour
     }
 
     // N : 공감 배우기
-    public void HeartStudy()
+    public void HeartStudy(int n)
     {
-        useBook();
-        heartLv.fCurrValue++;
-        happyStat.fCurrValue += 50;
+        //useBook();
+        heartLv.fCurrValue += n;
+        happyStat.fCurrValue += (50 * n);
     }
 }

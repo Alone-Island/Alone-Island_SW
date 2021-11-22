@@ -899,6 +899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talkManager: {fileID: 121161932}
+  screenManager: {fileID: 0}
   talkPanel: {fileID: 1036663247}
   talkText: {fileID: 315433220}
   talkIndex: 0
@@ -1978,6 +1979,7 @@ GameObject:
   - component: {fileID: 793937234}
   - component: {fileID: 793937238}
   - component: {fileID: 793937239}
+  - component: {fileID: 793937240}
   m_Layer: 10
   m_Name: AI
   m_TagString: Untagged
@@ -2122,6 +2124,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b4417fea3dfee4b8163bad42b9f4f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &793937240
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793937233}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 41a9dea1e274cd6428cac077652320b3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &807755066
 GameObject:
   m_ObjectHideFlags: 0

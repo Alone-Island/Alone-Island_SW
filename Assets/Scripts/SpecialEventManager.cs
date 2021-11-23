@@ -28,7 +28,7 @@ public class SpecialEventManager : MonoBehaviour
 
         System.Random rand = new System.Random();
         
-        int danger = (int)((10 - screenManager.houseLv.fCurrValue) * 5 + 50);   // J : 위험도 계산
+        int danger = (int)((10 - screenManager.houseLv.fCurrValue));   // J : 위험도 계산
         if (rand.Next(100) < danger)    // J : 위험도가 높아 재난 발생
             Disaster();
         else 

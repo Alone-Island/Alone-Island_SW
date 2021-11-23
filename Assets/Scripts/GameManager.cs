@@ -32,12 +32,12 @@ public class GameManager : MonoBehaviour
             }
             yield return null;
         }
-        StartCoroutine("SpecialEvent", 15 * day); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", day); // J : SpecialEvent 함수 호출
     }
 
     private void Start()
     {
-        StartCoroutine("SpecialEvent", 15 * day); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", day); // J : SpecialEvent 함수 호출
     }
 
     

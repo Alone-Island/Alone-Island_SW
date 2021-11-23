@@ -103,7 +103,7 @@ public class SpecialEventManager : MonoBehaviour
                         screenManager.HeartStudy(1); // J : 공감 1레벨 상승
                         break;
                     case 4: // J : 저기 야생동물이 있는 것 같아요! 잡아서 구워먹을까요?
-                        // 멧돼지 사망
+                        endingManager.suddenEnding(4);  // J : 멧돼지 사망
                         break;
 
                 }
@@ -115,7 +115,7 @@ public class SpecialEventManager : MonoBehaviour
                         endingManager.suddenEnding(2); // N : Bad Ending (AI가 이해하지 못함)
                         break;
                     case 2: // J : (AI가 물에 빠졌다)
-                        // 감전사 사망
+                        endingManager.suddenEnding(3);  // 감전사 사망
                         break;
                     case 3: // J : (나무가 쓰러져서 AI가 다쳤다. 어떻게 할까?)
                         // 하루 바로 지나기

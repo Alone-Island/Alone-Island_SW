@@ -59,7 +59,7 @@ public class TextManager : MonoBehaviour
         isTyping = true;
         isSkipPart = false;
 
-        SceneManager.LoadScene("SampleScene"); // K : 게임 신으로 가게 하는 함수입니다. > using UnityEngine.SceneManagement;
+        SceneManager.LoadScene("MainGame"); // K : 게임 신으로 가게 하는 함수입니다. > using UnityEngine.SceneManagement;
     }
 
     IEnumerator TypingAction() {

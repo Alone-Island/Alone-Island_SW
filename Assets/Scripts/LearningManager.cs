@@ -7,10 +7,24 @@ public class LearningManager : MonoBehaviour
     public ScreenManager screenManager;     // C :
     public AIAction aiAction;               // C :
     public bool isAILearning = false;         // K : AI가 학습중인지 확인하는 변수
-    
+    public int learningTime = 10;
+
     public void CompleateLearning()
     {
         isAILearning = false;
+    }
+    
+    public void WaitingLearning() // K : AI 학습 시간을 기다리는 함수
+    {
+        learningTime--;
+        if (learningTime == 0)
+        {
+            learningTime = 10;
+            Invoke("CompleateLearning", 1);
+        } else
+        {
+            Invoke("WaitingLearning", 1);
+        }
     }
 
     public void Learning(int id)            // C :
@@ -22,7 +36,7 @@ public class LearningManager : MonoBehaviour
                 screenManager.FarmStudy();
                 aiAction.GoToLearningPlace(-7, -7);
                 isAILearning = true;
-                Invoke("CompleateLearning", 10);
+                Invoke("WaitingLearning", 1);
                 break;
             case 200:                       // C :
                 Debug.Log(id);

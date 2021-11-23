@@ -17,6 +17,9 @@ public class ScreenManager : MonoBehaviour
     public AILevel engineerLv; // N : 공학 레벨
     public AILevel heartLv; // N : 공감 레벨
 
+    public LearningManager learningManager;
+    public TextMeshProUGUI learningTime;
+
     private int day = 1; // N : 날짜
     private int bookNum = 0; // N : 책 개수
     [SerializeField] private TextMeshProUGUI calender; // N : 날짜 텍스트
@@ -52,7 +55,14 @@ public class ScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // K :learningTime
+        if(learningManager.isAILearning)
+        {
+            learningTime.text = learningManager.learningTime.ToString();
+        } else
+        {
+            learningTime.text = "";
+        }
     }
 
     // N : 날짜 변화

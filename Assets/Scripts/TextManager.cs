@@ -8,9 +8,7 @@ using TMPro;
 // K : 텍스트에 효과를 주기 위한 매니저입니다.
 public class TextManager : MonoBehaviour
 {
-    [SerializeField] public TextMeshProUGUI dialog; // K : text 오브젝트를 받아오기 위한 변수입니다. > using TMPro;
-    public AudioSource keyboardAudio;
-    public AudioSource enterAudio;
+    [SerializeField] public TextMeshProUGUI dialog; // K : text 오브젝트를 받아오기 위한 변수입니다. > using TMPro;          
 
     // K : synopsys의 텍스트들(여러 문장)의 배열입니다.
     public string[] synopsysFullText = { 
@@ -29,11 +27,11 @@ public class TextManager : MonoBehaviour
     string subText; // K : synopsys의 텍스트(한 문장) 일부를 저장하기 위한 변수입니다.
     int currentPoint = 0; // K : synopsysFullText에서 현재 포인터가 어디있는지 저장하기 위한 변수입니다.
 
-    bool isTyping = true; // K : 현재 글자가 화면에 타이핑되고 있는지 확인하기 위한 변수입니다.
+    public bool isTyping = true; // K : 현재 글자가 화면에 타이핑되고 있는지 확인하기 위한 변수입니다.
     bool isSkipPart = false;
 
     void Start() {
-        StartCoroutine("TypingAction", 0);  // K : 스크립트의 시작과 동시에 타이핑을 시작하는 코드입니다.
+        StartCoroutine("TypingAction", 0);          // K : 스크립트의 시작과 동시에 타이핑을 시작하는 코드입니다.
     }
     
     void Update()

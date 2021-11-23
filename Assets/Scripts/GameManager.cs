@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public bool isTPShow;           // C : talkPanel의 상태 저장 (보여주기 or 숨기기)
     public TalkManager talkManager; // C : GameManager에서 TalkManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public int talkIndex;           // C : 필요한 talkIndex를 저장하기 위한 변수 생성
-    public int day = 10;            // J : 하루는 10초
+    public int day = 20;            // J : 하루는 20초
 
     public SpecialEventManager specialManager; // J : GameManager에서 SpecialEventManager의 함수를 호출할 수 있도록 talkManager 변수 생성
 
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     // J :IEnumerator 타입(WaitForSeconds)를 반환하는 함수
     private IEnumerator SpecialEvent(float delayTime)
     {
-        yield return new WaitForSeconds(delayTime); // J : delayTime(10)을 기다린 후 재개
+        yield return new WaitForSeconds(delayTime); // J : delayTime을 기다린 후 재개
         // J : 플레이어의 대화가 끝날 때까지 대기
         while (true) {
             if (!playerTalk) {              // J : player가 대화 중이 아니면
@@ -31,12 +31,12 @@ public class GameManager : MonoBehaviour
             }
             yield return null;
         }
-        StartCoroutine("SpecialEvent", day); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", 15 * day); // J : SpecialEvent 함수 호출
     }
 
     private void Start()
     {
-        StartCoroutine("SpecialEvent", day); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", 15 * day); // J : SpecialEvent 함수 호출
     }
 
     

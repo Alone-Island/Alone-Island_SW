@@ -23,6 +23,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI book; // N : 책 개수 텍스트
 
     public EndingManager endingManager;
+    public GameManager gameManager;     // J : GameManager에서 하루가 몇초인지 가져옴
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +46,7 @@ public class ScreenManager : MonoBehaviour
         // N : 책 개수 초기화
         book.text = "0 books";
 
-        Invoke("dayAfter", 20.0f);
+        Invoke("dayAfter", gameManager.day);
     }
 
     // Update is called once per frame
@@ -75,8 +76,8 @@ public class ScreenManager : MonoBehaviour
         else if (happyStat.fCurrValue <= 0) endingManager.failLonely();
         else if (temperatureStat.fCurrValue <= 0) endingManager.failCold();
 
-        // N : 20초마다 호출
-        Invoke("dayAfter", 20.0f);
+        // N : 하루마다 호출
+        Invoke("dayAfter", gameManager.day);
     }
 
     // N : 책 줍기

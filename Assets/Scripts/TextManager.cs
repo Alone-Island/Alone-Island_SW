@@ -9,6 +9,8 @@ using TMPro;
 public class TextManager : MonoBehaviour
 {
     [SerializeField] public TextMeshProUGUI dialog; // K : text 오브젝트를 받아오기 위한 변수입니다. > using TMPro;
+    public AudioSource keyboardAudio;
+    public AudioSource enterAudio;
 
     // K : synopsys의 텍스트들(여러 문장)의 배열입니다.
     public string[] synopsysFullText = { 

@@ -1363,6 +1363,7 @@ MonoBehaviour:
   talkPanel: {fileID: 1384437669}
   talkText: {fileID: 1093654109}
   talkIndex: 0
+  special: 0
   AItalk: 0
   selectText0: {fileID: 858138516}
   selectText1: {fileID: 855646736}

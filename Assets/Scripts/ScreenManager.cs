@@ -32,8 +32,8 @@ public class ScreenManager : MonoBehaviour
     void Start()
     {
         // N : Ω∫≈» √ ±‚»≠
-        hungerStat.initStat(10, 100);
-        happyStat.initStat(50, 100);
+        hungerStat.initStat(100, 100);
+        happyStat.initStat(100, 100);
         temperatureStat.initStat(100, 100);
         //dangerStat.initStat(100, 100);
 

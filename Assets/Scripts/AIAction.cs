@@ -86,7 +86,7 @@ public class AIAction : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (specialManager.AItalk || learningManager.isAILearning)    // 스페셜 이벤트, 플레이어가 AI와 대화하는 중 또는 AI가 학습중일때 정지
+        if (specialManager.special || learningManager.isAILearning)    // 스페셜 이벤트, 플레이어가 AI와 대화하는 중 또는 AI가 학습중일때 정지
         {
             rigid.velocity = new Vector2(0, 0); // K : ai 정지
         }

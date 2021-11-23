@@ -32,6 +32,9 @@ public class PlayerAction : MonoBehaviour
         // C : GameManager의 isTPShow를 사용하여 talkPanel이 보여지고 있을 때는 플레이어의 이동을 제한
         h = manager.isTPShow ? 0 : Input.GetAxisRaw("Horizontal");
         v = manager.isTPShow ? 0 : Input.GetAxisRaw("Vertical");
+        // J : SpecialEventManager의 special을 사용하여 스페셜 이벤트 진행 중인 경우 플레이어의 이동을 제한
+        h = specialManager.special ? 0 : Input.GetAxisRaw("Horizontal");
+        v = specialManager.special ? 0 : Input.GetAxisRaw("Vertical");
 
         // C : 키보드 입력(down, up)이 horizontal인지 vertical인지 확인
         // C : GameManager의 isTPShow를 사용하여 talkPanel이 보여지고 있을 때는 플레이어의 이동을 제한
@@ -39,6 +42,11 @@ public class PlayerAction : MonoBehaviour
         bool hUp = manager.isTPShow ? false : Input.GetButtonUp("Horizontal");
         bool vDown = manager.isTPShow ? false : Input.GetButtonDown("Vertical");
         bool vUp = manager.isTPShow ? false : Input.GetButtonUp("Vertical");
+        // J : SpecialEventManager의 special을 사용하여 스페셜 이벤트 진행 중인 경우 플레이어의 이동을 제한
+        hDown = specialManager.special ? false : Input.GetButtonDown("Horizontal");
+        hUp = specialManager.special ? false : Input.GetButtonUp("Horizontal");
+        vDown = specialManager.special ? false : Input.GetButtonDown("Vertical");
+        vUp = specialManager.special ? false : Input.GetButtonUp("Vertical");
 
         // C : isHorizonMove 값 설정
         if (hDown)           // C : 수평 키를 누르면 isHorizonMove는 true
@@ -75,8 +83,13 @@ public class PlayerAction : MonoBehaviour
         // J : 스페이스바 누름
         if (Input.GetButtonDown("Jump"))
         {
-            if (specialManager.AItalk)  // J : 스페셜 이벤트 진행 중이라면
-                specialManager.Talk();  // J : specialManager의 Talk 함수 호출
+            if (specialManager.special)     // J : 스페셜 이벤트 진행 중
+            {
+                if (specialManager.AItalk)  // J : 선택지가 뜨기 전이라면
+                    specialManager.Talk();  // J : specialManager의 Talk 함수 호출
+                else                        // J : 선택지 클릭한 후 (스페셜 이벤트 진행중)
+                    specialManager.ResultTalk();    // J : 결과 텍스트 보여주기
+            }
             else if (scanObject != null)        // J : 스페셜 이벤트 진행 중이 아니고 scanObject가 있으면
                 manager.Action(scanObject);     // C : 맵의 대화창에 적절한 메세지가 뜰 수 있도록 Action()함수 실행
             else    // J : 아무 상태도 아니거나 책 찾았다는 대화창이 뜬 상태..

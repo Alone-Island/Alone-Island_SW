@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public int day = 20;            // J : 하루는 20초
 
     public SpecialEventManager specialManager; // J : GameManager에서 SpecialEventManager의 함수를 호출할 수 있도록 talkManager 변수 생성
+    public LearningManager learningManager;
 
     bool playerTalk = false;            // J : 플레이어가 대화하는 중에는 special event를 유예하도록 변수 생성
     int randomNum = 0;                  // C : AI와의 대화 시, 랜덤한 대화 내용을 출력하기 위한 변수 생성
@@ -67,6 +68,10 @@ public class GameManager : MonoBehaviour
 
         if (talkData == null)           // C : 해당하는 id의 talkData string들을 모두 가져왔다면
         {
+            if (id >= 100 && id <= 400)     // C : 
+            {
+                learningManager.Learning(id);
+            }
             playerTalk = false;         // J : 정상적으로 special event가 발동하도록 설정
             isTPShow = false;           // C : talkPanel의 show 상태 false로 저장
             talkIndex = 0;              // C : 다음 Talk()함수 사용을 위해 talkIndex를 0으로 초기화

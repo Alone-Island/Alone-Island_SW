@@ -7,6 +7,7 @@ public class SpecialEventManager : MonoBehaviour
 {
     public TalkManager talkManager; // J : GameManager에서 TalkManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public ScreenManager screenManager; // N : 레벨 관리를 위해 호출
+    public EndingManager endingManager; // N : 엔딩 처리를 위해 호출
     public GameObject talkPanel;    // J : 대화창
     public Text talkText;           // J : 대화창의 text
     public int talkIndex;           // J : talkIndex를 저장하기 위한 변수
@@ -76,7 +77,7 @@ public class SpecialEventManager : MonoBehaviour
                         screenManager.HeartStudy(1); // N : 공감 1레벨 상승
                         break;
                     case 2: // J : 박사님을 위해 새로운 열매를 따왔어요!
-                        // 독열매 사망
+                        endingManager.suddenEnding(1); // N : Bad Ending (독열매)
                         break;
                     case 3: // J : 저기 야생동물이 있는 것 같아요! 잡아서 구워먹을까요?
                         screenManager.HeartStudy(1); // J : 공감 1레벨 상승
@@ -91,7 +92,7 @@ public class SpecialEventManager : MonoBehaviour
                 switch (secondRandomNum)
                 {
                     case 1: // J : 이 꽃 너무 이쁘지 않아요??
-                        // AI가 이해하지 못해서 사망
+                        endingManager.suddenEnding(2); // N : Bad Ending (AI가 이해하지 못함)
                         break;
                     case 2: // J : (AI가 물에 빠졌다)
                         // 감전사 사망
@@ -151,6 +152,7 @@ public class SpecialEventManager : MonoBehaviour
                 break;
             case 3: // J : (나무가 쓰러져서 AI가 다쳤다. 어떻게 할까?)
                 // 알고보니 심각한 손상을 입은 AI 고장 -> 사망
+                endingManager.suddenEnding(3); // N : Bad Ending (AI 고장)
                 break;
             case 4: // J : *추후 추가 예정*
                 // 나중에 추가

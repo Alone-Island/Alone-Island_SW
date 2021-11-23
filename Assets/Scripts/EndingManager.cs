@@ -56,6 +56,12 @@ public class EndingManager : MonoBehaviour
             case 3: // N : Bad Ending (AI 고장)
                 Debug.Log("Broken,,,");
                 break;
+            case 4: // J : Bad Ending (쓰나미)
+                Debug.Log("쓰나미");
+                break;
+            case 5: // J : Bad Ending (운석충돌)
+                Debug.Log("운석 충돌");
+                break;
         }
     }
 

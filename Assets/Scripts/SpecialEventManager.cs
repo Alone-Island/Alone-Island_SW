@@ -27,13 +27,33 @@ public class SpecialEventManager : MonoBehaviour
         AItalk = true;  // J : Jump키를 눌렀을 때 object scan을 할 수 없게 함
 
         System.Random rand = new System.Random();
-        firstRandomNum = rand.Next(2);      // J : 0-1까지의 난수 생성 (0 : 선택지 2개, 1: 선택지 3개)
-        secondRandomNum = rand.Next(1, 5);  // J : 1-4까지의 난수 생성
+        
+        int danger = (int)((10 - screenManager.houseLv.fCurrValue) * 5 + 50);   // J : 위험도 계산
+        if (rand.Next(100) < danger)    // J : 위험도가 높아 재난 발생
+            Disaster();
+        else 
+        {
+            firstRandomNum = rand.Next(2);      // J : 0-1까지의 난수 생성 (0 : 선택지 2개, 1: 선택지 3개)
+            secondRandomNum = rand.Next(1, 5);  // J : 1-4까지의 난수 생성
 
-        specialID = 10000 + 10 * firstRandomNum + secondRandomNum; // J : talkData를 갖고 오기 위해 talkID 계산
+            specialID = 10000 + 10 * firstRandomNum + secondRandomNum; // J : talkData를 갖고 오기 위해 talkID 계산
 
-        talkPanel.SetActive(true);  // J : 대화창 활성화
-        Talk();                     // J : 대화 시작
+            talkPanel.SetActive(true);  // J : 대화창 활성화
+            Talk();                     // J : 대화 시작
+        }
+    }
+
+    private void Disaster()
+    {
+        switch ((new System.Random()).Next(2))  // J : 각 재난은 50% 확률로 발생
+        {
+            case 0: // J : 쓰나미
+                endingManager.suddenEnding(4);
+                break;
+            case 1: // J : 운석 충돌
+                endingManager.suddenEnding(5);
+                break;
+        }
     }
 
     // J : 실행될 때마다 다음 문장으로 넘어감

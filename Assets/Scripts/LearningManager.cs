@@ -9,7 +9,7 @@ public class LearningManager : MonoBehaviour
     public bool isAILearning = false;         // K : AI가 학습중인지 확인하는 변수
     public int learningTime = 10;
 
-    public void CompleateLearning()
+    public void CompleateLearning() // K : 
     {
         isAILearning = false;
     }

@@ -98,7 +98,7 @@ public class AIAction : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)   // Ai 충돌 감지 함수
     {
-        //isAICollision = true;                   // K : AI 충돌
+        //isAICollision = true;                 // K : AI 충돌
         nextAIMoveX = 0;                        // Ai 충돌 발생시 무조건 멈춤
         nextAIMoveY = 0;
     }

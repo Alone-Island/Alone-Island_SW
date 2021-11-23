@@ -2,24 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;   // J : UI 프로그래밍을 위해 추가 (Text 등)
+using TMPro;            // J : TextMeshProUGUI를 위해 추가
 
 public class SpecialEventManager : MonoBehaviour
 {
-    public TalkManager talkManager; // J : GameManager에서 TalkManager의 함수를 호출할 수 있도록 talkManager 변수 생성
+    public TalkManager talkManager;     // J : GameManager에서 TalkManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public ScreenManager screenManager; // N : 레벨 관리를 위해 호출
     public EndingManager endingManager; // N : 엔딩 처리를 위해 호출
-    public GameObject talkPanel;    // J : 대화창
-    public Text talkText;           // J : 대화창의 text
-    public int talkIndex;           // J : talkIndex를 저장하기 위한 변수
-    public bool AItalk = false;     // J : AI가 스페셜 이벤트 대화를 하는지 여부
-    public Text selectText0, selectText1, selectText2;
+    public GameObject talkPanel;        // J : 대화창
+    public TextMeshProUGUI talkText;    // J : 대화창의 text
+    public int talkIndex;               // J : talkIndex를 저장하기 위한 변수
+    public bool AItalk = false;         // J : AI가 스페셜 이벤트 대화를 하는지 여부
+    public TextMeshProUGUI selectText0, selectText1, selectText2;
     public Button selectButton0, selectButton1, selectButton2;
 
-    List<Text> selectText;          // J : 선택지 텍스트를 관리하기 위한 리스트
-    List<Button> selectButton;      // J : 선택지 버튼을 관리하기 위한 리스트
-    int specialID;                  // J : TalkManager로부터 talkData를 가져오기 위한 변수
-    int firstRandomNum;             // J : 랜덤 스페셜 이벤트를 위한 변수1 (0 : 선택지 2개, 1: 선택지 3개)
-    int secondRandomNum;            // J : 랜덤 스페셜 이벤트를 위한 변수2
+    List<TextMeshProUGUI> selectText;   // J : 선택지 텍스트를 관리하기 위한 리스트
+    List<Button> selectButton;          // J : 선택지 버튼을 관리하기 위한 리스트
+    int specialID;                      // J : TalkManager로부터 talkData를 가져오기 위한 변수
+    int firstRandomNum;                 // J : 랜덤 스페셜 이벤트를 위한 변수1 (0 : 선택지 2개, 1: 선택지 3개)
+    int secondRandomNum;                // J : 랜덤 스페셜 이벤트를 위한 변수2
 
     // J : Special Event 발생
     public void Action() 
@@ -33,6 +34,7 @@ public class SpecialEventManager : MonoBehaviour
             Disaster();
         else 
         {
+            Debug.Log("Special 발동");
             firstRandomNum = rand.Next(2);      // J : 0-1까지의 난수 생성 (0 : 선택지 2개, 1: 선택지 3개)
             secondRandomNum = rand.Next(1, 5);  // J : 1-4까지의 난수 생성
 
@@ -191,7 +193,7 @@ public class SpecialEventManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        selectText = new List<Text>();
+        selectText = new List<TextMeshProUGUI>();
         selectText.Add(selectText0);
         selectText.Add(selectText1);
         selectText.Add(selectText2);

@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;   // C : UI 프로그래밍을 위해 추가 (Text 등)
+using TMPro;            // J : TextMeshProUGUI를 위해 추가
 
 // C : 전체적인 게임 진행 및 관리를 도와주는 스크립트
 public class GameManager : MonoBehaviour
 {
-    public Text talkText;           // C : 대화창의 text
+    public TextMeshProUGUI talkText;           // C : 대화창의 text
     public GameObject scanObject;   // C : 스캔된(조사한) game object
     public GameObject talkPanel;    // C : 대화창
     public bool isTPShow;           // C : talkPanel의 상태 저장 (보여주기 or 숨기기)

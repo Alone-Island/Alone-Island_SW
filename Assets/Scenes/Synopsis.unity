@@ -159,8 +159,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 253.20999, y: -97.41}
-  m_SizeDelta: {x: 93.58, y: 41.19}
+  m_AnchoredPosition: {x: 237.4, y: 116.46}
+  m_SizeDelta: {x: 79.57, y: 19.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &427207275
 MonoBehaviour:
@@ -399,8 +399,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093870598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.08, y: 0.02, z: 0}
-  m_LocalScale: {x: 25.2375, y: 10.4257, z: 1}
+  m_LocalPosition: {x: 0.14, y: 0.09, z: 0}
+  m_LocalScale: {x: 35.39441, y: 19.318981, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -574,8 +574,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -16, y: 4.405}
-  m_SizeDelta: {x: 134.62, y: 50}
+  m_AnchoredPosition: {x: 0.0000040531, y: -0.0000087023}
+  m_SizeDelta: {x: 79.57, y: 19.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1867516070
 MonoBehaviour:
@@ -625,8 +625,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -661,7 +661,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 34.801914, y: 11.1863365, z: 0, w: 0}
+  m_margin: {x: 0.16074753, y: 0.030702114, z: 0.18967818, w: 0.5871525}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

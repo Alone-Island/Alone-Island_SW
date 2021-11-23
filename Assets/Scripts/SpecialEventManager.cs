@@ -48,10 +48,10 @@ public class SpecialEventManager : MonoBehaviour
         switch ((new System.Random()).Next(2))  // J : 각 재난은 50% 확률로 발생
         {
             case 0: // J : 쓰나미
-                endingManager.suddenEnding(4);
+                endingManager.suddenEnding(5);
                 break;
             case 1: // J : 운석 충돌
-                endingManager.suddenEnding(5);
+                endingManager.suddenEnding(6);
                 break;
         }
     }

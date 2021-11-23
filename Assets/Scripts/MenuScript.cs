@@ -20,17 +20,23 @@ public class MenuScript : MonoBehaviour
         Debug.Log("불러오기");
     }
 
+    // J : 엔딩카드 버튼 onclick
+    public void SelectCard()
+    {
+        Debug.Log("엔딩카드");
+    }
+
     // J : 게임방법 버튼 onclick
     public void SelectRule()
     {
         Debug.Log("게임방법");
-        gameRule.SetActive(true);
+        gameRule.SetActive(true);   // J : 게임방법창 활성화
     }
 
     // J : 게임방법 나가기 버튼 onclick
     public void SelectRuleQuit()
     {
         Debug.Log("게임방법 나가기");
-        gameRule.SetActive(false);
+        gameRule.SetActive(false);  // J : 게임방법창 비활성화
     }
 }

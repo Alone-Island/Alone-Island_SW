@@ -37,8 +37,8 @@ public class ScreenManager : MonoBehaviour
         farmLv.initLv(1, 10);
         houseLv.initLv(1, 10);
         craftLv.initLv(1, 10);
-        engineerLv.initLv(1, 10);
-        heartLv.initLv(1, 10);
+        engineerLv.initLv(1, 15);
+        heartLv.initLv(1, 20);
 
         // N : 캘린더 초기화
         calender.text = "day 01";
@@ -62,14 +62,16 @@ public class ScreenManager : MonoBehaviour
         if (day < 10) calender.text = "day " + "0" + day.ToString();
         else calender.text = "day " + day.ToString();
 
+        // N : 90일 이후
+        if (day > 90) endingManager.timeOutEnding();
+
         // N : 스탯 관리
-        hungerStat.fCurrValue -= 10;
-        happyStat.fCurrValue -= 5;
-        temperatureStat.fCurrValue -= 10;
-        //dangerStat.fCurrValue -= 10;
+        hungerStat.fCurrValue = hungerStat.fCurrValue + farmLv.fCurrValue - 10;
+        happyStat.fCurrValue = happyStat.fCurrValue + heartLv.fCurrValue - 5;
+        temperatureStat.fCurrValue = temperatureStat.fCurrValue + craftLv.fCurrValue - 10;
 
         // N : 엔딩 처리
-        if (hungerStat.fCurrValue < 1) endingManager.failHungry();
+        if (hungerStat.fCurrValue <= 0) endingManager.failHungry();
         else if (happyStat.fCurrValue <= 0) endingManager.failLonely();
         else if (temperatureStat.fCurrValue <= 0) endingManager.failCold();
 
@@ -104,7 +106,7 @@ public class ScreenManager : MonoBehaviour
     {
         useBook();
         houseLv.fCurrValue++;
-        dangerStat.fCurrValue += 50;
+        //dangerStat.fCurrValue += 50;
     }
 
     // N : 공예 배우기
@@ -120,13 +122,29 @@ public class ScreenManager : MonoBehaviour
     {
         useBook();
         engineerLv.fCurrValue++;
+
+        // N : 엔딩 처리
+        if (engineerLv.fCurrValue >= engineerLv.maxValue)
+        {
+            if (heartLv.fCurrValue > 17.0f) endingManager.successPeople(); // N : 공감 능력이 높은 경우
+            else endingManager.successAI(); // N : 공감 능력이 낮은 경우
+        }
     }
 
-    // N : 공감 배우기
+    // N : 공감 배우기 (말걸기만 하는 경우 n = 0)
     public void HeartStudy(int n)
     {
+        if (n == 0) happyStat.fCurrValue += 5;
         //useBook();
         heartLv.fCurrValue += n;
-        happyStat.fCurrValue += (50 * n);
+        happyStat.fCurrValue += (10 * n);
+
+        // N : 엔딩 처리
+        if (happyStat.fCurrValue <= 0) endingManager.failLonely();
+        else if (heartLv.fCurrValue >= heartLv.maxValue)
+        {
+            if (engineerLv.fCurrValue > 13.0f) endingManager.successPeople(); // N : 공학 능력이 높은 경우
+            else endingManager.successTwo(); // N : 공학 능력이 낮은 경우
+        }
     }
 }

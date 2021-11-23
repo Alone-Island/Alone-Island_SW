@@ -900,7 +900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   talkManager: {fileID: 121161932}
   screenManager: {fileID: 1163355729}
-  endingManager: {fileID: 0}
+  endingManager: {fileID: 872728046}
   talkPanel: {fileID: 1384437669}
   talkText: {fileID: 1874054325}
   talkIndex: 0

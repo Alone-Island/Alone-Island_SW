@@ -50,7 +50,8 @@ public class AIAction : MonoBehaviour
         Invoke("NextAiMoveDirection", 5);   // K : 재귀함수, 5초 후 자기 자신을 재실행 
     }
 
-    public void GoToStudyPlace(int x, int y)
+    public void GoToStudyPlace(int x, int y) // K : AI가 학습 장소로 순간이동 하게 하는 함수
+                                             // (x,y)좌표를 파라미터로 받는다.
     {
         transform.position = new Vector3(x, y, 0);
     }

@@ -57,7 +57,7 @@ public class AutoPlayerAction : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
 
-        Invoke("NextAiMoveDirection", 5);   // K : 5초 후 object가 움직일 방향 결정 함수 실행
+        Invoke("NextAiMoveDirection", 2);   // J : 2초 후 object가 움직일 방향 결정 함수 실행
     }
 
     void Update()

@@ -6,6 +6,12 @@ public class LearningManager : MonoBehaviour
 {
     public ScreenManager screenManager;     // C :
     public AIAction aiAction;               // C :
+    public bool isAILearning = false;         // K : AI가 학습중인지 확인하는 변수
+    
+    public void CompleateLearning()
+    {
+        isAILearning = false;
+    }
 
     public void Learning(int id)            // C :
     {
@@ -14,22 +20,30 @@ public class LearningManager : MonoBehaviour
             case 100:                       // C :
                 Debug.Log(id);
                 screenManager.FarmStudy();
-                aiAction.GoToStudyPlace(-7, -7);
+                aiAction.GoToLearningPlace(-7, -7);
+                isAILearning = true;
+                Invoke("CompleateLearning", 10);
                 break;
             case 200:                       // C :
                 Debug.Log(id);
                 screenManager.HouseStudy();
-                aiAction.GoToStudyPlace(10, 9);
+                aiAction.GoToLearningPlace(10, 9);
+                isAILearning = true;
+                Invoke("CompleateLearning", 10);
                 break;
             case 300:                       // C :
                 Debug.Log(id);
                 screenManager.CraftStudy();
-                aiAction.GoToStudyPlace(7, 5);
+                aiAction.GoToLearningPlace(7, 5);
+                isAILearning = true;
+                Invoke("CompleateLearning", 10);
                 break;
             case 400:                       // C :
                 Debug.Log(id);
                 screenManager.EngineerStudy();
-                aiAction.GoToStudyPlace(-5, 5);
+                aiAction.GoToLearningPlace(-5, 5);
+                isAILearning = true;
+                Invoke("CompleateLearning", 10);
                 break;
             default:
                 Debug.Log("fail learning");

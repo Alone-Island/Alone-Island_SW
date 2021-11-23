@@ -10,7 +10,7 @@ public class AIAction : MonoBehaviour
     Rigidbody2D rigid;
     Animator anim;                          // C : 애니메이션 제어
     SpecialEventManager specialManager;     // K : SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
-    bool isAiStuding = true;                // K : ???의 AI가 학습중임을 확인할 수 있는 변수 호출을 위한 변수 생성
+    public LearningManager learningManager;
     public int nextAIMoveX = 0;             // K : ai의 다음 X축 방향 변후
     public int nextAIMoveY = 0;             // K : ai의 다음 Y축 방향 변후
     //bool isAICollision = false;             // K : ai 충돌 확인 변수 > 추후 사용 예정
@@ -50,7 +50,7 @@ public class AIAction : MonoBehaviour
         Invoke("NextAiMoveDirection", 5);   // K : 재귀함수, 5초 후 자기 자신을 재실행 
     }
 
-    public void GoToStudyPlace(int x, int y) // K : AI가 학습 장소로 순간이동 하게 하는 함수
+    public void GoToLearningPlace(int x, int y) // K : AI가 학습 장소로 순간이동 하게 하는 함수
                                              // (x,y)좌표를 파라미터로 받는다.
     {
         transform.position = new Vector3(x, y, 0);
@@ -68,7 +68,7 @@ public class AIAction : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         
-        //Invoke("NextAiMoveDirection", 5);   // K : 5초 후 ai가 움직일 방향 결정 함수 실행
+        Invoke("NextAiMoveDirection", 5);   // K : 5초 후 ai가 움직일 방향 결정 함수 실행
     }
 
     void Update()
@@ -86,7 +86,7 @@ public class AIAction : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (specialManager.AItalk || isAiStuding)    // 스페셜 이벤트, 플레이어가 AI와 대화하는 중 또는 AI가 학습중일때 정지
+        if (specialManager.AItalk || learningManager.isAILearning)    // 스페셜 이벤트, 플레이어가 AI와 대화하는 중 또는 AI가 학습중일때 정지
         {
             rigid.velocity = new Vector2(0, 0); // K : ai 정지
         }

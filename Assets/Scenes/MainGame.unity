@@ -2711,6 +2711,7 @@ MonoBehaviour:
   screenManager: {fileID: 1666890491}
   aiAction: {fileID: 793937239}
   isAILearning: 0
+  learningTime: 10
 --- !u!4 &721096103
 Transform:
   m_ObjectHideFlags: 0
@@ -6967,7 +6968,8 @@ MonoBehaviour:
   craftLv: {fileID: 1347493654}
   engineerLv: {fileID: 1668275455}
   heartLv: {fileID: 26451050}
-  learningManager: {fileID: 0}
+  learningManager: {fileID: 721096102}
+  learningTime: {fileID: 655002192}
   calender: {fileID: 1604483255}
   book: {fileID: 1302376640}
   endingManager: {fileID: 872728046}
@@ -9486,7 +9488,8 @@ MonoBehaviour:
   craftLv: {fileID: 1347493654}
   engineerLv: {fileID: 1668275455}
   heartLv: {fileID: 26451050}
-  learningManager: {fileID: 0}
+  learningManager: {fileID: 721096102}
+  learningTime: {fileID: 655002192}
   calender: {fileID: 1604483255}
   book: {fileID: 1302376640}
   endingManager: {fileID: 872728046}

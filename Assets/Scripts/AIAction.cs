@@ -10,10 +10,10 @@ public class AIAction : MonoBehaviour
     Rigidbody2D rigid;
     Animator anim;                          // C : 애니메이션 제어
     SpecialEventManager specialManager;     // K : SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
-    bool isAiStuding = true;               // K : ???의 AI가 학습중임을 확인할 수 있는 변수 호출을 위한 변수 생성
+    bool isAiStuding = true;                // K : ???의 AI가 학습중임을 확인할 수 있는 변수 호출을 위한 변수 생성
     public int nextAIMoveX = 0;             // K : ai의 다음 X축 방향 변후
     public int nextAIMoveY = 0;             // K : ai의 다음 Y축 방향 변후
-    bool isAICollision = false;
+    bool isAICollision = false;             // K : ai 충돌 확인 변수 > 추후 사용 예정
 
     void NextAiMoveDirection()              // K : ai가 랜덤하게 움직이도록 랜덤한 방향을 결정해주는 함수
     {
@@ -97,13 +97,13 @@ public class AIAction : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)   // Ai 충돌 감지 함수
     {
-        isAICollision = true;
+        isAICollision = true;                   // K : AI 충돌
         nextAIMoveX = 0;                        // Ai 충돌 발생시 무조건 멈춤
         nextAIMoveY = 0;
     }
 
-    void OnCollisionExit2D(Collision2D coll)   // Ai 충돌 제거 함수
+    void OnCollisionExit2D(Collision2D coll)   // Ai 충돌 제거 감지 함수
     {
-        isAICollision = false;
+        isAICollision = false;                 // K : AI 충돌 멈춤
     }
 }

@@ -9,10 +9,11 @@ public class AIAction : MonoBehaviour
 {
     Rigidbody2D rigid;
     Animator anim;                          // C : 애니메이션 제어
-    SpecialEventManager specialManager; // K : SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
+    SpecialEventManager specialManager;     // K : SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
+    bool isAiStuding = true;               // K : ???의 AI가 학습중임을 확인할 수 있는 변수 호출을 위한 변수 생성
     public int nextAIMoveX = 0;             // K : ai의 다음 X축 방향 변후
     public int nextAIMoveY = 0;             // K : ai의 다음 Y축 방향 변후
-    // public bool isAICollision = false;
+    bool isAICollision = false;
 
     void NextAiMoveDirection()              // K : ai가 랜덤하게 움직이도록 랜덤한 방향을 결정해주는 함수
     {
@@ -49,6 +50,11 @@ public class AIAction : MonoBehaviour
         Invoke("NextAiMoveDirection", 5);   // K : 재귀함수, 5초 후 자기 자신을 재실행 
     }
 
+    public void GoToStudyPlace(int x, int y)
+    {
+        transform.position = new Vector3(x, y, 0);
+    }
+
     void Awake()
     {
         // C : Animator component instance 생성
@@ -60,12 +66,12 @@ public class AIAction : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-
-        Invoke("NextAiMoveDirection", 5);   // K : 5초 후 ai가 움직일 방향 결정 함수 실행
+        
+        //Invoke("NextAiMoveDirection", 5);   // K : 5초 후 ai가 움직일 방향 결정 함수 실행
     }
 
     void Update()
-    {
+    {   
         // C : ai 이동(NextAiMoveDirection의 결과)값에 따라 애니메이션 적용
         if (anim.GetInteger("hAxisRaw") != nextAIMoveX)         // C : ai 좌우 이동 시 적절한 애니메이션 실행
         {
@@ -79,7 +85,7 @@ public class AIAction : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (specialManager.AItalk)    // 스페셜 이벤트, 플레이어가 AI와 대화하는 중 AI 정지
+        if (specialManager.AItalk || isAiStuding)    // 스페셜 이벤트, 플레이어가 AI와 대화하는 중 또는 AI가 학습중일때 정지
         {
             rigid.velocity = new Vector2(0, 0); // K : ai 정지
         }
@@ -91,8 +97,13 @@ public class AIAction : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)   // Ai 충돌 감지 함수
     {
-        Debug.Log("Ai 충돌 발생");
+        isAICollision = true;
         nextAIMoveX = 0;                        // Ai 충돌 발생시 무조건 멈춤
         nextAIMoveY = 0;
+    }
+
+    void OnCollisionExit2D(Collision2D coll)   // Ai 충돌 제거 함수
+    {
+        isAICollision = false;
     }
 }

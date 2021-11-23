@@ -6414,6 +6414,7 @@ MonoBehaviour:
   calender: {fileID: 1604483255}
   book: {fileID: 1302376640}
   endingManager: {fileID: 872728046}
+  gameManager: {fileID: 1163355727}
 --- !u!1 &1175649851
 GameObject:
   m_ObjectHideFlags: 0

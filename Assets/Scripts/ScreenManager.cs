@@ -21,9 +21,10 @@ public class ScreenManager : MonoBehaviour
     public TextMeshProUGUI learningTime;
 
     private int day = 1; // N : 날짜
-    private int bookNum = 0; // N : 책 개수
+    //private int bookNum = 0; // N : 책 개수
     [SerializeField] private TextMeshProUGUI calender; // N : 날짜 텍스트
     [SerializeField] private TextMeshProUGUI book; // N : 책 개수 텍스트
+    [SerializeField] private int bookNum;
 
     public EndingManager endingManager;
     public GameManager gameManager;     // J : GameManager에서 하루가 몇초인지 가져옴
@@ -33,7 +34,11 @@ public class ScreenManager : MonoBehaviour
     {
         // N : 스탯 초기화
         hungerStat.initStat(100, 100);
+<<<<<<< Updated upstream
         happyStat.initStat(100, 100);
+=======
+        happyStat.initStat(50, 100);
+>>>>>>> Stashed changes
         temperatureStat.initStat(100, 100);
         //dangerStat.initStat(100, 100);
 

@@ -34,11 +34,7 @@ public class ScreenManager : MonoBehaviour
     {
         // N : Ω∫≈» √ ±‚»≠
         hungerStat.initStat(100, 100);
-<<<<<<< Updated upstream
-        happyStat.initStat(100, 100);
-=======
         happyStat.initStat(50, 100);
->>>>>>> Stashed changes
         temperatureStat.initStat(100, 100);
         //dangerStat.initStat(100, 100);
 

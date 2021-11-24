@@ -91,6 +91,11 @@ public class ScreenManager : MonoBehaviour
         Invoke("dayAfter", gameManager.day);
     }
 
+    public int currBookNum()
+    {
+        return bookNum;
+    }
+
     // N : Ã¥ ÁÝ±â
     public void getBook()
     {

@@ -16,6 +16,8 @@ public class PlayerAction : MonoBehaviour
     Vector3 dirVec;     // C : 현재 바라보고 있는 방향 값
     GameObject scanObject;  // C : 스캔된 game object
 
+    public GameObject farmIcon;
+
     Rigidbody2D rigid;  // C : 물리 제어
     Animator anim;      // C : 애니메이션 제어
 
@@ -125,6 +127,21 @@ public class PlayerAction : MonoBehaviour
             manager.talkPanel.SetActive(true);              // J : 대화창 활성화
             manager.talkText.text = "책을 찾았습니다!";     // J : 대화창 텍스트 적용
             screenManager.getBook();                        // J : 책 개수 증가
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.name == "FarmLearning")
+        {
+            farmIcon.SetActive(true);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.gameObject.name == "FarmLearning")
+        {
+            farmIcon.SetActive(false);
         }
     }
 }

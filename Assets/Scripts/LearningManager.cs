@@ -19,8 +19,9 @@ public class LearningManager : MonoBehaviour
         learningTime--;
         if (learningTime == 0)
         {
+            //Invoke("CompleateLearning", 1);
+            CompleateLearning();
             learningTime = 10;
-            Invoke("CompleateLearning", 1);
         } else
         {
             Invoke("WaitingLearning", 1);
@@ -43,21 +44,21 @@ public class LearningManager : MonoBehaviour
                 screenManager.HouseStudy();
                 aiAction.GoToLearningPlace(10, 9);
                 isAILearning = true;
-                Invoke("CompleateLearning", 10);
+                Invoke("WaitingLearning", 1);
                 break;
             case 300:                       // C :
                 Debug.Log(id);
                 screenManager.CraftStudy();
                 aiAction.GoToLearningPlace(7, 5);
                 isAILearning = true;
-                Invoke("CompleateLearning", 10);
+                Invoke("WaitingLearning", 1);
                 break;
             case 400:                       // C :
                 Debug.Log(id);
                 screenManager.EngineerStudy();
                 aiAction.GoToLearningPlace(-5, 5);
                 isAILearning = true;
-                Invoke("CompleateLearning", 10);
+                Invoke("WaitingLearning", 1);
                 break;
             default:
                 Debug.Log("fail learning");

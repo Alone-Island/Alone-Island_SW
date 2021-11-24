@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
     public ScreenManager screenManager; // N : 책 개수 가져오기 위해
 
     bool playerTalk = false;            // J : 플레이어가 대화하는 중에는 special event를 유예하도록 변수 생성
-    public bool isTheEnd = false;         // N : 게임 종료 여부
+    public bool isEndingShow = false;         // N : 엔딩 여부 (엔딩 카드 나타난 직후부터)
+    public bool isTheEnd = false;         // N : 게임 종료 여부 (엔딩 카드 나타나고 2초 뒤부터)
     int randomNum = 0;                  // C : AI와의 대화 시, 랜덤한 대화 내용을 출력하기 위한 변수 생성
 
     // J :IEnumerator 타입(WaitForSeconds)를 반환하는 함수
@@ -35,12 +36,12 @@ public class GameManager : MonoBehaviour
             }
             yield return null;
         }
-        StartCoroutine("SpecialEvent", day); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", day*3); // J : SpecialEvent 함수 호출
     }
 
     private void Start()
     {
-        StartCoroutine("SpecialEvent", day); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", day*3); // J : SpecialEvent 함수 호출
     }
 
     

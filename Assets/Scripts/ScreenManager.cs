@@ -19,6 +19,7 @@ public class ScreenManager : MonoBehaviour
 
     public LearningManager learningManager;
     public TextMeshProUGUI learningTime;
+    public TextMeshProUGUI learningTitle;
 
     private int day = 1; // N : 날짜
     //private int bookNum = 0; // N : 책 개수
@@ -60,9 +61,11 @@ public class ScreenManager : MonoBehaviour
         if(learningManager.isAILearning)
         {
             learningTime.text = learningManager.learningTime.ToString();
+            learningTitle.alpha = 1;
         } else
         {
             learningTime.text = "";
+            learningTitle.alpha = 0;
         }
     }
 
@@ -157,7 +160,7 @@ public class ScreenManager : MonoBehaviour
         happyStat.fCurrValue += (10 * n);
 
         // N : 엔딩 처리
-        if (happyStat.fCurrValue <= 0) endingManager.failLonely();
+        if (happyStat.fCurrValue <= 0 || heartLv.fCurrValue < 1) endingManager.failLonely();
         else if (heartLv.fCurrValue >= heartLv.maxValue)
         {
             if (engineerLv.fCurrValue > 13.0f) endingManager.successPeople(); // N : 공학 능력이 높은 경우

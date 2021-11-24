@@ -17,7 +17,11 @@ public class PlayerAction : MonoBehaviour
     Vector3 dirVec;     // C : 현재 바라보고 있는 방향 값
     GameObject scanObject;  // C : 스캔된 game object
 
+    //N : 학습하기 안내 아이콘들
     public GameObject farmIcon;
+    public GameObject houseIcon;
+    public GameObject craftIcon;
+    public GameObject engineerIcon;
 
     Rigidbody2D rigid;  // C : 물리 제어
     Animator anim;      // C : 애니메이션 제어
@@ -31,6 +35,8 @@ public class PlayerAction : MonoBehaviour
 
     void Update()
     {
+        if (manager.isEndingShow) manager.isTPShow = true;  // N : 엔딩 시 플레이어 정지
+
         // C : 입력된 수평/수직 이동을 대입 (-1, 0, 1)
         // C : GameManager의 isTPShow를 사용하여 talkPanel이 보여지고 있을 때는 플레이어의 이동을 제한
         h = manager.isTPShow ? 0 : Input.GetAxisRaw("Horizontal");
@@ -98,6 +104,8 @@ public class PlayerAction : MonoBehaviour
             else    // J : 아무 상태도 아니거나 책 찾았다는 대화창이 뜬 상태..
                 manager.talkPanel.SetActive(false); // J : 대화창 끄기
 
+            // N : 엔딩 크레딧으로 연결
+            // N : 나중에 버튼 만들어서 클릭으로 처리하면 좋을 것 같음.
             if (manager.isTheEnd)
             {
                 SceneManager.LoadScene("EndingCredits");
@@ -136,18 +144,44 @@ public class PlayerAction : MonoBehaviour
         }
     }
 
+    // N : 장소에 들어가면
     private void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.gameObject.name == "FarmLearning")
         {
             farmIcon.SetActive(true);
         }
+        if (coll.gameObject.name == "HouseLearning")
+        {
+            houseIcon.SetActive(true);
+        }
+        if (coll.gameObject.name == "CraftLearning")
+        {
+            craftIcon.SetActive(true);
+        }
+        if (coll.gameObject.name == "EngineerLearning")
+        {
+            engineerIcon.SetActive(true);
+        }
     }
+    // N : 장소에서 나오면
     private void OnTriggerExit2D(Collider2D coll)
     {
         if (coll.gameObject.name == "FarmLearning")
         {
             farmIcon.SetActive(false);
+        }
+        if (coll.gameObject.name == "HouseLearning")
+        {
+            houseIcon.SetActive(false);
+        }
+        if (coll.gameObject.name == "CraftLearning")
+        {
+            craftIcon.SetActive(false);
+        }
+        if (coll.gameObject.name == "EngineerLearning")
+        {
+            engineerIcon.SetActive(false);
         }
     }
 }

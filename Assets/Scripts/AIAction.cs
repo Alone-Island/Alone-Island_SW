@@ -11,6 +11,7 @@ public class AIAction : MonoBehaviour
     Animator anim;                          // C : 애니메이션 제어
     SpecialEventManager specialManager;     // K : SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
     public LearningManager learningManager;
+    public GameManager gameManager;
     public int nextAIMoveX = 0;             // K : ai의 다음 X축 방향 변후
     public int nextAIMoveY = 0;             // K : ai의 다음 Y축 방향 변후
     //bool isAICollision = false;             // K : ai 충돌 확인 변수 > 추후 사용 예정
@@ -86,7 +87,7 @@ public class AIAction : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (specialManager.special || learningManager.isAILearning)    // 스페셜 이벤트, 플레이어가 AI와 대화하는 중 또는 AI가 학습중일때 정지
+        if (specialManager.special || learningManager.isAILearning || gameManager.isEndingShow)    // 스페셜 이벤트, 플레이어가 AI와 대화하는 중 또는 AI가 학습중일때 정지
         {
             rigid.velocity = new Vector2(0, 0); // K : ai 정지
         }

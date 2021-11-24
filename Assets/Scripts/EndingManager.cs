@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class EndingManager : MonoBehaviour
 {
+    public GameManager manager;
+
     public GameObject panel;            // N : 화면 어둡게
     public GameObject badHungry;        // N : 배드 엔딩 (배고픔) 카드
     public GameObject badBerry;         // J : 배드 엔딩 (독열매) 카드
@@ -19,18 +22,21 @@ public class EndingManager : MonoBehaviour
         Debug.Log("Hungry,,,");
         panel.SetActive(true);
         badHungry.SetActive(true);
+        manager.isTheEnd = true;
     }
 
     // N : 행복 스탯이 0인 경우
     public void failLonely()
     {
         Debug.Log("Lonely,,,");
+        manager.isTheEnd = true;
     }
 
     // N : 체온 스탯이 0인 경우
     public void failCold()
     {
         Debug.Log("Cold,,,");
+        manager.isTheEnd = true;
     }
 
     public void successPeople()
@@ -38,6 +44,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("통신기를 만들어서 다른 생존자들을 만남");
         panel.SetActive(true);
         happyPeople.SetActive(true);
+        manager.isTheEnd = true;
     }
 
     public void successAI()
@@ -45,6 +52,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("다른 ai를 만들어내서 ai들과 함께 살게 됨");
         panel.SetActive(true);
         happyAITown.SetActive(true);
+        manager.isTheEnd = true;
     }
 
     public void successTwo()
@@ -52,6 +60,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("human과 ai는 단둘이 행복하게 살았답니다");
         panel.SetActive(true);
         happyTwo.SetActive(true);
+        manager.isTheEnd = true;
     }
 
     // N : 이벤트 엔딩
@@ -82,10 +91,12 @@ public class EndingManager : MonoBehaviour
                 Debug.Log("운석 충돌");
                 break;
         }
+        manager.isTheEnd = true;
     }
 
     public void timeOutEnding()
     {
         Debug.Log("그냥 저냥 살았습니당 ~~");
+        manager.isTheEnd = true;
     }
 }

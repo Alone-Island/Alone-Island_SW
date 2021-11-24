@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // C : Dr.Kim 오브젝트의 모든 Action과 관련된 기능들이 들어있는 스크립트
 public class PlayerAction : MonoBehaviour
@@ -96,6 +97,11 @@ public class PlayerAction : MonoBehaviour
                 manager.Action(scanObject);     // C : 맵의 대화창에 적절한 메세지가 뜰 수 있도록 Action()함수 실행
             else    // J : 아무 상태도 아니거나 책 찾았다는 대화창이 뜬 상태..
                 manager.talkPanel.SetActive(false); // J : 대화창 끄기
+
+            if (manager.isTheEnd)
+            {
+                SceneManager.LoadScene("EndingCredits");
+            }
         }
     }
 

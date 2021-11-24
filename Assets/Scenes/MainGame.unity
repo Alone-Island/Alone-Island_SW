@@ -3895,6 +3895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2802159b269c07541b440ed508a3d864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 1163355727}
   panel: {fileID: 1175649851}
   badHungry: {fileID: 1596584002}
   badBerry: {fileID: 1644377435}
@@ -4449,7 +4450,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 2.5}
+  m_Size: {x: 4.5, y: 3.5}
   m_EdgeRadius: 0
 --- !u!114 &990543459
 MonoBehaviour:
@@ -7540,6 +7541,7 @@ MonoBehaviour:
   specialManager: {fileID: 488290411}
   learningManager: {fileID: 721096102}
   screenManager: {fileID: 1163355729}
+  isTheEnd: 0
 --- !u!4 &1163355728
 Transform:
   m_ObjectHideFlags: 0

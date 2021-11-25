@@ -30,39 +30,41 @@ public class LearningManager : MonoBehaviour
 
     public void Learning(int id)            // C :
     {
-        switch (id)
-        {
-            case 100:                       // C :
-                Debug.Log(id);
-                screenManager.FarmStudy();
-                aiAction.GoToLearningPlace(-7, -7);
-                isAILearning = true;
-                Invoke("WaitingLearning", 1);
-                break;
-            case 200:                       // C :
-                Debug.Log(id);
-                screenManager.HouseStudy();
-                aiAction.GoToLearningPlace(10, 9);
-                isAILearning = true;
-                Invoke("WaitingLearning", 1);
-                break;
-            case 300:                       // C :
-                Debug.Log(id);
-                screenManager.CraftStudy();
-                aiAction.GoToLearningPlace(7, 5);
-                isAILearning = true;
-                Invoke("WaitingLearning", 1);
-                break;
-            case 400:                       // C :
-                Debug.Log(id);
-                screenManager.EngineerStudy();
-                aiAction.GoToLearningPlace(-5, 5);
-                isAILearning = true;
-                Invoke("WaitingLearning", 1);
-                break;
-            default:
-                Debug.Log("fail learning");
-                break;
+        if (!isAILearning) {
+            switch (id)
+            {
+                case 100:                       // C :
+                    Debug.Log(id);
+                    screenManager.FarmStudy();
+                    aiAction.GoToLearningPlace(-7, -7);
+                    isAILearning = true;
+                    Invoke("WaitingLearning", 1);
+                    break;
+                case 200:                       // C :
+                    Debug.Log(id);
+                    screenManager.HouseStudy();
+                    aiAction.GoToLearningPlace(10, 9);
+                    isAILearning = true;
+                    Invoke("WaitingLearning", 1);
+                    break;
+                case 300:                       // C :
+                    Debug.Log(id);
+                    screenManager.CraftStudy();
+                    aiAction.GoToLearningPlace(7, 5);
+                    isAILearning = true;
+                    Invoke("WaitingLearning", 1);
+                    break;
+                case 400:                       // C :
+                    Debug.Log(id);
+                    screenManager.EngineerStudy();
+                    aiAction.GoToLearningPlace(-5, 5);
+                    isAILearning = true;
+                    Invoke("WaitingLearning", 1);
+                    break;
+                default:
+                    Debug.Log("fail learning");
+                    break;
+            }
         }
     }
 }

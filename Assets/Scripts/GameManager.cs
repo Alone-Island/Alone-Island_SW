@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         playerTalk = true;                  // J : 플레이어가 대화하는 중에는 special event를 유예하도록 설정
         scanObject = scanObj;               // C : parameter로 들어온 스캔된 game object를 public 변수인 scanObject에 대입
         ObjectData objData = scanObject.GetComponent<ObjectData>();     // C : scanObject의 ObjectData instance 가져오기
+        int talkId = objData.id;
 
         if (objData.id == 1000 && randomNum == 0)      // C : objData가 AI이고, 대화 첫 시작이면
         {
@@ -59,7 +60,17 @@ public class GameManager : MonoBehaviour
             randomNum = rand.Next(1, 11);                  // C : 1~10까지의 난수를 대입
         }
 
-        Talk(objData.id);                   // C : 필요한 talkPanel text 값 가져오기
+        if (objData.id >= 100 && objData.id <= 400)
+        {
+            if (learningManager.isAILearning) // K : 학습하기 조사를 했을때, AI 학습중인 경우 예외처리
+            {
+                talkId = 500;
+            } else if (screenManager.currBookNum() < 1) // K : 학습하기 조사를 했을때, AI 학습중인 경우 예외처리
+            {
+                talkId = 600;
+            }
+        }
+        Talk(talkId);                   // C : 필요한 talkPanel text 값 가져오기
 
         talkPanel.SetActive(isTPShow);      // C : talkPanel 숨기거나 보여주기
     }
@@ -70,16 +81,31 @@ public class GameManager : MonoBehaviour
         // C : 조사한 object에 해당하는 talkData 중 talkIndex 위치의 string을 가져오기
         string talkData = talkManager.GetTalkData(id + randomNum, talkIndex);
 
-        // N : 책이 없는 경우
-        if (id >= 100 && id <= 400 && talkIndex == 1 && screenManager.currBookNum() < 1) 
+        /*
+        if (id >= 100 && id <= 400 && talkIndex == 0)
         {
-            talkData = "책이 모자랍니다.";
-
+            if (learningManager.isAILearning)
+            {
+                talkData = "AI가 아직 학습중입니다.\n학습이 끝나고 새로운 학습을 시켜주세요.";
+                talkIndex++;
+                return;
+            }
         }
+
+        // N : 책이 없는 경우
+        if (id >= 100 && id <= 400 && talkIndex == 1) 
+        {
+            if (screenManager.currBookNum() < 1)
+            {
+                talkData = "책이 모자랍니다.";
+
+            }
+        }
+        */
 
         if (talkData == null)           // C : 해당하는 id의 talkData string들을 모두 가져왔다면
         {
-            if (id >= 100 && id <= 400 && screenManager.currBookNum() > 0)     // C :  
+            if (id >= 100 && id <= 400)     // C :  
             {
                 learningManager.Learning(id);
             }

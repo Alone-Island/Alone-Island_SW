@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class MenuScript : MonoBehaviour
 {
-    public GameObject gameRule; // J : 게임방법 창
-    public GameObject BGM;      // J : 배경음악 on/off를 위해 BGM object 가져옴
-    public GameObject onImage;  // J : BGM on 이미지
-    public GameObject offImage; // J : BGM off 이미지
+    public GameObject gameRule;     // J : 게임방법 창
+    public GameObject endingCards;  // J : 엔딩카드창
+    public GameObject BGM;          // J : 배경음악 on/off를 위해 BGM object 가져옴
+    public GameObject onImage;      // J : BGM on 이미지
+    public GameObject offImage;     // J : BGM off 이미지
 
     AudioSource audioSource;    // J : BGM
 
@@ -40,6 +41,7 @@ public class MenuScript : MonoBehaviour
     public void SelectCard()
     {
         Debug.Log("엔딩카드");
+        endingCards.SetActive(true);
     }
 
     // J : 게임방법 버튼 onclick

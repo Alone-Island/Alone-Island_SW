@@ -10,7 +10,17 @@ public class MenuScript : MonoBehaviour
     public GameObject onImage;  // J : BGM on 이미지
     public GameObject offImage; // J : BGM off 이미지
 
-    private bool play = true;   // J : 배경음악 재생중인지 여부
+    AudioSource audioSource;    // J : BGM
+
+    private void Start()
+    {
+        audioSource = BGM.GetComponent<AudioSource>();
+        // J : 게임 데이터에서 가져와 초기 세팅
+        if (DataController.Instance.settingData.BGMSound == 1)
+            audioSource.Play();     // J : BGM on
+        else if (DataController.Instance.settingData.BGMSound == 0)
+            audioSource.Stop();     // J : BGM off
+    }
 
     // J : 시작하기 버튼 onclick
     public void SelectStart()
@@ -48,24 +58,23 @@ public class MenuScript : MonoBehaviour
     // J : 오디오 버튼 onclick
     public void SelectAudio()
     {
-        AudioSource audioSource = BGM.GetComponent<AudioSource>();
-        if (play)   // J : BGM 재생중이면 off
+        if (DataController.Instance.settingData.BGMSound == 1)   // J : BGM 재생중이면 off
         {
             Debug.Log("BGM off");
-            audioSource.gameObject.SetActive(false);    // J : BGM off
+            audioSource.Stop();     // J : BGM off
             // J : off Image 보이게
             onImage.SetActive(false);
             offImage.SetActive(true);
-            play = false;
+            DataController.Instance.settingData.BGMSound = 0;
         }
         else        // J : BGM 재생중이면 on
         {
             Debug.Log("BGM on");
-            audioSource.gameObject.SetActive(true);     // J : BGM on
+            audioSource.Play();     // J : BGM on
             // J : on Image 보이게
             onImage.SetActive(true);
             offImage.SetActive(false);
-            play = true;
+            DataController.Instance.settingData.BGMSound = 1;
         }
     }
 }

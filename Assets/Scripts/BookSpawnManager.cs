@@ -75,56 +75,19 @@ public class BookSpawnManager : MonoBehaviour
 
 
         // C : book이 생성되면 안되는 위치를 제한하는 과정
-        Vector3 farmPosition = farmObject.transform.localPosition;                      // C :
-        Vector3 farmLearningPosition = farmLearningObject.transform.localPosition;      // C :       
-        Vector2 farmLearningSize = farmLearningArea.size;                               // C :
-        double[] farmArea = new double[] {farmLearningPosition.x - farmLearningSize.x + farmPosition.x - 0.5,       // C :
-                                           farmLearningPosition.x + farmLearningSize.x + farmPosition.x + 0.5,
-                                           farmLearningPosition.y - farmLearningSize.y + farmPosition.y - 0.5,
-                                           farmLearningPosition.y + farmLearningSize.y + farmPosition.y + 0.5};
-        
-        Vector3 housePosition = houseObject.transform.localPosition;                      // C :
-        Vector3 houseLearningPosition = houseLearningObject.transform.localPosition;      // C :       
-        Vector2 houseLearningSize = houseLearningArea.size;                               // C :
-        double[] houseArea = new double[] {houseLearningPosition.x - houseLearningSize.x + housePosition.x - 0.5,       // C :
-                                           houseLearningPosition.x + houseLearningSize.x + housePosition.x + 0.5,
-                                           houseLearningPosition.y - houseLearningSize.y + housePosition.y - 0.5,
-                                           houseLearningPosition.y + houseLearningSize.y + housePosition.y + 0.5};
-        
-        Vector3 craftPosition = craftObject.transform.localPosition;                      // C :
-        Vector3 craftLearningPosition = craftLearningObject.transform.localPosition;      // C :       
-        Vector2 craftLearningSize = craftLearningArea.size;                               // C :
-        double[] craftArea = new double[] {craftLearningPosition.x - craftLearningSize.x + craftPosition.x - 0.5,       // C :
-                                           craftLearningPosition.x + craftLearningSize.x + craftPosition.x + 0.5,
-                                           craftLearningPosition.y - craftLearningSize.y + craftPosition.y - 0.5,
-                                           craftLearningPosition.y + craftLearningSize.y + craftPosition.y + 0.5};
-
-        Vector3 labPosition = labObject.transform.localPosition;                        // C :
-        Vector3 labLearningPosition = labLearningObject.transform.localPosition;        // C :       
-        Vector2 labLearningSize = labLearningArea.size;                                 // C :
-        double[] labArea = new double[] {labLearningPosition.x - labLearningSize.x + labPosition.x - 0.5,       // C :
-                                           labLearningPosition.x + labLearningSize.x + labPosition.x + 0.5,
-                                           labLearningPosition.y - labLearningSize.y + labPosition.y - 0.5,
-                                           labLearningPosition.y + labLearningSize.y + labPosition.y + 0.5};
-
-        // C : 
-        if (spawnPos.x >= farmArea[0] && spawnPos.x <= farmArea[1]              // C :
-            && spawnPos.y >= farmArea[2] && spawnPos.y <= farmArea[3])
+        if (isLimit(farmObject, farmLearningObject, farmLearningArea, spawnPos))                // C :
         {
             return GetRandomPosition();
         }
-        else if (spawnPos.x >= houseArea[0] && spawnPos.x <= houseArea[1]       // C :
-            && spawnPos.y >= houseArea[2] && spawnPos.y <= houseArea[3])
+        else if (isLimit(houseObject, houseLearningObject, houseLearningArea, spawnPos))        // C :
         {
             return GetRandomPosition();
         }
-        else if (spawnPos.x >= craftArea[0] && spawnPos.x <= craftArea[1]       // C :
-           && spawnPos.y >= craftArea[2] && spawnPos.y <= craftArea[3])
+        else if (isLimit(craftObject, craftLearningObject, craftLearningArea, spawnPos))        // C :
         {
             return GetRandomPosition();
         }
-        else if (spawnPos.x >= labArea[0] && spawnPos.x <= labArea[1]           // C :
-           && spawnPos.y >= labArea[2] && spawnPos.y <= labArea[3])
+        else if (isLimit(labObject, labLearningObject, labLearningArea, spawnPos))              // C :
         {
             return GetRandomPosition();
         }
@@ -132,6 +95,29 @@ public class BookSpawnManager : MonoBehaviour
         return spawnPos;    // J : 랜덤 위치 return
     }
 
+
+    // C : 생성한 book의 랜덤 위치가 제한 지역에 있으면 true, 아니면 false 반환하는 함수
+    // C : 
+    private bool isLimit(GameObject baseObject, GameObject learningObject, BoxCollider2D learningColl, Vector3 spawnPos)
+    {
+        // C : book이 생성되면 안되는 범위 구하기
+        Vector3 basePos = baseObject.transform.localPosition;                       // C :
+        Vector3 learningPos = learningObject.transform.localPosition;               // C :       
+        Vector2 learningSize = learningColl.size;                                   // C :
+        double[] learingArea = new double[] {learningPos.x - learningSize.x + basePos.x - 0.5,       // C :
+                                           learningPos.x + learningSize.x + basePos.x + 0.5,
+                                           learningPos.y - learningSize.y + basePos.y - 0.5,
+                                           learningPos.y + learningSize.y + basePos.y + 0.5};
+
+        // C : book이 생성되면 안되는 위치에 있는지 확인
+        if (spawnPos.x >= learingArea[0] && spawnPos.x <= learingArea[1]              // C :
+            && spawnPos.y >= learingArea[2] && spawnPos.y <= learingArea[3])
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     // Update is called once per frame
     void Update()

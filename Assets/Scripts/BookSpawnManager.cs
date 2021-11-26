@@ -10,16 +10,17 @@ public class BookSpawnManager : MonoBehaviour
     public GameObject farmObject;                       // C :
     public GameObject farmLearningObject;               // C :
     public GameObject houseObject;                      // C :
-    public GameObject houseLearningObject;                // C :
+    public GameObject houseLearningObject;              // C :
+    public GameObject craftObject;                      // C :
+    public GameObject craftLearningObject;              // C :
     /*
-    public GameObject craftLearningIcon;        // C :
     public GameObject labLearningIcon;          // C :
     */
     
     public BoxCollider2D farmLearningArea;      // C :
     public BoxCollider2D houseLearningArea;     // C :
-    /* 
-    public BoxCollider2D craftLearningArea;
+    public BoxCollider2D craftLearningArea;     // C :
+    /*
     public BoxCollider2D labLearningArea;
     */
 
@@ -92,7 +93,16 @@ public class BookSpawnManager : MonoBehaviour
                                            houseLearningPosition.x + houseLearningSize.x + housePosition.x + 0.5,
                                            houseLearningPosition.y - houseLearningSize.y + housePosition.y - 0.5,
                                            houseLearningPosition.y + houseLearningSize.y + housePosition.y + 0.5};
+        
+        Vector3 craftPosition = craftObject.transform.localPosition;                      // C :
+        Vector3 craftLearningPosition = craftLearningObject.transform.localPosition;      // C :       
+        Vector2 craftLearningSize = craftLearningArea.size;                               // C :
+        double[] craftArea = new double[] {craftLearningPosition.x - craftLearningSize.x + craftPosition.x - 0.5,       // C :
+                                           craftLearningPosition.x + craftLearningSize.x + craftPosition.x + 0.5,
+                                           craftLearningPosition.y - craftLearningSize.y + craftPosition.y - 0.5,
+                                           craftLearningPosition.y + craftLearningSize.y + craftPosition.y + 0.5};
 
+        Debug.Log("0 : " + craftArea[0] + ", 1: " + craftArea[1] + ", 2: " + craftArea[2] + ", 3:" + craftArea[3]);
         // C : 
         if (spawnPos.x >= farmArea[0] && spawnPos.x <= farmArea[1]              // C :
             && spawnPos.y >= farmArea[2] && spawnPos.y <= farmArea[3])
@@ -101,6 +111,11 @@ public class BookSpawnManager : MonoBehaviour
         }
         else if (spawnPos.x >= houseArea[0] && spawnPos.x <= houseArea[1]       // C :
             && spawnPos.y >= houseArea[2] && spawnPos.y <= houseArea[3])
+        {
+            return GetRandomPosition();
+        }
+        else if (spawnPos.x >= craftArea[0] && spawnPos.x <= craftArea[1]       // C :
+           && spawnPos.y >= craftArea[2] && spawnPos.y <= craftArea[3])
         {
             return GetRandomPosition();
         }

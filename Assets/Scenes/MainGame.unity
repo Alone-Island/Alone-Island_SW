@@ -16272,8 +16272,11 @@ MonoBehaviour:
   farmLearningObject: {fileID: 990543455}
   houseObject: {fileID: 1380803793}
   houseLearningObject: {fileID: 735347372}
+  craftObject: {fileID: 1090773235}
+  craftLearningObject: {fileID: 2107326299}
   farmLearningArea: {fileID: 990543458}
   houseLearningArea: {fileID: 735347374}
+  craftLearningArea: {fileID: 2107326301}
   gameManager: {fileID: 1163355727}
 --- !u!4 &1905733199
 Transform:

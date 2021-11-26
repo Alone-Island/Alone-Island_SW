@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // C : Dr.Kim 오브젝트의 모든 Action과 관련된 기능들이 들어있는 스크립트
 public class PlayerAction : MonoBehaviour
 {
     public float speed;     // C : Dr.Kim 이동 속력
     public GameManager manager;         // C : player에서 GameManager의 함수를 호출할 수 있도록 manager 변수 생성
+    public ScreenManager screenManager;         // J : 책을 주웠을 때 책 개수 증가를 위해 ScreenManager 변수 생성
     public SpecialEventManager specialManager;  // J : player에서 SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
 
     float h;    // C : horizontal (수평 이동)
@@ -14,6 +16,12 @@ public class PlayerAction : MonoBehaviour
     bool isHorizonMove;     // C : 수평 이동이면 true, 수직 이동이면 false
     Vector3 dirVec;     // C : 현재 바라보고 있는 방향 값
     GameObject scanObject;  // C : 스캔된 game object
+
+    //N : 학습하기 안내 아이콘들
+    public GameObject farmIcon;
+    public GameObject houseIcon;
+    public GameObject craftIcon;
+    public GameObject engineerIcon;
 
     Rigidbody2D rigid;  // C : 물리 제어
     Animator anim;      // C : 애니메이션 제어
@@ -31,6 +39,12 @@ public class PlayerAction : MonoBehaviour
         // C : GameManager의 isTPShow를 사용하여 talkPanel이 보여지고 있을 때는 플레이어의 이동을 제한
         h = manager.isTPShow ? 0 : Input.GetAxisRaw("Horizontal");
         v = manager.isTPShow ? 0 : Input.GetAxisRaw("Vertical");
+        // J : SpecialEventManager의 special을 사용하여 스페셜 이벤트 진행 중인 경우 플레이어의 이동을 제한
+        h = specialManager.special ? 0 : Input.GetAxisRaw("Horizontal");
+        v = specialManager.special ? 0 : Input.GetAxisRaw("Vertical");
+        // N :
+        h = manager.isEndingShow ? 0 : Input.GetAxisRaw("Horizontal");
+        v = manager.isEndingShow ? 0 : Input.GetAxisRaw("Vertical");
 
         // C : 키보드 입력(down, up)이 horizontal인지 vertical인지 확인
         // C : GameManager의 isTPShow를 사용하여 talkPanel이 보여지고 있을 때는 플레이어의 이동을 제한
@@ -38,6 +52,16 @@ public class PlayerAction : MonoBehaviour
         bool hUp = manager.isTPShow ? false : Input.GetButtonUp("Horizontal");
         bool vDown = manager.isTPShow ? false : Input.GetButtonDown("Vertical");
         bool vUp = manager.isTPShow ? false : Input.GetButtonUp("Vertical");
+        // J : SpecialEventManager의 special을 사용하여 스페셜 이벤트 진행 중인 경우 플레이어의 이동을 제한
+        hDown = specialManager.special ? false : Input.GetButtonDown("Horizontal");
+        hUp = specialManager.special ? false : Input.GetButtonUp("Horizontal");
+        vDown = specialManager.special ? false : Input.GetButtonDown("Vertical");
+        vUp = specialManager.special ? false : Input.GetButtonUp("Vertical");
+        //N :
+        hDown = manager.isEndingShow ? false : Input.GetButtonDown("Horizontal");
+        hUp = manager.isEndingShow ? false : Input.GetButtonUp("Horizontal");
+        vDown = manager.isEndingShow ? false : Input.GetButtonDown("Vertical");
+        vUp = manager.isEndingShow ? false : Input.GetButtonUp("Vertical");
 
         // C : isHorizonMove 값 설정
         if (hDown)           // C : 수평 키를 누르면 isHorizonMove는 true
@@ -74,10 +98,24 @@ public class PlayerAction : MonoBehaviour
         // J : 스페이스바 누름
         if (Input.GetButtonDown("Jump"))
         {
-            if (specialManager.AItalk)  // J : 스페셜 이벤트 진행 중이라면
-                specialManager.Talk();  // J : specialManager의 Talk 함수 호출
+            if (specialManager.special)     // J : 스페셜 이벤트 진행 중
+            {
+                if (specialManager.AItalk)  // J : 선택지가 뜨기 전이라면
+                    specialManager.Talk();  // J : specialManager의 Talk 함수 호출
+                else                        // J : 선택지 클릭한 후 (스페셜 이벤트 진행중)
+                    specialManager.ResultTalk();    // J : 결과 텍스트 보여주기
+            }
             else if (scanObject != null)        // J : 스페셜 이벤트 진행 중이 아니고 scanObject가 있으면
                 manager.Action(scanObject);     // C : 맵의 대화창에 적절한 메세지가 뜰 수 있도록 Action()함수 실행
+            else    // J : 아무 상태도 아니거나 책 찾았다는 대화창이 뜬 상태..
+                manager.talkPanel.SetActive(false); // J : 대화창 끄기
+
+            // N : 엔딩 크레딧으로 연결
+            // N : 나중에 버튼 만들어서 클릭으로 처리하면 좋을 것 같음.
+            if (manager.isTheEnd)
+            {
+                SceneManager.LoadScene("EndingCredits");
+            }
         }
     }
 
@@ -99,5 +137,57 @@ public class PlayerAction : MonoBehaviour
         }
         else
             scanObject = null;
+    }
+
+    // J : 책을 찾았을 때
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.name == "Book(Clone)") {        // J : 부딪힌 오브젝트가 책인 경우
+            coll.gameObject.SetActive(false);               // J : Book Object 비활성화
+            manager.talkPanel.SetActive(true);              // J : 대화창 활성화
+            manager.talkText.text = "책을 찾았습니다!";     // J : 대화창 텍스트 적용
+            screenManager.getBook();                        // J : 책 개수 증가
+        }
+    }
+
+    // N : 장소에 들어가면
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.name == "FarmLearning")
+        {
+            farmIcon.SetActive(true);
+        }
+        if (coll.gameObject.name == "HouseLearning")
+        {
+            houseIcon.SetActive(true);
+        }
+        if (coll.gameObject.name == "CraftLearning")
+        {
+            craftIcon.SetActive(true);
+        }
+        if (coll.gameObject.name == "EngineerLearning")
+        {
+            engineerIcon.SetActive(true);
+        }
+    }
+    // N : 장소에서 나오면
+    private void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.gameObject.name == "FarmLearning")
+        {
+            farmIcon.SetActive(false);
+        }
+        if (coll.gameObject.name == "HouseLearning")
+        {
+            houseIcon.SetActive(false);
+        }
+        if (coll.gameObject.name == "CraftLearning")
+        {
+            craftIcon.SetActive(false);
+        }
+        if (coll.gameObject.name == "EngineerLearning")
+        {
+            engineerIcon.SetActive(false);
+        }
     }
 }

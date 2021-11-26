@@ -7,12 +7,14 @@ public class TalkManager : MonoBehaviour
 {
     Dictionary<int, string[]> talkData;       // C : 대화 데이터를 저장하는 dictionary 변수
     Dictionary<int, string[]> selectData;     // J : 선택지 데이터를 저장하는 dictionary 변수
+    Dictionary<int, string[]> resultData;     // J : 선택 결과 데이터를 저장하는 dictionary 변수
 
     void Awake()
     {
         // C : dictionary instance 생성
         talkData = new Dictionary<int, string[]>();
         selectData = new Dictionary<int, string[]>();
+        resultData = new Dictionary<int, string[]>();
         GenerateData();
     }
 
@@ -37,6 +39,10 @@ public class TalkManager : MonoBehaviour
         talkData.Add(300, new string[] { "공예를 학습하시겠습니까?", "공예를 학습합니다." });
         talkData.Add(400, new string[] { "공학을 학습하시겠습니까?", "공학을 학습합니다." });
 
+        // K: key가 500,600이면 학습에 대한 예외처리 text data
+        talkData.Add(500, new string[] { "AI가 학습중입니다.\n학습이 끝나고 다시 시도해주세요." });
+        talkData.Add(600, new string[] { "책이 없어서 학습을 할 수 없습니다." });
+
         // J : key가 10001~10013이면 스페셜 이벤트에 대한 text data (10001~10004 : 선택지 2개, 10011~10013 : 선택지 3개)
         talkData.Add(10001, new string[] { "배터리가 많이 닳았어요ㅠㅠ", "하루만 아무것도 안하고 싶어요.." });
         talkData.Add(10002, new string[] { "박사님을 위해 새로운 열매를 따왔어요!" });
@@ -56,6 +62,38 @@ public class TalkManager : MonoBehaviour
         selectData.Add(10012, new string[] { "바로 손을 내밀자!", "알아서 나올거야", "너무 멀어! 나뭇가지를 찾아서 구해야겠다!" });
         selectData.Add(10013, new string[] { "고장난 곳이 있는지 하루동안 찬찬히 살펴보자", "대충 괜찮은지 확인하자", "나무를 치워주고 다시 작업을 시작하자" });
         selectData.Add(10014, new string[] { "선택지1", "선택지2", "선택지3" });
+
+        // J : 스페셜 이벤트에 대한 선택 결과 data (specialID * 10 + 선택지(0~2))
+        // J : 선택지가 2개인 이벤트의 결과 텍스트
+        resultData.Add(100010, new string[] { "하루가 지나고...", "AI의 공감능력이 1레벨 상승했다!" });
+        resultData.Add(100011, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
+        
+        resultData.Add(100020, new string[] { "AI가 준 것은 독열매였다!" });
+        resultData.Add(100021, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
+        
+        resultData.Add(100030, new string[] { "토끼였다!", "AI의 공감능력이 1레벨 상승했다!" });
+        resultData.Add(100031, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
+        
+        resultData.Add(100040, new string[] { "멧돼지였다!" });
+        resultData.Add(100041, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
+
+        // J : 선택지가 3개인 이벤트의 결과 텍스트
+        resultData.Add(100110, new string[] { "AI가 이해하지 못해서 고장났다." });
+        resultData.Add(100111, new string[] { "아무런 변화도 일어나지 않았다." });
+        resultData.Add(100112, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
+
+        resultData.Add(100120, new string[] { "나까지 덩달아 감전됐다!" });
+        resultData.Add(100121, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
+        resultData.Add(100122, new string[] { "구조에 성공했다!" });
+
+        resultData.Add(100130, new string[] { "하루가 지나고...", "AI의 공감능력이 2레벨 상승했다!" });
+        resultData.Add(100131, new string[] { "아무런 변화도 일어나지 않았다." });
+        resultData.Add(100132, new string[] { "알고보니 AI는 심각한 손상을 입었다." });
+
+        resultData.Add(100140, new string[] { "추가하기" });
+        resultData.Add(100141, new string[] { "추가하기" });
+        resultData.Add(100142, new string[] { "추가하기" });
+
     }
 
     // C : 필요한 TalkData를 return
@@ -74,5 +112,13 @@ public class TalkManager : MonoBehaviour
             return null;
 
         return selectData[id][selectIndex];     // J : 필요한 문장을 id와 index를 통해 return
+    }
+
+    public string GetResultData(int id, int resultIndex)
+    {
+        if (resultIndex == resultData[id].Length)       // J : resultIndex가 resultData[id]의 마지막 index + 1이면
+            return null;
+
+        return resultData[id][resultIndex];     // J : 필요한 문장을 id와 index를 통해 return
     }
 }

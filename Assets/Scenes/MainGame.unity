@@ -4444,7 +4444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   learningManager: {fileID: 721096102}
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 1163355727}
   nextAIMoveX: 0
   nextAIMoveY: 0
 --- !u!95 &793937240

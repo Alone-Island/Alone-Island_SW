@@ -16268,6 +16268,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   book: {fileID: 2089972090860118588, guid: c7a0d716f5964f946b6ac78badbbb0d7, type: 3}
+  farmLearning_: {fileID: 990543455}
+  farmLearningArea: {fileID: 990543458}
   gameManager: {fileID: 1163355727}
 --- !u!4 &1905733199
 Transform:

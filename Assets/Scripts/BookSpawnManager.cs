@@ -6,16 +6,42 @@ public class BookSpawnManager : MonoBehaviour
 {
     // J : https://angliss.cc/random-gameobject-created/ 참조
     public GameObject book;
+    
+    public GameObject farmLearning_;         // C :
+    /*
+    public GameObject houseLearningIcon;        // C :
+    public GameObject craftLearningIcon;        // C :
+    public GameObject labLearningIcon;          // C :
+    */
+    
+    public BoxCollider2D farmLearningArea;
+    /*
+    public BoxCollider2D houseLearningArea;
+    public BoxCollider2D craftLearningArea;
+    public BoxCollider2D labLearningArea;
+    */
+
     public GameManager gameManager;
 
     int count = 20;                  // J : 찍어낼 책 개수
     private BoxCollider2D area;     // J : 박스 콜라이더의 사이즈 가져오기 위한 변수
     private List<GameObject> bookList = new List<GameObject>();
 
+
+    //Vector3 farmLearningPosition = farmLearningIcon.transform.localPosition;
+    // Debug.Log(farmLearningPosition);
+    // Debug.Log(farmLearningIcon.transform.localScale);
+    //RectTransform farmLearningIconSize = farmLearningIcon.GetComponent<RectTransform>();
+    //Debug.Log(farmLearningIcon.GetComponent<RectTransform>().rect.width);
+
     // J : count만큼 책 스폰
     void Start()
     {
         area = GetComponent<BoxCollider2D>();
+
+        /*Vector3 farmLearningPosition = farmLearningIcon.transform.localPosition;
+        Debug.Log(rect);*/
+        //Debug.Log(farmLearningIcon.GetComponent<RectTransform>().rect.height);
 
         StartCoroutine("Spawn");
     }
@@ -55,8 +81,51 @@ public class BookSpawnManager : MonoBehaviour
 
         Vector3 spawnPos = new Vector3(posX, posY, 0);
 
+        /*Vector3 farmLearningPosition = farmLearningIcon.transform.localPosition;
+        //Debug.Log(typeof(farmLearningPosition));
+        //Debug.Log(spawnPos.x >= (farmLearningPosition.x - farmLearningIcon.transform.localScale.x / 2));
+        if (spawnPos.x >= farmLearningPosition.x - farmLearningIcon.transform.localScale.x / 2
+            && spawnPos.x <= farmLearningPosition.x + farmLearningIcon.transform.localScale.x / 2
+            && spawnPos.y >= farmLearningPosition.y - farmLearningIcon.transform.localScale.y / 2
+            && spawnPos.y <= farmLearningPosition.y + farmLearningIcon.transform.localScale.y / 2)
+        {
+            //Debug.Log("hi");
+
+            //GetRandomPosition();
+        }
+        if (spawnPos.x <= farmLearningPosition.x - farmLearningIcon.transform.localScale.x / 2
+            || spawnPos.x >= farmLearningPosition.x + farmLearningIcon.transform.localScale.x / 2
+            || spawnPos.y <= farmLearningPosition.y - farmLearningIcon.transform.localScale.y / 2
+            || spawnPos.y >= farmLearningPosition.y + farmLearningIcon.transform.localScale.y / 2)
+        {
+           // Debug.Log("hello");
+
+            //GetRandomPosition();
+        }*/
+
+        Vector3 farmLearningPosition = farmLearning_.transform.localPosition;
+        
+        Vector2 farmLearningSize = farmLearningArea.size;
+        /*Vector2 houseLearningSize = houseLearningArea.size;
+        Vector2 craftLearningSize = craftLearningArea.size;
+        Vector2 labLearningSize = labLearningArea.size;*/
+        float[] farmArea = new float[] {farmLearningPosition.x - farmLearningSize.x -(float)1,
+                                           farmLearningPosition.x + farmLearningSize.x -(float)1,
+                                           farmLearningPosition.y - farmLearningSize.y +(float)1,
+                                           farmLearningPosition.y + farmLearningSize.y +(float)1};
+
+        //Debug.Log("0 : " + farmArea[0] + ", 1: " + farmArea[1] + ", 2: " + farmArea[2] + ", 3:" + farmArea[3]);
+
+        if (spawnPos.x >= farmArea[0] && spawnPos.x <= farmArea[1]
+            && spawnPos.y >= farmArea[2] && spawnPos.y <= farmArea[3])
+        {
+            return GetRandomPosition();
+            Debug.Log("spawnPos.x : " + spawnPos.x + ", spawnPos.y : " + spawnPos.y);
+        }
+
         return spawnPos;    // J : 랜덤 위치 return
     }
+
 
     // Update is called once per frame
     void Update()

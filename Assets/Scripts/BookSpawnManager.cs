@@ -120,7 +120,7 @@ public class BookSpawnManager : MonoBehaviour
             && spawnPos.y >= farmArea[2] && spawnPos.y <= farmArea[3])
         {
             return GetRandomPosition();
-            Debug.Log("spawnPos.x : " + spawnPos.x + ", spawnPos.y : " + spawnPos.y);
+            //Debug.Log("spawnPos.x : " + spawnPos.x + ", spawnPos.y : " + spawnPos.y);
         }
 
         return spawnPos;    // J : ·£´ý À§Ä¡ return

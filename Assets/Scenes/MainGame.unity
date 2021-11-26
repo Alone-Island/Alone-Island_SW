@@ -16270,7 +16270,10 @@ MonoBehaviour:
   book: {fileID: 2089972090860118588, guid: c7a0d716f5964f946b6ac78badbbb0d7, type: 3}
   farmObject: {fileID: 1882242383}
   farmLearningObject: {fileID: 990543455}
+  houseObject: {fileID: 1380803793}
+  houseLearningObject: {fileID: 735347372}
   farmLearningArea: {fileID: 990543458}
+  houseLearningArea: {fileID: 735347374}
   gameManager: {fileID: 1163355727}
 --- !u!4 &1905733199
 Transform:

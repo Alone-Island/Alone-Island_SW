@@ -7,17 +7,18 @@ public class BookSpawnManager : MonoBehaviour
     // J : https://angliss.cc/random-gameobject-created/ ÂüÁ¶
     public GameObject book;
 
-    public GameObject farmObject;                         // C :
-    public GameObject farmLearningObject;           // C :
+    public GameObject farmObject;                       // C :
+    public GameObject farmLearningObject;               // C :
+    public GameObject houseObject;                      // C :
+    public GameObject houseLearningObject;                // C :
     /*
-    public GameObject houseLearningIcon;        // C :
     public GameObject craftLearningIcon;        // C :
     public GameObject labLearningIcon;          // C :
     */
     
     public BoxCollider2D farmLearningArea;      // C :
-    /*
-    public BoxCollider2D houseLearningArea;
+    public BoxCollider2D houseLearningArea;     // C :
+    /* 
     public BoxCollider2D craftLearningArea;
     public BoxCollider2D labLearningArea;
     */
@@ -83,10 +84,23 @@ public class BookSpawnManager : MonoBehaviour
                                            farmLearningPosition.x + farmLearningSize.x + farmPosition.x + 0.5,
                                            farmLearningPosition.y - farmLearningSize.y + farmPosition.y - 0.5,
                                            farmLearningPosition.y + farmLearningSize.y + farmPosition.y + 0.5};
+        
+        Vector3 housePosition = houseObject.transform.localPosition;                      // C :
+        Vector3 houseLearningPosition = houseLearningObject.transform.localPosition;      // C :       
+        Vector2 houseLearningSize = houseLearningArea.size;                               // C :
+        double[] houseArea = new double[] {houseLearningPosition.x - houseLearningSize.x + housePosition.x - 0.5,       // C :
+                                           houseLearningPosition.x + houseLearningSize.x + housePosition.x + 0.5,
+                                           houseLearningPosition.y - houseLearningSize.y + housePosition.y - 0.5,
+                                           houseLearningPosition.y + houseLearningSize.y + housePosition.y + 0.5};
 
         // C : 
-        if (spawnPos.x >= farmArea[0] && spawnPos.x <= farmArea[1]
+        if (spawnPos.x >= farmArea[0] && spawnPos.x <= farmArea[1]              // C :
             && spawnPos.y >= farmArea[2] && spawnPos.y <= farmArea[3])
+        {
+            return GetRandomPosition();
+        }
+        else if (spawnPos.x >= houseArea[0] && spawnPos.x <= houseArea[1]       // C :
+            && spawnPos.y >= houseArea[2] && spawnPos.y <= houseArea[3])
         {
             return GetRandomPosition();
         }

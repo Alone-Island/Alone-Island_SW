@@ -15,7 +15,8 @@ public class BookSpawnManager : MonoBehaviour
     public GameObject craftLearningObject;              // C :
     public GameObject labObject;                        // C :
     public GameObject labLearningObject;                // C :
-    
+    public GameObject playerObject;                     // C :
+
     public BoxCollider2D farmLearningArea;      // C :
     public BoxCollider2D houseLearningArea;     // C :
     public BoxCollider2D craftLearningArea;     // C :
@@ -32,7 +33,7 @@ public class BookSpawnManager : MonoBehaviour
     void Start()
     {
         area = GetComponent<BoxCollider2D>();
-
+ 
         StartCoroutine("Spawn");
     }
 
@@ -75,6 +76,20 @@ public class BookSpawnManager : MonoBehaviour
 
 
         // C : book이 생성되면 안되는 위치를 제한하는 과정
+        // C : 현재 player 위치의 가까이에 book이 생성되지 않도록 설정
+        Vector3 playerPos = playerObject.transform.localPosition;               // C :       
+        Vector2 playerSize = playerObject.GetComponent<BoxCollider2D>().size;
+        double[] limitArea = new double[] {playerPos.x - playerSize.x - 1,       // C :
+                                           playerPos.x + playerSize.x + 1,
+                                           playerPos.y - playerSize.y - 1,
+                                           playerPos.y + playerSize.y + 1};
+        if (spawnPos.x >= limitArea[0] && spawnPos.x <= limitArea[1]              // C :
+            && spawnPos.y >= limitArea[2] && spawnPos.y <= limitArea[3])
+        {
+            return GetRandomPosition();
+        }
+
+
         if (isLimit(farmObject, farmLearningObject, farmLearningArea, spawnPos))                // C :
         {
             return GetRandomPosition();

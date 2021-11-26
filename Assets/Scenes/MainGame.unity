@@ -16276,6 +16276,7 @@ MonoBehaviour:
   craftLearningObject: {fileID: 2107326299}
   labObject: {fileID: 1758610969}
   labLearningObject: {fileID: 338751476}
+  playerObject: {fileID: 513927967}
   farmLearningArea: {fileID: 990543458}
   houseLearningArea: {fileID: 735347374}
   craftLearningArea: {fileID: 2107326301}

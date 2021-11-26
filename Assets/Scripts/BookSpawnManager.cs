@@ -13,16 +13,13 @@ public class BookSpawnManager : MonoBehaviour
     public GameObject houseLearningObject;              // C :
     public GameObject craftObject;                      // C :
     public GameObject craftLearningObject;              // C :
-    /*
-    public GameObject labLearningIcon;          // C :
-    */
+    public GameObject labObject;                        // C :
+    public GameObject labLearningObject;                // C :
     
     public BoxCollider2D farmLearningArea;      // C :
     public BoxCollider2D houseLearningArea;     // C :
     public BoxCollider2D craftLearningArea;     // C :
-    /*
-    public BoxCollider2D labLearningArea;
-    */
+    public BoxCollider2D labLearningArea;       // C :
 
     public GameManager gameManager;
 
@@ -102,7 +99,14 @@ public class BookSpawnManager : MonoBehaviour
                                            craftLearningPosition.y - craftLearningSize.y + craftPosition.y - 0.5,
                                            craftLearningPosition.y + craftLearningSize.y + craftPosition.y + 0.5};
 
-        Debug.Log("0 : " + craftArea[0] + ", 1: " + craftArea[1] + ", 2: " + craftArea[2] + ", 3:" + craftArea[3]);
+        Vector3 labPosition = labObject.transform.localPosition;                        // C :
+        Vector3 labLearningPosition = labLearningObject.transform.localPosition;        // C :       
+        Vector2 labLearningSize = labLearningArea.size;                                 // C :
+        double[] labArea = new double[] {labLearningPosition.x - labLearningSize.x + labPosition.x - 0.5,       // C :
+                                           labLearningPosition.x + labLearningSize.x + labPosition.x + 0.5,
+                                           labLearningPosition.y - labLearningSize.y + labPosition.y - 0.5,
+                                           labLearningPosition.y + labLearningSize.y + labPosition.y + 0.5};
+
         // C : 
         if (spawnPos.x >= farmArea[0] && spawnPos.x <= farmArea[1]              // C :
             && spawnPos.y >= farmArea[2] && spawnPos.y <= farmArea[3])
@@ -116,6 +120,11 @@ public class BookSpawnManager : MonoBehaviour
         }
         else if (spawnPos.x >= craftArea[0] && spawnPos.x <= craftArea[1]       // C :
            && spawnPos.y >= craftArea[2] && spawnPos.y <= craftArea[3])
+        {
+            return GetRandomPosition();
+        }
+        else if (spawnPos.x >= labArea[0] && spawnPos.x <= labArea[1]           // C :
+           && spawnPos.y >= labArea[2] && spawnPos.y <= labArea[3])
         {
             return GetRandomPosition();
         }

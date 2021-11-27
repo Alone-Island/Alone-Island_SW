@@ -30,6 +30,10 @@ public class ScreenManager : MonoBehaviour
     public EndingManager endingManager;
     public GameManager gameManager;     // J : GameManager에서 하루가 몇초인지 가져옴
 
+    public GameObject heartTextObject;      // C :
+    public GameObject levelUp;            // C :
+    private float time = 0;                 // C :
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +70,18 @@ public class ScreenManager : MonoBehaviour
         {
             learningTime.text = "";
             learningTitle.alpha = 0;
+        }
+
+
+        // C :
+        if (levelUp.activeSelf == true)     // C :
+        {
+            time += Time.deltaTime;
+            if (time > 2f)                      // C : 
+            {
+                levelUp.SetActive(false);
+                time = 0;
+            }
         }
     }
 
@@ -158,6 +174,10 @@ public class ScreenManager : MonoBehaviour
         //useBook();
         heartLv.fCurrValue += n;
         happyStat.fCurrValue += (10 * n);
+
+        // C : levelUp animation 실행하기
+        levelUp.transform.SetParent(heartTextObject.transform);
+        levelUp.SetActive(true);
 
         // N : 엔딩 처리
         if (happyStat.fCurrValue <= 0 || heartLv.fCurrValue < 1) endingManager.failLonely();

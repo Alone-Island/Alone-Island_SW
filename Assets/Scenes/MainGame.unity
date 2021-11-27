@@ -8796,6 +8796,8 @@ MonoBehaviour:
   bookNum: 0
   endingManager: {fileID: 872728046}
   gameManager: {fileID: 1163355727}
+  heartTextObject: {fileID: 26451048}
+  levelUp: {fileID: 1879157404}
 --- !u!1 &1175649851
 GameObject:
   m_ObjectHideFlags: 0
@@ -15574,7 +15576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1879157405
 RectTransform:
   m_ObjectHideFlags: 0

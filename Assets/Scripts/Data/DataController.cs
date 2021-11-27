@@ -37,6 +37,7 @@ public class DataController : MonoBehaviour
     }
 
     public string SettingDataFileName = "Setting.json";
+    public string EndingDataFileName = "Ending.json";
 
     public SettingData _settingData;
     public SettingData settingData
@@ -52,20 +53,51 @@ public class DataController : MonoBehaviour
         }
     }
 
+    public EndingData _endingData;
+    public EndingData endingData
+    {
+        get
+        {
+            if (_endingData == null)
+            {
+                LoadEndingData();
+                SaveEndingData();
+            }
+            return _endingData;
+        }
+    }
+
     public void LoadSettingData()
     {
         string filePath = Application.persistentDataPath + SettingDataFileName;
         Debug.Log(filePath);
         if (File.Exists(filePath))
         {
-            Debug.Log("불러오기 성공!");
+            Debug.Log("설정 데이터 불러오기 성공!");
             string FromJsonData = File.ReadAllText(filePath);
             _settingData = JsonUtility.FromJson<SettingData>(FromJsonData);
         }
         else 
         {
-            Debug.Log("새로운 파일 생성");
+            Debug.Log("새로운 설정 데이터 파일 생성");
             _settingData = new SettingData();
+        }
+    }
+
+    public void LoadEndingData()
+    {
+        string filePath = Application.persistentDataPath + EndingDataFileName;
+        Debug.Log(filePath);
+        if (File.Exists(filePath))
+        {
+            Debug.Log("엔딩 데이터 불러오기 성공!");
+            string FromJsonData = File.ReadAllText(filePath);
+            _endingData = JsonUtility.FromJson<EndingData>(FromJsonData);
+        }
+        else
+        {
+            Debug.Log("새로운 엔딩 데이터 파일 생성");
+            _endingData = new EndingData();
         }
     }
 
@@ -74,11 +106,20 @@ public class DataController : MonoBehaviour
         string ToJsonData = JsonUtility.ToJson(settingData);
         string filePath = Application.persistentDataPath + SettingDataFileName;
         File.WriteAllText(filePath, ToJsonData);
-        Debug.Log("저장 완료");
+        Debug.Log("설정 데이터 저장 완료");
+    }
+
+    public void SaveEndingData()
+    {
+        string ToJsonData = JsonUtility.ToJson(endingData);
+        string filePath = Application.persistentDataPath + EndingDataFileName;
+        File.WriteAllText(filePath, ToJsonData);
+        Debug.Log("엔딩 데이터 저장 완료");
     }
 
     private void OnApplicationQuit()    // J : 앱 종료 시 데이터 저장
     {
         SaveSettingData();
+        SaveEndingData();
     }
 }

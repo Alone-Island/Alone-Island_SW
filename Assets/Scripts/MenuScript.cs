@@ -150,6 +150,13 @@ public class MenuScript : MonoBehaviour
         }
     }
 
+    // J : 엔딩카드 나가기 버튼 onclick
+    public void SelectCardQuit()
+    {
+        Debug.Log("엔딩카드 나가기");
+        scrollView.SetActive(false);  // J : 게임방법창 비활성화
+    }
+
     // J : 게임방법 버튼 onclick
     public void SelectRule()
     {

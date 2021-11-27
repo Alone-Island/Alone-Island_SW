@@ -1593,6 +1593,7 @@ MonoBehaviour:
   craftIcon: {fileID: 1296171296}
   engineerIcon: {fileID: 351590406}
   addBook: {fileID: 787727355}
+  player: {fileID: 513927967}
 --- !u!50 &513927969
 Rigidbody2D:
   serializedVersion: 4

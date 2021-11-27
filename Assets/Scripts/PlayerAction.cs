@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 // C : Dr.Kim 오브젝트의 모든 Action과 관련된 기능들이 들어있는 스크립트
 public class PlayerAction : MonoBehaviour
@@ -23,8 +24,12 @@ public class PlayerAction : MonoBehaviour
     public GameObject craftIcon;
     public GameObject engineerIcon;
 
+    // C :
     public GameObject addBook;      // C :
-    private float time = 0;         // C :
+    //private float time = 0;         // C :
+    public GameObject player;       // C :
+    private List<GameObject> addBookListG = new List<GameObject>();      // C :
+    private List<float> addBookListT = new List<float>();      // C :
 
     Rigidbody2D rigid;  // C : 물리 제어
     Animator anim;      // C : 애니메이션 제어
@@ -121,17 +126,23 @@ public class PlayerAction : MonoBehaviour
             }
         }
 
-        // C :
-        if (addBook.activeSelf == true)
+        
+        // C : 
+        for (int i = 0; i < addBookListG.Count; i++)
         {
-            time += Time.deltaTime;
-            if (time > 2f)                      // C :
+            if (addBookListG[i].activeSelf == true)
             {
-                addBook.SetActive(false);
-                time = 0;
+                addBookListT[i] += Time.deltaTime;
+                if (addBookListT[i] > 2f)
+                {
+                    addBookListT[i] = 0;
+                    addBookListG[i].SetActive(false);
+                    Destroy(addBookListG[i]);
+                    addBookListG.RemoveAt(i);
+                    addBookListT.RemoveAt(i);
+                }
             }
         }
-
     }
 
     void FixedUpdate()
@@ -161,8 +172,14 @@ public class PlayerAction : MonoBehaviour
             coll.gameObject.SetActive(false);               // J : Book Object 비활성화
             manager.talkPanel.SetActive(true);              // J : 대화창 활성화
             manager.talkText.text = "책을 찾았습니다!";     // J : 대화창 텍스트 적용
-            addBook.SetActive(true);                        // C : player 머리 위의 책 object 보이기
             screenManager.getBook();                        // J : 책 개수 증가
+
+            // C :
+            GameObject bookInstance = Instantiate(addBook, player.transform.localPosition, Quaternion.identity);
+            bookInstance.transform.parent = player.transform;
+            bookInstance.SetActive(true);                   // C : player 머리 위의 책 object 보이기
+            addBookListG.Add(bookInstance);
+            addBookListT.Add(0f);                       
         }
     }
 

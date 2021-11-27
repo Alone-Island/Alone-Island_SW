@@ -78,7 +78,6 @@ public class ScreenManager : MonoBehaviour
         if (levelUp.activeSelf == true)     // C :
         {
             time += Time.deltaTime;
-            Debug.Log("in screen");
             if (time > 2f)                      // C : 
             {
                 levelUp.SetActive(false);
@@ -193,8 +192,13 @@ public class ScreenManager : MonoBehaviour
         }
 
         // C : levelUp animation 실행하기
-        levelUp.transform.SetParent(heartTextObject.transform);
-        levelUp.SetActive(true);
+        if (n >= 0)
+        {
+            levelUp.transform.SetParent(heartTextObject.transform);
+            levelUp.SetActive(true);
+        }
+        
+        
 
         // N : 엔딩 처리
         if (happyStat.fCurrValue < 0 || heartLv.fCurrValue < 0) endingManager.failLonely();

@@ -28,6 +28,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("Hungry,,,");
         panel.SetActive(true);
         badHungry.SetActive(true);
+
         manager.isEndingShow = true;
         Invoke("TheEnd", 2.0f);
     }
@@ -37,6 +38,7 @@ public class EndingManager : MonoBehaviour
     {
         Debug.Log("Lonely,,,");
         panel.SetActive(true);
+
         manager.isEndingShow = true;
         Invoke("TheEnd", 2.0f);
     }
@@ -46,6 +48,8 @@ public class EndingManager : MonoBehaviour
     {
         Debug.Log("Cold,,,");
         panel.SetActive(true);
+        panel.transform.Find("Bad-Frozen").gameObject.SetActive(true);
+
         manager.isEndingShow = true;
         Invoke("TheEnd", 2.0f);
     }
@@ -55,6 +59,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("통신기를 만들어서 다른 생존자들을 만남");
         panel.SetActive(true);
         happyPeople.SetActive(true);
+
         manager.isEndingShow = true;
         Invoke("TheEnd", 2.0f);
     }
@@ -64,6 +69,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("다른 ai를 만들어내서 ai들과 함께 살게 됨");
         panel.SetActive(true);
         happyAITown.SetActive(true);
+
         manager.isEndingShow = true;
         Invoke("TheEnd", 2.0f);
     }
@@ -73,6 +79,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("human과 ai는 단둘이 행복하게 살았답니다");
         panel.SetActive(true);
         happyTwo.SetActive(true);
+
         manager.isEndingShow = true;
         Invoke("TheEnd", 2.0f);
     }
@@ -90,6 +97,7 @@ public class EndingManager : MonoBehaviour
                 break;
             case 2: // N : Bad Ending (AI가 이해하지 못함)
                 Debug.Log("먼소리야,,,");
+                panel.transform.Find("Bad-Error").gameObject.SetActive(true);
                 break;
             case 3: // J : Bad Ending (감전사)
                 Debug.Log("감전사,,,");
@@ -101,9 +109,11 @@ public class EndingManager : MonoBehaviour
                 break;
             case 5: // J : Bad Ending (쓰나미)
                 Debug.Log("쓰나미");
+                panel.transform.Find("Bad-Storm").gameObject.SetActive(true);
                 break;
             case 6: // J : Bad Ending (운석충돌)
                 Debug.Log("운석 충돌");
+                panel.transform.Find("Bad-Space").gameObject.SetActive(true);
                 break;
         }
         Invoke("TheEnd", 2.0f);

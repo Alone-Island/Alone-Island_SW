@@ -6,20 +6,17 @@ public class BookSpawnManager : MonoBehaviour
 {
     // J : https://angliss.cc/random-gameobject-created/ 참조
     public GameObject book;
-    
-    public GameObject farmLearning_;         // C :
-    /*
-    public GameObject houseLearningIcon;        // C :
-    public GameObject craftLearningIcon;        // C :
-    public GameObject labLearningIcon;          // C :
-    */
-    
-    public BoxCollider2D farmLearningArea;
-    /*
-    public BoxCollider2D houseLearningArea;
-    public BoxCollider2D craftLearningArea;
-    public BoxCollider2D labLearningArea;
-    */
+
+    public GameObject farmObject;                       // C :
+    public GameObject farmLearningObject;               // C :
+    public GameObject houseObject;                      // C :
+    public GameObject houseLearningObject;              // C :
+    public GameObject craftObject;                      // C :
+    public GameObject craftLearningObject;              // C :
+    public GameObject labObject;                        // C :
+    public GameObject labLearningObject;                // C :
+    public GameObject playerObject;                     // C :
+    private GameObject tempObject;                      // C :
 
     public GameManager gameManager;
 
@@ -27,22 +24,11 @@ public class BookSpawnManager : MonoBehaviour
     private BoxCollider2D area;     // J : 박스 콜라이더의 사이즈 가져오기 위한 변수
     private List<GameObject> bookList = new List<GameObject>();
 
-
-    //Vector3 farmLearningPosition = farmLearningIcon.transform.localPosition;
-    // Debug.Log(farmLearningPosition);
-    // Debug.Log(farmLearningIcon.transform.localScale);
-    //RectTransform farmLearningIconSize = farmLearningIcon.GetComponent<RectTransform>();
-    //Debug.Log(farmLearningIcon.GetComponent<RectTransform>().rect.width);
-
     // J : count만큼 책 스폰
     void Start()
     {
         area = GetComponent<BoxCollider2D>();
-
-        /*Vector3 farmLearningPosition = farmLearningIcon.transform.localPosition;
-        Debug.Log(rect);*/
-        //Debug.Log(farmLearningIcon.GetComponent<RectTransform>().rect.height);
-
+        tempObject = new GameObject("tempObject");      // C :
         StartCoroutine("Spawn");
     }
 
@@ -72,6 +58,7 @@ public class BookSpawnManager : MonoBehaviour
     // J : 맵 내의 랜덤한 위치를 return
     private Vector2 GetRandomPosition()
     {
+        // C : 기본적인 랜덤한 위치 생성하는 과정
         Vector2 basePosition = transform.position;  // J : 오브젝트의 위치
         Vector2 size = area.size;                   // J : box colider2d, 즉 맵의 크기 벡터
 
@@ -81,51 +68,57 @@ public class BookSpawnManager : MonoBehaviour
 
         Vector3 spawnPos = new Vector3(posX, posY, 0);
 
-        /*Vector3 farmLearningPosition = farmLearningIcon.transform.localPosition;
-        //Debug.Log(typeof(farmLearningPosition));
-        //Debug.Log(spawnPos.x >= (farmLearningPosition.x - farmLearningIcon.transform.localScale.x / 2));
-        if (spawnPos.x >= farmLearningPosition.x - farmLearningIcon.transform.localScale.x / 2
-            && spawnPos.x <= farmLearningPosition.x + farmLearningIcon.transform.localScale.x / 2
-            && spawnPos.y >= farmLearningPosition.y - farmLearningIcon.transform.localScale.y / 2
-            && spawnPos.y <= farmLearningPosition.y + farmLearningIcon.transform.localScale.y / 2)
-        {
-            //Debug.Log("hi");
 
-            //GetRandomPosition();
-        }
-        if (spawnPos.x <= farmLearningPosition.x - farmLearningIcon.transform.localScale.x / 2
-            || spawnPos.x >= farmLearningPosition.x + farmLearningIcon.transform.localScale.x / 2
-            || spawnPos.y <= farmLearningPosition.y - farmLearningIcon.transform.localScale.y / 2
-            || spawnPos.y >= farmLearningPosition.y + farmLearningIcon.transform.localScale.y / 2)
-        {
-           // Debug.Log("hello");
 
-            //GetRandomPosition();
-        }*/
-
-        Vector3 farmLearningPosition = farmLearning_.transform.localPosition;
-        
-        Vector2 farmLearningSize = farmLearningArea.size;
-        /*Vector2 houseLearningSize = houseLearningArea.size;
-        Vector2 craftLearningSize = craftLearningArea.size;
-        Vector2 labLearningSize = labLearningArea.size;*/
-        float[] farmArea = new float[] {farmLearningPosition.x - farmLearningSize.x -(float)1,
-                                           farmLearningPosition.x + farmLearningSize.x -(float)1,
-                                           farmLearningPosition.y - farmLearningSize.y +(float)1,
-                                           farmLearningPosition.y + farmLearningSize.y +(float)1};
-
-        //Debug.Log("0 : " + farmArea[0] + ", 1: " + farmArea[1] + ", 2: " + farmArea[2] + ", 3:" + farmArea[3]);
-
-        if (spawnPos.x >= farmArea[0] && spawnPos.x <= farmArea[1]
-            && spawnPos.y >= farmArea[2] && spawnPos.y <= farmArea[3])
+        // C : book이 생성되면 안되는 위치를 제한하는 과정
+        if (isLimit(tempObject, playerObject, spawnPos, 1))                     // C : 현재 player 위치의 가까이에 book이 생성되지 않도록 설정
         {
             return GetRandomPosition();
-            //Debug.Log("spawnPos.x : " + spawnPos.x + ", spawnPos.y : " + spawnPos.y);
+        }
+        else if (isLimit(farmObject, farmLearningObject, spawnPos, 0))          // C :
+        {
+            return GetRandomPosition();
+        }
+        else if (isLimit(houseObject, houseLearningObject, spawnPos, 0))        // C :
+        {
+            return GetRandomPosition();
+        }
+        else if (isLimit(craftObject, craftLearningObject, spawnPos, 0))        // C :
+        {
+            return GetRandomPosition();
+        }
+        else if (isLimit(labObject, labLearningObject, spawnPos, 0))            // C :
+        {
+            return GetRandomPosition();
         }
 
         return spawnPos;    // J : 랜덤 위치 return
     }
 
+
+    // C : 생성한 book의 랜덤 위치가 제한 지역에 있으면 true, 아니면 false 반환하는 함수
+    // C : 
+    private bool isLimit(GameObject baseObject, GameObject learningObject, Vector3 spawnPos, double margin)
+    {
+        // C : book이 생성되면 안되는 범위 구하기
+        Vector3 basePos = baseObject.transform.localPosition;
+        Vector3 learningPos = learningObject.transform.localPosition;               // C :       
+        Vector2 learningSize = learningObject.GetComponent<BoxCollider2D>().size;   // C :
+
+        double[] learingArea = new double[] {learningPos.x - learningSize.x + basePos.x - 0.5 - margin,       // C :
+                                           learningPos.x + learningSize.x + basePos.x + 0.5 + margin,
+                                           learningPos.y - learningSize.y + basePos.y - 0.5 - margin,
+                                           learningPos.y + learningSize.y + basePos.y + 0.5 + margin};
+
+        // C : book이 생성되면 안되는 위치에 있는지 확인
+        if (spawnPos.x >= learingArea[0] && spawnPos.x <= learingArea[1]              // C :
+            && spawnPos.y >= learingArea[2] && spawnPos.y <= learingArea[3])
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     // Update is called once per frame
     void Update()

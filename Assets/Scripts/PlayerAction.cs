@@ -23,6 +23,9 @@ public class PlayerAction : MonoBehaviour
     public GameObject craftIcon;
     public GameObject engineerIcon;
 
+    public GameObject addBook;      // C :
+    private float time = 0;         // C :
+
     Rigidbody2D rigid;  // C : 물리 제어
     Animator anim;      // C : 애니메이션 제어
 
@@ -117,6 +120,18 @@ public class PlayerAction : MonoBehaviour
                 SceneManager.LoadScene("EndingCredits");
             }
         }
+
+        // C :
+        if (addBook.activeSelf == true)
+        {
+            time += Time.deltaTime;
+            if (time > 2f)                      // C :
+            {
+                addBook.SetActive(false);
+                time = 0;
+            }
+        }
+
     }
 
     void FixedUpdate()
@@ -146,6 +161,7 @@ public class PlayerAction : MonoBehaviour
             coll.gameObject.SetActive(false);               // J : Book Object 비활성화
             manager.talkPanel.SetActive(true);              // J : 대화창 활성화
             manager.talkText.text = "책을 찾았습니다!";     // J : 대화창 텍스트 적용
+            addBook.SetActive(true);                        // C : player 머리 위의 책 object 보이기
             screenManager.getBook();                        // J : 책 개수 증가
         }
     }

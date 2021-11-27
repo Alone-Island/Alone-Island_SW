@@ -4993,7 +4993,7 @@ GameObject:
   - component: {fileID: 94328881}
   - component: {fileID: 94328880}
   m_Layer: 5
-  m_Name: Button0
+  m_Name: timeOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7255,7 +7255,7 @@ GameObject:
   - component: {fileID: 251586375}
   - component: {fileID: 251586374}
   m_Layer: 5
-  m_Name: Button0
+  m_Name: hungry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7273,6 +7273,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 581537699}
+  - {fileID: 370512983}
   m_Father: {fileID: 1453104891}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7376,7 +7377,7 @@ GameObject:
   - component: {fileID: 256165241}
   - component: {fileID: 256165240}
   m_Layer: 5
-  m_Name: Button4
+  m_Name: storm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7559,6 +7560,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279380426}
   m_CullTransparentMesh: 1
+--- !u!1 &370512982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 370512983}
+  - component: {fileID: 370512985}
+  - component: {fileID: 370512984}
+  m_Layer: 5
+  m_Name: hungry
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &370512983
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370512982}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 251586373}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &370512984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370512982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5dbdf30854a523b48a2a18ac999e171b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &370512985
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370512982}
+  m_CullTransparentMesh: 1
 --- !u!1 &429304678
 GameObject:
   m_ObjectHideFlags: 0
@@ -7572,7 +7648,7 @@ GameObject:
   - component: {fileID: 429304681}
   - component: {fileID: 429304680}
   m_Layer: 5
-  m_Name: Button1
+  m_Name: two
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8652,7 +8728,7 @@ GameObject:
   - component: {fileID: 546797683}
   - component: {fileID: 546797682}
   m_Layer: 5
-  m_Name: Button0
+  m_Name: space
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10541,7 +10617,7 @@ GameObject:
   - component: {fileID: 973698818}
   - component: {fileID: 973698817}
   m_Layer: 5
-  m_Name: Button1
+  m_Name: lonely
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11331,7 +11407,7 @@ GameObject:
   - component: {fileID: 1074122457}
   - component: {fileID: 1074122456}
   m_Layer: 5
-  m_Name: Button0
+  m_Name: poisonBerry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12701,7 +12777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12739,7 +12815,7 @@ GameObject:
   - component: {fileID: 1277298603}
   - component: {fileID: 1277298602}
   m_Layer: 5
-  m_Name: Button3
+  m_Name: pig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13055,7 +13131,7 @@ GameObject:
   - component: {fileID: 1400033880}
   - component: {fileID: 1400033879}
   m_Layer: 5
-  m_Name: Button3
+  m_Name: people
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13243,10 +13319,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameRule: {fileID: 683037655}
-  endingCards: {fileID: 1723074334}
+  scrollView: {fileID: 1723074334}
   BGM: {fileID: 1817713681}
   onImage: {fileID: 1647828192}
   offImage: {fileID: 2071986175}
+  endingCards: {fileID: 1481526004}
+  badCard: {fileID: 21300000, guid: 9a443cacefd9eb043a5c427871874c04, type: 3}
 --- !u!1 &1448983459
 GameObject:
   m_ObjectHideFlags: 0
@@ -13903,7 +13981,7 @@ GameObject:
   - component: {fileID: 1550157083}
   - component: {fileID: 1550157082}
   m_Layer: 5
-  m_Name: Button2
+  m_Name: electric
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15442,7 +15520,7 @@ GameObject:
   - component: {fileID: 1854820829}
   - component: {fileID: 1854820828}
   m_Layer: 5
-  m_Name: Button1
+  m_Name: error
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15964,7 +16042,7 @@ GameObject:
   - component: {fileID: 1996304116}
   - component: {fileID: 1996304115}
   m_Layer: 5
-  m_Name: Button2
+  m_Name: cold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16085,7 +16163,7 @@ GameObject:
   - component: {fileID: 2035544537}
   - component: {fileID: 2035544536}
   m_Layer: 5
-  m_Name: Button2
+  m_Name: AITown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

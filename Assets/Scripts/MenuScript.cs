@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
     public GameObject gameRule;     // J : 게임방법 창
-    public GameObject endingCards;  // J : 엔딩카드창
+    public GameObject scrollView;   // J : 엔딩카드창
+
     public GameObject BGM;          // J : 배경음악 on/off를 위해 BGM object 가져옴
     public GameObject onImage;      // J : BGM on 이미지
     public GameObject offImage;     // J : BGM off 이미지
+    AudioSource audioSource;        // J : BGM
 
-    AudioSource audioSource;    // J : BGM
+    public GameObject endingCards;  // J : Scroll View->Viewport->Content
+    public Sprite badCard;
 
     private void Start()
     {
@@ -41,7 +45,16 @@ public class MenuScript : MonoBehaviour
     public void SelectCard()
     {
         Debug.Log("엔딩카드");
-        endingCards.SetActive(true);
+        scrollView.SetActive(true);
+
+        if (DataController.Instance.endingData.hungry == 1)
+        {
+
+            Image card = endingCards.transform.Find("BadLine0").transform.Find("hungry").GetComponent<Image>();
+            card.sprite = badCard;
+            endingCards.transform.Find("BadLine0").transform.Find("hungry").transform.Find("Image").gameObject.SetActive(false);
+            endingCards.transform.Find("BadLine0").transform.Find("hungry").transform.Find("hungry").gameObject.SetActive(true);
+        }
     }
 
     // J : 게임방법 버튼 onclick

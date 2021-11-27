@@ -111,6 +111,7 @@ public class ScreenManager : MonoBehaviour
     // N : 날짜 변화
     public void dayAfter()
     {
+        if (gameManager.isEndingShow) return;
         // N : 캘린더 관리
         day++;
         if (day < 10) calender.text = "day " + "0" + day.ToString();
@@ -240,12 +241,12 @@ public class ScreenManager : MonoBehaviour
         {
             //useBook();
             heartLv.fCurrValue++;
-            happyStat.fCurrValue += 15;
+            happyStat.fCurrValue += 5;
         }
         else
         {
             heartLv.fCurrValue += n;
-            happyStat.fCurrValue += (10 * n);
+            happyStat.fCurrValue += (5 * n);
         }
 
         // C : levelUp animation 실행하기

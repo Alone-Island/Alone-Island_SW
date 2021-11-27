@@ -123,6 +123,7 @@ public class EndingManager : MonoBehaviour
     {
         Debug.Log("그냥 저냥 살았습니당 ~~");
         panel.SetActive(true);
+        happyTwo.SetActive(true);
         manager.isEndingShow = true;
         Invoke("TheEnd", 2.0f);
     }

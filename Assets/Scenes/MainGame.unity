@@ -2948,6 +2948,7 @@ MonoBehaviour:
   learningTime: 10
   craftTextObject: {fileID: 1347493652}
   farmTextObject: {fileID: 620036288}
+  houseTextObject: {fileID: 2071883240}
   levelUp: {fileID: 1879157404}
 --- !u!4 &721096103
 Transform:

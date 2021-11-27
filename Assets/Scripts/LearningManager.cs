@@ -67,7 +67,7 @@ public class LearningManager : MonoBehaviour
                 case 300:                       // C :
                     Debug.Log(id);
                     screenManager.CraftStudy();
-                    aiAction.GoToLearningPlace(7, 5);
+                    aiAction.GoToLearningPlace(5, 0);
                     isAILearning = true;
                     Invoke("WaitingLearning", 1);
 

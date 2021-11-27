@@ -2949,6 +2949,7 @@ MonoBehaviour:
   craftTextObject: {fileID: 1347493652}
   farmTextObject: {fileID: 620036288}
   houseTextObject: {fileID: 2071883240}
+  engineerTextObject: {fileID: 1668275453}
   levelUp: {fileID: 1879157404}
 --- !u!4 &721096103
 Transform:

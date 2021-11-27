@@ -106,9 +106,6 @@ public class ScreenManager : MonoBehaviour
         else if (happyStat.fCurrValue <= 0) endingManager.failLonely();
         else if (temperatureStat.fCurrValue <= 0) endingManager.failCold();
 
-        //N : AI와 대화 횟수 초기화
-        gameManager.dayTalk = 0;
-
         // N : 하루마다 호출
         Invoke("dayAfter", gameManager.day);
     }
@@ -170,7 +167,7 @@ public class ScreenManager : MonoBehaviour
         }
     }
 
-    // N : 공감 배우기 (말걸기 n = 0)
+    // N : 공감 배우기 (말걸기만 하는 경우 n = 0)
     public void HeartStudy(int n)
     {
         if (n == 0)
@@ -190,7 +187,7 @@ public class ScreenManager : MonoBehaviour
         levelUp.SetActive(true);
 
         // N : 엔딩 처리
-        if (happyStat.fCurrValue < 0 || heartLv.fCurrValue < 0) endingManager.failLonely();
+        if (happyStat.fCurrValue < 0 || heartLv.fCurrValue < 1) endingManager.failLonely();
         else if (heartLv.fCurrValue >= heartLv.maxValue)
         {
             if (engineerLv.fCurrValue > 13.0f) endingManager.successPeople(); // N : 공학 능력이 높은 경우

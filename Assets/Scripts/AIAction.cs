@@ -12,14 +12,18 @@ public class AIAction : MonoBehaviour
     SpecialEventManager specialManager;     // K : SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
     public LearningManager learningManager;
     public GameManager gameManager;
+    public int vel = 1;                     // K : ai 이동 속도 조절
     public int nextAIMoveX = 0;             // K : ai의 다음 X축 방향 변후
     public int nextAIMoveY = 0;             // K : ai의 다음 Y축 방향 변후
-    //bool isAICollision = false;             // K : ai 충돌 확인 변수 > 추후 사용 예정
+    bool isAICollision = false;             // K : ai 충돌 확인 변수 > 추후 사용 예정
+    //bool isAICollisionToPlayer = false;     // K : ai가 player와 충돌
 
     void NextAiMoveDirection()              // K : ai가 랜덤하게 움직이도록 랜덤한 방향을 결정해주는 함수
     {
-        int random = Random.Range(1, 6);    // K : ai가 움직이 방향 랜덤 설정
-        int vel = 1;                        // K : ai 이동 속도 조절 
+        int random = Random.Range(2, 6);    // K : ai가 움직이 방향 랜덤 설정
+
+        // K : AI가 가면 안되는 방향 제어
+
         switch (random)
         {
             case 1:                         // K : 정지
@@ -35,7 +39,7 @@ public class AIAction : MonoBehaviour
                 nextAIMoveY = vel;
                 break;
             case 4:                         // K : 오른쪽
-                nextAIMoveX = vel; ;
+                nextAIMoveX = vel;
                 nextAIMoveY = 0;
                 break;
             case 5:                         // K : 아래
@@ -52,7 +56,7 @@ public class AIAction : MonoBehaviour
     }
 
     public void GoToLearningPlace(int x, int y) // K : AI가 학습 장소로 순간이동 하게 하는 함수
-                                             // (x,y)좌표를 파라미터로 받는다.
+                                                // (x,y)좌표를 파라미터로 받는다.
     {
         transform.position = new Vector3(x, y, 0);
     }
@@ -68,12 +72,12 @@ public class AIAction : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        
+
         Invoke("NextAiMoveDirection", 5);   // K : 5초 후 ai가 움직일 방향 결정 함수 실행
     }
 
     void Update()
-    {   
+    {
         // C : ai 이동(NextAiMoveDirection의 결과)값에 따라 애니메이션 적용
         if (anim.GetInteger("hAxisRaw") != nextAIMoveX)         // C : ai 좌우 이동 시 적절한 애니메이션 실행
         {
@@ -99,13 +103,48 @@ public class AIAction : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)   // Ai 충돌 감지 함수
     {
-        //isAICollision = true;                 // K : AI 충돌
-        nextAIMoveX = 0;                        // Ai 충돌 발생시 무조건 멈춤
-        nextAIMoveY = 0;
+        isAICollision = true;
+        if (coll.gameObject.name == "Dr.Kim")
+        {
+            nextAIMoveX = 0;
+            nextAIMoveY = 0;
+            vel = 0;
+        }
+
+        
     }
 
-    void OnCollisionExit2D(Collision2D coll)   // Ai 충돌 제거 감지 함수
+    void OnCollisionStay2D(Collision2D coll)  // Ai 충돌 유지 감지 함수
     {
-        //isAICollision = false;                 // K : AI 충돌 멈춤
+        
+    }
+
+    void OnCollisionExit2D(Collision2D coll)   // K : Ai 충돌 제거 감지 함수
+    {
+        isAICollision = false;                 // K : AI 충돌 멈춤
+        if (coll.gameObject.name == "Dr.Kim")  // K : Ai가 플레이어와 충돌을 끝나면 출발
+        {
+            vel = 1;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.name == "FarmLearning")
+        {
+            vel = 0;
+        }
+        if (coll.gameObject.name == "HouseLearning")
+        {
+            vel = 0;
+        }
+        if (coll.gameObject.name == "CraftLearning")
+        {
+            vel = 0;
+        }
+        if (coll.gameObject.name == "EngineerLearning")
+        {
+            vel = 0;
+        }
     }
 }

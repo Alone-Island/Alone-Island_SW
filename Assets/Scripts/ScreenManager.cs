@@ -161,6 +161,29 @@ public class ScreenManager : MonoBehaviour
         useBook();
         farmLv.fCurrValue++;
         hungerStat.fCurrValue += 50;
+
+        if (farmLv.fCurrValue > 2)
+        {
+            if(farmLv.fCurrValue<5) GameObject.Find("Farm").transform.Find("Lv3-4").gameObject.SetActive(true); // N : 레벨 3-4
+            else if (farmLv.fCurrValue < 7)
+            {
+                // N : 레벨 5-6
+                GameObject.Find("Farm").transform.Find("Lv3-4").gameObject.SetActive(false);
+                GameObject.Find("Farm").transform.Find("Lv5-6").gameObject.SetActive(true);
+            }
+            else if (farmLv.fCurrValue < 9)
+            {
+                // N : 레벨 7-8
+                GameObject.Find("Farm").transform.Find("Lv5-6").gameObject.SetActive(false);
+                GameObject.Find("Farm").transform.Find("Lv7-8").gameObject.SetActive(true);
+            }
+            else
+            {
+                // N : 레벨 9-10
+                GameObject.Find("Farm").transform.Find("Lv7-8").gameObject.SetActive(false);
+                GameObject.Find("Farm").transform.Find("Lv9-10").gameObject.SetActive(true);
+            }
+        }
     }
 
     // N : 건축 배우기

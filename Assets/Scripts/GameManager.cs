@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public bool isEndingShow = false;         // N : 엔딩 여부 (엔딩 카드 나타난 직후부터)
     public bool isTheEnd = false;         // N : 게임 종료 여부 (엔딩 카드 나타나고 2초 뒤부터)
     int randomNum = 0;                  // C : AI와의 대화 시, 랜덤한 대화 내용을 출력하기 위한 변수 생성
+    public int dayTalk = 0;        // N : AI와의 대화 횟수
 
     // J :IEnumerator 타입(WaitForSeconds)를 반환하는 함수
     private IEnumerator SpecialEvent(float delayTime)
@@ -56,8 +57,17 @@ public class GameManager : MonoBehaviour
 
         if (objData.id == 1000 && randomNum == 0)      // C : objData가 AI이고, 대화 첫 시작이면
         {
-            System.Random rand = new System.Random();
-            randomNum = rand.Next(1, 11);                  // C : 1~10까지의 난수를 대입
+            // N : 하루에 한번 이상 대화 시도
+            if (dayTalk > 0)
+            {
+                talkId = 2000;
+            }
+            else
+            {
+                System.Random rand = new System.Random();
+                randomNum = rand.Next(1, 11);                  // C : 1~10까지의 난수를 대입
+                dayTalk++;
+            }
         }
 
         if (objData.id >= 100 && objData.id <= 400)

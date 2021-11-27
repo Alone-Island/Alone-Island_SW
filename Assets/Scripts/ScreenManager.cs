@@ -170,17 +170,24 @@ public class ScreenManager : MonoBehaviour
     // N : 공감 배우기 (말걸기만 하는 경우 n = 0)
     public void HeartStudy(int n)
     {
-        if (n == 0) happyStat.fCurrValue += 5;
-        //useBook();
-        heartLv.fCurrValue += n;
-        happyStat.fCurrValue += (10 * n);
+        if (n == 0)
+        {
+            happyStat.fCurrValue += 5;
+            //useBook();
+            heartLv.fCurrValue++;
+        }
+        else
+        {
+            heartLv.fCurrValue += n;
+            happyStat.fCurrValue += (10 * n);
+        }
 
         // C : levelUp animation 실행하기
         levelUp.transform.SetParent(heartTextObject.transform);
         levelUp.SetActive(true);
 
         // N : 엔딩 처리
-        if (happyStat.fCurrValue <= 0 || heartLv.fCurrValue < 1) endingManager.failLonely();
+        if (happyStat.fCurrValue < 0 || heartLv.fCurrValue < 1) endingManager.failLonely();
         else if (heartLv.fCurrValue >= heartLv.maxValue)
         {
             if (engineerLv.fCurrValue > 13.0f) endingManager.successPeople(); // N : 공학 능력이 높은 경우

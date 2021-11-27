@@ -31,8 +31,10 @@ public class ScreenManager : MonoBehaviour
     public GameManager gameManager;     // J : GameManager에서 하루가 몇초인지 가져옴
 
     public GameObject heartTextObject;      // C :
-    public GameObject levelUp;            // C :
-    //private float time = 0;                 // C :
+    public GameObject levelUp;              // C :
+    public GameObject levelDown;            // C :
+    //private float time = 0;               // C :
+    private float downTime = 0;             // C :
 
     // Start is called before the first frame update
     void Start()
@@ -89,6 +91,21 @@ public class ScreenManager : MonoBehaviour
             time = 0;
         }
         */
+
+        // C :
+        if (levelDown.activeSelf == true)     // C :
+        {
+            downTime += Time.deltaTime;
+            if (downTime > 2f)                      // C : 
+            {
+                levelDown.SetActive(false);
+                downTime = 0;
+            }
+        }
+        else
+        {
+            downTime = 0;
+        }
     }
 
     // N : 날짜 변화
@@ -196,6 +213,10 @@ public class ScreenManager : MonoBehaviour
         {
             levelUp.transform.SetParent(heartTextObject.transform);
             levelUp.SetActive(true);
+        }
+        else
+        {
+            levelDown.SetActive(true);
         }
         
         

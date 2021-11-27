@@ -125,7 +125,7 @@ public class PlayerAction : MonoBehaviour
         if (addBook.activeSelf == true)
         {
             time += Time.deltaTime;
-            if (time > 5f)                      // C :
+            if (time > 2f)                      // C :
             {
                 addBook.SetActive(false);
                 time = 0;

@@ -6,15 +6,19 @@ public class LearningManager : MonoBehaviour
 {
     public ScreenManager screenManager;     // C :
     public AIAction aiAction;               // C :
-    public bool isAILearning = false;         // K : AI°¡ ÇÐ½ÀÁßÀÎÁö È®ÀÎÇÏ´Â º¯¼ö
+    public bool isAILearning = false;         // K : AIê°€ í•™ìŠµì¤‘ì¸ì§€ í™•ì¸í•˜ëŠ” ë³€ìˆ˜
     public int learningTime = 10;
+
+    public GameObject craftTextObject;      // C :
+    public GameObject levelUp;            // C :
+    private float time = 0;
 
     public void CompleateLearning() // K : 
     {
         isAILearning = false;
     }
     
-    public void WaitingLearning() // K : AI ÇÐ½À ½Ã°£À» ±â´Ù¸®´Â ÇÔ¼ö
+    public void WaitingLearning() // K : AI í•™ìŠµ ì‹œê°„ì„ ê¸°ë‹¤ë¦¬ëŠ” í•¨ìˆ˜
     {
         learningTime--;
         if (learningTime == 0)
@@ -53,6 +57,11 @@ public class LearningManager : MonoBehaviour
                     aiAction.GoToLearningPlace(7, 5);
                     isAILearning = true;
                     Invoke("WaitingLearning", 1);
+
+                    // C : levelUp animation ì‹¤í–‰í•˜ê¸°
+                    levelUp.transform.SetParent(craftTextObject.transform);
+                    levelUp.SetActive(true);
+
                     break;
                 case 400:                       // C :
                     Debug.Log(id);
@@ -64,6 +73,20 @@ public class LearningManager : MonoBehaviour
                 default:
                     Debug.Log("fail learning");
                     break;
+            }
+        }
+    }
+
+    void Update()
+    {
+        // C :
+        if (levelUp.activeSelf == true)     // C :
+        {
+            time += Time.deltaTime;
+            if (time > 2f)                      // C : 
+            {
+                levelUp.SetActive(false);
+                time = 0;
             }
         }
     }

@@ -25,6 +25,16 @@ public class TextManager : MonoBehaviour
         "하지만 나에게는 NJ-C가 있어! ",
         "아직 깡통에 불과하는 이 로봇을 학습시켜서\n이 섬에서 살아남아 보자! "
     };
+
+    public string[] HappyEndingFullText = {
+        "박사님!!\n 제가 통신기를 만들었어요!!",
+        "통신기?",
+        "사실 매일 조금씩 만들고 있었는데...\n드디어 완성이에요!",
+        "NJ-C! 당장 통신기를 사용해보자!",
+        "치...지직....치지지..직...여기는",
+    };
+
+
     string subText; // K : synopsys의 텍스트(한 문장) 일부를 저장하기 위한 변수입니다.
     int currentPoint = 0; // K : synopsysFullText에서 현재 포인터가 어디있는지 저장하기 위한 변수입니다.
 
@@ -52,7 +62,7 @@ public class TextManager : MonoBehaviour
         }
     }
 
-    public void GoToGameScreen() // K : 게임 신으로 가는 함수입니다.
+    public void GoToGameScreen(string screenName) // K : 게임 신으로 가는 함수입니다.
     {
         // K : 모든 변수 초기화
         currentPoint = 0;
@@ -60,14 +70,14 @@ public class TextManager : MonoBehaviour
         isTyping = true;
         isSkipPart = false;
 
-        SceneManager.LoadScene("MainGame"); // K : 게임 신으로 가게 하는 함수입니다. > using UnityEngine.SceneManagement;
+        SceneManager.LoadScene(screenName); // K : 게임 신으로 가게 하는 함수입니다. > using UnityEngine.SceneManagement;
     }
 
     IEnumerator TypingAction() {
         if (currentPoint >= synopsysFullText.Length)    // K : 모든 텍스트들을 타이핑 했을 때
         {
-            Debug.Log("게임 시작"); // K : 모든 텍스트를 출력 완료, 게임 플레이 신으로 이동
-            GoToGameScreen();
+            Debug.Log("Game Start"); // K : 모든 텍스트를 출력 완료, 게임 플레이 신으로 이동
+            GoToGameScreen("MainGame");
         }
 
         dialog.text = "";   // K : Text 오브젝트의 text 초기화

@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public int dayTalk = 0;        // N : AI와의 대화 횟수
 
     public TextMeshProUGUI alertText;           // N : 알림창의 text
+    bool alert = false;
 
     // J :IEnumerator 타입(WaitForSeconds)를 반환하는 함수
     private IEnumerator SpecialEvent(float delayTime)
@@ -59,8 +60,8 @@ public class GameManager : MonoBehaviour
 
         if (objData.id == 1000 && randomNum == 0)      // C : objData가 AI이고, 대화 첫 시작이면
         {
-            // N : 하루에 한번 이상 대화 시도
-            if (dayTalk > 0)
+            // N : 하루에 한번 이상 대화 시도, J : or 어제 띄운 알림창이 아직 활성화 상태인 경우
+            if (dayTalk > 0 || alert)
             {
                 talkId = 2000;
             }
@@ -84,8 +85,12 @@ public class GameManager : MonoBehaviour
         }
         Talk(talkId);                   // C : 필요한 talkPanel text 값 가져오기, K : 예외처리를 위해 objData.id > talkId로 수정
 
-        if(talkId == 1000) talkPanel.SetActive(isTPShow);      // C : talkPanel 숨기거나 보여주기
-        else GameObject.Find("Alert").transform.Find("Alert Set").gameObject.SetActive(isTPShow); // N : 알림창 띄워주기
+        if (talkId == 1000) talkPanel.SetActive(isTPShow);      // C : talkPanel 숨기거나 보여주기
+        else
+        {
+            GameObject.Find("Alert").transform.Find("Alert Set").gameObject.SetActive(isTPShow); // N : 알림창 띄워주기
+            alert = true;
+        }
     }
 
     // C : 상황에 따라 적절하게 필요한 talkPanel text 값 대화창에 띄우기
@@ -104,6 +109,7 @@ public class GameManager : MonoBehaviour
 
             playerTalk = false;         // J : 정상적으로 special event가 발동하도록 설정
             isTPShow = false;           // C : talkPanel의 show 상태 false로 저장
+            alert = false;              // J : 알림창 비활성화 상태
             talkIndex = 0;              // C : 다음 Talk()함수 사용을 위해 talkIndex를 0으로 초기화
             randomNum = 0;              // C : 다음 Talk()함수 사용을 위해 randomNum을 0으로 초기화
             return;

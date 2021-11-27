@@ -176,7 +176,7 @@ public class PlayerAction : MonoBehaviour
 
             // C :
             GameObject bookInstance = Instantiate(addBook, player.transform.localPosition, Quaternion.identity);
-            bookInstance.transform.parent = player.transform;
+            bookInstance.transform.SetParent(player.transform);
             bookInstance.SetActive(true);                   // C : player 머리 위의 책 object 보이기
             addBookListG.Add(bookInstance);
             addBookListT.Add(0f);                       

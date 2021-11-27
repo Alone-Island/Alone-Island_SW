@@ -175,9 +175,9 @@ public class ScreenManager : MonoBehaviour
     {
         if (n == 0)
         {
-            happyStat.fCurrValue += 5;
             //useBook();
             heartLv.fCurrValue++;
+            happyStat.fCurrValue += 15;
         }
         else
         {

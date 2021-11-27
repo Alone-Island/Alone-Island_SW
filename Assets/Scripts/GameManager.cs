@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     int randomNum = 0;                  // C : AI와의 대화 시, 랜덤한 대화 내용을 출력하기 위한 변수 생성
     public int dayTalk = 0;        // N : AI와의 대화 횟수
 
+    public TextMeshProUGUI alertText;           // N : 알림창의 text
+
     // J :IEnumerator 타입(WaitForSeconds)를 반환하는 함수
     private IEnumerator SpecialEvent(float delayTime)
     {
@@ -104,8 +106,9 @@ public class GameManager : MonoBehaviour
             randomNum = 0;              // C : 다음 Talk()함수 사용을 위해 randomNum을 0으로 초기화
             return;
         }
-        
-        talkText.text = talkData;       // C : talkPanel의 text를 talkData로 설정
+        if (id == 1000) talkText.text = talkData;       // C : talkPanel의 text를 talkData로 설정
+        else alertText.text = talkData;                 // N : 알림창
+
         isTPShow = true;                // C : talkPanel의 show 상태 true로 저장 (해당하는 id의 talkData string이 아직 남아있음)
         talkIndex++;                    // C : 해당하는 id의 다음 talkData string을 가져오기 위해
     }

@@ -192,6 +192,23 @@ public class ScreenManager : MonoBehaviour
         useBook();
         houseLv.fCurrValue++;
         //dangerStat.fCurrValue += 50;
+
+        if (houseLv.fCurrValue > 2)
+        {
+            if (houseLv.fCurrValue < 6) GameObject.Find("House").transform.Find("Lv3-5").gameObject.SetActive(true); // N : 레벨 3-4
+            else if (farmLv.fCurrValue < 9)
+            {
+                // N : 레벨 5-6
+                GameObject.Find("House").transform.Find("Lv3-5").gameObject.SetActive(false);
+                GameObject.Find("House").transform.Find("Lv6-8").gameObject.SetActive(true);
+            }
+            else
+            {
+                // N : 레벨 9-10
+                GameObject.Find("House").transform.Find("Lv6-8").gameObject.SetActive(false);
+                GameObject.Find("House").transform.Find("Lv9-10").gameObject.SetActive(true);
+            }
+        }
     }
 
     // N : 공예 배우기

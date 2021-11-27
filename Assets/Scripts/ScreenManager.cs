@@ -197,7 +197,7 @@ public class ScreenManager : MonoBehaviour
         if (houseLv.fCurrValue > 2)
         {
             if (houseLv.fCurrValue < 6) GameObject.Find("House").transform.Find("Lv3-5").gameObject.SetActive(true); // N : 레벨 3-4
-            else if (farmLv.fCurrValue < 9)
+            else if (houseLv.fCurrValue < 9)
             {
                 // N : 레벨 5-6
                 GameObject.Find("House").transform.Find("Lv3-5").gameObject.SetActive(false);
@@ -259,8 +259,18 @@ public class ScreenManager : MonoBehaviour
         {
             levelDown.SetActive(true);
         }
-        
-        
+
+
+        if (heartLv.fCurrValue > 7)
+        {
+            if (heartLv.fCurrValue < 15) GameObject.Find("plant").transform.Find("Lv8-14").gameObject.SetActive(true); // N : 레벨 3-4
+            else
+            {
+                // N : 레벨 9-10
+                GameObject.Find("plant").transform.Find("Lv8-14").gameObject.SetActive(false);
+                GameObject.Find("plant").transform.Find("Lv15-20").gameObject.SetActive(true);
+            }
+        }
 
         // N : 엔딩 처리
         if (happyStat.fCurrValue < 0 || heartLv.fCurrValue < 0) endingManager.failLonely();

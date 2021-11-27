@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         }
         Talk(talkId);                   // C : 필요한 talkPanel text 값 가져오기, K : 예외처리를 위해 objData.id > talkId로 수정
 
-        if(objData.id == 1000) talkPanel.SetActive(isTPShow);      // C : talkPanel 숨기거나 보여주기
+        if(talkId == 1000) talkPanel.SetActive(isTPShow);      // C : talkPanel 숨기거나 보여주기
         else GameObject.Find("Alert").transform.Find("Alert Set").gameObject.SetActive(isTPShow); // N : 알림창 띄워주기
     }
 
@@ -100,6 +100,8 @@ public class GameManager : MonoBehaviour
             {
                 learningManager.Learning(id);
             }
+            else if (id == 1000) screenManager.HeartStudy(0);
+
             playerTalk = false;         // J : 정상적으로 special event가 발동하도록 설정
             isTPShow = false;           // C : talkPanel의 show 상태 false로 저장
             talkIndex = 0;              // C : 다음 Talk()함수 사용을 위해 talkIndex를 0으로 초기화
@@ -107,7 +109,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         if (id == 1000) talkText.text = talkData;       // C : talkPanel의 text를 talkData로 설정
-        else alertText.text = talkData;                 // N : 알림창
+        else alertText.text = talkData;                 // N : 알림창의 text를 talkData로 설정
 
         isTPShow = true;                // C : talkPanel의 show 상태 true로 저장 (해당하는 id의 talkData string이 아직 남아있음)
         talkIndex++;                    // C : 해당하는 id의 다음 talkData string을 가져오기 위해

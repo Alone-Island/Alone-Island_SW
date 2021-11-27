@@ -32,7 +32,7 @@ public class ScreenManager : MonoBehaviour
 
     public GameObject heartTextObject;      // C :
     public GameObject levelUp;            // C :
-    private float time = 0;                 // C :
+    //private float time = 0;                 // C :
 
     // Start is called before the first frame update
     void Start()
@@ -73,16 +73,23 @@ public class ScreenManager : MonoBehaviour
         }
 
 
+        /*
         // C :
         if (levelUp.activeSelf == true)     // C :
         {
             time += Time.deltaTime;
+            Debug.Log("in screen");
             if (time > 2f)                      // C : 
             {
                 levelUp.SetActive(false);
                 time = 0;
             }
         }
+        else
+        {
+            time = 0;
+        }
+        */
     }
 
     // N : 날짜 변화

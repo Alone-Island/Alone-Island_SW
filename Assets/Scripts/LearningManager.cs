@@ -50,6 +50,7 @@ public class LearningManager : MonoBehaviour
                     // C : levelUp animation 실행하기
                     levelUp.transform.SetParent(farmTextObject.transform);
                     levelUp.SetActive(true);
+                    Debug.Log("levelUp true in farm");
 
                     break;
                 case 200:                       // C :
@@ -62,6 +63,7 @@ public class LearningManager : MonoBehaviour
                     // C : levelUp animation 실행하기
                     levelUp.transform.SetParent(houseTextObject.transform);
                     levelUp.SetActive(true);
+                    Debug.Log("levelUp true in house");
 
                     break;
                 case 300:                       // C :
@@ -74,6 +76,7 @@ public class LearningManager : MonoBehaviour
                     // C : levelUp animation 실행하기
                     levelUp.transform.SetParent(craftTextObject.transform);
                     levelUp.SetActive(true);
+                    Debug.Log("levelUp true in craft");
 
                     break;
                 case 400:                       // C :
@@ -86,6 +89,7 @@ public class LearningManager : MonoBehaviour
                     // C : levelUp animation 실행하기
                     levelUp.transform.SetParent(engineerTextObject.transform);
                     levelUp.SetActive(true);
+                    Debug.Log("levelUp true in engineer");
 
                     break;
                 default:
@@ -101,11 +105,18 @@ public class LearningManager : MonoBehaviour
         if (levelUp.activeSelf == true)     // C :
         {
             time += Time.deltaTime;
+            Debug.Log("in learning");
             if (time > 2f)                      // C : 
             {
+                Debug.Log("levelUp false");
                 levelUp.SetActive(false);
                 time = 0;
             }
+            Debug.Log(time);
+        }
+        else
+        {
+            time = 0;
         }
     }
 }

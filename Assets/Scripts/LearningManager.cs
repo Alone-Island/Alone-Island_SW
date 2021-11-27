@@ -10,6 +10,7 @@ public class LearningManager : MonoBehaviour
     public int learningTime = 10;
 
     public GameObject craftTextObject;      // C :
+    public GameObject farmTextObject;      // C :
     public GameObject levelUp;            // C :
     private float time = 0;
 
@@ -43,6 +44,11 @@ public class LearningManager : MonoBehaviour
                     aiAction.GoToLearningPlace(-7, -7);
                     isAILearning = true;
                     Invoke("WaitingLearning", 1);
+
+                    // C : levelUp animation 실행하기
+                    levelUp.transform.SetParent(farmTextObject.transform);
+                    levelUp.SetActive(true);
+
                     break;
                 case 200:                       // C :
                     Debug.Log(id);

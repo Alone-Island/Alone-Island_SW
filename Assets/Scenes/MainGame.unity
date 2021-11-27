@@ -2947,6 +2947,7 @@ MonoBehaviour:
   isAILearning: 0
   learningTime: 10
   craftTextObject: {fileID: 1347493652}
+  farmTextObject: {fileID: 620036288}
   levelUp: {fileID: 1879157404}
 --- !u!4 &721096103
 Transform:

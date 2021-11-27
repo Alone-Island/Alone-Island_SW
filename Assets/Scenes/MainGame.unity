@@ -4365,7 +4365,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: b3b88dccb6a71fb4093b9b67787af456, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9aa345f11e22c824dadaf51a316bf5b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5818,7 +5818,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c792b158835335949b9d38c488addaae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a8ce532465165114887c81a2bb6d5387, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

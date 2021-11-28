@@ -42,7 +42,7 @@ public class EndingManager : MonoBehaviour
         DataController.Instance.endingData.lonely = 1;
 
         panel.SetActive(true);
-        //panel.transform.Find("Bad-Frozen").gameObject.SetActive(true);
+        panel.transform.Find("Bad-Lonely").gameObject.SetActive(true);
 
         manager.isEndingShow = true;
         Invoke("TheEnd", 2.0f);

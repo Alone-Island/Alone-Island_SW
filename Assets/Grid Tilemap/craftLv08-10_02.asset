@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: craftLv08-10_Left
+  m_Name: craftLv08-10_02
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 06fe87525a0e0754faea3e1616abd24b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bd0d619bc80e4294c8f74a86330e0c86, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

@@ -45,7 +45,7 @@ public class TextManager : MonoBehaviour
 
     void Start() {
         fullText = synopsysFullText;
-        fullText = HappyEndingFullText;
+        //fullText = HappyEndingFullText;
         StartCoroutine("TypingAction", 0);          // K : 스크립트의 시작과 동시에 타이핑을 시작하는 코드입니다.
     }
     
@@ -66,7 +66,7 @@ public class TextManager : MonoBehaviour
         }
     }
 
-    public void GoToGameScreen(string screenName) // K : 게임 신으로 가는 함수입니다.
+    public void GoToGameScreen() // K : 게임 신으로 가는 함수입니다.
     {
         // K : 모든 변수 초기화
         currentPoint = 0;
@@ -74,14 +74,14 @@ public class TextManager : MonoBehaviour
         isTyping = true;
         isSkipPart = false;
 
-        SceneManager.LoadScene(screenName); // K : 게임 신으로 가게 하는 함수입니다. > using UnityEngine.SceneManagement;
+        SceneManager.LoadScene("MainGame"); // K : 게임 신으로 가게 하는 함수입니다. > using UnityEngine.SceneManagement;
     }
 
     IEnumerator TypingAction() {
         if (currentPoint >= fullText.Length)    // K : 모든 텍스트들을 타이핑 했을 때
         {
             Debug.Log("Game Start"); // K : 모든 텍스트를 출력 완료, 게임 플레이 신으로 이동
-            GoToGameScreen("MainGame");
+            GoToGameScreen();
         }
 
         dialog.text = "";   // K : Text 오브젝트의 text 초기화
@@ -89,7 +89,7 @@ public class TextManager : MonoBehaviour
 
         for (int i = 0; i < fullText[currentPoint].Length; i++) // K : 텍스트 한 문장의 한 글자 한 글자를 화면에 나타나게 하기 위한 반복문
         {
-            yield return new WaitForSeconds(0.15f); // K : 텍스트 한 글자 한 글자 사이의 딜레이
+            yield return new WaitForSeconds(0.12f); // K : 텍스트 한 글자 한 글자 사이의 딜레이
 
             subText += fullText[currentPoint].Substring(0, i);  // K : 텍스트의 인덱스 0~i까지 자름
             dialog.text = subText;                                      // K : Text 오브젝트에 subText 적용 

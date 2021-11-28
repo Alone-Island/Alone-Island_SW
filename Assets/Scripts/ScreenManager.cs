@@ -226,6 +226,24 @@ public class ScreenManager : MonoBehaviour
         useBook();
         engineerLv.fCurrValue++;
 
+        // ~~
+        if (engineerLv.fCurrValue > 2)
+        {
+            if (engineerLv.fCurrValue < 6) GameObject.Find("Lab").transform.Find("Lv3-5").gameObject.SetActive(true); // N : 레벨 3-4
+            else if (engineerLv.fCurrValue < 9)
+            {
+                // N : 레벨 5-6
+                GameObject.Find("Lab").transform.Find("Lv3-5").gameObject.SetActive(false);
+                GameObject.Find("Lab").transform.Find("Lv6-8").gameObject.SetActive(true);
+            }
+            else
+            {
+                // N : 레벨 9-10
+                GameObject.Find("Lab").transform.Find("Lv6-8").gameObject.SetActive(false);
+                GameObject.Find("Lab").transform.Find("Lv9-10").gameObject.SetActive(true);
+            }
+        }
+
         // N : 엔딩 처리
         if (engineerLv.fCurrValue >= engineerLv.maxValue)
         {

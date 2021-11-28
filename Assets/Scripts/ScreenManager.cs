@@ -218,6 +218,21 @@ public class ScreenManager : MonoBehaviour
         useBook();
         craftLv.fCurrValue++;
         temperatureStat.fCurrValue += 50;
+
+        if (craftLv.fCurrValue > 3)
+        {
+            if (craftLv.fCurrValue < 8)
+            {
+                GameObject.Find("Craft_Room").transform.Find("Lv1-3").gameObject.SetActive(false);
+                GameObject.Find("Craft_Room").transform.Find("Lv4-7").gameObject.SetActive(true);
+            }
+            else
+            {
+                // N : 레벨 9-10
+                GameObject.Find("Craft_Room").transform.Find("Lv4-7").gameObject.SetActive(false);
+                GameObject.Find("Craft_Room").transform.Find("Lv8-10").gameObject.SetActive(true);
+            }
+        }
     }
 
     // N : 공학 배우기

@@ -11,6 +11,7 @@ public class PlayerAction : MonoBehaviour
     public GameManager manager;         // C : player에서 GameManager의 함수를 호출할 수 있도록 manager 변수 생성
     public ScreenManager screenManager;         // J : 책을 주웠을 때 책 개수 증가를 위해 ScreenManager 변수 생성
     public SpecialEventManager specialManager;  // J : player에서 SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
+    private AIAction aiAction;
 
     float h;    // C : horizontal (수평 이동)
     float v;    // C : vertical (수직 이동)
@@ -39,6 +40,7 @@ public class PlayerAction : MonoBehaviour
         // C : component instance 생성
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        aiAction = GameObject.Find("AI").GetComponent<AIAction>();
     }
 
     void Update()
@@ -203,6 +205,48 @@ public class PlayerAction : MonoBehaviour
             engineerIcon.SetActive(true);
         }
     }
+
+    private void OnTriggerStay2D(Collider2D coll)
+    {
+        if (aiAction.isAICollisionToPlayer)
+        {
+            if (coll.gameObject.name == "FarmLearning")
+            {
+                farmIcon.SetActive(false);
+            }
+            if (coll.gameObject.name == "HouseLearning")
+            {
+                houseIcon.SetActive(false);
+            }
+            if (coll.gameObject.name == "CraftLearning")
+            {
+                craftIcon.SetActive(false);
+            }
+            if (coll.gameObject.name == "EngineerLearning")
+            {
+                engineerIcon.SetActive(false);
+            }
+        } else
+        {
+            if (coll.gameObject.name == "FarmLearning")
+            {
+                farmIcon.SetActive(true);
+            }
+            if (coll.gameObject.name == "HouseLearning")
+            {
+                houseIcon.SetActive(true);
+            }
+            if (coll.gameObject.name == "CraftLearning")
+            {
+                craftIcon.SetActive(true);
+            }
+            if (coll.gameObject.name == "EngineerLearning")
+            {
+                engineerIcon.SetActive(true);
+            }
+        }
+    }
+
     // N : 장소에서 나오면
     private void OnTriggerExit2D(Collider2D coll)
     {

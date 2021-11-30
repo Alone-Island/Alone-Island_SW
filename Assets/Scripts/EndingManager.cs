@@ -139,7 +139,7 @@ public class EndingManager : MonoBehaviour
         DataController.Instance.endingData.timeOut = 1;
 
         ending();
-        happyTwo.SetActive(true);
+        panel.transform.Find("Happy-SosoLife").gameObject.SetActive(true);
         Invoke("TheEnd", 2.0f);
     }
 }

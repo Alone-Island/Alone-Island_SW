@@ -9035,7 +9035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -13779,7 +13779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -14565,6 +14565,7 @@ MonoBehaviour:
   specialManager: {fileID: 488290411}
   learningManager: {fileID: 721096102}
   screenManager: {fileID: 1163355729}
+  playerTalk: 0
   isEndingShow: 0
   isTheEnd: 0
   dayTalk: 0
@@ -14607,6 +14608,7 @@ MonoBehaviour:
   learningManager: {fileID: 721096102}
   learningTime: {fileID: 655002192}
   learningTitle: {fileID: 2011665721}
+  dayTime: 0
   calender: {fileID: 1604483255}
   book: {fileID: 1302376640}
   bookNum: 0
@@ -25294,7 +25296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}

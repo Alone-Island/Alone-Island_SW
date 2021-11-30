@@ -37,7 +37,7 @@ public class LearningManager : MonoBehaviour
 
     public void Learning(int id)            // C :
     {
-        if (!isAILearning) {
+        if (!isAILearning && !aiAction.isAICollisionToPlayer) {
             switch (id)
             {
                 case 100:                       // C :

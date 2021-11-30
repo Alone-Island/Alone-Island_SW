@@ -15,8 +15,7 @@ public class AIAction : MonoBehaviour
     public int vel = 1;                     // K : ai 이동 속도 조절
     public int nextAIMoveX = 0;             // K : ai의 다음 X축 방향 변후
     public int nextAIMoveY = 0;             // K : ai의 다음 Y축 방향 변후
-    bool isAICollision = false;             // K : ai 충돌 확인 변수 > 추후 사용 예정
-    //bool isAICollisionToPlayer = false;     // K : ai가 player와 충돌
+    public bool isAICollisionToPlayer = false;     // K : ai가 player와 충돌
 
     void NextAiMoveDirection()              // K : ai가 랜덤하게 움직이도록 랜덤한 방향을 결정해주는 함수
     {
@@ -91,7 +90,7 @@ public class AIAction : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (specialManager.special || learningManager.isAILearning || gameManager.isEndingShow)    // 스페셜 이벤트, 플레이어가 AI와 대화하는 중 또는 AI가 학습중일때 정지
+        if (specialManager.special || learningManager.isAILearning || gameManager.isEndingShow || gameManager.playerTalk)    // 스페셜 이벤트, 플레이어가 AI와 대화하는 중 또는 AI가 학습중일때 정지
         {
             rigid.velocity = new Vector2(0, 0); // K : ai 정지
         }
@@ -103,9 +102,10 @@ public class AIAction : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)   // Ai 충돌 감지 함수
     {
-        isAICollision = true;
+        //isAICollision = true;
         if (coll.gameObject.name == "Dr.Kim")
         {
+            isAICollisionToPlayer = true;
             nextAIMoveX = 0;
             nextAIMoveY = 0;
             vel = 0;
@@ -121,9 +121,10 @@ public class AIAction : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D coll)   // K : Ai 충돌 제거 감지 함수
     {
-        isAICollision = false;                 // K : AI 충돌 멈춤
+        //isAICollision = false;                 // K : AI 충돌 멈춤
         if (coll.gameObject.name == "Dr.Kim")  // K : Ai가 플레이어와 충돌을 끝나면 출발
         {
+            isAICollisionToPlayer = false;
             vel = 1;
         }
     }

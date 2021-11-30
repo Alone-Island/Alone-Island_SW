@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         ObjectData objData = scanObject.GetComponent<ObjectData>();     // C : scanObject의 ObjectData instance 가져오기
         int talkId = objData.id;            // K : takl data의 id 지정 변수, 예외처리를 위해 추가 설정함
 
-        
+
 
         if (objData.id == 1000 || aiAction.isAICollisionToPlayer)      // C : objData가 AI
         {

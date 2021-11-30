@@ -9,6 +9,18 @@ public class SettingManager : MonoBehaviour
     public AudioSource audio;
 
     private GameObject setting;
+
+    void Start()
+    {
+        audio.volume = DataController.Instance.settingData.BGMSound;
+        slider.value = DataController.Instance.settingData.BGMSound;
+    }
+
+    void Update()
+    {
+        SoundSlider();
+    }
+
     public void SelectSetting()
     {
         setting = GameObject.Find("Screen").transform.Find("Setting").gameObject;
@@ -26,10 +38,5 @@ public class SettingManager : MonoBehaviour
     {
         audio.volume = slider.value;
         DataController.Instance.settingData.BGMSound = slider.value;
-    }
-
-    private void Update()
-    {
-        SoundSlider();
     }
 }

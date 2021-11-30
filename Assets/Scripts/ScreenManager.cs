@@ -22,6 +22,8 @@ public class ScreenManager : MonoBehaviour
     public TextMeshProUGUI learningTitle;
 
     private int day = 1; // N : 날짜
+    public int dayTime = 0; // N : 하루의 시간
+
     //private int bookNum = 0; // N : 책 개수
     [SerializeField] private TextMeshProUGUI calender; // N : 날짜 텍스트
     [SerializeField] private TextMeshProUGUI book; // N : 책 개수 텍스트
@@ -113,6 +115,7 @@ public class ScreenManager : MonoBehaviour
     {
         if (gameManager.isEndingShow) return;
         // N : 캘린더 관리
+
         day++;
         if (day < 10) calender.text = "day " + "0" + day.ToString();
         else calender.text = "day " + day.ToString();
@@ -133,8 +136,14 @@ public class ScreenManager : MonoBehaviour
         //N : AI와 대화 횟수 초기화
         gameManager.dayTalk = 0;
 
-        // N : 하루마다 호출
-        Invoke("dayAfter", gameManager.day);
+        timeFly();
+    }
+
+    public void timeFly()
+    {
+        dayTime++;
+        if (dayTime >= gameManager.day) { dayTime = 0; dayAfter(); }
+        else Invoke("timeFly", 1);
     }
 
     public int currBookNum()

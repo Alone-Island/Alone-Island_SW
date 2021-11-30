@@ -116,7 +116,7 @@ public class SpecialEventManager : MonoBehaviour
                         switch (secondRandomNum)
                         {
                             case 1: // J : 배터리가 많이 닳았어요ㅠㅠ "하루만 아무것도 안하고 싶어요..
-                                screenManager.dayAfter();       // J : 하루 바로 지나기
+                                screenManager.dayTime = 20;
                                 screenManager.HeartStudy(1); // N : 공감 1레벨 상승
                                 break;
                             case 2: // J : 박사님을 위해 새로운 열매를 따왔어요!

@@ -131,7 +131,7 @@ public class ScreenManager : MonoBehaviour
         else if (temperatureStat.fCurrValue <= 0) endingManager.failCold();
 
         //N : AI와 대화 횟수 초기화
-        if (!gameManager.isTPShow) gameManager.dayTalk = 0;
+        gameManager.dayTalk = 0;
 
         // N : 하루마다 호출
         Invoke("dayAfter", gameManager.day);

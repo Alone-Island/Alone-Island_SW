@@ -57,17 +57,22 @@ public class GameManager : MonoBehaviour
         ObjectData objData = scanObject.GetComponent<ObjectData>();     // C : scanObject의 ObjectData instance 가져오기
         int talkId = objData.id;            // K : takl data의 id 지정 변수, 예외처리를 위해 추가 설정함
 
-        if (objData.id == 1000 && randomNum == 0)      // C : objData가 AI이고, 대화 첫 시작이면
+        if (objData.id == 1000)      // C : objData가 AI
         {
-            // N : 하루에 한번 이상 대화 시도, J : or 어제 띄운 알림창이 아직 활성화 상태인 경우
-            if (dayTalk > 0)
+            // N : 
+            if (randomNum==1000) talkId = 2000;
+            else if(randomNum == 0) // C : 대화 첫 시작
             {
-                talkId = 2000;
-            }
-            else
-            {
-                System.Random rand = new System.Random();
-                randomNum = rand.Next(1, 11);                  // C : 1~10까지의 난수를 대입
+                if (dayTalk > 0)
+                {
+                    talkId = 2000;
+                    randomNum = 1000;
+                }
+                else
+                {
+                    System.Random rand = new System.Random();
+                    randomNum = rand.Next(1, 11);                  // C : 1~10까지의 난수를 대입
+                }
             }
         }
 

@@ -34,7 +34,7 @@ public class TalkManager : MonoBehaviour
         talkData.Add(1010, new string[] { "죽음이란 무엇일까요? 죽으면 어디로 가는 걸까요?" });
 
         // N : 하루에 한번 이상 대화 시도
-        talkData.Add(2000, new string[] { "충전 중이에요.. 오늘은 대화를 더 이상 할 수 없어요." });
+        talkData.Add(3000, new string[] { "충전 중이에요.. 오늘은 대화를 더 이상 할 수 없어요." });
 
         // C : key가 100~400이면 학습하기에 대한 text data (100 - 농사, 200 - 건축, 300 - 공예, 400 - 공학)
         talkData.Add(100, new string[] { "농사를 학습하시겠습니까?", "농사를 학습합니다." });

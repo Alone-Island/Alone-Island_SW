@@ -14,10 +14,12 @@ public class GameManager : MonoBehaviour
     public TalkManager talkManager; // C : GameManager에서 TalkManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public int talkIndex;           // C : 필요한 talkIndex를 저장하기 위한 변수 생성
     public int day = 20;            // J : 하루는 20초
+    private int specialEventCoolTimeDay = 10;
         
     public SpecialEventManager specialManager; // J : GameManager에서 SpecialEventManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public LearningManager learningManager;     // C :
     public ScreenManager screenManager; // N : 책 개수 가져오기 위해
+    public AIAction aiAction;           // K : ai와 play가 충돌중인지 확인하기 위해서 > 대화 가능
 
     public bool playerTalk = false;            // J : 플레이어가 대화하는 중에는 special event를 유예하도록 변수 생성
     public bool isEndingShow = false;         // N : 엔딩 여부 (엔딩 카드 나타난 직후부터)
@@ -39,12 +41,12 @@ public class GameManager : MonoBehaviour
             }
             yield return null;
         }
-        StartCoroutine("SpecialEvent", day*3); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", day* specialEventCoolTimeDay); // J : SpecialEvent 함수 호출
     }
 
     private void Start()
     {
-        StartCoroutine("SpecialEvent", day*3); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", day* specialEventCoolTimeDay); // J : SpecialEvent 함수 호출
     }
 
     
@@ -57,7 +59,9 @@ public class GameManager : MonoBehaviour
         ObjectData objData = scanObject.GetComponent<ObjectData>();     // C : scanObject의 ObjectData instance 가져오기
         int talkId = objData.id;            // K : takl data의 id 지정 변수, 예외처리를 위해 추가 설정함
 
-        if (objData.id == 1000)      // C : objData가 AI
+        
+
+        if (objData.id == 1000 || aiAction.isAICollisionToPlayer)      // C : objData가 AI
         {
             // N : 
             if (randomNum==1000) talkId = 2000;
@@ -74,9 +78,7 @@ public class GameManager : MonoBehaviour
                     randomNum = rand.Next(1, 11);                  // C : 1~10까지의 난수를 대입
                 }
             }
-        }
-
-        if (objData.id >= 100 && objData.id <= 400)
+        } else if (objData.id >= 100 && objData.id <= 400)
         {
             if (learningManager.isAILearning) // K : 학습하기 조사를 했을때, AI 학습중인 경우 예외처리
             {

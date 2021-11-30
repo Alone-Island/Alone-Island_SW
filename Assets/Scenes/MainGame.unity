@@ -8964,6 +8964,7 @@ MonoBehaviour:
   vel: 1
   nextAIMoveX: 0
   nextAIMoveY: 0
+  isAICollisionToPlayer: 0
 --- !u!95 &793937240
 Animator:
   serializedVersion: 3
@@ -14565,6 +14566,7 @@ MonoBehaviour:
   specialManager: {fileID: 488290411}
   learningManager: {fileID: 721096102}
   screenManager: {fileID: 1163355729}
+  aiAction: {fileID: 793937239}
   playerTalk: 0
   isEndingShow: 0
   isTheEnd: 0

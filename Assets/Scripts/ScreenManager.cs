@@ -21,7 +21,7 @@ public class ScreenManager : MonoBehaviour
     public TextMeshProUGUI learningTime;
     public TextMeshProUGUI learningTitle;
 
-    private int day = 1; // N : 날짜
+    private int day = 0; // N : 날짜
     public int dayTime = 0; // N : 하루의 시간
 
     //private int bookNum = 0; // N : 책 개수
@@ -31,6 +31,7 @@ public class ScreenManager : MonoBehaviour
 
     public EndingManager endingManager;
     public GameManager gameManager;     // J : GameManager에서 하루가 몇초인지 가져옴
+    public SettingManager settingManager;
 
     public GameObject heartTextObject;      // C :
     public GameObject levelUp;              // C :
@@ -59,7 +60,8 @@ public class ScreenManager : MonoBehaviour
         // N : 책 개수 초기화
         book.text = "0 books";
 
-        Invoke("dayAfter", gameManager.day);
+        dayAfter();
+        //Invoke("dayAfter", gameManager.day);
     }
 
     // Update is called once per frame
@@ -123,10 +125,13 @@ public class ScreenManager : MonoBehaviour
         // N : 90일 이후
         if (day > 90) endingManager.timeOutEnding();
 
-        // N : 스탯 관리
-        hungerStat.fCurrValue = hungerStat.fCurrValue + farmLv.fCurrValue - 10;
-        happyStat.fCurrValue = happyStat.fCurrValue + heartLv.fCurrValue - 5;
-        temperatureStat.fCurrValue = temperatureStat.fCurrValue + craftLv.fCurrValue - 10;
+        if (day > 1)
+        {
+            // N : 스탯 관리
+            hungerStat.fCurrValue = hungerStat.fCurrValue + farmLv.fCurrValue - 10;
+            happyStat.fCurrValue = happyStat.fCurrValue + heartLv.fCurrValue - 5;
+            temperatureStat.fCurrValue = temperatureStat.fCurrValue + craftLv.fCurrValue - 10;
+        }
 
         // N : 엔딩 처리
         if (hungerStat.fCurrValue <= 0) endingManager.failHungry();
@@ -141,7 +146,8 @@ public class ScreenManager : MonoBehaviour
 
     public void timeFly()
     {
-        dayTime++;
+        if(!settingManager.nowSetting) dayTime++;
+
         if (dayTime >= gameManager.day) { dayTime = 0; dayAfter(); }
         else Invoke("timeFly", 1);
     }

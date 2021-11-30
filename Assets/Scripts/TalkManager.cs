@@ -37,10 +37,10 @@ public class TalkManager : MonoBehaviour
         talkData.Add(3000, new string[] { "충전 중이에요.. 오늘은 대화를 더 이상 할 수 없어요." });
 
         // C : key가 100~400이면 학습하기에 대한 text data (100 - 농사, 200 - 건축, 300 - 공예, 400 - 공학)
-        talkData.Add(100, new string[] { "농사를 학습하시겠습니까?", "농사를 학습합니다." });
-        talkData.Add(200, new string[] { "건축을 학습하시겠습니까?", "건축을 학습합니다." });
-        talkData.Add(300, new string[] { "공예를 학습하시겠습니까?", "공예를 학습합니다." });
-        talkData.Add(400, new string[] { "공학을 학습하시겠습니까?", "공학을 학습합니다." });
+        talkData.Add(100, new string[] { "농사를 학습하시겠습니까?(취소 : ESC)", "농사를 학습합니다." });
+        talkData.Add(200, new string[] { "건축을 학습하시겠습니까?(취소 : ESC)", "건축을 학습합니다." });
+        talkData.Add(300, new string[] { "공예를 학습하시겠습니까?(취소 : ESC)", "공예를 학습합니다." });
+        talkData.Add(400, new string[] { "공학을 학습하시겠습니까?(취소 : ESC)", "공학을 학습합니다." });
 
         // K: key가 500,600이면 학습에 대한 예외처리 text data
         talkData.Add(500, new string[] { "AI가 학습중입니다.\n학습이 끝나고 다시 시도해주세요." });

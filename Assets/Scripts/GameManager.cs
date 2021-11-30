@@ -15,13 +15,14 @@ public class GameManager : MonoBehaviour
     public int talkIndex;           // C : 필요한 talkIndex를 저장하기 위한 변수 생성
     public int day = 20;            // J : 하루는 20초
     private int specialEventCoolTimeDay = 10;
-        
+
     public SpecialEventManager specialManager; // J : GameManager에서 SpecialEventManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public LearningManager learningManager;     // C :
     public ScreenManager screenManager; // N : 책 개수 가져오기 위해
     public AIAction aiAction;           // K : ai와 play가 충돌중인지 확인하기 위해서 > 대화 가능
 
-    public bool playerTalk = false;            // J : 플레이어가 대화하는 중에는 special event를 유예하도록 변수 생성
+    public bool playerTalk = false;           // J : 플레이어가 대화하는 중에는 special event를 유예하도록 변수 생성
+    public bool isSelectedAILearning = true;         // K : AI가 학습을 할것인지 학습을 하지 않을 것인지 확인하는 플래그
     public bool isEndingShow = false;         // N : 엔딩 여부 (엔딩 카드 나타난 직후부터)
     public bool isTheEnd = false;         // N : 게임 종료 여부 (엔딩 카드 나타나고 2초 뒤부터)
     int randomNum = 0;                  // C : AI와의 대화 시, 랜덤한 대화 내용을 출력하기 위한 변수 생성
@@ -41,15 +42,15 @@ public class GameManager : MonoBehaviour
             }
             yield return null;
         }
-        StartCoroutine("SpecialEvent", day* specialEventCoolTimeDay); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", day * specialEventCoolTimeDay); // J : SpecialEvent 함수 호출
     }
 
     private void Start()
     {
-        StartCoroutine("SpecialEvent", day* specialEventCoolTimeDay); // J : SpecialEvent 함수 호출
+        StartCoroutine("SpecialEvent", day * specialEventCoolTimeDay); // J : SpecialEvent 함수 호출
     }
 
-    
+
 
     // C : 플레이어가 Object에 대해 조사 시(플레이어의 액션 발생 시) 적절한 내용을 포함한 대화창 띄워주기
     public void Action(GameObject scanObj)
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
         playerTalk = true;                  // J : 플레이어가 대화하는 중에는 special event를 유예하도록 설정
         scanObject = scanObj;               // C : parameter로 들어온 스캔된 game object를 public 변수인 scanObject에 대입
         ObjectData objData = scanObject.GetComponent<ObjectData>();     // C : scanObject의 ObjectData instance 가져오기
-        
+
         if (aiAction.isAICollisionToPlayer) // K : ai와 충돌중이라면 학습장소에서도 대화하기를 우선으로 한다.
         {
             objData = GameObject.Find("AI").GetComponent<ObjectData>(); // K : ai에게 대화하기를 하기 위해 오브젝트를 AI로 가져온다.
@@ -67,8 +68,8 @@ public class GameManager : MonoBehaviour
         if (objData.id == 1000)      // C : objData가 AI  
         {
             // N : 
-            if (randomNum==1000) talkId = 2000;
-            else if(randomNum == 0) // C : 대화 첫 시작
+            if (randomNum == 1000) talkId = 2000;
+            else if (randomNum == 0) // C : 대화 첫 시작
             {
                 if (dayTalk > 0)
                 {
@@ -106,14 +107,18 @@ public class GameManager : MonoBehaviour
         // C : 조사한 object에 해당하는 talkData 중 talkIndex 위치의 string을 가져오기
         string talkData = talkManager.GetTalkData(id + randomNum, talkIndex);
 
-        if (talkData == null)           // C : 해당하는 id의 talkData string들을 모두 가져왔다면
+        if (talkData == null || !isSelectedAILearning)           // C : 해당하는 id의 talkData string들을 모두 가져왔다면
         {
             if (id >= 100 && id <= 400)     // C :
             {
-                learningManager.Learning(id);
+                if (isSelectedAILearning)
+                {
+                    learningManager.Learning(id);
+                }
             }
             else if (id == 1000) screenManager.HeartStudy(0);
 
+            isSelectedAILearning = true;
             playerTalk = false;         // J : 정상적으로 special event가 발동하도록 설정
             isTPShow = false;           // C : talkPanel의 show 상태 false로 저장
             talkIndex = 0;              // C : 다음 Talk()함수 사용을 위해 talkIndex를 0으로 초기화
@@ -121,6 +126,7 @@ public class GameManager : MonoBehaviour
             if (id == 1000) dayTalk++;  // N : 하루 대화 횟수 증가
             return;
         }
+
         if (id == 1000) talkText.text = talkData;       // C : talkPanel의 text를 talkData로 설정
         else alertText.text = talkData;                 // N : 알림창의 text를 talkData로 설정
 

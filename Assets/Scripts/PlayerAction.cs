@@ -128,9 +128,21 @@ public class PlayerAction : MonoBehaviour
             }
         }
 
-        
-        // C : 
-        for (int i = 0; i < addBookListG.Count; i++)
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (scanObject != null)
+            {
+                ObjectData objData = scanObject.GetComponent<ObjectData>();
+                if (objData.id >= 100 && objData.id <= 400)
+                {
+                    manager.isSelectedAILearning = false;
+                    manager.Action(scanObject);
+                }                    
+            }
+        }
+       
+            // C : 
+            for (int i = 0; i < addBookListG.Count; i++)
         {
             if (addBookListG[i].activeSelf == true)
             {

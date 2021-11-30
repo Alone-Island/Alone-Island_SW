@@ -8,12 +8,17 @@ public class SettingManager : MonoBehaviour
     public Slider slider;
     public AudioSource audio;
 
+    public GameObject On;
+    public GameObject Off;
+
     private GameObject setting;
 
     void Start()
     {
-        audio.volume = DataController.Instance.settingData.BGMSound;
-        slider.value = DataController.Instance.settingData.BGMSound;
+        float volume = DataController.Instance.settingData.BGMSound;
+        audio.volume = volume;
+        slider.value = volume;
+        SetSoundImage(volume);
     }
 
     void Update()
@@ -36,7 +41,26 @@ public class SettingManager : MonoBehaviour
 
     private void SoundSlider()
     {
-        audio.volume = slider.value;
-        DataController.Instance.settingData.BGMSound = slider.value;
+        float volume = slider.value;
+        audio.volume = volume;
+        DataController.Instance.settingData.BGMSound = volume;
+        SetSoundImage(volume);
     }
+
+    private void SetSoundImage(float volume)
+    {
+        if (volume > 0)
+        {
+            On.SetActive(true);
+            Off.SetActive(false);
+        }
+
+        else
+        {
+            On.SetActive(false);
+            Off.SetActive(true);
+        }
+            
+    }
+
 }

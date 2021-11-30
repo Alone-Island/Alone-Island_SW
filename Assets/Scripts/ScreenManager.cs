@@ -31,6 +31,7 @@ public class ScreenManager : MonoBehaviour
 
     public EndingManager endingManager;
     public GameManager gameManager;     // J : GameManager에서 하루가 몇초인지 가져옴
+    public SpecialEventManager specialManager;
     public SettingManager settingManager;
 
     public GameObject heartTextObject;      // C :
@@ -122,8 +123,8 @@ public class ScreenManager : MonoBehaviour
         if (day < 10) calender.text = "day " + "0" + day.ToString();
         else calender.text = "day " + day.ToString();
 
-        // N : 90일 이후
-        if (day > 90) endingManager.timeOutEnding();
+        if (day % gameManager.specialEventCoolTimeDay == 0)
+            specialManager.Action();
 
         if (day > 1)
         {
@@ -132,6 +133,9 @@ public class ScreenManager : MonoBehaviour
             happyStat.fCurrValue = happyStat.fCurrValue + heartLv.fCurrValue - 5;
             temperatureStat.fCurrValue = temperatureStat.fCurrValue + craftLv.fCurrValue - 10;
         }
+
+        // N : 90일 이후
+        if (day > 90) endingManager.timeOutEnding();
 
         // N : 엔딩 처리
         if (hungerStat.fCurrValue <= 0) endingManager.failHungry();

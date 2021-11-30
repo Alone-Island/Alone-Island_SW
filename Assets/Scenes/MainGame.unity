@@ -15485,11 +15485,13 @@ MonoBehaviour:
   talkManager: {fileID: 121161932}
   talkIndex: 0
   day: 10
+  specialEventCoolTimeDay: 10
   specialManager: {fileID: 488290411}
   learningManager: {fileID: 721096102}
   screenManager: {fileID: 1163355729}
   aiAction: {fileID: 793937239}
   playerTalk: 0
+  isSelectedAILearning: 1
   isEndingShow: 0
   isTheEnd: 0
   dayTalk: 0
@@ -15538,6 +15540,7 @@ MonoBehaviour:
   bookNum: 0
   endingManager: {fileID: 872728046}
   gameManager: {fileID: 1163355727}
+  specialManager: {fileID: 488290411}
   settingManager: {fileID: 960379046}
   heartTextObject: {fileID: 26451048}
   levelUp: {fileID: 1879157404}

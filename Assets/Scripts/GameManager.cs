@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public TalkManager talkManager; // C : GameManager에서 TalkManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public int talkIndex;           // C : 필요한 talkIndex를 저장하기 위한 변수 생성
     public int day = 20;            // J : 하루는 20초
-    private int specialEventCoolTimeDay = 10;
+    public int specialEventCoolTimeDay = 10;
 
     public SpecialEventManager specialManager; // J : GameManager에서 SpecialEventManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public LearningManager learningManager;     // C :
@@ -29,27 +29,6 @@ public class GameManager : MonoBehaviour
     public int dayTalk = 0;        // N : AI와의 대화 횟수
 
     public TextMeshProUGUI alertText;           // N : 알림창의 text
-
-    // J :IEnumerator 타입(WaitForSeconds)를 반환하는 함수
-    private IEnumerator SpecialEvent(float delayTime)
-    {
-        yield return new WaitForSeconds(delayTime); // J : delayTime을 기다린 후 재개
-        // J : 플레이어의 대화가 끝날 때까지 대기
-        while (true) {
-            if (!playerTalk) {              // J : player가 대화 중이 아니면
-                specialManager.Action();    // J : special event 발동
-                break;
-            }
-            yield return null;
-        }
-        StartCoroutine("SpecialEvent", day * specialEventCoolTimeDay); // J : SpecialEvent 함수 호출
-    }
-
-    private void Start()
-    {
-        StartCoroutine("SpecialEvent", day * specialEventCoolTimeDay); // J : SpecialEvent 함수 호출
-    }
-
 
 
     // C : 플레이어가 Object에 대해 조사 시(플레이어의 액션 발생 시) 적절한 내용을 포함한 대화창 띄워주기

@@ -7,6 +7,6 @@ using UnityEngine;
 [Serializable]  // J : 流纺拳等 Data
 public class SettingData
 {
-    public int BGMSound = 1;    // J : 家府 on/off
+    public float BGMSound = 1;    // J : 家府 on/off
     public int firstGame = 1;   // J : 霉 霸烙 咯何
 }

@@ -141,7 +141,7 @@ public class SpecialEventManager : MonoBehaviour
                                 endingManager.suddenEnding(3);  // 감전사 사망
                                 break;
                             case 3: // J : (나무가 쓰러져서 AI가 다쳤다. 어떻게 할까?)
-                                screenManager.dayAfter();       // J : 하루 바로 지나기
+                                screenManager.dayTime = 20;
                                 screenManager.HeartStudy(2); // N : 공감 2레벨 상승
                                 break;
                             case 4: // J : *추후 추가 예정*

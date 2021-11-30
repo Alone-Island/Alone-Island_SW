@@ -33,7 +33,10 @@ public class MenuScript : MonoBehaviour
     public void SelectStart()
     {
         Debug.Log("시작하기");
-        SceneManager.LoadScene("Synopsis"); // J : Synopsis scene으로 이동
+        if (DataController.Instance.settingData.firstGame == 1) // J : 첫게임이면
+            SceneManager.LoadScene("Synopsis"); // J : Synopsis scene으로 이동
+        else
+            SceneManager.LoadScene("MainGame"); // J : MainGame scene으로 이동
     }
 
     // J : 불러오기 버튼 onclick

@@ -25,20 +25,68 @@ public class SettingManager : MonoBehaviour
 
     void Update()
     {
-        SoundSlider();
+        SoundSlider();  
     }
 
+    // J : 설정 버튼 onclick
     public void SelectSetting()
     {
         setting.SetActive(true);// J : 설정창 활성화
         nowSetting = true;      // J : 시간 멈추기
     }
 
+    // J : 설정창 나가기 버튼 onclick
     public void SelectSettingQuit()
     {
         setting.SetActive(false);   // J : 설정창 비활성화
         nowSetting = false;         // J : 시간 재생
 
+    }
+
+    // J : 저장하기 버튼 onclick
+    public void SelectStore()
+    {
+        Debug.Log("저장하기");
+    }
+
+    // J : 메뉴로 돌아가기 버튼 onclick
+    public void SelectMenu()
+    {
+        Debug.Log("메뉴로 돌아가기");
+        SceneManager.LoadScene("GameMenu"); // J : 게임메뉴로 이동
+    }
+
+    // J : 게임 초기화 버튼 onclick
+    public void SelectReset()
+    {
+        Debug.Log("게임 초기화");
+        GameObject.Find("Windows").transform.Find("ResetAlert").gameObject.SetActive(true); // J : 게임 초기화 경고창 활성화
+    }
+
+    // J : 게임 초기화 yes 버튼 onclick
+    public void SelectResetYes()
+    {
+        Debug.Log("게임 초기화 O");        
+        GameObject.Find("Windows").transform.Find("ResetAlert").gameObject.SetActive(false);    // J : 게임 초기화 경고창 비활성화
+        SelectSettingQuit();    // J : 설정창 비활성화
+
+        DataController.Instance.DeleteAllData();    // J : 모든 데이터 파일(.json) 삭제
+        ResetSetting(); // J : 파일 삭제해도 남는 설정 수동으로 초기화
+    }
+
+    // J : 게임 초기화 no 버튼 onclick
+    public void SelectResetNo()
+    {
+        Debug.Log("게임 초기화 X");
+        GameObject.Find("Windows").transform.Find("ResetAlert").gameObject.SetActive(false);    // J : 게임 초기화 경고창 비활성화
+    }
+
+    // J : 설정 데이터 초기화
+    // J : SettingData를 삭제해도 설정창의 음량 조절 슬라이더값으로 인해 소리 데이터는 유지
+    // J : =>슬라이더값을 1로 세팅
+    private void ResetSetting()
+    {
+        slider.value = 1;
     }
 
     // J : 슬라이더의 값으로 음량 조절+설정 데이터에 저장
@@ -66,18 +114,5 @@ public class SettingManager : MonoBehaviour
             On.SetActive(false);
             Off.SetActive(true);
         }
-    }
-
-    // J : 저장하기 버튼 onclick
-    public void SelectStore()
-    {
-        Debug.Log("저장하기");
-    }
-
-    // J : 메뉴로 돌아가기 버튼 onclick
-    public void SelectMenu()
-    {
-        Debug.Log("메뉴로 돌아가기");
-        SceneManager.LoadScene("GameMenu");
     }
 }

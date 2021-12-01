@@ -14,7 +14,7 @@ public class SpecialEventManager : MonoBehaviour
     public int talkIndex;               // J : talkIndex를 저장하기 위한 변수
     public bool special = false;        // J : 스페셜 이벤트 진행중인지 여부
     public bool AItalk = false;         // J : AI가 스페셜 이벤트 대화를 하는지 여부 (선택지 선택 전)
-    public bool result = false;         // j : 결과 텍스트 창을 보여주는지 여부 (선택지 선택 후)
+    public bool result = false;         // J : 결과 텍스트 창을 보여주는지 여부 (선택지 선택 후)
     public TextMeshProUGUI selectText0, selectText1, selectText2;
     public Button selectButton0, selectButton1, selectButton2;
 

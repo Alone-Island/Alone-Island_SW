@@ -117,7 +117,7 @@ public class DataController : MonoBehaviour
         Debug.Log("엔딩 데이터 저장 완료");
     }
 
-    private void OnApplicationQuit()    // J : 앱 종료 시 데이터 저장
+    private void OnApplicationQuit()    // J : 프로그램 종료 시 데이터 저장
     {
         SaveSettingData();
         SaveEndingData();

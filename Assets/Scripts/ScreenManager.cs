@@ -123,6 +123,7 @@ public class ScreenManager : MonoBehaviour
         if (day < 10) calender.text = "day " + "0" + day.ToString();
         else calender.text = "day " + day.ToString();
 
+        // J : 스페셜 이벤트 주기(15일)마다 스페셜 이벤트 함수 실행
         if (day % gameManager.specialEventCoolTimeDay == 0)
             specialManager.Action();
 

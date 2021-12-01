@@ -5528,6 +5528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talkManager: {fileID: 121161932}
+  gameManager: {fileID: 1163355727}
   screenManager: {fileID: 1163355729}
   endingManager: {fileID: 872728046}
   talkPanel: {fileID: 1384437669}

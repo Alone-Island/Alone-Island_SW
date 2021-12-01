@@ -143,8 +143,9 @@ public class ScreenManager : MonoBehaviour
         if (day < 10) calender.text = "day " + "0" + day.ToString();
         else calender.text = "day " + day.ToString();
 
+        // J : 스페셜 이벤트 주기마다 스페셜 이벤트 발동
         if (day % gameManager.specialEventCoolTimeDay == 0)
-            specialManager.Action();
+            specialManager.StartCoroutine("Check");
 
         if (day > 1)
         {

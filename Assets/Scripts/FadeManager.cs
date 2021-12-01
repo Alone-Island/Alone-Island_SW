@@ -25,5 +25,6 @@ public class FadeManager : MonoBehaviour
             yield return new WaitForSeconds(0.01f); // J : 0.01초마다 밝아지게->1초 후 완전히 밝아짐
             panel.color = new Color(0, 0, 0, fadeCount);    // J : 알파값 조정
         }
+        panel.gameObject.SetActive(false);  // J : 페이드인 끝나면 비활성화
     }
 }

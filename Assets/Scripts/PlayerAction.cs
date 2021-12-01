@@ -124,7 +124,7 @@ public class PlayerAction : MonoBehaviour
             // N : 나중에 버튼 만들어서 클릭으로 처리하면 좋을 것 같음.
             if (manager.isTheEnd)
             {
-                SceneManager.LoadScene("EndingCredits");
+                SceneManager.LoadScene("GameMenu"); // K : 배드엔딩이 끝나고 바로 게임 메뉴로 돌아갑니다., 해피엔딩은 textmanager에서 처리함
             }
         }
 

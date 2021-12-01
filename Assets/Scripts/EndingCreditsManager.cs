@@ -14,7 +14,7 @@ public class EndingCreditsManager : MonoBehaviour
     void Update()
     {
         Vector2 pos = transform.position;
-        pos.y += 0.015f; // K : 엔딩 크레딧이 올라가는 속도 입니다.
+        pos.y += 0.05f; // K : 엔딩 크레딧이 올라가는 속도 입니다.
         transform.position = pos;
 
         if(transform.position.y > 15) // K : 엔디 크레딧의 포지션이 15보다 커지면, 

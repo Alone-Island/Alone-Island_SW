@@ -12,13 +12,13 @@ public class SettingManager : MonoBehaviour
     public GameObject On;       // J : 소리 on Image
     public GameObject Off;      // J : 소리 off Image
 
-    private GameObject setting; // J : 설정창
+    public GameObject setting;  // J : 설정창
     public bool nowSetting = false;
 
     void Start()
     {
         float volume = DataController.Instance.settingData.BGMSound;    // J : 설정 데이터의 음량 가져오기
-        bgm.volume = volume;  // J : 설정 데이터의 음량으로 게임 시작 시 음량 초기값 세팅
+        bgm.volume = volume;    // J : 설정 데이터의 음량으로 게임 시작 시 음량 초기값 세팅
         slider.value = volume;  // J : 설정 데이터의 음량으로 음량 조절 슬라이더의 초기값 세팅
         SetSoundImage(volume);  // J : 초기값으로 소리 이미지 세팅
     }
@@ -30,7 +30,6 @@ public class SettingManager : MonoBehaviour
 
     public void SelectSetting()
     {
-        setting = GameObject.Find("Screen").transform.Find("Setting").gameObject;
         setting.SetActive(true);// J : 설정창 활성화
         nowSetting = true;      // J : 시간 멈추기
     }

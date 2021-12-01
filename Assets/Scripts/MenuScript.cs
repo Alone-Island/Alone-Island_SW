@@ -12,22 +12,11 @@ public class MenuScript : MonoBehaviour
     public GameObject BGM;          // J : 배경음악 on/off를 위해 BGM object 가져옴
     public GameObject onImage;      // J : BGM on 이미지
     public GameObject offImage;     // J : BGM off 이미지
-    AudioSource audioSource;        // J : BGM
 
     public GameObject endingCards;  // J : Scroll View->Viewport->Content
     public Sprite badCard;
     public Sprite happyCard;
 
-    private void Start()
-    {
-        audioSource = BGM.GetComponent<AudioSource>();
-        // J : 게임 데이터에서 가져와 초기 세팅
-        if (DataController.Instance.settingData.BGMSound == 1)
-            audioPlay();
-
-        else if (DataController.Instance.settingData.BGMSound == 0)
-            audioStop();
-    }
 
     // J : 시작하기 버튼 onclick
     public void SelectStart()
@@ -172,38 +161,5 @@ public class MenuScript : MonoBehaviour
     {
         Debug.Log("게임방법 나가기");
         gameRule.SetActive(false);  // J : 게임방법창 비활성화
-    }
-
-    // J : 오디오 버튼 onclick
-    public void SelectAudio()
-    {
-        if (DataController.Instance.settingData.BGMSound == 1)   // J : BGM 재생중이면 off
-        {
-            Debug.Log("BGM off");
-            audioStop();
-            DataController.Instance.settingData.BGMSound = 0;
-        }
-        else        // J : BGM 재생중이면 on
-        {
-            Debug.Log("BGM on");
-            audioPlay();
-            DataController.Instance.settingData.BGMSound = 1;
-        }
-    }
-
-    private void audioPlay()
-    {
-        audioSource.Play();     // J : BGM on
-        // J : on Image 보이게
-        onImage.SetActive(true);
-        offImage.SetActive(false);
-    }
-
-    private void audioStop()
-    {
-        audioSource.Stop();     // J : BGM off
-        // J : off Image 보이게
-        onImage.SetActive(false);
-        offImage.SetActive(true);
     }
 }

@@ -11210,6 +11210,7 @@ MonoBehaviour:
   bgm: {fileID: 483869586}
   On: {fileID: 502949840}
   Off: {fileID: 778919268}
+  setting: {fileID: 1275107941}
   nowSetting: 0
 --- !u!4 &960379047
 Transform:

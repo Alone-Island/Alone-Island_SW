@@ -11207,7 +11207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 517355824}
-  audio: {fileID: 483869586}
+  bgm: {fileID: 483869586}
   On: {fileID: 502949840}
   Off: {fileID: 778919268}
   nowSetting: 0

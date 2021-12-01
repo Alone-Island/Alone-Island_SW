@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class SettingManager : MonoBehaviour
 {
     public Slider slider;       // J : 음량 조절 슬라이더
-    public AudioSource audio;   // J : 배경음악 component
+    public AudioSource bgm;     // J : 배경음악 component
 
     public GameObject On;       // J : 소리 on Image
     public GameObject Off;      // J : 소리 off Image
@@ -18,7 +18,7 @@ public class SettingManager : MonoBehaviour
     void Start()
     {
         float volume = DataController.Instance.settingData.BGMSound;    // J : 설정 데이터의 음량 가져오기
-        audio.volume = volume;  // J : 설정 데이터의 음량으로 게임 시작 시 음량 초기값 세팅
+        bgm.volume = volume;  // J : 설정 데이터의 음량으로 게임 시작 시 음량 초기값 세팅
         slider.value = volume;  // J : 설정 데이터의 음량으로 음량 조절 슬라이더의 초기값 세팅
         SetSoundImage(volume);  // J : 초기값으로 소리 이미지 세팅
     }
@@ -46,7 +46,7 @@ public class SettingManager : MonoBehaviour
     private void SoundSlider()
     {
         float volume = slider.value;    // J : 슬라이더의 값 가져오기
-        audio.volume = volume;  // J : 음량을 슬라이더의 값으로 세팅
+        bgm.volume = volume;  // J : 음량을 슬라이더의 값으로 세팅
         DataController.Instance.settingData.BGMSound = volume;  // J : 설정 데이터에 저장
         SetSoundImage(volume);  // J : 음량에 맞게 소리 이미지 세팅
     }

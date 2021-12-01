@@ -80,7 +80,7 @@ public class EndingManager : MonoBehaviour
             case 4: // J : Bad Ending (¸äµÅÁö)
                 Debug.Log("¸äµÅÁö");
                 DataController.Instance.endingData.pig = 1;
-                panel.transform.Find("Bad-Pi").gameObject.SetActive(true);
+                panel.transform.Find("Bad-Pig").gameObject.SetActive(true);
                 break;
             case 5: // J : Bad Ending (¾²³ª¹Ì)
                 Debug.Log("¾²³ª¹Ì");

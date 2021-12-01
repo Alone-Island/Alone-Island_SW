@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI alertText;           // N : 알림창의 text
 
-
+ 
     // C : 플레이어가 Object에 대해 조사 시(플레이어의 액션 발생 시) 적절한 내용을 포함한 대화창 띄워주기
     public void Action(GameObject scanObj)
     {

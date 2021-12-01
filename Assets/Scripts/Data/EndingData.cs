@@ -10,4 +10,6 @@ public class EndingData
     public int hungry, lonely, cold = 0;                                // J : human 스탯에 따른 배드엔딩
     public int poisonBerry, error, electric, pig, storm, space = 0;     // J : 스페셜 이벤트 엔딩
     public int timeOut, two, AITown, people = 0;                        // J : 해피엔딩
+
+    public int currentEndingCode = 0;
 }

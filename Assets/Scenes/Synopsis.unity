@@ -219,6 +219,103 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172447856}
   m_CullTransparentMesh: 1
+--- !u!1 &226748079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 226748082}
+  - component: {fileID: 226748081}
+  - component: {fileID: 226748080}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &226748080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226748079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb614487c3db66438e59b0817cc9ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hungerStat: {fileID: 0}
+  happyStat: {fileID: 0}
+  temperatureStat: {fileID: 0}
+  dangerStat: {fileID: 0}
+  farmLv: {fileID: 0}
+  houseLv: {fileID: 0}
+  craftLv: {fileID: 0}
+  engineerLv: {fileID: 0}
+  heartLv: {fileID: 0}
+  learningManager: {fileID: 0}
+  learningTime: {fileID: 0}
+  learningTitle: {fileID: 0}
+  dayTime: 0
+  calender: {fileID: 0}
+  book: {fileID: 0}
+  bookNum: 0
+  endingManager: {fileID: 0}
+  gameManager: {fileID: 226748081}
+  specialManager: {fileID: 0}
+  settingManager: {fileID: 0}
+  heartTextObject: {fileID: 0}
+  levelUp: {fileID: 0}
+  levelDown: {fileID: 0}
+--- !u!114 &226748081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226748079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d5ab8df5e3d664290edd014ae3eaee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  talkText: {fileID: 0}
+  scanObject: {fileID: 0}
+  talkPanel: {fileID: 0}
+  isTPShow: 0
+  talkManager: {fileID: 0}
+  talkIndex: 0
+  day: 10
+  specialEventCoolTimeDay: 10
+  specialManager: {fileID: 0}
+  learningManager: {fileID: 0}
+  screenManager: {fileID: 226748080}
+  aiAction: {fileID: 0}
+  playerTalk: 0
+  isSelectedAILearning: 1
+  isEndingShow: 0
+  isTheEnd: 0
+  dayTalk: 0
+  alertText: {fileID: 0}
+--- !u!4 &226748082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226748079}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.962939, y: 51.96027, z: -5.5411835}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &427207273
 GameObject:
   m_ObjectHideFlags: 0
@@ -2747,6 +2844,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867516068}
   m_CullTransparentMesh: 1
+--- !u!1 &1997346383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1997346385}
+  - component: {fileID: 1997346384}
+  m_Layer: 0
+  m_Name: EndingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1997346384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997346383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2802159b269c07541b440ed508a3d864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 226748081}
+  panel: {fileID: 1225953248}
+--- !u!4 &1997346385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997346383}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2004241321
 GameObject:
   m_ObjectHideFlags: 0
@@ -3096,6 +3238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialog: {fileID: 1179185492}
+  manager: {fileID: 226748081}
+  endingManager: {fileID: 1997346384}
   fullText: []
   isTyping: 1
 --- !u!4 &2139573813

@@ -21,7 +21,7 @@ public class ScreenManager : MonoBehaviour
     public TextMeshProUGUI learningTime;
     public TextMeshProUGUI learningTitle;
 
-    private int day = 0; // N : 날짜
+    private int day = 89; // N : 날짜
     public int dayTime = 0; // N : 하루의 시간
 
     //private int bookNum = 0; // N : 책 개수
@@ -68,7 +68,7 @@ public class ScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // K :learningTime
+        // K :learningTime 
         if(learningManager.isAILearning)
         {
             learningTime.text = learningManager.learningTime.ToString();

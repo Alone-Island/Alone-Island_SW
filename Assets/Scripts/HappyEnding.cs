@@ -164,7 +164,7 @@ public class HappyEnding : MonoBehaviour
                 panel.transform.Find("Happy-Two").gameObject.SetActive(true);
                 break;
             case 103:
-                panel.transform.Find("Happy-AI").gameObject.SetActive(true);
+                panel.transform.Find("Happy-AITown").gameObject.SetActive(true);
                 break;
             case 104:
                 panel.transform.Find("Happy-People").gameObject.SetActive(true);

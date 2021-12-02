@@ -39,7 +39,6 @@ public class FadeManager : MonoBehaviour
         float fadeCount = 0;    // J : 초기 알파값(검은 화면)
         while (true)    // J : 알파값이 최대(1)가 될 때까지 반복
         {
-            Debug.Log("FadeOut ing~");
             if (fadeCount >= 1) // J : 페이드아웃이 끝나면 함수 실행
             {
                 func();

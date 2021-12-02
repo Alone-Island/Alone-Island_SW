@@ -162,4 +162,11 @@ public class MenuScript : MonoBehaviour
         Debug.Log("게임방법 나가기");
         gameRule.SetActive(false);  // J : 게임방법창 비활성화
     }
+
+    // J : 게임종료 버튼 onclick
+    public void SelectGameQuit()
+    {
+        Debug.Log("게임종료");
+        Application.Quit(); // J : 프로그램 종료
+    }
 }

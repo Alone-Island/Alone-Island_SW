@@ -10122,6 +10122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1163355727}
+  fadeManager: {fileID: 1709032728}
   panel: {fileID: 1175649851}
 --- !u!4 &872728047
 Transform:

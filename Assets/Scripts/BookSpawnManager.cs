@@ -20,7 +20,7 @@ public class BookSpawnManager : MonoBehaviour
 
     public GameManager gameManager;
 
-    int count = 20;                  // J : 찍어낼 책 개수
+    int count = 5;                  // J : 찍어낼 책 개수
     private BoxCollider2D area;     // J : 박스 콜라이더의 사이즈 가져오기 위한 변수
     private List<GameObject> bookList = new List<GameObject>();
 

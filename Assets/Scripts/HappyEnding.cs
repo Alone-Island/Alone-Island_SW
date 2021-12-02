@@ -12,7 +12,7 @@ public class HappyEnding : MonoBehaviour
     [SerializeField] public TextMeshProUGUI dialog; // K : text 오브젝트를 받아오기 위한 변수입니다. > using TMPro;          
     public string[] fullText;
 
-    private int endingCode = 101;//DataController.Instance.endingData.currentEndingCode;
+    private int endingCode = DataController.Instance.endingData.currentEndingCode;
 
     // K : synopsys의 텍스트들(여러 문장)의 배열입니다.
     
@@ -66,7 +66,6 @@ public class HappyEnding : MonoBehaviour
                 break;
             default:
                 Debug.Log("해피에딩 에러");
-                fullText = happyPeopleFullText;
                 break;
         }
         StartCoroutine("TypingAction", 0);          // K : 스크립트의 시작과 동시에 시놉시스를 타이핑을 시작하는 코드입니다.

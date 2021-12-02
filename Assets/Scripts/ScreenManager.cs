@@ -359,7 +359,7 @@ public class ScreenManager : MonoBehaviour
             currColor.a = 0;
             StartCoroutine("fadeIn");
         }
-        else if (heartLv.fCurrValue == 6)
+        else if (heartLv.fCurrValue == 15)
         {
             // N : ·¹º§ 8-14
             preMap = GameObject.Find("plant").transform.Find("Lv8-14");

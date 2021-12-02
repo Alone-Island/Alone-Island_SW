@@ -18,10 +18,51 @@ public class LearningManager : MonoBehaviour
     public GameObject levelUp;            // C :
     private float levelUpEffectTime = 0;
 
+    private int learningId;
+
     public void CompleateLearning() // K : 
     {
         isAILearning = false;
         learningTime = 5;
+
+        switch (learningId)
+        {
+            case 100:                       // C :
+                screenManager.FarmStudy();
+
+                // C : levelUp animation 실행하기
+                levelUp.transform.SetParent(farmTextObject.transform);
+                levelUp.SetActive(true);
+
+                break;
+            case 200:                       // C :               
+                screenManager.HouseStudy();
+               
+                // C : levelUp animation 실행하기
+                levelUp.transform.SetParent(houseTextObject.transform);
+                levelUp.SetActive(true);
+
+                break;
+            case 300:                       // C :
+                screenManager.CraftStudy();
+
+                // C : levelUp animation 실행하기
+                levelUp.transform.SetParent(craftTextObject.transform);
+                levelUp.SetActive(true);
+
+                break;
+            case 400:                       // C :
+                screenManager.EngineerStudy();
+
+                // C : levelUp animation 실행하기
+                levelUp.transform.SetParent(engineerTextObject.transform);
+                levelUp.SetActive(true);
+
+                break;
+            default:
+                Debug.Log("fail learning level up");
+                break;
+        }
     }
     
     public void WaitingLearning() // K : AI 학습 시간을 기다리는 함수
@@ -38,59 +79,39 @@ public class LearningManager : MonoBehaviour
 
     public void Learning(int id)            // C :
     {
+        learningId = id;
         if (!isAILearning && !aiAction.isAICollisionToPlayer) {
-            switch (id)
+            switch (learningId)
             {
                 case 100:                       // C :
-                    Debug.Log(id);
+                    Debug.Log(learningId);
                     learningTime = initLearningTime + screenManager.farmLv.fCurrValue;
-                    screenManager.FarmStudy();
                     aiAction.GoToLearningPlace(-7, -7);
                     isAILearning = true;                                        
-                    Invoke("WaitingLearning", 1);
-
-                    // C : levelUp animation 실행하기
-                    levelUp.transform.SetParent(farmTextObject.transform);
-                    levelUp.SetActive(true);
-
+                    Invoke("WaitingLearning", 1);               
                     break;
                 case 200:                       // C :
-                    Debug.Log(id);
+                    Debug.Log(learningId);
                     learningTime = initLearningTime + screenManager.houseLv.fCurrValue;
-                    screenManager.HouseStudy();
                     aiAction.GoToLearningPlace(10, 9);
                     isAILearning = true;
                     Invoke("WaitingLearning", 1);
 
-                    // C : levelUp animation 실행하기
-                    levelUp.transform.SetParent(houseTextObject.transform);
-                    levelUp.SetActive(true);
-
                     break;
                 case 300:                       // C :
-                    Debug.Log(id);
+                    Debug.Log(learningId);
                     learningTime = initLearningTime + screenManager.craftLv.fCurrValue;
-                    screenManager.CraftStudy();
                     aiAction.GoToLearningPlace(5, 0);
                     isAILearning = true;
                     Invoke("WaitingLearning", 1);
 
-                    // C : levelUp animation 실행하기
-                    levelUp.transform.SetParent(craftTextObject.transform);
-                    levelUp.SetActive(true);
-
                     break;
                 case 400:                       // C :
-                    Debug.Log(id);
+                    Debug.Log(learningId);
                     learningTime = initLearningTime + screenManager.engineerLv.fCurrValue;
-                    screenManager.EngineerStudy();
                     aiAction.GoToLearningPlace(-5, 5);
                     isAILearning = true;
                     Invoke("WaitingLearning", 1);
-
-                    // C : levelUp animation 실행하기
-                    levelUp.transform.SetParent(engineerTextObject.transform);
-                    levelUp.SetActive(true);
 
                     break;
                 default:

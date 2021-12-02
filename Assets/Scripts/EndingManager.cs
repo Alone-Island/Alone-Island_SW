@@ -6,6 +6,7 @@ using UnityEngine;
 public class EndingManager : MonoBehaviour
 {
     public GameManager manager;
+    public FadeManager fadeManager;
     public GameObject panel;            // N : 화면 어둡게
 
     // N : 스페이스바 입력 받는 시간을 주기 위해
@@ -104,7 +105,7 @@ public class EndingManager : MonoBehaviour
         DataController.Instance.endingData.timeOut = 1;
         DataController.Instance.endingData.currentEndingCode = 101;
         Debug.Log("그냥 저냥 살았습니당 ~~");
-        SceneManager.LoadScene("HappyEnding");
+        fadeManager.FadeOutStart(LoadHaapyScene); // J : 페이드아웃
     }
 
     public void successTwo()
@@ -112,7 +113,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("human과 ai는 단둘이 행복하게 살았답니다");
         DataController.Instance.endingData.two = 1;
         DataController.Instance.endingData.currentEndingCode = 102;
-        SceneManager.LoadScene("HappyEnding");
+        fadeManager.FadeOutStart(LoadHaapyScene); // J : 페이드아웃
     }
 
     public void successAI()
@@ -120,7 +121,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("다른 ai를 만들어내서 ai들과 함께 살게 됨");
         DataController.Instance.endingData.AITown = 1;
         DataController.Instance.endingData.currentEndingCode = 103;
-        SceneManager.LoadScene("HappyEnding");
+        fadeManager.FadeOutStart(LoadHaapyScene); // J : 페이드아웃
     }
 
     public void successPeople()
@@ -128,6 +129,12 @@ public class EndingManager : MonoBehaviour
         Debug.Log("통신기를 만들어서 다른 생존자들을 만남");
         DataController.Instance.endingData.people = 1;
         DataController.Instance.endingData.currentEndingCode = 104;
+        fadeManager.FadeOutStart(LoadHaapyScene); // J : 페이드아웃
+    }
+
+    // J : 페이드아웃 끝나면 호출
+    public void LoadHaapyScene()
+    {
         SceneManager.LoadScene("HappyEnding");
     }
 }

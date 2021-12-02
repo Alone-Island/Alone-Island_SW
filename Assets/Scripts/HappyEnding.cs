@@ -46,6 +46,7 @@ public class HappyEnding : MonoBehaviour
     public bool isTyping = true; // K : 현재 글자가 화면에 타이핑되고 있는지 확인하기 위한 변수입니다.
     bool isSkipPart = false;
     bool isEnd = false;
+    bool isEndingCardShow = false;
 
     void Start()
     {
@@ -75,7 +76,7 @@ public class HappyEnding : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))    // K : 스페이스바를 눌렀을 때
         {
-            if (!isEnd)
+            if (!isEndingCardShow)
             {
                 if (!isTyping)  // K : 현재 글자가 화면에 타이핑 되고 있지 않을 때
                 {
@@ -87,7 +88,8 @@ public class HappyEnding : MonoBehaviour
                     // K : 스페이스바를 눌렀을 때 현재 글자가 화면에 타이핑 되고 있다면, 부분 스킵을 위해 isSkipPart true로 변경하는 코드
                     isSkipPart = true;
                 }
-            } else
+            } 
+            if (isEnd)
             {
                 SceneManager.LoadScene("EndingCredits");
             }
@@ -138,7 +140,7 @@ public class HappyEnding : MonoBehaviour
 
     // J : 모든 엔딩의 공통 코드
     private void ending()
-    {
+    {        
         panel.SetActive(true);
         DataController.Instance.settingData.firstGame = 0;
     }
@@ -152,6 +154,7 @@ public class HappyEnding : MonoBehaviour
         subText = "";
         isTyping = false;
         isSkipPart = false;
+        isEndingCardShow = true;
         ending();
         switch (endingCode)
         {

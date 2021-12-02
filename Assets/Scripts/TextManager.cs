@@ -13,8 +13,6 @@ public class TextManager : MonoBehaviour
     public EndingManager endingManager;
     public string[] fullText;
 
-    private int endingCode = DataController.Instance.endingData.currentEndingCode;
-
     // K : synopsys의 텍스트들(여러 문장)의 배열입니다.
     private string[] synopsysFullText = { 
         "나는 로봇공학자 K...\nAI 로봇을 개발하기 위해\n연구실에서만 지낸 시간이 수년... ", 
@@ -25,30 +23,6 @@ public class TextManager : MonoBehaviour
         "하지만 나에게는 NJ-C가 있어!\n아직 깡통에 불과하는 이 로봇을 학습시켜서\n이 섬에서 살아남아 보자! "
     };
 
-    private string[] happySosoLifeFullText = {
-        "벌써 90일이 지났어요.",
-        "이런 하루하루도 나쁘지는 않네요.",
-        "앞으로도 잘 지내봐요. 박사님."
-    };    
-    private string[] happyAIFullText = {
-        "박사님! 박사님이 가르칠 로봇들이 잔뜩 생겼어요.",
-        "제 공학 능력이 이렇게 성장했네요.",
-        "앞으로 저희가 다같이 박사님을 도울게요.",
-        "박사박사님!!님!! 박박사님!사님! 박사님!!"
-    };    
-    private string[] happyPeopleFullText = {
-        "박사님!! \n제가 통신기를 만들었어요!!!",
-        "사실 매일 조금씩 만들고 있었는데... \n드디어 완성이에요!",
-        "지금 당장 통신기를 사용해봐요!!",
-        "치...지직....치지지..직...여기는...",
-    };    
-    private string[] happyTwoFullText = {
-        "박사님! 제가 열심히 꽃을 심었더니 우리 섬이 예뻐졌어요!",
-        "박사님과의 하루하루가 정말 즐거워요",
-        "박사님도 그러셨으면 좋겠어요"
-    };
-
-
     string subText; // K : synopsys의 텍스트(한 문장) 일부를 저장하기 위한 변수입니다.
     int currentPoint = 0; // K : synopsysFullText에서 현재 포인터가 어디있는지 저장하기 위한 변수입니다.
 
@@ -56,32 +30,8 @@ public class TextManager : MonoBehaviour
     bool isSkipPart = false;
 
     void Start() {
-        if (endingCode == 0)             // K : 엔딩 코드가 0인 경우가 초기화 상태이므로 게임 시작시 시놉시스 우선
-        {
-            fullText = synopsysFullText;
-            
-        }       
-        else if(endingCode > 100)                                            // K : 엔딩코드가 100보다 큰 경우 해피엔딩
-        {
-            switch (endingCode)
-            {
-                case 101:
-                    fullText = happySosoLifeFullText;
-                    break;
-                case 102:
-                    fullText = happyTwoFullText;
-                    break;
-                case 103:
-                    fullText = happyAIFullText;
-                    break;
-                case 104:
-                    fullText = happyPeopleFullText;
-                    break;
-                default:
-                    Debug.Log("해피에딩 에러");
-                    break;
-            }
-        }
+        fullText = synopsysFullText;
+
         StartCoroutine("TypingAction", 0);          // K : 스크립트의 시작과 동시에 시놉시스를 타이핑을 시작하는 코드입니다.
     }
     
@@ -90,29 +40,16 @@ public class TextManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))    // K : 스페이스바를 눌렀을 때
         {
 
-            if (manager.isTheEnd)
+            if (!isTyping)  // K : 현재 글자가 화면에 타이핑 되고 있지 않을 때
             {
-                if (endingCode < 100) // 배드에딩코드 < 100, 해피엔딩시 > 100
-                {
-                    SceneManager.LoadScene("GameMenu"); // K : 배드엔딩이 끝나고 바로 게임 메뉴로 돌아갑니다.
-                }
-                else
-                {
-                    SceneManager.LoadScene("EndingCredits"); // K : 해피엔딩시에만 엔딩크레딧을 보여줌
-                }
-            } else
+                // K : 스페이스바를 눌렀을 때 현재 글자가 화면에 타이핑 되고 있지 않는다면, 다음 문장 타이핑하기 위한 코드
+                StartCoroutine("TypingAction", 0);
+            }
+            else
             {
-                if (!isTyping)  // K : 현재 글자가 화면에 타이핑 되고 있지 않을 때
-                {
-                    // K : 스페이스바를 눌렀을 때 현재 글자가 화면에 타이핑 되고 있지 않는다면, 다음 문장 타이핑하기 위한 코드
-                    StartCoroutine("TypingAction", 0);
-                }
-                else
-                {
-                    // K : 스페이스바를 눌렀을 때 현재 글자가 화면에 타이핑 되고 있다면, 부분 스킵을 위해 isSkipPart true로 변경하는 코드
-                    isSkipPart = true;
-                }
-            }            
+                // K : 스페이스바를 눌렀을 때 현재 글자가 화면에 타이핑 되고 있다면, 부분 스킵을 위해 isSkipPart true로 변경하는 코드
+                isSkipPart = true;
+            }
         }
     }
 
@@ -125,26 +62,13 @@ public class TextManager : MonoBehaviour
         isTyping = true;
         isSkipPart = false;
 
-        if (endingCode < 100)
-        {
-            SceneManager.LoadScene("MainGame"); // K : 시놉시스가 끝나고 게임 신으로 가게 하는 함수입니다. > using UnityEngine.SceneManagement;
-        }
-        else
-        {
-            endingManager.ShowHappyEndingCard(endingCode); // K : 해피엔딩 카드가 보이게 하는 함수를 호출합니다.
-        }        
+        SceneManager.LoadScene("MainGame"); // K : 시놉시스가 끝나고 게임 신으로 가게 하는 함수입니다. > using UnityEngine.SceneManagement
     }
 
     IEnumerator TypingAction() {
         if (currentPoint >= fullText.Length)    // K : 모든 텍스트들을 타이핑 했을 때
         {
-            if (endingCode < 100)
-            {
-                Debug.Log("Game Start"); // K : 모든 텍스트를 출력 완료, 게임 플레이 신으로 이동
-            } else
-            {
-                Debug.Log("Game Happy Ending Credits");
-            }
+            Debug.Log("Game Start"); // K : 모든 텍스트를 출력 완료, 게임 플레이 신으로 이동
             GoToGameScreen();
         }
 

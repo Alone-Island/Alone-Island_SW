@@ -96,31 +96,7 @@ public class EndingManager : MonoBehaviour
         Invoke("TheEnd", 2.0f);
     }
 
-    // K : 해피 엔딩 endingCode 101-104
-    public void ShowHappyEndingCard(int endingCode)
-    {
-        ending();
-        switch (endingCode)
-        {
-            case 101:
-                panel.transform.Find("Happy-SosoLife").gameObject.SetActive(true);
-                break;
-            case 102:
-                panel.transform.Find("Happy-Two").gameObject.SetActive(true);
-                break;
-            case 103:
-                panel.transform.Find("Happy-AI").gameObject.SetActive(true);
-                break;
-            case 104:
-                panel.transform.Find("Happy-People").gameObject.SetActive(true);
-                break;
-            default:
-                Debug.Log("해피에딩 에러");
-                break;
-        }
-        
-        Invoke("TheEnd", 2.0f);
-    }
+
 
     // K : 해피 엔딩
     public void timeOutEnding()
@@ -128,7 +104,7 @@ public class EndingManager : MonoBehaviour
         DataController.Instance.endingData.timeOut = 1;
         DataController.Instance.endingData.currentEndingCode = 101;
         Debug.Log("그냥 저냥 살았습니당 ~~");
-        SceneManager.LoadScene("Synopsis");
+        SceneManager.LoadScene("HappyEnding");
     }
 
     public void successTwo()
@@ -136,7 +112,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("human과 ai는 단둘이 행복하게 살았답니다");
         DataController.Instance.endingData.two = 1;
         DataController.Instance.endingData.currentEndingCode = 102;
-        SceneManager.LoadScene("Synopsis");
+        SceneManager.LoadScene("HappyEnding");
     }
 
     public void successAI()
@@ -144,7 +120,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("다른 ai를 만들어내서 ai들과 함께 살게 됨");
         DataController.Instance.endingData.AITown = 1;
         DataController.Instance.endingData.currentEndingCode = 103;
-        SceneManager.LoadScene("Synopsis");
+        SceneManager.LoadScene("HappyEnding");
     }
 
     public void successPeople()
@@ -152,7 +128,7 @@ public class EndingManager : MonoBehaviour
         Debug.Log("통신기를 만들어서 다른 생존자들을 만남");
         DataController.Instance.endingData.people = 1;
         DataController.Instance.endingData.currentEndingCode = 104;
-        SceneManager.LoadScene("Synopsis");
+        SceneManager.LoadScene("HappyEnding");
     }
 }
 

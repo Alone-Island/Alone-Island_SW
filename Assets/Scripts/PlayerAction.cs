@@ -46,32 +46,20 @@ public class PlayerAction : MonoBehaviour
     void Update()
     {
         // C : 입력된 수평/수직 이동을 대입 (-1, 0, 1)
-        // C : GameManager의 isTPShow를 사용하여 talkPanel이 보여지고 있을 때는 플레이어의 이동을 제한
-        h = manager.isTPShow ? 0 : Input.GetAxisRaw("Horizontal");
-        v = manager.isTPShow ? 0 : Input.GetAxisRaw("Vertical");
-        // J : SpecialEventManager의 special을 사용하여 스페셜 이벤트 진행 중인 경우 플레이어의 이동을 제한
-        h = specialManager.special ? 0 : Input.GetAxisRaw("Horizontal");
-        v = specialManager.special ? 0 : Input.GetAxisRaw("Vertical");
+        // C : GameManager의 isTPShow를 사용하여 talkPanel이 보여지고 있을 때
+        // J : or SpecialEventManager의 special을 사용하여 스페셜 이벤트 진행 중인 경우 플레이어의 이동을 제한
         // N :
-        h = manager.isEndingShow ? 0 : Input.GetAxisRaw("Horizontal");
-        v = manager.isEndingShow ? 0 : Input.GetAxisRaw("Vertical");
+        h = manager.isTPShow || specialManager.special || manager.isEndingShow ? 0 : Input.GetAxisRaw("Horizontal");
+        v = manager.isTPShow || specialManager.special || manager.isEndingShow ? 0 : Input.GetAxisRaw("Vertical");
 
         // C : 키보드 입력(down, up)이 horizontal인지 vertical인지 확인
-        // C : GameManager의 isTPShow를 사용하여 talkPanel이 보여지고 있을 때는 플레이어의 이동을 제한
-        bool hDown = manager.isTPShow ? false : Input.GetButtonDown("Horizontal");
-        bool hUp = manager.isTPShow ? false : Input.GetButtonUp("Horizontal");
-        bool vDown = manager.isTPShow ? false : Input.GetButtonDown("Vertical");
-        bool vUp = manager.isTPShow ? false : Input.GetButtonUp("Vertical");
-        // J : SpecialEventManager의 special을 사용하여 스페셜 이벤트 진행 중인 경우 플레이어의 이동을 제한
-        hDown = specialManager.special ? false : Input.GetButtonDown("Horizontal");
-        hUp = specialManager.special ? false : Input.GetButtonUp("Horizontal");
-        vDown = specialManager.special ? false : Input.GetButtonDown("Vertical");
-        vUp = specialManager.special ? false : Input.GetButtonUp("Vertical");
-        //N :
-        hDown = manager.isEndingShow ? false : Input.GetButtonDown("Horizontal");
-        hUp = manager.isEndingShow ? false : Input.GetButtonUp("Horizontal");
-        vDown = manager.isEndingShow ? false : Input.GetButtonDown("Vertical");
-        vUp = manager.isEndingShow ? false : Input.GetButtonUp("Vertical");
+        // C : GameManager의 isTPShow를 사용하여 talkPanel이 보여지고 있을 때
+        // J : or SpecialEventManager의 special을 사용하여 스페셜 이벤트 진행 중인 경우 플레이어의 이동을 제한
+        // N :
+        bool hDown = manager.isTPShow || specialManager.special || manager.isEndingShow ? false : Input.GetButtonDown("Horizontal");
+        bool hUp = manager.isTPShow || specialManager.special || manager.isEndingShow ? false : Input.GetButtonUp("Horizontal");
+        bool vDown = manager.isTPShow || specialManager.special || manager.isEndingShow ? false : Input.GetButtonDown("Vertical");
+        bool vUp = manager.isTPShow || specialManager.special || manager.isEndingShow ? false : Input.GetButtonUp("Vertical");
 
         // C : isHorizonMove 값 설정
         if (hDown)           // C : 수평 키를 누르면 isHorizonMove는 true

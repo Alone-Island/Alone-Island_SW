@@ -28,7 +28,8 @@ public class FadeIn : MonoBehaviour
                 fadeDeltaTime = fadeInSeconds;
                 isFadeIn = false;
             }
-            audioSource.volume = (float)(fadeDeltaTime / fadeInSeconds);
+            // J : 설정데이터에 저장된 소리값까지만 페이드인
+            audioSource.volume = DataController.Instance.settingData.BGMSound * (float)(fadeDeltaTime / fadeInSeconds);
         }
         
     }

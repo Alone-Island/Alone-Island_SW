@@ -1,151 +1,168 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;   // J : UI ÇÁ·Î±×·¡¹ÖÀ» À§ÇØ Ãß°¡ (Text µî)
-using TMPro;            // J : TextMeshProUGUI¸¦ À§ÇØ Ãß°¡
+using UnityEngine.UI;   // J : UI í”„ë¡œê·¸ë˜ë°ì„ ìœ„í•´ ì¶”ê°€ (Text ë“±)
+using TMPro;            // J : TextMeshProUGUIë¥¼ ìœ„í•´ ì¶”ê°€
 
 public class SpecialEventManager : MonoBehaviour
 {
-    public TalkManager talkManager;     // J : GameManager¿¡¼­ TalkManagerÀÇ ÇÔ¼ö¸¦ È£ÃâÇÒ ¼ö ÀÖµµ·Ï talkManager º¯¼ö »ı¼º
-    public ScreenManager screenManager; // N : ·¹º§ °ü¸®¸¦ À§ÇØ È£Ãâ
-    public EndingManager endingManager; // N : ¿£µù Ã³¸®¸¦ À§ÇØ È£Ãâ
-    public GameObject talkPanel;        // J : ´ëÈ­Ã¢
-    public TextMeshProUGUI talkText;    // J : ´ëÈ­Ã¢ÀÇ text
-    public int talkIndex;               // J : talkIndex¸¦ ÀúÀåÇÏ±â À§ÇÑ º¯¼ö
-    public bool special = false;        // J : ½ºÆä¼È ÀÌº¥Æ® ÁøÇàÁßÀÎÁö ¿©ºÎ
-    public bool AItalk = false;         // J : AI°¡ ½ºÆä¼È ÀÌº¥Æ® ´ëÈ­¸¦ ÇÏ´ÂÁö ¿©ºÎ (¼±ÅÃÁö ¼±ÅÃ Àü)
-    public bool result = false;         // J : °á°ú ÅØ½ºÆ® Ã¢À» º¸¿©ÁÖ´ÂÁö ¿©ºÎ (¼±ÅÃÁö ¼±ÅÃ ÈÄ)
+    public TalkManager talkManager;     // J : TalkManagerì˜ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•  ìˆ˜ ìˆë„ë¡ talkManager ë³€ìˆ˜ ìƒì„±
+    public GameManager gameManager;     // J : ìŠ¤í˜ì…œ ì´ë²¤íŠ¸ ë°œë™ ì¡°ê±´ì„ ì²´í¬í•˜ê¸° ìœ„í•´
+    public ScreenManager screenManager; // N : ë ˆë²¨ ê´€ë¦¬ë¥¼ ìœ„í•´ í˜¸ì¶œ
+    public EndingManager endingManager; // N : ì—”ë”© ì²˜ë¦¬ë¥¼ ìœ„í•´ í˜¸ì¶œ
+    public GameObject talkPanel;        // J : ëŒ€í™”ì°½
+    public TextMeshProUGUI talkText;    // J : ëŒ€í™”ì°½ì˜ text
+    public int talkIndex;               // J : talkIndexë¥¼ ì €ì¥í•˜ê¸° ìœ„í•œ ë³€ìˆ˜
+    public bool special = false;        // J : ìŠ¤í˜ì…œ ì´ë²¤íŠ¸ ì§„í–‰ì¤‘ì¸ì§€ ì—¬ë¶€
+    public bool AItalk = false;         // J : AIê°€ ìŠ¤í˜ì…œ ì´ë²¤íŠ¸ ëŒ€í™”ë¥¼ í•˜ëŠ”ì§€ ì—¬ë¶€ (ì„ íƒì§€ ì„ íƒ ì „)
+    public bool result = false;         // J : ê²°ê³¼ í…ìŠ¤íŠ¸ ì°½ì„ ë³´ì—¬ì£¼ëŠ”ì§€ ì—¬ë¶€ (ì„ íƒì§€ ì„ íƒ í›„)
     public TextMeshProUGUI selectText0, selectText1, selectText2;
     public Button selectButton0, selectButton1, selectButton2;
 
-    List<TextMeshProUGUI> selectText;   // J : ¼±ÅÃÁö ÅØ½ºÆ®¸¦ °ü¸®ÇÏ±â À§ÇÑ ¸®½ºÆ®
-    List<Button> selectButton;          // J : ¼±ÅÃÁö ¹öÆ°À» °ü¸®ÇÏ±â À§ÇÑ ¸®½ºÆ®
-    int specialID;                      // J : TalkManager·ÎºÎÅÍ talkData¸¦ °¡Á®¿À±â À§ÇÑ º¯¼ö
-    int firstRandomNum;                 // J : ·£´ı ½ºÆä¼È ÀÌº¥Æ®¸¦ À§ÇÑ º¯¼ö1 (0 : ¼±ÅÃÁö 2°³, 1: ¼±ÅÃÁö 3°³)
-    int secondRandomNum;                // J : ·£´ı ½ºÆä¼È ÀÌº¥Æ®¸¦ À§ÇÑ º¯¼ö2
+    List<TextMeshProUGUI> selectText;   // J : ì„ íƒì§€ í…ìŠ¤íŠ¸ë¥¼ ê´€ë¦¬í•˜ê¸° ìœ„í•œ ë¦¬ìŠ¤íŠ¸
+    List<Button> selectButton;          // J : ì„ íƒì§€ ë²„íŠ¼ì„ ê´€ë¦¬í•˜ê¸° ìœ„í•œ ë¦¬ìŠ¤íŠ¸
+    int specialID;                      // J : TalkManagerë¡œë¶€í„° talkDataë¥¼ ê°€ì ¸ì˜¤ê¸° ìœ„í•œ ë³€ìˆ˜
+    int firstRandomNum;                 // J : ëœë¤ ìŠ¤í˜ì…œ ì´ë²¤íŠ¸ë¥¼ ìœ„í•œ ë³€ìˆ˜1 (0 : ì„ íƒì§€ 2ê°œ, 1: ì„ íƒì§€ 3ê°œ)
+    int secondRandomNum;                // J : ëœë¤ ìŠ¤í˜ì…œ ì´ë²¤íŠ¸ë¥¼ ìœ„í•œ ë³€ìˆ˜2
     int select;
 
-    // J : Special Event ¹ß»ı
+    // J : Special Event ë°œìƒ
     public void Action() 
     {
-        AItalk = true;  // J : JumpÅ°¸¦ ´­·¶À» ¶§ object scanÀ» ÇÒ ¼ö ¾ø°Ô ÇÔ
+        AItalk = true;  // J : Jumpí‚¤ë¥¼ ëˆŒë €ì„ ë•Œ object scanì„ í•  ìˆ˜ ì—†ê²Œ í•¨
         special = true;
 
         System.Random rand = new System.Random();
         
-        int danger = (int)((10 - screenManager.houseLv.fCurrValue));   // J : À§Çèµµ °è»ê
-        if (rand.Next(10000) < danger)    // J : À§Çèµµ°¡ ³ô¾Æ Àç³­ ¹ß»ı
+        int danger = (int)((10 - screenManager.houseLv.fCurrValue));   // J : ìœ„í—˜ë„ ê³„ì‚°
+        if (rand.Next(10000) < danger)    // J : ìœ„í—˜ë„ê°€ ë†’ì•„ ì¬ë‚œ ë°œìƒ
             Disaster();
         else 
         {
-            firstRandomNum = rand.Next(2);      // J : 0-1±îÁöÀÇ ³­¼ö »ı¼º (0 : ¼±ÅÃÁö 2°³, 1: ¼±ÅÃÁö 3°³)
-            secondRandomNum = rand.Next(1, 5);  // J : 1-4±îÁöÀÇ ³­¼ö »ı¼º
+            firstRandomNum = rand.Next(2);      // J : 0-1ê¹Œì§€ì˜ ë‚œìˆ˜ ìƒì„± (0 : ì„ íƒì§€ 2ê°œ, 1: ì„ íƒì§€ 3ê°œ)
+            secondRandomNum = rand.Next(1, 5);  // J : 1-4ê¹Œì§€ì˜ ë‚œìˆ˜ ìƒì„±
 
-            specialID = 10000 + 10 * firstRandomNum + secondRandomNum; // J : talkData¸¦ °®°í ¿À±â À§ÇØ talkID °è»ê
+            specialID = 10000 + 10 * firstRandomNum + secondRandomNum; // J : talkDataë¥¼ ê°–ê³  ì˜¤ê¸° ìœ„í•´ talkID ê³„ì‚°
 
-            talkPanel.SetActive(true);  // J : ´ëÈ­Ã¢ È°¼ºÈ­
-            Talk();                     // J : ´ëÈ­ ½ÃÀÛ
+            talkPanel.SetActive(true);  // J : ëŒ€í™”ì°½ í™œì„±í™”
+            Talk();                     // J : ëŒ€í™” ì‹œì‘
+        }
+    }
+
+    // J : ìŠ¤í˜ì…œ ì´ë²¤íŠ¸ë¥¼ ë°œë™í•  ìˆ˜ ìˆëŠ” ìƒíƒœì¸ì§€ ì²´í¬
+    private IEnumerator Check()
+    {
+        // J : ëŒ€í™”ê°€ ëë‚  ë•Œê¹Œì§€ ëŒ€ê¸°
+        while (true)
+        {
+            Debug.Log(gameManager.playerTalk);
+            if (!gameManager.playerTalk)    // J : ëŒ€í™”ê°€ ëë‚˜ë©´ ìŠ¤í˜ì…œ ì´ë²¤íŠ¸ ë°œë™
+            {
+                Action();
+                break;
+            }
+            yield return null;
         }
     }
 
     private void Disaster()
     {
-        switch ((new System.Random()).Next(2))  // J : °¢ Àç³­Àº 50% È®·ü·Î ¹ß»ı
+        switch ((new System.Random()).Next(2))  // J : ê° ì¬ë‚œì€ 50% í™•ë¥ ë¡œ ë°œìƒ
         {
-            case 0: // J : ¾²³ª¹Ì
+            case 0: // J : ì“°ë‚˜ë¯¸
                 endingManager.suddenEnding(5);
                 break;
-            case 1: // J : ¿î¼® Ãæµ¹
+            case 1: // J : ìš´ì„ ì¶©ëŒ
                 endingManager.suddenEnding(6);
                 break;
         }
     }
 
-    // J : ½ÇÇàµÉ ¶§¸¶´Ù ´ÙÀ½ ¹®ÀåÀ¸·Î ³Ñ¾î°¨
+    // J : ì‹¤í–‰ë  ë•Œë§ˆë‹¤ ë‹¤ìŒ ë¬¸ì¥ìœ¼ë¡œ ë„˜ì–´ê°
     public void Talk() 
     {
-        string talkData = talkManager.GetTalkData(specialID, talkIndex);   // J : TalkManager·ÎºÎÅÍ talkData¸¦ °¡Á®¿À±â
-        if (talkData == null)   // J : ÇØ´ç talkIDÀÇ talkData¸¦ ¸ğµÎ °¡Á®¿Ô´Ù¸é
+        string talkData = talkManager.GetTalkData(specialID, talkIndex);   // J : TalkManagerë¡œë¶€í„° talkDataë¥¼ ê°€ì ¸ì˜¤ê¸°
+        if (talkData == null)   // J : í•´ë‹¹ talkIDì˜ talkDataë¥¼ ëª¨ë‘ ê°€ì ¸ì™”ë‹¤ë©´
         {
-            AItalk = false;     // J : JumpÅ°¸¦ ´­·¶À» ¶§ object scanÀ» ÇÒ ¼ö ÀÖ°Ô ÇÔ
-            talkIndex = 0;      // J : talk index ÃÊ±âÈ­
-            Select();           // J : ¼±ÅÃÁö È­¸é¿¡ º¸ÀÓ
+            AItalk = false;     // J : Jumpí‚¤ë¥¼ ëˆŒë €ì„ ë•Œ object scanì„ í•  ìˆ˜ ìˆê²Œ í•¨
+            talkIndex = 0;      // J : talk index ì´ˆê¸°í™”
+            Select();           // J : ì„ íƒì§€ í™”ë©´ì— ë³´ì„
             return;
         }
-        talkText.text = talkData;       // J : talkPanelÀÇ text¸¦ talkData·Î ¼³Á¤
-        talkIndex++;                    // J : ÇØ´ç talkIDÀÇ ´ÙÀ½ talkData stringÀ» °¡Á®¿À±â À§ÇØ
+        talkText.text = talkData;       // J : talkPanelì˜ textë¥¼ talkDataë¡œ ì„¤ì •
+        talkIndex++;                    // J : í•´ë‹¹ talkIDì˜ ë‹¤ìŒ talkData stringì„ ê°€ì ¸ì˜¤ê¸° ìœ„í•´
     }
 
-    // J : ¼±ÅÃÁö Å¬¸¯ ÈÄ È£Ãâ, ½ÇÇàµÉ ¶§¸¶´Ù ´ÙÀ½ ¹®ÀåÀ¸·Î ³Ñ¾î°¨
+    // J : ì„ íƒì§€ í´ë¦­ í›„ í˜¸ì¶œ, ì‹¤í–‰ë  ë•Œë§ˆë‹¤ ë‹¤ìŒ ë¬¸ì¥ìœ¼ë¡œ ë„˜ì–´ê°
     public void ResultTalk()
     {
-        result = true;  // J : °á°ú ÅØ½ºÆ®¸¦ º¸¿©ÁÖ´Â »óÅÂ
-        string talkData = talkManager.GetResultData(specialID * 10 + select, talkIndex);   // J : TalkManager·ÎºÎÅÍ resultData¸¦ °¡Á®¿À±â
-        if (talkData == null)   // J : ÇØ´ç talkIDÀÇ resultData¸¦ ¸ğµÎ °¡Á®¿Ô´Ù¸é
+        result = true;  // J : ê²°ê³¼ í…ìŠ¤íŠ¸ë¥¼ ë³´ì—¬ì£¼ëŠ” ìƒíƒœ
+        string talkData = talkManager.GetResultData(specialID * 10 + select, talkIndex);   // J : TalkManagerë¡œë¶€í„° resultDataë¥¼ ê°€ì ¸ì˜¤ê¸°
+        if (talkData == null)   // J : í•´ë‹¹ talkIDì˜ resultDataë¥¼ ëª¨ë‘ ê°€ì ¸ì™”ë‹¤ë©´
         {
-            result = false;     // J : °á°ú ÅØ½ºÆ® Á¾·á
-            special = false;    // J : ½ºÆä¼È ÀÌº¥Æ® Á¾·á
-            talkIndex = 0;      // J : talk index ÃÊ±âÈ­
-            Result();           // J : °á°ú ¹İ¿µ
+            result = false;     // J : ê²°ê³¼ í…ìŠ¤íŠ¸ ì¢…ë£Œ
+            special = false;    // J : ìŠ¤í˜ì…œ ì´ë²¤íŠ¸ ì¢…ë£Œ
+            talkIndex = 0;      // J : talk index ì´ˆê¸°í™”
+            Result();           // J : ê²°ê³¼ ë°˜ì˜
             return;
         }
-        talkText.text = talkData;       // J : talkPanelÀÇ text¸¦ resultData·Î ¼³Á¤
-        talkIndex++;                    // J : ÇØ´ç talkIDÀÇ ´ÙÀ½ resultData stringÀ» °¡Á®¿À±â À§ÇØ
+        talkText.text = talkData;       // J : talkPanelì˜ textë¥¼ resultDataë¡œ ì„¤ì •
+        talkIndex++;                    // J : í•´ë‹¹ talkIDì˜ ë‹¤ìŒ resultData stringì„ ê°€ì ¸ì˜¤ê¸° ìœ„í•´
     }
 
-    // J : ¼±ÅÃÁö°¡ È­¸é¿¡ ³ªÅ¸³²
+    // J : ì„ íƒì§€ê°€ í™”ë©´ì— ë‚˜íƒ€ë‚¨
     void Select()
     {
         string selectData;        
-        for (int selectIndex = 0; (selectData = talkManager.GetSelectData(specialID, selectIndex)) != null; selectIndex++) // J : selectDataÀÇ °³¼ö¿¡ µû¶ó selectButtonÀÌ º¸ÀÓ
+        for (int selectIndex = 0; (selectData = talkManager.GetSelectData(specialID, selectIndex)) != null; selectIndex++) // J : selectDataì˜ ê°œìˆ˜ì— ë”°ë¼ selectButtonì´ ë³´ì„
         {
-            selectText[selectIndex].text = selectData;              // J : SelectButtonÀÇ text¿¡ selectData´ëÀÔ
-            selectButton[selectIndex].gameObject.SetActive(true);   // J : SelectButton È°¼ºÈ­
+            selectText[selectIndex].text = selectData;              // J : SelectButtonì˜ textì— selectDataëŒ€ì…
+            selectButton[selectIndex].gameObject.SetActive(true);   // J : SelectButton í™œì„±í™”
         }
     }
 
-    // J : °á°ú ÅØ½ºÆ®¸¦ ¸ğµÎ º¸¿©ÁØ µÚ È£ÃâµÊ, °á°ú ¹İ¿µ
+    // J : ê²°ê³¼ í…ìŠ¤íŠ¸ë¥¼ ëª¨ë‘ ë³´ì—¬ì¤€ ë’¤ í˜¸ì¶œë¨, ê²°ê³¼ ë°˜ì˜
     void Result()
     {
-        switch (select) // J : ¸î¹øÂ° ¼±ÅÃÁö¸¦ Å¬¸¯Çß´ÂÁö
+        switch (select) // J : ëª‡ë²ˆì§¸ ì„ íƒì§€ë¥¼ í´ë¦­í–ˆëŠ”ì§€
         {
             case 0:
                 switch (firstRandomNum)
                 {
-                    case 0:     // J : ¼±ÅÃÁö°¡ 2°³ÀÎ °æ¿ì
+                    case 0:     // J : ì„ íƒì§€ê°€ 2ê°œì¸ ê²½ìš°
                         switch (secondRandomNum)
                         {
-                            case 1: // J : ¹èÅÍ¸®°¡ ¸¹ÀÌ ´â¾Ò¾î¿ä¤Ğ¤Ğ "ÇÏ·ç¸¸ ¾Æ¹«°Íµµ ¾ÈÇÏ°í ½Í¾î¿ä..
+                            case 1: // J : ë°°í„°ë¦¬ê°€ ë§ì´ ë‹³ì•˜ì–´ìš”ã… ã…  "í•˜ë£¨ë§Œ ì•„ë¬´ê²ƒë„ ì•ˆí•˜ê³  ì‹¶ì–´ìš”..
                                 screenManager.dayTime = 20;
-                                screenManager.HeartStudy(1); // N : °ø°¨ 1·¹º§ »ó½Â
+                                screenManager.HeartStudy(1); // N : ê³µê° 1ë ˆë²¨ ìƒìŠ¹
                                 break;
-                            case 2: // J : ¹Ú»ç´ÔÀ» À§ÇØ »õ·Î¿î ¿­¸Å¸¦ µû¿Ô¾î¿ä!
-                                endingManager.suddenEnding(1); // N : Bad Ending (µ¶¿­¸Å)
+                            case 2: // J : ë°•ì‚¬ë‹˜ì„ ìœ„í•´ ìƒˆë¡œìš´ ì—´ë§¤ë¥¼ ë”°ì™”ì–´ìš”!
+                                endingManager.suddenEnding(1); // N : Bad Ending (ë…ì—´ë§¤)
                                 break;
-                            case 3: // J : Àú±â ¾ß»ıµ¿¹°ÀÌ ÀÖ´Â °Í °°¾Æ¿ä! Àâ¾Æ¼­ ±¸¿ö¸ÔÀ»±î¿ä?
-                                screenManager.HeartStudy(1); // J : °ø°¨ 1·¹º§ »ó½Â
+                            case 3: // J : ì €ê¸° ì•¼ìƒë™ë¬¼ì´ ìˆëŠ” ê²ƒ ê°™ì•„ìš”! ì¡ì•„ì„œ êµ¬ì›Œë¨¹ì„ê¹Œìš”?
+                                screenManager.HeartStudy(1); // J : ê³µê° 1ë ˆë²¨ ìƒìŠ¹
                                 break;
-                            case 4: // J : Àú±â ¾ß»ıµ¿¹°ÀÌ ÀÖ´Â °Í °°¾Æ¿ä! Àâ¾Æ¼­ ±¸¿ö¸ÔÀ»±î¿ä?
-                                endingManager.suddenEnding(4);  // J : ¸äµÅÁö »ç¸Á
+                            case 4: // J : ì €ê¸° ì•¼ìƒë™ë¬¼ì´ ìˆëŠ” ê²ƒ ê°™ì•„ìš”! ì¡ì•„ì„œ êµ¬ì›Œë¨¹ì„ê¹Œìš”?
+                                endingManager.suddenEnding(4);  // J : ë©§ë¼ì§€ ì‚¬ë§
                                 break;
 
                         }
                         break;
-                    case 1:     // J : ¼±ÅÃÁö°¡ 3°³ÀÎ °æ¿ì
+                    case 1:     // J : ì„ íƒì§€ê°€ 3ê°œì¸ ê²½ìš°
                         switch (secondRandomNum)
                         {
-                            case 1: // J : ÀÌ ²É ³Ê¹« ÀÌ»ÚÁö ¾Ê¾Æ¿ä??
-                                endingManager.suddenEnding(2); // N : Bad Ending (AI°¡ ÀÌÇØÇÏÁö ¸øÇÔ)
+                            case 1: // J : ì´ ê½ƒ ë„ˆë¬´ ì´ì˜ì§€ ì•Šì•„ìš”??
+                                endingManager.suddenEnding(2); // N : Bad Ending (AIê°€ ì´í•´í•˜ì§€ ëª»í•¨)
                                 break;
-                            case 2: // J : (AI°¡ ¹°¿¡ ºüÁ³´Ù)
-                                endingManager.suddenEnding(3);  // °¨Àü»ç »ç¸Á
+                            case 2: // J : (AIê°€ ë¬¼ì— ë¹ ì¡Œë‹¤)
+                                endingManager.suddenEnding(3);  // ê°ì „ì‚¬ ì‚¬ë§
                                 break;
-                            case 3: // J : (³ª¹«°¡ ¾²·¯Á®¼­ AI°¡ ´ÙÃÆ´Ù. ¾î¶»°Ô ÇÒ±î?)
+                            case 3: // J : (ë‚˜ë¬´ê°€ ì“°ëŸ¬ì ¸ì„œ AIê°€ ë‹¤ì³¤ë‹¤. ì–´ë–»ê²Œ í• ê¹Œ?)
                                 screenManager.dayTime = 20;
-                                screenManager.HeartStudy(2); // N : °ø°¨ 2·¹º§ »ó½Â
+                                screenManager.HeartStudy(2); // N : ê³µê° 2ë ˆë²¨ ìƒìŠ¹
                                 break;
-                            case 4: // J : *ÃßÈÄ Ãß°¡ ¿¹Á¤*
-                                    // ³ªÁß¿¡ Ãß°¡
+                            case 4: // J : *ì¶”í›„ ì¶”ê°€ ì˜ˆì •*
+                                    // ë‚˜ì¤‘ì— ì¶”ê°€
                                 break;
                         }
                         break;
@@ -154,23 +171,23 @@ public class SpecialEventManager : MonoBehaviour
             case 1:
                 switch (firstRandomNum)
                 {
-                    case 0:     // J : ¼±ÅÃÁö°¡ 2°³ÀÎ °æ¿ì
-                        screenManager.HeartStudy(-1); // J : °ø°¨ 1·¹º§ ÇÏ¶ô
+                    case 0:     // J : ì„ íƒì§€ê°€ 2ê°œì¸ ê²½ìš°
+                        screenManager.HeartStudy(-1); // J : ê³µê° 1ë ˆë²¨ í•˜ë½
                         break;
-                    case 1:     // J : ¼±ÅÃÁö°¡ 3°³ÀÎ °æ¿ì
+                    case 1:     // J : ì„ íƒì§€ê°€ 3ê°œì¸ ê²½ìš°
                         switch (secondRandomNum)
                         {
-                            case 1: // J : ÀÌ ²É ³Ê¹« ÀÌ»ÚÁö ¾Ê¾Æ¿ä??
-                                    // J : º¯È­¾øÀ½
+                            case 1: // J : ì´ ê½ƒ ë„ˆë¬´ ì´ì˜ì§€ ì•Šì•„ìš”??
+                                    // J : ë³€í™”ì—†ìŒ
                                 break;
-                            case 2: // J : (AI°¡ ¹°¿¡ ºüÁ³´Ù)
-                                screenManager.HeartStudy(-1); // J : °ø°¨ 1·¹º§ ÇÏ¶ô
+                            case 2: // J : (AIê°€ ë¬¼ì— ë¹ ì¡Œë‹¤)
+                                screenManager.HeartStudy(-1); // J : ê³µê° 1ë ˆë²¨ í•˜ë½
                                 break;
-                            case 3: // J : (³ª¹«°¡ ¾²·¯Á®¼­ AI°¡ ´ÙÃÆ´Ù. ¾î¶»°Ô ÇÒ±î?)
-                                    // J : º¯È­¾øÀ½
+                            case 3: // J : (ë‚˜ë¬´ê°€ ì“°ëŸ¬ì ¸ì„œ AIê°€ ë‹¤ì³¤ë‹¤. ì–´ë–»ê²Œ í• ê¹Œ?)
+                                    // J : ë³€í™”ì—†ìŒ
                                 break;
-                            case 4: // J : *ÃßÈÄ Ãß°¡ ¿¹Á¤*
-                                    // ³ªÁß¿¡ Ãß°¡
+                            case 4: // J : *ì¶”í›„ ì¶”ê°€ ì˜ˆì •*
+                                    // ë‚˜ì¤‘ì— ì¶”ê°€
                                 break;
                         }
                         break;
@@ -179,50 +196,50 @@ public class SpecialEventManager : MonoBehaviour
             case 2:
                 switch (secondRandomNum)
                 {
-                    case 1: // J : ÀÌ ²É ³Ê¹« ÀÌ»ÚÁö ¾Ê¾Æ¿ä??
-                        screenManager.HeartStudy(-1); // J : °ø°¨ 1·¹º§ ÇÏ¶ô
+                    case 1: // J : ì´ ê½ƒ ë„ˆë¬´ ì´ì˜ì§€ ì•Šì•„ìš”??
+                        screenManager.HeartStudy(-1); // J : ê³µê° 1ë ˆë²¨ í•˜ë½
                         break;
-                    case 2: // J : (AI°¡ ¹°¿¡ ºüÁ³´Ù)
-                            // J : ±¸Á¶ ¼º°ø
+                    case 2: // J : (AIê°€ ë¬¼ì— ë¹ ì¡Œë‹¤)
+                            // J : êµ¬ì¡° ì„±ê³µ
                         break;
-                    case 3: // J : (³ª¹«°¡ ¾²·¯Á®¼­ AI°¡ ´ÙÃÆ´Ù. ¾î¶»°Ô ÇÒ±î?)
-                        endingManager.suddenEnding(3); // N : Bad Ending (AI °íÀå)
+                    case 3: // J : (ë‚˜ë¬´ê°€ ì“°ëŸ¬ì ¸ì„œ AIê°€ ë‹¤ì³¤ë‹¤. ì–´ë–»ê²Œ í• ê¹Œ?)
+                        endingManager.suddenEnding(3); // N : Bad Ending (AI ê³ ì¥)
                         break;
-                    case 4: // J : *ÃßÈÄ Ãß°¡ ¿¹Á¤*
-                            // ³ªÁß¿¡ Ãß°¡
+                    case 4: // J : *ì¶”í›„ ì¶”ê°€ ì˜ˆì •*
+                            // ë‚˜ì¤‘ì— ì¶”ê°€
                         break;
                 }
                 break;
         }
-        talkPanel.SetActive(false);     // J : ½ºÆä¼È ÀÌº¥Æ® ´ëÈ­Ã¢ ºñÈ°¼ºÈ­
+        talkPanel.SetActive(false);     // J : ìŠ¤í˜ì…œ ì´ë²¤íŠ¸ ëŒ€í™”ì°½ ë¹„í™œì„±í™”
     }
 
 
-    // J : SelectButton0À» Å¬¸¯ÇßÀ» ¶§ È£ÃâµÇ´Â ÇÔ¼ö
+    // J : SelectButton0ì„ í´ë¦­í–ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
     public void Select0()
     {
         select = 0;
         ResultTalk();
-        SelectComplete();   // J :¼±ÅÃÀÌ ¿Ï·áµÇ¸é ¼±ÅÃÁö ºñÈ°¼ºÈ­
+        SelectComplete();   // J :ì„ íƒì´ ì™„ë£Œë˜ë©´ ì„ íƒì§€ ë¹„í™œì„±í™”
     }
 
-    // J : SelectButton1À» Å¬¸¯ÇßÀ» ¶§ È£ÃâµÇ´Â ÇÔ¼ö
+    // J : SelectButton1ì„ í´ë¦­í–ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
     public void Select1()
     {
         select = 1;
         ResultTalk();
-        SelectComplete();   // J :¼±ÅÃÀÌ ¿Ï·áµÇ¸é ¼±ÅÃÁö ºñÈ°¼ºÈ­
+        SelectComplete();   // J :ì„ íƒì´ ì™„ë£Œë˜ë©´ ì„ íƒì§€ ë¹„í™œì„±í™”
     }
 
-    // J : SelectButton2À» Å¬¸¯ÇßÀ» ¶§ È£ÃâµÇ´Â ÇÔ¼ö
+    // J : SelectButton2ì„ í´ë¦­í–ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
     public void Select2()
     {
         select = 2;
         ResultTalk();
-        SelectComplete();   // J :¼±ÅÃÀÌ ¿Ï·áµÇ¸é ¼±ÅÃÁö ºñÈ°¼ºÈ­
+        SelectComplete();   // J :ì„ íƒì´ ì™„ë£Œë˜ë©´ ì„ íƒì§€ ë¹„í™œì„±í™”
     }
 
-    // J :¼±ÅÃÀÌ ¿Ï·áµÇ¸é È£Ãâ, ´ëÈ­Ã¢°ú ¼±ÅÃÁö ºñÈ°¼ºÈ­
+    // J :ì„ íƒì´ ì™„ë£Œë˜ë©´ í˜¸ì¶œ, ëŒ€í™”ì°½ê³¼ ì„ íƒì§€ ë¹„í™œì„±í™”
     void SelectComplete()
     {
         for (int i = 0; i < 3; i++)

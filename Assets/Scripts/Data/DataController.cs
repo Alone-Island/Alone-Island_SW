@@ -117,6 +117,14 @@ public class DataController : MonoBehaviour
         Debug.Log("엔딩 데이터 저장 완료");
     }
 
+    // J : 게임의 모든 데이터 삭제
+    public void DeleteAllData()
+    {
+        // J : 모든 데이터 파일 삭제
+        File.Delete(Application.persistentDataPath + SettingDataFileName);
+        File.Delete(Application.persistentDataPath + EndingDataFileName);
+    }
+
     private void OnApplicationQuit()    // J : 프로그램 종료 시 데이터 저장
     {
         SaveSettingData();

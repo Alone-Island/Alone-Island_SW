@@ -15591,7 +15591,7 @@ MonoBehaviour:
   isTheEnd: 0
   dayTalk: 0
   alertText: {fileID: 685170850}
-  aiObjData: {fileID: 0}
+  aiObjData: {fileID: 793937238}
 --- !u!4 &1163355728
 Transform:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class HappyEnding : MonoBehaviour
     [SerializeField] public TextMeshProUGUI dialog; // K : text 오브젝트를 받아오기 위한 변수입니다. > using TMPro;          
     public string[] fullText;
 
-    private int endingCode = DataController.Instance.endingData.currentEndingCode;
+    private int endingCode;
 
     // K : synopsys의 텍스트들(여러 문장)의 배열입니다.
     
@@ -50,6 +50,7 @@ public class HappyEnding : MonoBehaviour
 
     void Start()
     {
+        endingCode = DataController.Instance.endingData.currentEndingCode;
         switch (endingCode)
         {
             case 101:

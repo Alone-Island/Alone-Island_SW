@@ -128,24 +128,4 @@ public class AIAction : MonoBehaviour
             vel = 1;
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.gameObject.name == "FarmLearning")
-        {
-            vel = 0;
-        }
-        if (coll.gameObject.name == "HouseLearning")
-        {
-            vel = 0;
-        }
-        if (coll.gameObject.name == "CraftLearning")
-        {
-            vel = 0;
-        }
-        if (coll.gameObject.name == "EngineerLearning")
-        {
-            vel = 0;
-        }
-    }
 }

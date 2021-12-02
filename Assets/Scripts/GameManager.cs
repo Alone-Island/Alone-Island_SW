@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI alertText;           // N : 알림창의 text
 
+    public ObjectData aiObjData;
 
     // C : 플레이어가 Object에 대해 조사 시(플레이어의 액션 발생 시) 적절한 내용을 포함한 대화창 띄워주기
     public void Action(GameObject scanObj)
@@ -37,14 +38,18 @@ public class GameManager : MonoBehaviour
         playerTalk = true;                  // J : 플레이어가 대화하는 중에는 special event를 유예하도록 설정
         scanObject = scanObj;               // C : parameter로 들어온 스캔된 game object를 public 변수인 scanObject에 대입
         ObjectData objData = scanObject.GetComponent<ObjectData>();     // C : scanObject의 ObjectData instance 가져오기
+        int talkId;
 
         if (aiAction.isAICollisionToPlayer) // K : ai와 충돌중이라면 학습장소에서도 대화하기를 우선으로 한다.
         {
-            objData = GameObject.Find("AI").GetComponent<ObjectData>(); // K : ai에게 대화하기를 하기 위해 오브젝트를 AI로 가져온다.
+            //objData = GameObject.Find("AI").GetComponent<ObjectData>(); // K : ai에게 대화하기를 하기 위해 오브젝트를 AI로 가져온다.
+            talkId = aiObjData.id; // K : ai에게 대화하기를 하기 위해 오브젝트를 AI로 가져온다.
+        } else
+        {
+            talkId = objData.id;
         }
-
-        int talkId = objData.id;            // K : takl data의 id 지정 변수, 예외처리를 위해 추가 설정함
-        if (objData.id == 1000)      // C : objData가 AI  
+                     // K : takl data의 id 지정 변수, 예외처리를 위해 추가 설정함
+        if (talkId == 1000)      // C : objData가 AI  
         {
             // N : 
             if (randomNum == 1000) talkId = 2000;

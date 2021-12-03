@@ -35,7 +35,7 @@ public class SpecialEventManager : MonoBehaviour
         System.Random rand = new System.Random();
         
         int danger = (int)((10 - screenManager.houseLv.fCurrValue));   // J : 위험도 계산
-        if (rand.Next(10000) < danger)    // J : 위험도가 높아 재난 발생
+        if (rand.Next(100) < danger)    // J : 위험도가 높아 재난 발생
             Disaster();
         else 
         {
@@ -67,6 +67,8 @@ public class SpecialEventManager : MonoBehaviour
 
     private void Disaster()
     {
+        AItalk = false;
+        special = false;
         switch ((new System.Random()).Next(2))  // J : 각 재난은 50% 확률로 발생
         {
             case 0: // J : 쓰나미

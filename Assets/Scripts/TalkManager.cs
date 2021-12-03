@@ -121,6 +121,7 @@ public class TalkManager : MonoBehaviour
         return selectData[id][selectIndex];     // J : 필요한 문장을 id와 index를 통해 return
     }
 
+    // 필요한 ResultData를 return
     public string GetResultData(int id, int resultIndex)
     {
         if (resultIndex == resultData[id].Length)       // J : resultIndex가 resultData[id]의 마지막 index + 1이면

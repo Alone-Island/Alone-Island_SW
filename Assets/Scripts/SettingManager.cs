@@ -53,7 +53,18 @@ public class SettingManager : MonoBehaviour
     public void SelectMenu()
     {
         Debug.Log("메뉴로 돌아가기");
+        setting.transform.Find("MenuAlert").gameObject.SetActive(true);    // J : 메뉴로 돌아가기 경고창 활성화
+    }
+
+    public void SelectMenuYes()
+    {
+        Debug.Log("메뉴로 돌아가기 O");
         SceneManager.LoadScene("GameMenu"); // J : 게임메뉴로 이동
+    }
+    public void SelectMenuNo()
+    {
+        Debug.Log("메뉴로 돌아가기 X");
+        setting.transform.Find("MenuAlert").gameObject.SetActive(false);    // J : 메뉴로 돌아가기 경고창 비활성화
     }
 
     // J : 게임 초기화 버튼 onclick

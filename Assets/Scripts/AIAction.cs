@@ -103,6 +103,7 @@ public class AIAction : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll)   // Ai 충돌 감지 함수
     {
         //isAICollision = true;
+        // Dr.Kim과 충돌 시 그 자리에 멈춤
         if (coll.gameObject.name == "Dr.Kim")
         {
             isAICollisionToPlayer = true;

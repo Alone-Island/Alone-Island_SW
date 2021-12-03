@@ -199,7 +199,6 @@ public class ScreenManager : MonoBehaviour
     // N : 농사 배우기
     public void FarmStudy()
     {
-        useBook();
         farmLv.fCurrValue++;
         hungerStat.fCurrValue += 50;
 
@@ -238,7 +237,6 @@ public class ScreenManager : MonoBehaviour
     // N : 건축 배우기
     public void HouseStudy()
     {
-        useBook();
         houseLv.fCurrValue++;
         //dangerStat.fCurrValue += 50;
 
@@ -269,7 +267,6 @@ public class ScreenManager : MonoBehaviour
     // N : 공예 배우기
     public void CraftStudy()
     {
-        useBook();
         craftLv.fCurrValue++;
         temperatureStat.fCurrValue += 50;
 
@@ -293,7 +290,6 @@ public class ScreenManager : MonoBehaviour
     // N : 공학 배우기
     public void EngineerStudy()
     {
-        useBook();
         engineerLv.fCurrValue++;
 
         if (engineerLv.fCurrValue == 3)

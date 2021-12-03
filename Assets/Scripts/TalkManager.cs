@@ -54,7 +54,7 @@ public class TalkManager : MonoBehaviour
         talkData.Add(10011, new string[] { "이 꽃 너무 이쁘지 않아요??" });
         talkData.Add(10012, new string[] { "(AI가 물에 빠졌다)" });
         talkData.Add(10013, new string[] { "(나무가 쓰러져서 AI가 다쳤다. 어떻게 할까?)" });
-        talkData.Add(10014, new string[] { "*추후 추가 예정*" });
+        talkData.Add(10014, new string[] { "박사님 신기하게 생긴 생물을 발견했어요! 박사님께 드리려고 힘들게 잡았어요ㅎㅎ" });
 
         // J : key가 10001~10013이면 스페셜 이벤트에 대한 선택지 data
         selectData.Add(10001, new string[] { "그래 하루 쉬자", "안돼안돼 지금 바로 일 해야돼!" });
@@ -64,7 +64,7 @@ public class TalkManager : MonoBehaviour
         selectData.Add(10011, new string[] { "꽃보다 너가 더 예뻐", "예쁘네~", "별로..." });
         selectData.Add(10012, new string[] { "바로 손을 내밀자!", "알아서 나올거야", "너무 멀어! 나뭇가지를 찾아서 구해야겠다!" });
         selectData.Add(10013, new string[] { "고장난 곳이 있는지 하루동안 찬찬히 살펴보자", "대충 괜찮은지 확인하자", "나무를 치워주고 다시 작업을 시작하자" });
-        selectData.Add(10014, new string[] { "선택지1", "선택지2", "선택지3" });
+        selectData.Add(10014, new string[] { "으악!! 벌레잖아! (도망간다)", " 그건 벌레야. 고맙지만 사양할게", "윽 벌레잖아..? 그래도 날 위해 잡은거니 웃으면서 받자" });
 
         // J : 스페셜 이벤트에 대한 선택 결과 data (specialID * 10 + 선택지(0~2))
         // J : 선택지가 2개인 이벤트의 결과 텍스트
@@ -93,9 +93,9 @@ public class TalkManager : MonoBehaviour
         resultData.Add(100131, new string[] { "아무런 변화도 일어나지 않았다." });
         resultData.Add(100132, new string[] { "알고보니 AI는 심각한 손상을 입었다." });
 
-        resultData.Add(100140, new string[] { "추가하기" });
-        resultData.Add(100141, new string[] { "추가하기" });
-        resultData.Add(100142, new string[] { "추가하기" });
+        resultData.Add(100140, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
+        resultData.Add(100141, new string[] { "아무런 변화도 일어나지 않았다." });
+        resultData.Add(100142, new string[] { "AI의 공감능력이 1레벨 상승했다!" });
 
     }
 

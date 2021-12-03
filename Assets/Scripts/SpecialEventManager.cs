@@ -162,7 +162,7 @@ public class SpecialEventManager : MonoBehaviour
                                 screenManager.HeartStudy(2); // N : 공감 2레벨 상승
                                 break;
                             case 4: // J : *추후 추가 예정*
-                                    // 나중에 추가
+                                screenManager.HeartStudy(-1);
                                 break;
                         }
                         break;
@@ -206,7 +206,7 @@ public class SpecialEventManager : MonoBehaviour
                         endingManager.suddenEnding(3); // N : Bad Ending (AI 고장)
                         break;
                     case 4: // J : *추후 추가 예정*
-                            // 나중에 추가
+                        screenManager.HeartStudy(1);
                         break;
                 }
                 break;

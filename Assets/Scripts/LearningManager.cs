@@ -85,7 +85,6 @@ public class LearningManager : MonoBehaviour
             {
                 case 100:                       // C :
                     Debug.Log(learningId);
-                    screenManager.useBook();
                     learningTime = initLearningTime + screenManager.farmLv.fCurrValue;
                     aiAction.GoToLearningPlace(-7, -7);
                     isAILearning = true;                                        
@@ -93,7 +92,6 @@ public class LearningManager : MonoBehaviour
                     break;
                 case 200:                       // C :
                     Debug.Log(learningId);
-                    screenManager.useBook();
                     learningTime = initLearningTime + screenManager.houseLv.fCurrValue;
                     aiAction.GoToLearningPlace(10, 9);
                     isAILearning = true;
@@ -102,7 +100,6 @@ public class LearningManager : MonoBehaviour
                     break;
                 case 300:                       // C :
                     Debug.Log(learningId);
-                    screenManager.useBook();
                     learningTime = initLearningTime + screenManager.craftLv.fCurrValue;
                     aiAction.GoToLearningPlace(5, 0);
                     isAILearning = true;
@@ -111,7 +108,6 @@ public class LearningManager : MonoBehaviour
                     break;
                 case 400:                       // C :
                     Debug.Log(learningId);
-                    screenManager.useBook();
                     learningTime = initLearningTime + screenManager.engineerLv.fCurrValue;
                     aiAction.GoToLearningPlace(-5, 5);
                     isAILearning = true;

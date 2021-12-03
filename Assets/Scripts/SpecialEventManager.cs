@@ -10,6 +10,7 @@ public class SpecialEventManager : MonoBehaviour
     public GameManager gameManager;     // J : 스페셜 이벤트 발동 조건을 체크하기 위해
     public ScreenManager screenManager; // N : 레벨 관리를 위해 호출
     public EndingManager endingManager; // N : 엔딩 처리를 위해 호출
+    public CameraShake cameraShake;     // J : 카메라를 흔들기 위해 호출
     public GameObject talkPanel;        // J : 대화창
     public TextMeshProUGUI talkText;    // J : 대화창의 text
     public int talkIndex;               // J : talkIndex를 저장하기 위한 변수
@@ -69,9 +70,10 @@ public class SpecialEventManager : MonoBehaviour
         }
     }
 
+    // J : 재난 발생
     private void Disaster()
     {
-        disasterTalk = true;
+        disasterTalk = true;    // J : AI가 위험도 엔딩 대화 시작
         specialID = 11000 + (new System.Random()).Next(2);  // J : 각 재난은 50% 확률로 발생
         DisasterTalk();
     }
@@ -86,13 +88,20 @@ public class SpecialEventManager : MonoBehaviour
             disasterTalk = false;
             special = false;
             talkIndex = 0;      // J : talk index 초기화
-            talkPanel.SetActive(false); // J : 대화창 활성화
-            endingManager.disasterEnding(specialID - 11000);    // J : 위험도 엔딩
+            talkPanel.SetActive(false); // J : 대화창 비활성화
+            cameraShake.Shake(DisasterEnding);
             return;
         }
         talkText.text = talkData;       // J : talkPanel의 text를 talkData로 설정
         talkIndex++;                    // J : 해당 talkID의 다음 talkData string을 가져오기 위해
     }
+
+    // J : 카메라 흔들기가 끝나면 엔딩
+    public void DisasterEnding()
+    {
+        endingManager.DisasterEnding(specialID - 11000);    // J : 위험도 엔딩
+    }
+        
 
     // J : 실행될 때마다 다음 문장으로 넘어감
     public void Talk() 

@@ -5531,12 +5531,14 @@ MonoBehaviour:
   gameManager: {fileID: 1163355727}
   screenManager: {fileID: 1163355729}
   endingManager: {fileID: 872728046}
+  cameraShake: {fileID: 1163355730}
   talkPanel: {fileID: 1384437669}
   talkText: {fileID: 1093654109}
   talkIndex: 0
   special: 0
-  AItalk: 0
-  result: 0
+  specialTalk: 0
+  disasterTalk: 0
+  resultTalk: 0
   selectText0: {fileID: 858138516}
   selectText1: {fileID: 855646736}
   selectText2: {fileID: 196860700}
@@ -15555,6 +15557,7 @@ GameObject:
   - component: {fileID: 1163355728}
   - component: {fileID: 1163355727}
   - component: {fileID: 1163355729}
+  - component: {fileID: 1163355730}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -15642,6 +15645,21 @@ MonoBehaviour:
   heartTextObject: {fileID: 26451048}
   levelUp: {fileID: 1879157404}
   levelDown: {fileID: 2077640052}
+--- !u!114 &1163355730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163355726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4038fb1fdd040f449f4b66aa8e714f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 519420031}
+  shakeRange: 0.05
+  duration: 3
 --- !u!1 &1163931272
 GameObject:
   m_ObjectHideFlags: 0

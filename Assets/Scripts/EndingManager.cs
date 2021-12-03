@@ -97,7 +97,7 @@ public class EndingManager : MonoBehaviour
         Invoke("TheEnd", 2.0f);
     }
 
-    public void disasterEnding(int endingCode)
+    public void DisasterEnding(int endingCode)
     {
         ending();
         switch(endingCode)

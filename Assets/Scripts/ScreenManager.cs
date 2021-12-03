@@ -34,11 +34,12 @@ public class ScreenManager : MonoBehaviour
     public SpecialEventManager specialManager;
     public SettingManager settingManager;
 
-    public GameObject heartTextObject;      // C :
-    public GameObject levelUp;              // C :
-    public GameObject levelDown;            // C :
+    // C : 공감 능력 향상 시 레벨업 애니메이션을 위해
+    public GameObject heartTextObject;      // C : 공감 레벨 위에 +1 애니메이션을 실행하기 위해 필요한 변수
+    public GameObject levelUp;              // C : AI와 대화하기 완료 시, 공감 레벨 위에 띄울 레벨업 애니메이션이 설정된 game object 변수
+    public GameObject levelDown;            // C : 스페셜 이벤트에서 부적절한 선택지를 골랐을 때, 공감 레벨 위에 띄울 레벨다운 애니메이션이 설정된 game object 변수
     //private float time = 0;               // C :
-    private float downTime = 0;             // C :
+    private float downTime = 0;             // C : 레벨다운 애니메이션이 진행될 시간을 조절하기 위한 변수
 
     private Color currColor = new Color(1f, 1f, 1f, 0f);        // N :
     Transform nextMap;                                          // N :
@@ -117,19 +118,19 @@ public class ScreenManager : MonoBehaviour
         }
         */
 
-        // C :
-        if (levelDown.activeSelf == true)     // C :
+        // C : 레벨다운 애니메이션의 화면 실행 시간을 조정
+        if (levelDown.activeSelf == true)           // C : 레벨다운 object의 active 상태가 true이면
         {
-            downTime += Time.deltaTime;
-            if (downTime > 2f)                      // C : 
+            downTime += Time.deltaTime;             // C : 레벨다운 애니메이션 타임에 흐른 시간 추가
+            if (downTime > 2f)                      // C : 레벨다운 애니메이션 타임이 2초가 지났을 때
             {
-                levelDown.SetActive(false);
-                downTime = 0;
+                levelDown.SetActive(false);         // C : 레벨다운 object의 active 상태를 false로 변환
+                downTime = 0;                       // C : 다음 애니메이션을 위해 레벨다운 애니메이션 타임을 0으로 초기화
             }
         }
-        else
+        else                                        // C : 레벨다운 object의 active 상태가 false이면
         {
-            downTime = 0;
+            downTime = 0;                           // C : 다음 애니메이션을 위해 레벨다운 애니메이션 타임을 0으로 초기화
         }
     }
 
@@ -259,6 +260,7 @@ public class ScreenManager : MonoBehaviour
             levelDown.SetActive(true);
         }
 
+        // C : 공감 능력 레벨에 따른 맵 변화
         HeartLevelUpAnimation();
 
         // N : 엔딩 처리

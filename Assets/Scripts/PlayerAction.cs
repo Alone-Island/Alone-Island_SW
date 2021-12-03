@@ -98,10 +98,12 @@ public class PlayerAction : MonoBehaviour
         {
             if (specialManager.special)     // J : 스페셜 이벤트 진행 중
             {
-                if (specialManager.AItalk)  // J : 선택지가 뜨기 전이라면
+                if (specialManager.specialTalk)  // J : 선택지가 뜨기 전이라면
                     specialManager.Talk();  // J : specialManager의 Talk 함수 호출
-                else if (specialManager.result)     // J : 선택지 클릭한 후 (스페셜 이벤트 진행중)
+                else if (specialManager.resultTalk)     // J : 선택지 클릭한 후 (스페셜 이벤트 진행중)
                     specialManager.ResultTalk();    // J : 결과 텍스트 보여주기
+                else if (specialManager.disasterTalk)
+                    specialManager.DisasterTalk();
             }
             else if (scanObject != null)        // J : 스페셜 이벤트 진행 중이 아니고 scanObject가 있으면
                 manager.Action(scanObject);     // C : 맵의 대화창에 적절한 메세지가 뜰 수 있도록 Action()함수 실행

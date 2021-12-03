@@ -14,8 +14,9 @@ public class SpecialEventManager : MonoBehaviour
     public TextMeshProUGUI talkText;    // J : 대화창의 text
     public int talkIndex;               // J : talkIndex를 저장하기 위한 변수
     public bool special = false;        // J : 스페셜 이벤트 진행중인지 여부
-    public bool AItalk = false;         // J : AI가 스페셜 이벤트 대화를 하는지 여부 (선택지 선택 전)
-    public bool result = false;         // J : 결과 텍스트 창을 보여주는지 여부 (선택지 선택 후)
+    public bool specialTalk = false;    // J : AI가 스페셜 이벤트 대화를 하는지 여부 (선택지 선택 전)
+    public bool disasterTalk = false;   // J : 위험도 엔딩 대화를 하는지 여부
+    public bool resultTalk = false;     // J : 결과 텍스트 창을 보여주는지 여부 (선택지 선택 후)
     public TextMeshProUGUI selectText0, selectText1, selectText2;
     public Button selectButton0, selectButton1, selectButton2;
 
@@ -29,16 +30,19 @@ public class SpecialEventManager : MonoBehaviour
     // J : Special Event 발생
     public void Action() 
     {
-        AItalk = true;  // J : Jump키를 눌렀을 때 object scan을 할 수 없게 함
         special = true;
 
         System.Random rand = new System.Random();
         
         int danger = (int)((10 - screenManager.houseLv.fCurrValue));   // J : 위험도 계산
         if (rand.Next(100) < danger)    // J : 위험도가 높아 재난 발생
-            Disaster();
+        {
+            talkPanel.SetActive(true);  // J : 대화창 활성화
+            Disaster(); // J : 재난 발생
+        }
         else 
         {
+            specialTalk = true;  // J : Jump키를 눌렀을 때 object scan을 할 수 없게 함
             firstRandomNum = rand.Next(2);      // J : 0-1까지의 난수 생성 (0 : 선택지 2개, 1: 선택지 3개)
             secondRandomNum = rand.Next(1, 5);  // J : 1-4까지의 난수 생성
 
@@ -67,17 +71,27 @@ public class SpecialEventManager : MonoBehaviour
 
     private void Disaster()
     {
-        AItalk = false;
-        special = false;
-        switch ((new System.Random()).Next(2))  // J : 각 재난은 50% 확률로 발생
+        disasterTalk = true;
+        specialID = 11000 + (new System.Random()).Next(2);  // J : 각 재난은 50% 확률로 발생
+        DisasterTalk();
+    }
+
+    // J : 실행될 때마다 다음 문장으로 넘어감
+    public void DisasterTalk()
+    {
+        string talkData = talkManager.GetTalkData(specialID, talkIndex);   // J : TalkManager로부터 talkData를 가져오기
+        if (talkData == null)   // J : 해당 talkID의 talkData를 모두 가져왔다면
         {
-            case 0: // J : 쓰나미
-                endingManager.suddenEnding(5);
-                break;
-            case 1: // J : 운석 충돌
-                endingManager.suddenEnding(6);
-                break;
+            // J : 스페셜 이벤트 Flag 초기화
+            disasterTalk = false;
+            special = false;
+            talkIndex = 0;      // J : talk index 초기화
+            talkPanel.SetActive(false); // J : 대화창 활성화
+            endingManager.disasterEnding(specialID - 11000);    // J : 위험도 엔딩
+            return;
         }
+        talkText.text = talkData;       // J : talkPanel의 text를 talkData로 설정
+        talkIndex++;                    // J : 해당 talkID의 다음 talkData string을 가져오기 위해
     }
 
     // J : 실행될 때마다 다음 문장으로 넘어감
@@ -86,7 +100,7 @@ public class SpecialEventManager : MonoBehaviour
         string talkData = talkManager.GetTalkData(specialID, talkIndex);   // J : TalkManager로부터 talkData를 가져오기
         if (talkData == null)   // J : 해당 talkID의 talkData를 모두 가져왔다면
         {
-            AItalk = false;     // J : Jump키를 눌렀을 때 object scan을 할 수 있게 함
+            specialTalk = false;     // J : Jump키를 눌렀을 때 object scan을 할 수 있게 함
             talkIndex = 0;      // J : talk index 초기화
             Select();           // J : 선택지 화면에 보임
             return;
@@ -98,11 +112,11 @@ public class SpecialEventManager : MonoBehaviour
     // J : 선택지 클릭 후 호출, 실행될 때마다 다음 문장으로 넘어감
     public void ResultTalk()
     {
-        result = true;  // J : 결과 텍스트를 보여주는 상태
+        resultTalk = true;  // J : 결과 텍스트를 보여주는 상태
         string talkData = talkManager.GetResultData(specialID * 10 + select, talkIndex);   // J : TalkManager로부터 resultData를 가져오기
         if (talkData == null)   // J : 해당 talkID의 resultData를 모두 가져왔다면
         {
-            result = false;     // J : 결과 텍스트 종료
+            resultTalk = false;     // J : 결과 텍스트 종료
             special = false;    // J : 스페셜 이벤트 종료
             talkIndex = 0;      // J : talk index 초기화
             Result();           // J : 결과 반영

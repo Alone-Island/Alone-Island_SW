@@ -56,6 +56,10 @@ public class TalkManager : MonoBehaviour
         talkData.Add(10013, new string[] { "(나무가 쓰러져서 AI가 다쳤다. 어떻게 할까?)" });
         talkData.Add(10014, new string[] { "박사님 신기하게 생긴 생물을 발견했어요! 박사님께 드리려고 힘들게 잡았어요ㅎㅎ" });
 
+        // J : key가 11000~이면 위험도 엔딩에 대한 text data
+        talkData.Add(11000, new string[] { "박사님!", "저기 밀려오는 바닷물이 저번에 말씀하셨던 파도풀인가요?" });
+        talkData.Add(11001, new string[] { "박사님!", "별이 저희한테 다가오고 있어요!!", "너무 멋있지 않아요?"});
+
         // J : key가 10001~10013이면 스페셜 이벤트에 대한 선택지 data
         selectData.Add(10001, new string[] { "그래 하루 쉬자", "안돼안돼 지금 바로 일 해야돼!" });
         selectData.Add(10002, new string[] { "고마워~ 먹어보자!", "고맙지만 처음보는 열매는 위험해! " });

@@ -97,6 +97,25 @@ public class EndingManager : MonoBehaviour
         Invoke("TheEnd", 2.0f);
     }
 
+    public void disasterEnding(int endingCode)
+    {
+        ending();
+        switch(endingCode)
+        {
+            case 0: // J : Bad Ending (쓰나미)
+                Debug.Log("쓰나미");
+                DataController.Instance.endingData.storm = 1;
+                panel.transform.Find("Bad-Storm").gameObject.SetActive(true);
+                break;
+            case 1: // J : Bad Ending (운석충돌)
+                Debug.Log("운석 충돌");
+                DataController.Instance.endingData.space = 1;
+                panel.transform.Find("Bad-Space").gameObject.SetActive(true);
+                break;
+        }
+        Invoke("TheEnd", 2.0f);
+    }
+
 
 
     // K : 해피 엔딩

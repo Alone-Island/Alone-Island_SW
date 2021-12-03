@@ -25,12 +25,12 @@ public class PlayerAction : MonoBehaviour
     public GameObject craftIcon;
     public GameObject engineerIcon;
 
-    // C :
-    public GameObject addBook;      // C :
-    //private float time = 0;         // C :
-    public GameObject player;       // C :
-    private List<GameObject> addBookListG = new List<GameObject>();      // C :
-    private List<float> addBookListT = new List<float>();      // C :
+    // C : 책을 찾았을 때 'book + 1' 애니메이션을 주기 위한 변수들
+    public GameObject addBook;      // C : 'book + 1' object 변수
+    //private float time = 0;       // C :
+    public GameObject player;       // C : 플레이어 object 변수
+    private List<GameObject> addBookListG = new List<GameObject>();      // C : addBook object를 담을 리스트
+    private List<float> addBookListT = new List<float>();                // C : addBook의 애니메이션 시간을 담을 리스트
 
     Rigidbody2D rigid;  // C : 물리 제어
     Animator anim;      // C : 애니메이션 제어
@@ -131,19 +131,21 @@ public class PlayerAction : MonoBehaviour
             }
         }
        
-            // C : 
-            for (int i = 0; i < addBookListG.Count; i++)
+        // C : 책을 찾았을 때 책 추가 애니메이션 시간 조정을 위해
+        // C : 책 추가 애니메이션을 띄울 addBook object가 존재할 경우
+        for (int i = 0; i < addBookListG.Count; i++)
         {
+            // C : 해당 addBook object의 active 상태가 true인 경우
             if (addBookListG[i].activeSelf == true)
             {
-                addBookListT[i] += Time.deltaTime;
-                if (addBookListT[i] > 2f)
+                addBookListT[i] += Time.deltaTime;      // C : 해당 addBook object 애니메이션 타임에 흐른 시간 추가
+                if (addBookListT[i] > 2f)               // C : 해당 addBook object 애니메이션 타임이 2초가 지났을 때
                 {
-                    addBookListT[i] = 0;
-                    addBookListG[i].SetActive(false);
-                    Destroy(addBookListG[i]);
-                    addBookListG.RemoveAt(i);
-                    addBookListT.RemoveAt(i);
+                    addBookListT[i] = 0;                // C : 해당 addBook object 애니메이션 타임을 0으로 초기화
+                    addBookListG[i].SetActive(false);   // C : 해당 addBook object의 active 상태를 false로 변환
+                    Destroy(addBookListG[i]);           // C : 해당 addBook object를 삭제
+                    addBookListG.RemoveAt(i);           // C : addBook을 담는 리스트에서 해당 addBook object 삭제
+                    addBookListT.RemoveAt(i);           // C : addBook 애니메이션 시간을 담는 리스트에서 해당 addBook 애니메이션 시간 변수 삭제
                 }
             }
         }
@@ -178,10 +180,14 @@ public class PlayerAction : MonoBehaviour
             // manager.talkText.text = "책을 찾았습니다!";     // J : 대화창 텍스트 적용
             screenManager.getBook();                        // J : 책 개수 증가
 
-            // C :
+            // C : 책 추가 애니메이션 실행하기
+            // C : 책 추가 game object를 복사하여 새로운 책 추가 game object 생성
             GameObject bookInstance = Instantiate(addBook, player.transform.localPosition, Quaternion.identity);
+            // C : 현재 player의 머리 위에 bookInstance가 위치하도록 bookInstance의 부모 object 변경
             bookInstance.transform.SetParent(player.transform);
-            bookInstance.SetActive(true);                   // C : player 머리 위의 책 object 보이기
+            // C : player 머리 위의 책 object 보이기
+            bookInstance.SetActive(true);
+            // C : 애니메이션 시작과 끝을 관리하기 위해 bookInstance와 애니메이션 시간을 리스트에 추가
             addBookListG.Add(bookInstance);
             addBookListT.Add(0f);                       
         }

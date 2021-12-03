@@ -201,37 +201,6 @@ public class ScreenManager : MonoBehaviour
     {
         farmLv.fCurrValue++;
         hungerStat.fCurrValue += 50;
-
-        if (farmLv.fCurrValue == 3)
-        {
-            nextMap = GameObject.Find("Farm").transform.Find("Lv3-4");
-            currColor.a = 0;
-            StartCoroutine("fadeIn");
-        }
-        else if (farmLv.fCurrValue == 5)
-        {
-            // N : 레벨 5-6
-            preMap = GameObject.Find("Farm").transform.Find("Lv3-4");
-            nextMap = GameObject.Find("Farm").transform.Find("Lv5-6");
-            currColor.a = 1;
-            StartCoroutine("fadeOut");
-        }
-        else if (farmLv.fCurrValue == 7)
-        {
-            // N : 레벨 7-8
-            preMap = GameObject.Find("Farm").transform.Find("Lv5-6");
-            nextMap = GameObject.Find("Farm").transform.Find("Lv7-8");
-            currColor.a = 1;
-            StartCoroutine("fadeOut");
-        }
-        else if (farmLv.fCurrValue == 9)
-        {
-            // N : 레벨 9-10
-            preMap = GameObject.Find("Farm").transform.Find("Lv7-8");
-            nextMap = GameObject.Find("Farm").transform.Find("Lv9-10");
-            currColor.a = 1;
-            StartCoroutine("fadeOut");
-        }
     }
 
     // N : 건축 배우기
@@ -239,29 +208,6 @@ public class ScreenManager : MonoBehaviour
     {
         houseLv.fCurrValue++;
         //dangerStat.fCurrValue += 50;
-
-        if (houseLv.fCurrValue == 3)
-        {
-            nextMap = GameObject.Find("House").transform.Find("Lv3-5");
-            currColor.a = 0;
-            StartCoroutine("fadeIn");
-        }
-        else if (houseLv.fCurrValue == 6)
-        {
-            // N : 레벨 6-8
-            preMap = GameObject.Find("House").transform.Find("Lv3-5");
-            nextMap = GameObject.Find("House").transform.Find("Lv6-8");
-            currColor.a = 1;
-            StartCoroutine("fadeOut");
-        }
-        else if (houseLv.fCurrValue == 9)
-        {
-            // N : 레벨 9-10
-            preMap = GameObject.Find("House").transform.Find("Lv6-8");
-            nextMap = GameObject.Find("House").transform.Find("Lv9-10");
-            currColor.a = 1;
-            StartCoroutine("fadeOut");
-        }
     }
 
     // N : 공예 배우기
@@ -270,50 +216,14 @@ public class ScreenManager : MonoBehaviour
         craftLv.fCurrValue++;
         temperatureStat.fCurrValue += 50;
 
-        if (craftLv.fCurrValue == 4)
-        {
-            preMap = GameObject.Find("Craft_Room").transform.Find("Lv1-3");
-            nextMap = GameObject.Find("Craft_Room").transform.Find("Lv4-7");
-            currColor.a = 1;
-            StartCoroutine("fadeOut");
-        }
-        else if (craftLv.fCurrValue == 8)
-        {
-            // N : 레벨 8-10
-            preMap = GameObject.Find("Craft_Room").transform.Find("Lv4-7");
-            nextMap = GameObject.Find("Craft_Room").transform.Find("Lv8-10");
-            currColor.a = 1;
-            StartCoroutine("fadeOut");
-        }
+        
     }
 
     // N : 공학 배우기
     public void EngineerStudy()
     {
         engineerLv.fCurrValue++;
-
-        if (engineerLv.fCurrValue == 3)
-        {
-            nextMap = GameObject.Find("Lab").transform.Find("Lv3-5");
-            currColor.a = 0;
-            StartCoroutine("fadeIn");
-        }
-        else if (engineerLv.fCurrValue == 6)
-        {
-            // N : 레벨 6-8
-            preMap = GameObject.Find("Lab").transform.Find("Lv3-5");
-            nextMap = GameObject.Find("Lab").transform.Find("Lv6-8");
-            currColor.a = 1;
-            StartCoroutine("fadeOut");
-        }
-        else if (engineerLv.fCurrValue == 9)
-        {
-            // N : 레벨 9-10
-            preMap = GameObject.Find("Lab").transform.Find("Lv6-8");
-            nextMap = GameObject.Find("Lab").transform.Find("Lv9-10");
-            currColor.a = 1;
-            StartCoroutine("fadeOut");
-        }
+               
 
         // N : 엔딩 처리
         if (engineerLv.fCurrValue >= engineerLv.maxValue)
@@ -349,20 +259,7 @@ public class ScreenManager : MonoBehaviour
             levelDown.SetActive(true);
         }
 
-        if (heartLv.fCurrValue == 7)
-        {
-            nextMap = GameObject.Find("plant").transform.Find("Lv8-14");
-            currColor.a = 0;
-            StartCoroutine("fadeIn");
-        }
-        else if (heartLv.fCurrValue == 15)
-        {
-            // N : 레벨 8-14
-            preMap = GameObject.Find("plant").transform.Find("Lv8-14");
-            nextMap = GameObject.Find("plant").transform.Find("Lv15-20");
-            currColor.a = 1;
-            StartCoroutine("fadeOut");
-        }
+        HeartLevelUpAnimation();
 
         // N : 엔딩 처리
         if (happyStat.fCurrValue < 0 || heartLv.fCurrValue < 0) endingManager.failLonely();
@@ -370,6 +267,130 @@ public class ScreenManager : MonoBehaviour
         {
             if (engineerLv.fCurrValue > 13.0f) endingManager.successPeople(); // N : 공학 능력이 높은 경우
             else endingManager.successTwo(); // N : 공학 능력이 낮은 경우
+        }
+    }
+
+    public void FarmLevelUpAnimation()
+    {
+        if (farmLv.fCurrValue == 9)
+        {
+            // N : 레벨 9-10
+            preMap = GameObject.Find("Farm").transform.Find("Lv7-8");
+            nextMap = GameObject.Find("Farm").transform.Find("Lv9-10");
+            currColor.a = 1;
+            StartCoroutine("fadeOut");
+        }
+        else if (farmLv.fCurrValue == 7)
+        {
+            // N : 레벨 7-8
+            preMap = GameObject.Find("Farm").transform.Find("Lv5-6");
+            nextMap = GameObject.Find("Farm").transform.Find("Lv7-8");
+            currColor.a = 1;
+            StartCoroutine("fadeOut");
+        }
+        else if (farmLv.fCurrValue == 5)
+        {
+            // N : 레벨 5-6
+            preMap = GameObject.Find("Farm").transform.Find("Lv3-4");
+            nextMap = GameObject.Find("Farm").transform.Find("Lv5-6");
+            currColor.a = 1;
+            StartCoroutine("fadeOut");
+        }
+        else if (farmLv.fCurrValue == 3)
+        {
+            nextMap = GameObject.Find("Farm").transform.Find("Lv3-4");
+            currColor.a = 0;
+            StartCoroutine("fadeIn");
+        }
+        
+    }
+
+    public void HouseLevelUpAnimation()
+    {
+        if (houseLv.fCurrValue == 9)
+        {
+            // N : 레벨 9-10
+            preMap = GameObject.Find("House").transform.Find("Lv6-8");
+            nextMap = GameObject.Find("House").transform.Find("Lv9-10");
+            currColor.a = 1;
+            StartCoroutine("fadeOut");
+        }
+        else if (houseLv.fCurrValue == 6)
+        {
+            // N : 레벨 6-8
+            preMap = GameObject.Find("House").transform.Find("Lv3-5");
+            nextMap = GameObject.Find("House").transform.Find("Lv6-8");
+            currColor.a = 1;
+            StartCoroutine("fadeOut");
+        }
+        else if (houseLv.fCurrValue == 3)
+        {
+            nextMap = GameObject.Find("House").transform.Find("Lv3-5");
+            currColor.a = 0;
+            StartCoroutine("fadeIn");
+        }
+    } 
+    
+    public void CraftLevelUpAnimation()
+    {
+        if (craftLv.fCurrValue == 8)
+        {
+            // N : 레벨 8-10
+            preMap = GameObject.Find("Craft_Room").transform.Find("Lv4-7");
+            nextMap = GameObject.Find("Craft_Room").transform.Find("Lv8-10");
+            currColor.a = 1;
+            StartCoroutine("fadeOut");
+        }
+        else if (craftLv.fCurrValue == 4)
+        {
+            preMap = GameObject.Find("Craft_Room").transform.Find("Lv1-3");
+            nextMap = GameObject.Find("Craft_Room").transform.Find("Lv4-7");
+            currColor.a = 1;
+            StartCoroutine("fadeOut");
+        }
+    }
+
+    public void EngineerLevelUpAnimation()
+    {
+        if (engineerLv.fCurrValue == 9)
+        {
+            // N : 레벨 9-10
+            preMap = GameObject.Find("Lab").transform.Find("Lv6-8");
+            nextMap = GameObject.Find("Lab").transform.Find("Lv9-10");
+            currColor.a = 1;
+            StartCoroutine("fadeOut");
+        }
+        else if (engineerLv.fCurrValue == 6)
+        {
+            // N : 레벨 6-8
+            preMap = GameObject.Find("Lab").transform.Find("Lv3-5");
+            nextMap = GameObject.Find("Lab").transform.Find("Lv6-8");
+            currColor.a = 1;
+            StartCoroutine("fadeOut");
+        }
+        else if (engineerLv.fCurrValue == 3)
+        {
+            nextMap = GameObject.Find("Lab").transform.Find("Lv3-5");
+            currColor.a = 0;
+            StartCoroutine("fadeIn");
+        }
+    }
+
+    public void HeartLevelUpAnimation()
+    {
+        if (heartLv.fCurrValue == 15)
+        {
+            // N : 레벨 8-14
+            preMap = GameObject.Find("plant").transform.Find("Lv8-14");
+            nextMap = GameObject.Find("plant").transform.Find("Lv15-20");
+            currColor.a = 1;
+            StartCoroutine("fadeOut");
+        }
+        else if (heartLv.fCurrValue == 7)
+        {
+            nextMap = GameObject.Find("plant").transform.Find("Lv8-14");
+            currColor.a = 0;
+            StartCoroutine("fadeIn");
         }
     }
 

@@ -186,8 +186,8 @@ public class SpecialEventManager : MonoBehaviour
                                 screenManager.dayTime = 20;
                                 screenManager.HeartStudy(2); // N : 공감 2레벨 상승
                                 break;
-                            case 4: // J : *추후 추가 예정*
-                                screenManager.HeartStudy(-1);
+                            case 4: // C : 박사님 신기하게 생긴 생물을 발견했어요! 박사님께 드리려고 힘들게 잡았어요ㅎㅎ
+                                screenManager.HeartStudy(-1);   // C : 공감 1레벨 하락
                                 break;
                         }
                         break;
@@ -211,8 +211,8 @@ public class SpecialEventManager : MonoBehaviour
                             case 3: // J : (나무가 쓰러져서 AI가 다쳤다. 어떻게 할까?)
                                     // J : 변화없음
                                 break;
-                            case 4: // J : *추후 추가 예정*
-                                    // 나중에 추가
+                            case 4: // C : 박사님 신기하게 생긴 생물을 발견했어요! 박사님께 드리려고 힘들게 잡았어요ㅎㅎ
+                                    // C : 변화 없음
                                 break;
                         }
                         break;
@@ -230,8 +230,8 @@ public class SpecialEventManager : MonoBehaviour
                     case 3: // J : (나무가 쓰러져서 AI가 다쳤다. 어떻게 할까?)
                         endingManager.suddenEnding(3); // N : Bad Ending (AI 고장)
                         break;
-                    case 4: // J : *추후 추가 예정*
-                        screenManager.HeartStudy(1);
+                    case 4: // C : 박사님 신기하게 생긴 생물을 발견했어요! 박사님께 드리려고 힘들게 잡았어요ㅎㅎ
+                        screenManager.HeartStudy(1);    // C : 공감 1레벨 상승
                         break;
                 }
                 break;

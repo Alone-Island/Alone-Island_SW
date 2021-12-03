@@ -14,10 +14,10 @@ public class GameManager : MonoBehaviour
     public TalkManager talkManager; // C : GameManager에서 TalkManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public int talkIndex;           // C : 필요한 talkIndex를 저장하기 위한 변수 생성
     public int day = 20;            // J : 하루는 20초
-    public int specialEventCoolTimeDay = 10;
+    public int specialEventCoolTimeDay = 10;        // 스페셜 이벤트가 발생하기 위한 쿨타임 일수
 
     public SpecialEventManager specialManager; // J : GameManager에서 SpecialEventManager의 함수를 호출할 수 있도록 talkManager 변수 생성
-    public LearningManager learningManager;     // C :
+    public LearningManager learningManager;     // C : 플레이어가 AI를 학습시키는 action을 시도했을 때, 적절한 학습을 시킬 수 있도록 learningManager 변수 생성
     public ScreenManager screenManager; // N : 책 개수 가져오기 위해
     public AIAction aiAction;           // K : ai와 play가 충돌중인지 확인하기 위해서 > 대화 가능
 
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI alertText;           // N : 알림창의 text
 
-    public ObjectData aiObjData;
+    public ObjectData aiObjData;            // C : 빌드 시 스크립트를 통한 GetComponent 방식에 에러가 발생하기 때문에 (임시로) AIObject를 퍼블릭 변수로 설정
 
     // C : 플레이어가 Object에 대해 조사 시(플레이어의 액션 발생 시) 적절한 내용을 포함한 대화창 띄워주기
     public void Action(GameObject scanObj)
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         if (talkId == 1000)      // C : objData가 AI  
         {
             // N : 
-            if (randomNum == 1000) talkId = 2000;
+            if (randomNum == 1000) talkId = 2000;           // C : AI와 대화하기를 시도했을 때
             else if (randomNum == 0) // C : 대화 첫 시작
             {
                 if (dayTalk > 0)
@@ -66,7 +66,8 @@ public class GameManager : MonoBehaviour
                     randomNum = rand.Next(1, 11);                  // C : 1~10까지의 난수를 대입
                 }
             }
-        } else if (objData.id >= 100 && objData.id <= 400)
+        }
+        else if (objData.id >= 100 && objData.id <= 400)      // C : 학습하기를 시도했을 때
         {
             if (learningManager.isAILearning) // K : 학습하기 조사를 했을때, AI 학습중인 경우 예외처리
             {
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
                 talkId = 600;
             }
         }
+
         Talk(talkId);                   // C : 필요한 talkPanel text 값 가져오기, K : 예외처리를 위해 objData.id > talkId로 수정
 
         if (talkId == 1000) talkPanel.SetActive(isTPShow);      // C : talkPanel 숨기거나 보여주기
@@ -93,14 +95,14 @@ public class GameManager : MonoBehaviour
 
         if (talkData == null || !isSelectedAILearning)           // C : 해당하는 id의 talkData string들을 모두 가져왔다면
         {
-            if (id >= 100 && id <= 400)     // C :
+            if (id >= 100 && id <= 400)                          // C : 학습하기에 대한 talkData를 모두 가져온 경우
             {
-                if (isSelectedAILearning)
+                if (isSelectedAILearning)                        // C : AI가 학습을 해야하는/할수 있는 상황이라면
                 {
-                    learningManager.Learning(id);
+                    learningManager.Learning(id);                // C : 적절한 학습을 실행한다.
                 }
             }
-            else if (id == 1000) screenManager.HeartStudy(0);
+            else if (id == 1000) screenManager.HeartStudy(0);    // C : AI와 대화하기에 대한 talkData를 모두 가져온 경우, 공감 능력을 1 상승시킨다.
 
             isSelectedAILearning = true;
             playerTalk = false;         // J : 정상적으로 special event가 발동하도록 설정

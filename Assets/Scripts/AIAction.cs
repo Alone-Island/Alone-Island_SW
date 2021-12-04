@@ -46,7 +46,7 @@ public class AIAction : MonoBehaviour
                 nextAIMoveY = -1 * vel;
                 break;
             default:
-                nextAIMoveX = 0;
+                nextAIMoveX = 0;            // K : 예외처리 - 정지
                 nextAIMoveY = 0;
                 break;
         }
@@ -90,29 +90,23 @@ public class AIAction : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (specialManager.special || learningManager.isAILearning || gameManager.isEndingShow || gameManager.playerTalk)    // 스페셜 이벤트, 플레이어가 AI와 대화하는 중 또는 AI가 학습중일때 정지
+        if (specialManager.special || learningManager.isAILearning || gameManager.isEndingShow || gameManager.playerTalk || isAICollisionToPlayer)    
+            // K : 스페셜 이벤트, 플레이어가 AI와 대화하는,  AI가 학습중일때 정지, 엔딩카드가 보여졌을 때, AI와 플레이어가 충돌중일때
         {
-            rigid.velocity = new Vector2(0, 0); // K : ai 정지
+            rigid.velocity = new Vector2(0, 0); // K : AI 정지
         }
         else
         {
-            rigid.velocity = new Vector2(nextAIMoveX, nextAIMoveY); // K : ai 이동
+            rigid.velocity = new Vector2(nextAIMoveX, nextAIMoveY); // K : AI 이동
         }
     }
 
-    void OnCollisionEnter2D(Collision2D coll)   // Ai 충돌 감지 함수
+    void OnCollisionEnter2D(Collision2D coll)   // K : AI 충돌 감지 함수
     {
-        //isAICollision = true;
-        // Dr.Kim과 충돌 시 그 자리에 멈춤
         if (coll.gameObject.name == "Dr.Kim")
         {
-            isAICollisionToPlayer = true;
-            nextAIMoveX = 0;
-            nextAIMoveY = 0;
-            vel = 0;
-        }
-
-        
+            isAICollisionToPlayer = true;   // K : AI가 플레이어와 충돌을 확인하기 위한 코드
+        }        
     }
 
     void OnCollisionStay2D(Collision2D coll)  // Ai 충돌 유지 감지 함수
@@ -120,13 +114,11 @@ public class AIAction : MonoBehaviour
         
     }
 
-    void OnCollisionExit2D(Collision2D coll)   // K : Ai 충돌 제거 감지 함수
+    void OnCollisionExit2D(Collision2D coll)   // K : AI 충돌 제거 감지 함수
     {
-        //isAICollision = false;                 // K : AI 충돌 멈춤
-        if (coll.gameObject.name == "Dr.Kim")  // K : Ai가 플레이어와 충돌을 끝나면 출발
+        if (coll.gameObject.name == "Dr.Kim")
         {
-            isAICollisionToPlayer = false;
-            vel = 1;
+            isAICollisionToPlayer = false; // K : AI가 플레이어와 충돌이 제거됨을 확인하기 위한 코드
         }
     }
 }

@@ -11,7 +11,7 @@ public class TextManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI dialog; // K : text 오브젝트를 받아오기 위한 변수입니다. > using TMPro;          
     public GameManager manager;
     public EndingManager endingManager;
-    public string[] fullText;
+    private string[] fullText;                       // K : 타이핑 효과를 줄 텍스트를 담기 위한 배열입니다
 
     // K : synopsys의 텍스트들(여러 문장)의 배열입니다.
     private string[] synopsysFullText = { 
@@ -27,10 +27,10 @@ public class TextManager : MonoBehaviour
     int currentPoint = 0; // K : synopsysFullText에서 현재 포인터가 어디있는지 저장하기 위한 변수입니다.
 
     public bool isTyping = true; // K : 현재 글자가 화면에 타이핑되고 있는지 확인하기 위한 변수입니다.
-    bool isSkipPart = false;
+    bool isSkipPart = false;     // K : 현재 문장을 타이핑 효과 없이 바로 화면에 띄울지 확인하기 위한 변수입니다.
 
     void Start() {
-        fullText = synopsysFullText;
+        fullText = synopsysFullText;                // K : synopsys를 타이핑 효과를 주기 위해 fullText에 담는 코드입니다.
 
         StartCoroutine("TypingAction", 0);          // K : 스크립트의 시작과 동시에 시놉시스를 타이핑을 시작하는 코드입니다.
     }
@@ -56,11 +56,11 @@ public class TextManager : MonoBehaviour
     public void GoToGameScreen() // K : 게임 신으로 가는 함수입니다.
     {
         // K : 모든 변수 초기화
-        StopCoroutine("TypingAction");
-        currentPoint = 0;
-        subText = "";
-        isTyping = true;
-        isSkipPart = false;
+        StopCoroutine("TypingAction");  // K : 타이핑 코루틴을 멈추기 위한 코드
+        currentPoint = 0;               // K : 타이핑 효과를 준 배열의 포인터를 0으로 초기화
+        subText = "";                   // K : 타이핑 효과를 주기 위해 텍스트의 일부 를 담기 위한 변수 초기화
+        isTyping = false;               // K : 타이핑이 멈춤
+        isSkipPart = false;             // K : 타이핑 스킵 초기화
 
         SceneManager.LoadScene("MainGame"); // K : 시놉시스가 끝나고 게임 신으로 가게 하는 함수입니다. > using UnityEngine.SceneManagement
     }

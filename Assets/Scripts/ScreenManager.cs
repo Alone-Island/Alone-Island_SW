@@ -89,7 +89,7 @@ public class ScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // K :learningTime 
+        // N :learningTime 
         if(learningManager.isAILearning)
         {
             learningTime.text = learningManager.learningTime.ToString();
@@ -272,6 +272,7 @@ public class ScreenManager : MonoBehaviour
         }
     }
 
+    // N, K : 농사 학습시 레벨업 애니매이션
     public void FarmLevelUpAnimation()
     {
         if (farmLv.fCurrValue == 9)
@@ -307,6 +308,7 @@ public class ScreenManager : MonoBehaviour
         
     }
 
+    // N, K : 건축 학습시 레벨업 애니매이션
     public void HouseLevelUpAnimation()
     {
         if (houseLv.fCurrValue == 9)
@@ -331,8 +333,8 @@ public class ScreenManager : MonoBehaviour
             currColor.a = 0;
             StartCoroutine("fadeIn");
         }
-    } 
-    
+    }
+    // N, K : 공예 학습시 레벨업 애니매이션
     public void CraftLevelUpAnimation()
     {
         if (craftLv.fCurrValue == 8)
@@ -351,7 +353,7 @@ public class ScreenManager : MonoBehaviour
             StartCoroutine("fadeOut");
         }
     }
-
+    // N, K : 공학 학습시 레벨업 애니매이션
     public void EngineerLevelUpAnimation()
     {
         if (engineerLv.fCurrValue == 9)
@@ -377,7 +379,7 @@ public class ScreenManager : MonoBehaviour
             StartCoroutine("fadeIn");
         }
     }
-
+    // N, K : 공감 학습시 레벨업 애니매이션
     public void HeartLevelUpAnimation()
     {
         if (heartLv.fCurrValue == 15)

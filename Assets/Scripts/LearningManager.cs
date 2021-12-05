@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-Define BASELEARNINGTIME 5; // 기본 학습 시간
 
 public class LearningManager : MonoBehaviour
 {
@@ -10,7 +9,7 @@ public class LearningManager : MonoBehaviour
     public bool isAILearning = false;         // K : AI가 학습중인지 확인하는 변수
    
     private float initLearningTime = 4;     // C : 초기 학습 시간
-    public float learningTime = BASELEARNINGTIME;  // C : 스크린에 명시할 남은 학습 시간, K : 기본 학습시간으로 초기화
+    public float learningTime = 4;  // C : 스크린에 명시할 남은 학습 시간, K : 기본 학습시간으로 초기화
 
     public GameObject farmTextObject;       // C : 농사 학습하기 완료 시, 농사 레벨 위에 +1 애니메이션을 실행하기 위해 필요한 변수
     public GameObject houseTextObject;      // C : 건축 학습하기 완료 시, 건축 레벨 위에 +1 애니메이션을 실행하기 위해 필요한 변수
@@ -25,7 +24,7 @@ public class LearningManager : MonoBehaviour
     public void CompleateLearning()
     {
         isAILearning = false;
-        learningTime = BASELEARNINGTIME;       // K : 기본 학습시간으로 초기화
+        learningTime = initLearningTime;       // K : 기본 학습시간으로 초기화
 
         // C : 학습하기 id에 따라 다른 결과 실행
         switch (learningId)

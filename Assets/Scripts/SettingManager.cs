@@ -43,10 +43,11 @@ public class SettingManager : MonoBehaviour
 
     }
 
-    // J : 저장하기 버튼 onclick
-    public void SelectStore()
+    // J : 게임 종료 버튼 onclick
+    public void SelectGameQuit()
     {
-        Debug.Log("저장하기");
+        Debug.Log("게임 종료");
+        Application.Quit(); // J : 프로그램 종료
     }
 
     // J : 메뉴로 돌아가기 버튼 onclick

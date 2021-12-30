@@ -28,12 +28,6 @@ public class MenuScript : MonoBehaviour
             SceneManager.LoadScene("MainGame"); // J : MainGame scene으로 이동
     }
 
-    // J : 불러오기 버튼 onclick
-    public void SelectBring()
-    {
-        Debug.Log("불러오기");
-    }
-
     // J : 엔딩카드 버튼 onclick
     public void SelectCard()
     {

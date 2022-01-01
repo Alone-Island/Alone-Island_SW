@@ -78,13 +78,21 @@ public class AIAction : MonoBehaviour
     void Update()
     {
         // C : ai 이동(NextAiMoveDirection의 결과)값에 따라 애니메이션 적용
-        if (anim.GetInteger("hAxisRaw") != nextAIMoveX)         // C : ai 좌우 이동 시 적절한 애니메이션 실행
+        if (!isAICollisionToPlayer)
         {
-            anim.SetInteger("hAxisRaw", (int)nextAIMoveX);
+            if (anim.GetInteger("hAxisRaw") != nextAIMoveX)         // C : ai 좌우 이동 시 적절한 애니메이션 실행
+            {
+                anim.SetInteger("hAxisRaw", (int)nextAIMoveX);
+            }
+            else if (anim.GetInteger("vAxisRaw") != nextAIMoveY)    // C : ai 상하 이동 시 적절한 애니메이션 실행
+            {
+                anim.SetInteger("vAxisRaw", (int)nextAIMoveY);
+            }
         }
-        else if (anim.GetInteger("vAxisRaw") != nextAIMoveY)    // C : ai 상하 이동 시 적절한 애니메이션 실행
+        else
         {
-            anim.SetInteger("vAxisRaw", (int)nextAIMoveY);
+            anim.SetInteger("hAxisRaw", 0);
+            anim.SetInteger("vAxisRaw", 0);
         }
     }
 
@@ -106,52 +114,50 @@ public class AIAction : MonoBehaviour
         if (coll.gameObject.name == "Dr.Kim")
         {
             isAICollisionToPlayer = true;   // K : AI가 플레이어와 충돌을 확인하기 위한 코드
-
-            //Vector3 direction = transform.position - coll.gameObject.transform.position;
             
             // C : 충돌 방향 감지
-            Vector2 direction = transform.position - coll.gameObject.transform.position;
-            Debug.Log("ai direction : " + transform.position);
+            Vector2 collisionDir = transform.position - coll.gameObject.transform.position;
+            
+            /*Debug.Log("ai direction : " + transform.position);
             Debug.Log("박사 direction : " + coll.gameObject.transform.position);
-            Debug.Log("direction : " + direction);
+            Debug.Log("direction : " + collisionDir);
+
+            int collisionDirX = Mathf.RoundToInt(collisionDir.x);
+            int collisionDirY = Mathf.RoundToInt(collisionDir.y);
+            Debug.Log("x절댓값 : " + Mathf.Abs(collisionDir.x));
+            Debug.Log("y절댓값 : " + Mathf.Abs(collisionDir.y));
+
+            Debug.Log("x : " + collisionDir.x + "dX : " + collisionDirX + "절댓값 : " + Mathf.Abs(collisionDir.x));
+            Debug.Log("y : " + collisionDir.y + "dY : " + collisionDirY + "절댓값 : " + Mathf.Abs(collisionDir.y));
             
-            /*int directionX = Mathf.RoundToInt(direction.x);
-            int directionY = Mathf.RoundToInt(direction.y);
-            Debug.Log("x절댓값 : " + Mathf.Abs(direction.x));
-            Debug.Log("y절댓값 : " + Mathf.Abs(direction.y));
 
-            
-            Debug.Log("x : " + direction.x + "dX : " + directionX + "절댓값 : " + Mathf.Abs(direction.x));
-            Debug.Log("y : " + direction.y + "dY : " + directionY + "절댓값 : " + Mathf.Abs(direction.y));
-            
+            //Debug.Log("x  : " + collisionDirX + ", 절대값 x : " + Mathf.Abs(collisionDirX));
+            //Debug.Log("y  : " + collisionDirY + ", 절대값 y : " + Mathf.Abs(collisionDirY));
 
-            //Debug.Log("x  : " + directionX + ", 절대값 x : " + Mathf.Abs(directionX));
-            //Debug.Log("y  : " + directionY + ", 절대값 y : " + Mathf.Abs(directionY));
+            Debug.Log("x 절대값 : " + Math.Abs((int)collisionDir.x));
+            Debug.Log("y 절대값 : " + Math.Abs((int)collisionDir.y));*/
 
-            Debug.Log("x 절대값 : " + Math.Abs((int)direction.x));
-            Debug.Log("y 절대값 : " + Math.Abs((int)direction.y));*/
-
-            if (Mathf.Abs(direction.x) > 1)
+            if (Mathf.Abs(collisionDir.x) > 1)
             {
-                if (direction.x - direction.y < 0)
+                if (collisionDir.x - collisionDir.y < 0)
                 {
                     Debug.Log("박사 방향 : 오른쪽");
                     anim.SetBool("right", true);
                 }
-                else if (direction.x - direction.y > 0)
+                else if (collisionDir.x - collisionDir.y > 0)
                 {
                     Debug.Log("박사 방향 : 왼쪽");
                     anim.SetBool("left", true);
                 }
             }
-            else if(Mathf.Abs(direction.y) > 1)
+            else if(Mathf.Abs(collisionDir.y) > 1)
             {
-                if (direction.x - direction.y < 0)
+                if (collisionDir.x - collisionDir.y < 0)
                 {
                     Debug.Log("박사 방향 : 아래쪽");
                     anim.SetBool("down", true);
                 }
-                else if (direction.x - direction.y > 0)
+                else if (collisionDir.x - collisionDir.y > 0)
                 {
                     Debug.Log("박사 방향 : 위쪽");
                     anim.SetBool("up", true);
@@ -177,4 +183,5 @@ public class AIAction : MonoBehaviour
             anim.SetBool("down", false);
         }
     }
+
 }

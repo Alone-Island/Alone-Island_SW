@@ -106,6 +106,58 @@ public class AIAction : MonoBehaviour
         if (coll.gameObject.name == "Dr.Kim")
         {
             isAICollisionToPlayer = true;   // K : AI가 플레이어와 충돌을 확인하기 위한 코드
+
+            //Vector3 direction = transform.position - coll.gameObject.transform.position;
+            
+            // C : 충돌 방향 감지
+            Vector2 direction = transform.position - coll.gameObject.transform.position;
+            Debug.Log("ai direction : " + transform.position);
+            Debug.Log("박사 direction : " + coll.gameObject.transform.position);
+            Debug.Log("direction : " + direction);
+            
+            /*int directionX = Mathf.RoundToInt(direction.x);
+            int directionY = Mathf.RoundToInt(direction.y);
+            Debug.Log("x절댓값 : " + Mathf.Abs(direction.x));
+            Debug.Log("y절댓값 : " + Mathf.Abs(direction.y));
+
+            
+            Debug.Log("x : " + direction.x + "dX : " + directionX + "절댓값 : " + Mathf.Abs(direction.x));
+            Debug.Log("y : " + direction.y + "dY : " + directionY + "절댓값 : " + Mathf.Abs(direction.y));
+            
+
+            //Debug.Log("x  : " + directionX + ", 절대값 x : " + Mathf.Abs(directionX));
+            //Debug.Log("y  : " + directionY + ", 절대값 y : " + Mathf.Abs(directionY));
+
+            Debug.Log("x 절대값 : " + Math.Abs((int)direction.x));
+            Debug.Log("y 절대값 : " + Math.Abs((int)direction.y));*/
+
+            if (Mathf.Abs(direction.x) > 1)
+            {
+                if (direction.x - direction.y < 0)
+                {
+                    Debug.Log("박사 방향 : 오른쪽");
+                    anim.SetBool("right", true);
+                }
+                else if (direction.x - direction.y > 0)
+                {
+                    Debug.Log("박사 방향 : 왼쪽");
+                    anim.SetBool("left", true);
+                }
+            }
+            else if(Mathf.Abs(direction.y) > 1)
+            {
+                if (direction.x - direction.y < 0)
+                {
+                    Debug.Log("박사 방향 : 아래쪽");
+                    anim.SetBool("down", true);
+                }
+                else if (direction.x - direction.y > 0)
+                {
+                    Debug.Log("박사 방향 : 위쪽");
+                    anim.SetBool("up", true);
+                }
+            }
+            
         }        
     }
 
@@ -119,6 +171,10 @@ public class AIAction : MonoBehaviour
         if (coll.gameObject.name == "Dr.Kim")
         {
             isAICollisionToPlayer = false; // K : AI가 플레이어와 충돌이 제거됨을 확인하기 위한 코드
+            anim.SetBool("left", false);
+            anim.SetBool("right", false);
+            anim.SetBool("up", false);
+            anim.SetBool("down", false);
         }
     }
 }

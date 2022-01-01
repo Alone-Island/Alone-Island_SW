@@ -41,7 +41,6 @@ public class SpecialEventManager : MonoBehaviour
         int danger = (int)((10 - screenManager.houseLv.fCurrValue));   // J : 위험도 계산
         if (rand.Next(100) < danger)    // J : 위험도가 높아 재난 발생
         {
-            talkPanel.SetActive(true);  // J : 대화창 활성화
             StartCoroutine("DisasterAfterAlarm");   // C : 스페셜이벤트 발생 알람 후 재난 발생
         }
         else 
@@ -295,7 +294,8 @@ public class SpecialEventManager : MonoBehaviour
     IEnumerator DisasterAfterAlarm()
     {
         playerAction.StartCoroutine("OnAlarm");
-        yield return new WaitForSeconds(3.3f);
+        yield return new WaitForSeconds(3.3f);      // C : 알람 애니메이션 끝난 후
+        talkPanel.SetActive(true);
         Disaster();
     }
 
@@ -303,8 +303,8 @@ public class SpecialEventManager : MonoBehaviour
     IEnumerator TalkAfterAlarm()
     {
         playerAction.StartCoroutine("OnAlarm");
-        yield return new WaitForSeconds(3.3f);
-        talkPanel.SetActive(true);  // J : 대화창 활성화
-        Talk();                     // J : 대화 시작
+        yield return new WaitForSeconds(3.3f);      // C : 알람 애니메이션 끝난 후
+        talkPanel.SetActive(true);
+        Talk();
     }
 }

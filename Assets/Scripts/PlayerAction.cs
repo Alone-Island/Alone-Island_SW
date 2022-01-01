@@ -32,6 +32,11 @@ public class PlayerAction : MonoBehaviour
     private List<GameObject> addBookListG = new List<GameObject>();      // C : addBook object를 담을 리스트
     private List<float> addBookListT = new List<float>();                // C : addBook의 애니메이션 시간을 담을 리스트
 
+    // C : 스페셜이벤트 발생 시 '!' 오브젝트를 띄워주기 위한 변수들
+    public GameObject alarm;        // C : '!' object 변수
+    //private float alarmEffectTime = 0;
+    //int i = 1;
+
     Rigidbody2D rigid;  // C : 물리 제어
     Animator anim;      // C : 애니메이션 제어
 
@@ -149,6 +154,36 @@ public class PlayerAction : MonoBehaviour
                 }
             }
         }
+
+
+        
+        /*IEnumerator coroutine = OnAlarm();
+        if(i == 1)
+        {
+            StartCoroutine(coroutine);
+            i--;
+        }*/
+        /*if (i == 1)
+        {
+            OnAlarm();
+            i--;
+        }*/
+        /*
+        // C : alarm 애니메이션의 화면 실행 시간을 조정
+        if (alarm.activeSelf == true)                 // C : object의 active 상태가 true이면
+        {
+            alarmEffectTime += Time.deltaTime;        // C : 애니메이션 타임에 흐른 시간 추가
+            if (alarmEffectTime > 3.3f)                 // C : 애니메이션 타임이 3.3초가 지났을 때
+            {
+                alarm.SetActive(false);               // C : object의 active 상태를 false로 변환
+                alarmEffectTime = 0;                  // C : 다음 애니메이션을 위해 애니메이션 타임을 0으로 초기화
+            }
+        }
+        else                                            // C : object의 active 상태가 false이면
+        {
+            alarmEffectTime = 0;                      // C : 다음 애니메이션을 위해 애니메이션 타임을 0으로 초기화
+        }
+        */
     }
 
     void FixedUpdate()
@@ -191,6 +226,50 @@ public class PlayerAction : MonoBehaviour
             addBookListG.Add(bookInstance);
             addBookListT.Add(0f);                       
         }
+    }
+
+
+    /*// C : 
+    IEnumerator OnAlarm()
+    {
+        int count = 0;
+        while (count < 3)
+        {
+            alarm.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            alarm.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+            count++;
+        }
+    }*/
+
+    /*
+    public void OnAlarm()
+    {
+        alarm.SetActive(true);
+    }
+    */
+
+    /*private static DateTime Delay(int MS)
+    {
+        DateTime startMoment = DateTime.Now;
+        TimeSpan duration = new TimeSpan(0, 0, 0, 0, MS);
+        DateTime endMoment = startMoment.Add(duration);
+        while (endMoment >= startMoment)
+        {
+            System.Windows.Forms.Application.DoEvents();
+            startMoment = DateTime.Now;
+        }
+
+        return DateTime.Now;
+    }*/
+
+    // C : 스페셜이벤트 발생 전 플레이어 머리 위에 알림 띄우기
+    IEnumerator OnAlarm()
+    {
+        alarm.SetActive(true);
+        yield return new WaitForSeconds(3.3f);
+        alarm.SetActive(false);
     }
 
     // N : 장소에 들어가면

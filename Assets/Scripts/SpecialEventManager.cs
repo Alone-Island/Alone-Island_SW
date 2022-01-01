@@ -28,6 +28,9 @@ public class SpecialEventManager : MonoBehaviour
     int secondRandomNum;                // J : 랜덤 스페셜 이벤트를 위한 변수2
     int select;
 
+    // C : 스페셜이벤트 발생 직전, 플레이어 머리 위에 '!' 오브젝트를 띄워주기 위한 변수
+    public PlayerAction playerAction;
+
     // J : Special Event 발생
     public void Action() 
     {
@@ -39,7 +42,7 @@ public class SpecialEventManager : MonoBehaviour
         if (rand.Next(100) < danger)    // J : 위험도가 높아 재난 발생
         {
             talkPanel.SetActive(true);  // J : 대화창 활성화
-            Disaster(); // J : 재난 발생
+            StartCoroutine("DisasterAfterAlarm");   // C : 스페셜이벤트 발생 알람 후 재난 발생
         }
         else 
         {
@@ -49,8 +52,7 @@ public class SpecialEventManager : MonoBehaviour
 
             specialID = 10000 + 10 * firstRandomNum + secondRandomNum; // J : talkData를 갖고 오기 위해 talkID 계산
 
-            talkPanel.SetActive(true);  // J : 대화창 활성화
-            Talk();                     // J : 대화 시작
+            StartCoroutine("TalkAfterAlarm");   // C : 스페셜이벤트 발생 알람 후 대화창 활성화 및 대화 시작
         }
     }
 
@@ -287,6 +289,22 @@ public class SpecialEventManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    }
+
+    // C : 스페셜이벤트 발생 알람 후 재난 발생
+    IEnumerator DisasterAfterAlarm()
+    {
+        playerAction.StartCoroutine("OnAlarm");
+        yield return new WaitForSeconds(3.3f);
+        Disaster();
+    }
+
+    // C : 스페셜이벤트 발생 알람 후 대화창 활성화 및 대화 시작
+    IEnumerator TalkAfterAlarm()
+    {
+        playerAction.StartCoroutine("OnAlarm");
+        yield return new WaitForSeconds(3.3f);
+        talkPanel.SetActive(true);  // J : 대화창 활성화
+        Talk();                     // J : 대화 시작
     }
 }

@@ -5971,6 +5971,7 @@ MonoBehaviour:
   selectButton0: {fileID: 807755068}
   selectButton1: {fileID: 1110692393}
   selectButton2: {fileID: 1956002469}
+  playerAction: {fileID: 513927968}
 --- !u!4 &488290412
 Transform:
   m_ObjectHideFlags: 0
@@ -6178,6 +6179,7 @@ MonoBehaviour:
   engineerIcon: {fileID: 351590406}
   addBook: {fileID: 787727355}
   player: {fileID: 513927967}
+  alarm: {fileID: 521752879}
 --- !u!50 &513927969
 Rigidbody2D:
   serializedVersion: 4
@@ -6517,13 +6519,14 @@ GameObject:
   - component: {fileID: 521752880}
   - component: {fileID: 521752882}
   - component: {fileID: 521752881}
+  - component: {fileID: 521752883}
   m_Layer: 0
   m_Name: alarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &521752880
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6602,6 +6605,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &521752883
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521752879}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 26bc3d17ea97c2e4982d1446249c6a4a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &551020353
 GameObject:
   m_ObjectHideFlags: 0

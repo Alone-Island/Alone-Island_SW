@@ -275,7 +275,7 @@ public class ScreenManager : MonoBehaviour
     // N, K : 농사 학습시 레벨업 애니매이션
     public void FarmLevelUpAnimation()
     {
-        if (farmLv.fCurrValue == 9)
+        if (farmLv.fCurrValue == 8)
         {
             // N : 레벨 9-10
             preMap = GameObject.Find("Farm").transform.Find("Lv7-8");
@@ -283,7 +283,7 @@ public class ScreenManager : MonoBehaviour
             currColor.a = 1;
             StartCoroutine("fadeOut");
         }
-        else if (farmLv.fCurrValue == 7)
+        else if (farmLv.fCurrValue == 6)
         {
             // N : 레벨 7-8
             preMap = GameObject.Find("Farm").transform.Find("Lv5-6");
@@ -291,7 +291,7 @@ public class ScreenManager : MonoBehaviour
             currColor.a = 1;
             StartCoroutine("fadeOut");
         }
-        else if (farmLv.fCurrValue == 5)
+        else if (farmLv.fCurrValue == 4)
         {
             // N : 레벨 5-6
             preMap = GameObject.Find("Farm").transform.Find("Lv3-4");
@@ -299,7 +299,7 @@ public class ScreenManager : MonoBehaviour
             currColor.a = 1;
             StartCoroutine("fadeOut");
         }
-        else if (farmLv.fCurrValue == 3)
+        else if (farmLv.fCurrValue == 2)
         {
             nextMap = GameObject.Find("Farm").transform.Find("Lv3-4");
             currColor.a = 0;
@@ -311,7 +311,7 @@ public class ScreenManager : MonoBehaviour
     // N, K : 건축 학습시 레벨업 애니매이션
     public void HouseLevelUpAnimation()
     {
-        if (houseLv.fCurrValue == 9)
+        if (houseLv.fCurrValue == 8)
         {
             // N : 레벨 9-10
             preMap = GameObject.Find("House").transform.Find("Lv6-8");
@@ -319,7 +319,7 @@ public class ScreenManager : MonoBehaviour
             currColor.a = 1;
             StartCoroutine("fadeOut");
         }
-        else if (houseLv.fCurrValue == 6)
+        else if (houseLv.fCurrValue == 5)
         {
             // N : 레벨 6-8
             preMap = GameObject.Find("House").transform.Find("Lv3-5");
@@ -327,7 +327,7 @@ public class ScreenManager : MonoBehaviour
             currColor.a = 1;
             StartCoroutine("fadeOut");
         }
-        else if (houseLv.fCurrValue == 3)
+        else if (houseLv.fCurrValue == 2)
         {
             nextMap = GameObject.Find("House").transform.Find("Lv3-5");
             currColor.a = 0;
@@ -337,7 +337,7 @@ public class ScreenManager : MonoBehaviour
     // N, K : 공예 학습시 레벨업 애니매이션
     public void CraftLevelUpAnimation()
     {
-        if (craftLv.fCurrValue == 8)
+        if (craftLv.fCurrValue == 7)
         {
             // N : 레벨 8-10
             preMap = GameObject.Find("Craft_Room").transform.Find("Lv4-7");
@@ -345,7 +345,7 @@ public class ScreenManager : MonoBehaviour
             currColor.a = 1;
             StartCoroutine("fadeOut");
         }
-        else if (craftLv.fCurrValue == 4)
+        else if (craftLv.fCurrValue == 3)
         {
             preMap = GameObject.Find("Craft_Room").transform.Find("Lv1-3");
             nextMap = GameObject.Find("Craft_Room").transform.Find("Lv4-7");
@@ -356,7 +356,7 @@ public class ScreenManager : MonoBehaviour
     // N, K : 공학 학습시 레벨업 애니매이션
     public void EngineerLevelUpAnimation()
     {
-        if (engineerLv.fCurrValue == 9)
+        if (engineerLv.fCurrValue == 8)
         {
             // N : 레벨 9-10
             preMap = GameObject.Find("Lab").transform.Find("Lv6-8");
@@ -364,7 +364,7 @@ public class ScreenManager : MonoBehaviour
             currColor.a = 1;
             StartCoroutine("fadeOut");
         }
-        else if (engineerLv.fCurrValue == 6)
+        else if (engineerLv.fCurrValue == 5)
         {
             // N : 레벨 6-8
             preMap = GameObject.Find("Lab").transform.Find("Lv3-5");
@@ -372,7 +372,7 @@ public class ScreenManager : MonoBehaviour
             currColor.a = 1;
             StartCoroutine("fadeOut");
         }
-        else if (engineerLv.fCurrValue == 3)
+        else if (engineerLv.fCurrValue == 2)
         {
             nextMap = GameObject.Find("Lab").transform.Find("Lv3-5");
             currColor.a = 0;
@@ -382,7 +382,7 @@ public class ScreenManager : MonoBehaviour
     // N, K : 공감 학습시 레벨업 애니매이션
     public void HeartLevelUpAnimation()
     {
-        if (heartLv.fCurrValue == 15)
+        if (heartLv.fCurrValue == 14)
         {
             // N : 레벨 8-14
             preMap = GameObject.Find("plant").transform.Find("Lv8-14");

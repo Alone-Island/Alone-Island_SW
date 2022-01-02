@@ -46,6 +46,12 @@ public class TalkManager : MonoBehaviour
         talkData.Add(500, new string[] { "AI가 학습중입니다.\n학습이 끝나고 다시 시도해주세요." });
         talkData.Add(600, new string[] { "책이 없어서 학습을 할 수 없습니다." });
 
+        // N : 레벨 MAX
+        talkData.Add(2100, new string[] { "농사를 전부 배웠어요. 더이상 농사에 대해 학습할 수 없어요." });
+        talkData.Add(2200, new string[] { "건축을 전부 배웠어요. 더이상 건축에 대해 학습할 수 없어요." });
+        talkData.Add(2300, new string[] { "공예를 전부 배웠어요. 더이상 공예에 대해 학습할 수 없어요." });
+        talkData.Add(2400, new string[] { "공학을 전부 배웠어요. 더이상 공학에 대해 학습할 수 없어요." });
+
         // J : key가 10001~10013이면 스페셜 이벤트에 대한 text data (10001~10004 : 선택지 2개, 10011~10013 : 선택지 3개)
         talkData.Add(10001, new string[] { "배터리가 많이 닳았어요ㅠㅠ", "하루만 아무것도 안하고 싶어요.." });
         talkData.Add(10002, new string[] { "박사님을 위해 새로운 열매를 따왔어요!" });

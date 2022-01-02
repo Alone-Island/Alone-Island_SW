@@ -32,6 +32,13 @@ public class AILevel : MonoBehaviour
         fCurrValue = curr;
     }
 
+    public bool IsMax()
+    {
+        bool isMax = false;
+        if (currValue >= maxValue) isMax = true;
+        return isMax;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

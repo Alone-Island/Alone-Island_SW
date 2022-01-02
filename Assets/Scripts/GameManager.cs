@@ -51,14 +51,14 @@ public class GameManager : MonoBehaviour
                      // K : takl data의 id 지정 변수, 예외처리를 위해 추가 설정함
         if (talkId == 1000)      // C : objData가 AI  
         {
-            // N : 
-            if (randomNum == 1000) talkId = 2000;           // C : AI와 대화하기를 시도했을 때
+            // N :
+            if (randomNum == 1000) talkId = 2000;
             else if (randomNum == 0) // C : 대화 첫 시작
             {
                 if (dayTalk > 0)
                 {
-                    talkId = 2000;
-                    randomNum = 1000;
+                    talkId = 2000;                                  // N : 하루에 한 번 이상 대화를 시도하는 경우 예외 처리
+                    randomNum = 1000;                               // N : 대화 중에 하루가 지나면 새로운 대화가 일어나는 것을 방지
                 }
                 else
                 {
@@ -72,10 +72,17 @@ public class GameManager : MonoBehaviour
             if (learningManager.isAILearning) // K : 학습하기 조사를 했을때, AI 학습중인 경우 예외처리
             {
                 talkId = 500;
-            } else if (screenManager.currBookNum() < 1) // K : 학습하기 조사를 했을때, 책이 없는 경우 예외처리
+            }
+            else if (screenManager.currBookNum() < 1) // K : 학습하기 조사를 했을때, 책이 없는 경우 예외처리
             {
                 talkId = 600;
             }
+
+            // N : 레벨 MAX에서 예외 처리
+            else if (objData.id == 100 && screenManager.farmLv.IsMax() == true) talkId = 2100;
+            else if (objData.id == 200 && screenManager.houseLv.IsMax() == true) talkId = 2200;
+            else if (objData.id == 300 && screenManager.craftLv.IsMax() == true) talkId = 2300;
+            else if (objData.id == 400 && screenManager.engineerLv.IsMax() == true) talkId = 2400;
         }
 
         Talk(talkId);                   // C : 필요한 talkPanel text 값 가져오기, K : 예외처리를 위해 objData.id > talkId로 수정

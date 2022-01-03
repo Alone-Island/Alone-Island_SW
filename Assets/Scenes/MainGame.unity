@@ -2112,7 +2112,7 @@ GameObject:
   - component: {fileID: 121357834}
   - component: {fileID: 121357833}
   m_Layer: 0
-  m_Name: House (1)
+  m_Name: Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14980,7 +14980,7 @@ GameObject:
   - component: {fileID: 1015524277}
   - component: {fileID: 1015524276}
   m_Layer: 0
-  m_Name: House (2)
+  m_Name: ExtraBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

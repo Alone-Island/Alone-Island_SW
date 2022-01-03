@@ -11,7 +11,7 @@ public class PlayerAction : MonoBehaviour
     public GameManager manager;         // C : player에서 GameManager의 함수를 호출할 수 있도록 manager 변수 생성
     public ScreenManager screenManager;         // J : 책을 주웠을 때 책 개수 증가를 위해 ScreenManager 변수 생성
     public SpecialEventManager specialManager;  // J : player에서 SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
-    public SettingManager settingManager;
+    public SettingManager settingManager;       // J : 설정창 활성화 중에는 플레이어가 움직일 수 없게 settingManager 변수 생성
 
     private AIAction aiAction;
 
@@ -53,6 +53,7 @@ public class PlayerAction : MonoBehaviour
 
     void Update()
     {
+        // J : 설정창 활성화 상태면 action X
         if (settingManager.nowSetting)
             return;
         // C : 입력된 수평/수직 이동을 대입 (-1, 0, 1)

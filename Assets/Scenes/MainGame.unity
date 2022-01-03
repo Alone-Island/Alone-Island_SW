@@ -7366,6 +7366,7 @@ MonoBehaviour:
   manager: {fileID: 1163355727}
   screenManager: {fileID: 1163355729}
   specialManager: {fileID: 488290411}
+  settingManager: {fileID: 960379046}
   farmIcon: {fileID: 728066744}
   houseIcon: {fileID: 2118737755}
   craftIcon: {fileID: 1296171296}

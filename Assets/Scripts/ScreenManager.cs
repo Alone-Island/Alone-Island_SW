@@ -400,6 +400,7 @@ public class ScreenManager : MonoBehaviour
 
     IEnumerator fadeIn()
     {
+        nextMap.gameObject.SetActive(true); // J : 다음 레벨의 맵 활성화
         while (currColor.a < 1f)
         {
             currColor.a += 0.1f;
@@ -416,7 +417,7 @@ public class ScreenManager : MonoBehaviour
             preMap.GetComponent<Renderer>().material.color = currColor;
             yield return new WaitForSeconds(0.1f);
         }
-
+        preMap.gameObject.SetActive(false); // J : 이전 레벨의 맵 비활성화
         StartCoroutine("fadeIn");
     }
 }

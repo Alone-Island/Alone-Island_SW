@@ -43,13 +43,6 @@ public class SettingManager : MonoBehaviour
 
     }
 
-    // J : 게임 종료 버튼 onclick
-    public void SelectGameQuit()
-    {
-        Debug.Log("게임 종료");
-        Application.Quit(); // J : 프로그램 종료
-    }
-
     // J : 메뉴로 돌아가기 버튼 onclick
     public void SelectMenu()
     {
@@ -57,15 +50,39 @@ public class SettingManager : MonoBehaviour
         setting.transform.Find("MenuAlert").gameObject.SetActive(true);    // J : 메뉴로 돌아가기 경고창 활성화
     }
 
+    //J : 메뉴로 돌아가기 경고창 Yes 버튼 onclick
     public void SelectMenuYes()
     {
         Debug.Log("메뉴로 돌아가기 O");
         SceneManager.LoadScene("GameMenu"); // J : 게임메뉴로 이동
     }
+
+    //J : 메뉴로 돌아가기 경고창 No 버튼 onclick
     public void SelectMenuNo()
     {
         Debug.Log("메뉴로 돌아가기 X");
         setting.transform.Find("MenuAlert").gameObject.SetActive(false);    // J : 메뉴로 돌아가기 경고창 비활성화
+    }
+
+    // J : 게임 종료 버튼 onclick
+    public void SelectGameQuit()
+    {
+        Debug.Log("게임 종료");
+        setting.transform.Find("GameQuitAlert").gameObject.SetActive(true);    // J : 게임 종료 경고창 활성화
+    }
+
+    //J : 게임 종료 경고창 Yes 버튼 onclick
+    public void SelectGameQuitYes()
+    {
+        Debug.Log("게임 종료 O");
+        Application.Quit(); // J : 프로그램 종료
+    }
+
+    //J : 게임 종료 경고창 No 버튼 onclick
+    public void SelectGameQuitNo()
+    {
+        Debug.Log("게임 종료 X");
+        setting.transform.Find("GameQuitAlert").gameObject.SetActive(false);    // J : 메뉴로 돌아가기 경고창 비활성화
     }
 
     // J : 게임 초기화 버튼 onclick

@@ -11,6 +11,8 @@ public class PlayerAction : MonoBehaviour
     public GameManager manager;         // C : player에서 GameManager의 함수를 호출할 수 있도록 manager 변수 생성
     public ScreenManager screenManager;         // J : 책을 주웠을 때 책 개수 증가를 위해 ScreenManager 변수 생성
     public SpecialEventManager specialManager;  // J : player에서 SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
+    public SettingManager settingManager;
+
     private AIAction aiAction;
 
     float h;    // C : horizontal (수평 이동)
@@ -51,6 +53,8 @@ public class PlayerAction : MonoBehaviour
 
     void Update()
     {
+        if (settingManager.nowSetting)
+            return;
         // C : 입력된 수평/수직 이동을 대입 (-1, 0, 1)
         // C : GameManager의 isTPShow를 사용하여 talkPanel이 보여지고 있을 때
         // J : or SpecialEventManager의 special을 사용하여 스페셜 이벤트 진행 중인 경우 플레이어의 이동을 제한

@@ -10,7 +10,7 @@ public class EffectPlay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GameObject.Find("FindBookEffect").GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -19,10 +19,11 @@ public class EffectPlay : MonoBehaviour
         effectOn = true;
     }
 
-    public void Play()
+    public void Play(string objectName)
     {
         if (effectOn)
         {
+            audioSource = GameObject.Find(objectName).GetComponent<AudioSource>();
             audioSource.Play();
         }
     }

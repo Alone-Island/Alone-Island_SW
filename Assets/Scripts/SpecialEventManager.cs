@@ -21,12 +21,15 @@ public class SpecialEventManager : MonoBehaviour
     public TextMeshProUGUI selectText0, selectText1, selectText2;
     public Button selectButton0, selectButton1, selectButton2;
 
+    public EffectPlay effect; // K: 효과음 이벤트 발생 오브젝트
+
     List<TextMeshProUGUI> selectText;   // J : 선택지 텍스트를 관리하기 위한 리스트
     List<Button> selectButton;          // J : 선택지 버튼을 관리하기 위한 리스트
     int specialID;                      // J : TalkManager로부터 talkData를 가져오기 위한 변수
     int firstRandomNum;                 // J : 랜덤 스페셜 이벤트를 위한 변수1 (0 : 선택지 2개, 1: 선택지 3개)
     int secondRandomNum;                // J : 랜덤 스페셜 이벤트를 위한 변수2
     int select;
+
 
     // C : 스페셜이벤트 발생 직전, 플레이어 머리 위에 '!' 오브젝트를 띄워주기 위한 변수
     public PlayerAction playerAction;
@@ -302,6 +305,9 @@ public class SpecialEventManager : MonoBehaviour
     // C : 스페셜이벤트 발생 알람 후 대화창 활성화 및 대화 시작
     IEnumerator TalkAfterAlarm()
     {
+        // K : 스페셜 이벤트 효과음 발생
+        effect.Play("SpecialEventEffect");
+
         playerAction.StartCoroutine("OnAlarm");
         yield return new WaitForSeconds(3.3f);      // C : 알람 애니메이션 끝난 후
         talkPanel.SetActive(true);

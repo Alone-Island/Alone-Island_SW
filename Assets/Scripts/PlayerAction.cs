@@ -33,7 +33,7 @@ public class PlayerAction : MonoBehaviour
     public GameObject player;       // C : 플레이어 object 변수
     private List<GameObject> addBookListG = new List<GameObject>();      // C : addBook object를 담을 리스트
     private List<float> addBookListT = new List<float>();                // C : addBook의 애니메이션 시간을 담을 리스트
-    public EffectPlay effect;
+    public EffectPlay effect; // K: 효과음 이벤트 발생 오브젝트
 
     // C : 스페셜이벤트 발생 시 '!' 오브젝트를 띄워주기 위한 변수들
     public GameObject alarm;        // C : '!' object 변수
@@ -222,7 +222,7 @@ public class PlayerAction : MonoBehaviour
             screenManager.getBook();                        // J : 책 개수 증가
 
             // 책 +1 효과음
-            effect.Play();
+            effect.Play("FindBookEffect");
 
             // C : 책 추가 애니메이션 실행하기
             // C : 책 추가 game object를 복사하여 새로운 책 추가 game object 생성

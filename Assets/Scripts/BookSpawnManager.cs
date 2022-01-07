@@ -51,6 +51,7 @@ public class BookSpawnManager : MonoBehaviour
             // J : 원본, 위치, 회전값을 매개변수로 받아 오브젝트 복제
             // J : Quaternion.identity <- 회전값 0
             GameObject instance = Instantiate(book, spawnPos, Quaternion.identity);
+            instance.GetComponent<Renderer>().enabled = false;  // J : 오브젝트가 보이지 않도록
             bookList.Add(instance); // J : 오브젝트 관리를 위해 리스트에 add
         }
         area.enabled = false;       // J : BoxCollider2D 끄기

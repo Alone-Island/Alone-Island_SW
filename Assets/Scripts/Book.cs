@@ -8,8 +8,9 @@ public class Book : MonoBehaviour
 {
     private GameObject player;          // J : Dr.Kim(플레이어) 오브젝트
     private Vector2 playerPos, bookPos; // J : 플레이어의 위치, 책(자신)의 위치
-    private int radius = 2;             // J : 책이 보이는 범위
+    private int radius = 3;             // J : 책이 보이는 범위
     private float fadeCount = 0;        // J : 초기 알파값
+    private float fadeInterval = 0.003f;// J : 페이드 시간 간격(0.01이면 1초 소요)
     private bool inside;                // J : 책이 플레이어의 반경 내에 있음
     private bool outside;               // J : 책이 플레이어의 반경 외에 있음
 
@@ -61,7 +62,7 @@ public class Book : MonoBehaviour
                 break;
 
             fadeCount += 0.01f;
-            yield return new WaitForSeconds(0.01f); // J : 0.01초마다 선명해짐->1초 후 완전히 보임
+            yield return new WaitForSeconds(fadeInterval); // J : fadeInterval 초마다 선명해짐 -> fadeInterval*100초 후 완전히 보임
             this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, fadeCount);    // J : 알파값 조정
         }
     }
@@ -71,7 +72,7 @@ public class Book : MonoBehaviour
         while (fadeCount > 0)    // J : 알파값이 최소(0)가 될 때까지 반복
         {
             fadeCount -= 0.01f;
-            yield return new WaitForSeconds(0.01f); // J : 0.01초마다 흐릿해짐->1초 후 완전히 안보임
+            yield return new WaitForSeconds(fadeInterval); // J : fadeInterval 초마다 흐릿해짐 -> fadeInterval*100초 후 완전히 안보임
             this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, fadeCount);    // J : 알파값 조정
         }
     }

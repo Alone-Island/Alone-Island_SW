@@ -31,6 +31,7 @@ public class Book : MonoBehaviour
             if (!inside)    // J : 반경 외에 있다가 내부에 들어온 경우
             {
                 inside = true; outside = false;
+                this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, fadeCount);    // J : 초기 알파값 적용
                 this.gameObject.GetComponent<Renderer>().enabled = true;    // J : 책이 보이도록
                 StopCoroutine("FadeOut");   // J : 페이드 아웃 중이었다면 중단
                 StartCoroutine("FadeIn");   // J : 페이드 인 시작

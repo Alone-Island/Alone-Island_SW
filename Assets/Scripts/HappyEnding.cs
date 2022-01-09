@@ -14,6 +14,9 @@ public class HappyEnding : MonoBehaviour
 
     private int endingCode;                         // K : 해피 엔딩 코드를 담을 변수 입니다.
 
+    public EffectPlay effect; // K: 효과음 이벤트 발생 오브젝트
+
+
     // K : synopsys의 텍스트들(여러 문장)의 배열입니다.
 
     private string[] happySosoLifeFullText = {
@@ -141,6 +144,7 @@ public class HappyEnding : MonoBehaviour
     // J : 모든 엔딩의 공통 코드
     private void ending()
     {
+        effect.Play("HappyEndingEffect");
         Debug.Log("Game Happy Ending Credits");
         currentPoint = 0;               // K : 타이핑 효과를 준 배열의 포인터를 0으로 초기화
         subText = "";                   // K : 타이핑 효과를 주기 위해 텍스트의 일부 를 담기 위한 변수 초기화

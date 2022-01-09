@@ -9,6 +9,14 @@ public class EndingManager : MonoBehaviour
     public FadeManager fadeManager;
     public GameObject panel;            // N : 화면 어둡게
 
+    public EffectPlay effect; // K: 효과음 이벤트 발생 오브젝트
+    private AudioSource bgm; // K: 효과음 이벤트 발생 오브젝트
+    
+    void Start()
+    {
+        bgm = GameObject.Find("BGM").GetComponent<AudioSource>();
+    }
+
     // N : 스페이스바 입력 받는 시간을 주기 위해
     public void TheEnd()
     {
@@ -19,6 +27,9 @@ public class EndingManager : MonoBehaviour
     // J : 모든 엔딩의 공통 코드
     private void ending()
     {
+
+        bgm.Stop();
+        effect.Play("BadEndingEffect");
         panel.SetActive(true);
         manager.isEndingShow = true;
         DataController.Instance.settingData.firstGame = 0;

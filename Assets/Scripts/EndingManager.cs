@@ -8,7 +8,7 @@ using TMPro;
 public class EndingManager : MonoBehaviour
 {
     public GameManager manager;
-    public TalkManager talkManager;
+    public TalkManager talkManager;     // J : 엔딩 대화 데이터 가져오기 위함
     public FadeManager fadeManager;
     public CameraShake cameraShake;     // J : 카메라를 흔들기 위해 호출
 
@@ -19,7 +19,7 @@ public class EndingManager : MonoBehaviour
     public EffectPlay effect; // K: 효과음 이벤트 발생 오브젝트
     private AudioSource bgm; // K: 효과음 이벤트 발생 오브젝트
 
-    public int endingCode;
+    public int endingCode;              // J : Bad Ending Code
     public int talkIndex;               // J : talkIndex를 저장하기 위한 변수
 
     void Start()
@@ -38,13 +38,14 @@ public class EndingManager : MonoBehaviour
     public void BadEnding(int code)
     {
         endingCode = code;
-        manager.isEndingShow = true;
+        manager.isEndingShow = true;    // J : ending 보여주는 중
         DataController.Instance.settingData.firstGame = 0;
-        bgm.Stop();
-        talkPanel.SetActive(true);
-        BadEndingTalk();
+        bgm.Stop();     // K : 배경음악 끄기
+        talkPanel.SetActive(true);  // J : 대화창 활성화
+        BadEndingTalk();    // J : 배드엔딩 대화 시작
     }
 
+    // J : 배드엔딩 대화
     public void BadEndingTalk()
     {
         string talkData = talkManager.GetTalkData(11000 + endingCode, talkIndex);   // J : TalkManager로부터 talkData를 가져오기
@@ -56,13 +57,14 @@ public class EndingManager : MonoBehaviour
                 cameraShake.Shake(BadEndingShow);
                 return;
             }
-            BadEndingShow();
+            BadEndingShow();    // J : 카드 보여주기
             return;
         }
         talkText.text = talkData;       // J : talkPanel의 text를 talkData로 설정
         talkIndex++;                    // J : 해당 talkID의 다음 talkData string을 가져오기 위해
     }
 
+    // J : 배드엔딩 카드 보여주기
     public void BadEndingShow()
     {
         switch (endingCode)

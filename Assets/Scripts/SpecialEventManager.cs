@@ -99,8 +99,7 @@ public class SpecialEventManager : MonoBehaviour
         if (talkData == null)   // J : 해당 talkID의 resultData를 모두 가져왔다면
         {
             resultTalk = false;     // J : 결과 텍스트 종료
-            special = false;    // J : 스페셜 이벤트 종료
-            talkIndex = 0;      // J : talk index 초기화
+            EndSpecialEvent();
             Result();           // J : 결과 반영
             return;
         }
@@ -209,7 +208,6 @@ public class SpecialEventManager : MonoBehaviour
                 }
                 break;
         }
-        talkPanel.SetActive(false);     // J : 스페셜 이벤트 대화창 비활성화
     }
 
 
@@ -262,6 +260,7 @@ public class SpecialEventManager : MonoBehaviour
     {
     }
 
+    // J : 스페셜 이벤트 종료 (변수 초기화)
     private void EndSpecialEvent()
     {
         special = false;

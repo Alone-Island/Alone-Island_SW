@@ -129,6 +129,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        specialEventCoolTimeDay = 3;
+        specialEventCoolTimeDay = 3;    // J : 스페셜 이벤트 쿨타임 설정
     }
 }

@@ -7,7 +7,7 @@ using System;
 public class Book : MonoBehaviour
 {
     public float fadeCount = 0;        // J : 초기 알파값
-    private float fadeInterval = 0.003f;// J : 페이드 시간 간격(0.01이면 1초 소요)
+    private float fadeInterval = 0.0001f;// J : 페이드 시간 간격(0.01이면 1초 소요)
     
     private IEnumerator FadeIn()
     {

@@ -365,8 +365,11 @@ public class PlayerAction : MonoBehaviour
             GameObject book = coll.gameObject.transform.parent.gameObject;
             Book bookScript = book.GetComponent<Book>();
 
-            bookScript.StopCoroutine("FadeIn");    // J : 페이드 인 중이었다면 중단
-            bookScript.StartCoroutine("FadeOut");  // J : 페이드 아웃 시작
+            if (book.activeSelf == true)    // J : 책 오브젝트가 활성화 상태
+            {
+                bookScript.StopCoroutine("FadeIn");    // J : 페이드 인 중이었다면 중단
+                bookScript.StartCoroutine("FadeOut");  // J : 페이드 아웃 시작
+            }
         }
 
         if (coll.gameObject.name == "FarmLearning")

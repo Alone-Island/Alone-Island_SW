@@ -284,6 +284,19 @@ public class PlayerAction : MonoBehaviour
     // N : 장소에 들어가면
     private void OnTriggerEnter2D(Collider2D coll)
     {
+        // J : 책 반경에 들어간 경우
+        if (coll.gameObject.name == "BookArea(Clone)")
+        {
+            GameObject book = coll.gameObject.transform.parent.gameObject;
+            Book bookScript = book.GetComponent<Book>();
+
+            book.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, bookScript.fadeCount);    // J : 초기 알파값 적용
+            book.GetComponent<Renderer>().enabled = true;    // J : 책이 보이도록
+
+            bookScript.StopCoroutine("FadeOut");   // J : 페이드 아웃 중이었다면 중단
+            bookScript.StartCoroutine("FadeIn");   // J : 페이드 인 시작
+        }
+
         if (coll.gameObject.name == "FarmLearning")
         {
             farmIcon.SetActive(true);
@@ -346,6 +359,16 @@ public class PlayerAction : MonoBehaviour
     // N : 장소에서 나오면
     private void OnTriggerExit2D(Collider2D coll)
     {
+        // J : 책 반경에서 나온 경우
+        if (coll.gameObject.name == "BookArea(Clone)")
+        {
+            GameObject book = coll.gameObject.transform.parent.gameObject;
+            Book bookScript = book.GetComponent<Book>();
+
+            bookScript.StopCoroutine("FadeIn");    // J : 페이드 인 중이었다면 중단
+            bookScript.StartCoroutine("FadeOut");  // J : 페이드 아웃 시작
+        }
+
         if (coll.gameObject.name == "FarmLearning")
         {
             farmIcon.SetActive(false);

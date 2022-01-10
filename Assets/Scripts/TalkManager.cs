@@ -87,14 +87,16 @@ public class TalkManager : MonoBehaviour
         // J : 선택지가 2개인 이벤트의 결과 텍스트
         resultData.Add(100010, new string[] { "하루가 지나고...", "AI의 공감능력이 1레벨 상승했다!" });
         resultData.Add(100011, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
-        
-        resultData.Add(100020, new string[] { "AI가 준 것은 독열매였다!" });
+
+        //resultData.Add(100020, new string[] { "AI가 준 것은 독열매였다!" });
+        resultData.Add(100020, new string[] {  });
         resultData.Add(100021, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
         
         resultData.Add(100030, new string[] { "토끼였다!", "AI의 공감능력이 1레벨 상승했다!" });
         resultData.Add(100031, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
-        
-        resultData.Add(100040, new string[] { "멧돼지였다!" });
+
+        //resultData.Add(100040, new string[] { "멧돼지였다!" });
+        resultData.Add(100040, new string[] {  });
         resultData.Add(100041, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
 
         // J : 선택지가 3개인 이벤트의 결과 텍스트
@@ -102,13 +104,15 @@ public class TalkManager : MonoBehaviour
         resultData.Add(100111, new string[] { "아무런 변화도 일어나지 않았다." });
         resultData.Add(100112, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
 
-        resultData.Add(100120, new string[] { "나까지 덩달아 감전됐다!" });
+        //resultData.Add(100120, new string[] { "나까지 덩달아 감전됐다!" });
+        resultData.Add(100120, new string[] {  });
         resultData.Add(100121, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
         resultData.Add(100122, new string[] { "구조에 성공했다!" });
 
         resultData.Add(100130, new string[] { "하루가 지나고...", "AI의 공감능력이 2레벨 상승했다!" });
         resultData.Add(100131, new string[] { "아무런 변화도 일어나지 않았다." });
-        resultData.Add(100132, new string[] { "알고보니 AI는 심각한 손상을 입었다." });
+        //resultData.Add(100132, new string[] { "알고보니 AI는 심각한 손상을 입었다." });
+        resultData.Add(100132, new string[] {  });
 
         resultData.Add(100140, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
         resultData.Add(100141, new string[] { "아무런 변화도 일어나지 않았다." });

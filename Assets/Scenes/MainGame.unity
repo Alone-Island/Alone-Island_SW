@@ -7655,13 +7655,11 @@ MonoBehaviour:
   gameManager: {fileID: 1163355727}
   screenManager: {fileID: 1163355729}
   endingManager: {fileID: 872728046}
-  cameraShake: {fileID: 1163355730}
   talkPanel: {fileID: 1384437669}
   talkText: {fileID: 1093654109}
   talkIndex: 0
   special: 0
   specialTalk: 0
-  disasterTalk: 0
   resultTalk: 0
   selectText0: {fileID: 858138516}
   selectText1: {fileID: 855646736}
@@ -7872,6 +7870,7 @@ MonoBehaviour:
   manager: {fileID: 1163355727}
   screenManager: {fileID: 1163355729}
   specialManager: {fileID: 488290411}
+  endingManager: {fileID: 872728046}
   settingManager: {fileID: 960379046}
   farmIcon: {fileID: 728066744}
   houseIcon: {fileID: 2118737755}
@@ -13239,9 +13238,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1163355727}
+  talkManager: {fileID: 121161932}
   fadeManager: {fileID: 1709032728}
+  cameraShake: {fileID: 1163355730}
+  talkPanel: {fileID: 1036663247}
+  talkText: {fileID: 873840781}
   panel: {fileID: 1175649851}
   effect: {fileID: 1393059719}
+  endingCode: 0
+  talkIndex: 0
 --- !u!4 &872728047
 Transform:
   m_ObjectHideFlags: 0

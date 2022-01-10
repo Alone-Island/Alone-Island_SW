@@ -69,7 +69,7 @@ public class DataController : MonoBehaviour
 
     public void LoadSettingData()
     {
-        string filePath = Application.persistentDataPath + SettingDataFileName;
+        string filePath = Application.persistentDataPath + "/" + SettingDataFileName;
         Debug.Log(filePath);
         if (File.Exists(filePath))
         {
@@ -86,7 +86,7 @@ public class DataController : MonoBehaviour
 
     public void LoadEndingData()
     {
-        string filePath = Application.persistentDataPath + EndingDataFileName;
+        string filePath = Application.persistentDataPath + "/" + EndingDataFileName;
         Debug.Log(filePath);
         if (File.Exists(filePath))
         {
@@ -104,7 +104,7 @@ public class DataController : MonoBehaviour
     public void SaveSettingData()
     {
         string ToJsonData = JsonUtility.ToJson(settingData);
-        string filePath = Application.persistentDataPath + SettingDataFileName;
+        string filePath = Application.persistentDataPath + "/" + SettingDataFileName;
         File.WriteAllText(filePath, ToJsonData);
         Debug.Log("설정 데이터 저장 완료");
     }
@@ -112,7 +112,7 @@ public class DataController : MonoBehaviour
     public void SaveEndingData()
     {
         string ToJsonData = JsonUtility.ToJson(endingData);
-        string filePath = Application.persistentDataPath + EndingDataFileName;
+        string filePath = Application.persistentDataPath + "/" + EndingDataFileName;
         File.WriteAllText(filePath, ToJsonData);
         Debug.Log("엔딩 데이터 저장 완료");
     }
@@ -121,8 +121,8 @@ public class DataController : MonoBehaviour
     public void DeleteAllData()
     {
         // J : 모든 데이터 파일 삭제
-        File.Delete(Application.persistentDataPath + SettingDataFileName);
-        File.Delete(Application.persistentDataPath + EndingDataFileName);
+        File.Delete(Application.persistentDataPath + "/" + SettingDataFileName);
+        File.Delete(Application.persistentDataPath + "/" + EndingDataFileName);
     }
 
     private void OnApplicationQuit()    // J : 프로그램 종료 시 데이터 저장

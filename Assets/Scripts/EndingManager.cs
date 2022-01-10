@@ -1,17 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;   // J : UI 프로그래밍을 위해 추가 (Text 등)
 using UnityEngine;
+using TMPro;
 
 public class EndingManager : MonoBehaviour
 {
     public GameManager manager;
+    public TalkManager talkManager;
     public FadeManager fadeManager;
+    public CameraShake cameraShake;     // J : 카메라를 흔들기 위해 호출
+
+    public GameObject talkPanel;        // J : 대화창
+    public TextMeshProUGUI talkText;    // J : 대화창의 text
     public GameObject panel;            // N : 화면 어둡게
 
     public EffectPlay effect; // K: 효과음 이벤트 발생 오브젝트
     private AudioSource bgm; // K: 효과음 이벤트 발생 오브젝트
-    
+
+    public int endingCode;
+    public int talkIndex;               // J : talkIndex를 저장하기 위한 변수
+
     void Start()
     {
         bgm = GameObject.Find("BGM").GetComponent<AudioSource>();
@@ -24,106 +34,87 @@ public class EndingManager : MonoBehaviour
         DataController.Instance.endingData.currentEndingCode = 0;
     }
 
-    // J : 모든 엔딩의 공통 코드
-    private void ending()
+    // J : 배드 엔딩
+    public void BadEnding(int code)
     {
-
-        bgm.Stop();
-        effect.Play("BadEndingEffect");
-        panel.SetActive(true);
+        endingCode = code;
         manager.isEndingShow = true;
         DataController.Instance.settingData.firstGame = 0;
+        bgm.Stop();
+        talkPanel.SetActive(true);
+        BadEndingTalk();
     }
 
-    // N : 배고픔 스탯이 0인 경우
-    public void failHungry()
+    public void BadEndingTalk()
     {
-        Debug.Log("Hungry,,,");
-        DataController.Instance.endingData.hungry = 1;
-
-        ending();
-        panel.transform.Find("Bad-Hungry").gameObject.SetActive(true);
-        Invoke("TheEnd", 2.0f);
+        string talkData = talkManager.GetTalkData(11000 + endingCode, talkIndex);   // J : TalkManager로부터 talkData를 가져오기
+        if (talkData == null)   // J : 해당 talkID의 talkData를 모두 가져왔다면
+        {
+            talkPanel.SetActive(false); // J : 대화창 비활성화
+            if (endingCode == 7 || endingCode == 8) // J : 재난 엔딩인 경우 카메라 흔들기
+            {
+                cameraShake.Shake(BadEndingShow);
+                return;
+            }
+            BadEndingShow();
+            return;
+        }
+        talkText.text = talkData;       // J : talkPanel의 text를 talkData로 설정
+        talkIndex++;                    // J : 해당 talkID의 다음 talkData string을 가져오기 위해
     }
 
-    // N : 행복 스탯이 0인 경우
-    public void failLonely()
+    public void BadEndingShow()
     {
-        Debug.Log("Lonely,,,");
-        DataController.Instance.endingData.lonely = 1;
-
-        ending();
-        panel.transform.Find("Bad-Lonely").gameObject.SetActive(true);
-        Invoke("TheEnd", 2.0f);
-    }
-
-    // N : 체온 스탯이 0인 경우
-    public void failCold()
-    {
-        Debug.Log("Cold,,,");
-        DataController.Instance.endingData.cold = 1;
-
-        ending();
-        panel.transform.Find("Bad-Frozen").gameObject.SetActive(true);
-        Invoke("TheEnd", 2.0f);
-    }
-
-    // N : 이벤트 엔딩 endingCode 1-6
-    public void suddenEnding(int endingCode)
-    {
-        ending();
         switch (endingCode)
         {
-            case 1: // N : Bad Ending (독열매)
+            case 0:
+                Debug.Log("Hungry,,,");
+                DataController.Instance.endingData.hungry = 1;
+                panel.transform.Find("Bad-Hungry").gameObject.SetActive(true);
+                break;
+            case 1:
+                Debug.Log("Lonely,,,");
+                DataController.Instance.endingData.lonely = 1;
+                panel.transform.Find("Bad-Lonely").gameObject.SetActive(true);
+                break;
+            case 2:
+                Debug.Log("Cold,,,");
+                DataController.Instance.endingData.cold = 1;
+                panel.transform.Find("Bad-Frozen").gameObject.SetActive(true);
+                break;
+            case 3: // N : Bad Ending (독열매)
                 Debug.Log("Poison Berry,,,");
                 DataController.Instance.endingData.poisonBerry = 1;
                 panel.transform.Find("Bad-Berry").gameObject.SetActive(true);
                 break;
-            case 2: // N : Bad Ending (AI가 이해하지 못함)
+            case 4: // N : Bad Ending (AI가 이해하지 못함)
                 Debug.Log("먼소리야,,,");
                 DataController.Instance.endingData.error = 1;
                 panel.transform.Find("Bad-Error").gameObject.SetActive(true);
                 break;
-            case 3: // J : Bad Ending (감전사)
+            case 5: // J : Bad Ending (감전사)
                 Debug.Log("감전사,,,");
                 DataController.Instance.endingData.electric = 1;
                 panel.transform.Find("Bad-Electric").gameObject.SetActive(true);
                 break;
-            case 4: // J : Bad Ending (멧돼지)
+            case 6: // J : Bad Ending (멧돼지)
                 Debug.Log("멧돼지");
                 DataController.Instance.endingData.pig = 1;
                 panel.transform.Find("Bad-Pig").gameObject.SetActive(true);
                 break;
-            case 5: // J : Bad Ending (쓰나미)
+            case 7: // J : Bad Ending (쓰나미)
                 Debug.Log("쓰나미");
                 DataController.Instance.endingData.storm = 1;
                 panel.transform.Find("Bad-Storm").gameObject.SetActive(true);
                 break;
-            case 6: // J : Bad Ending (운석충돌)
+            case 8: // J : Bad Ending (운석충돌)
                 Debug.Log("운석 충돌");
                 DataController.Instance.endingData.space = 1;
                 panel.transform.Find("Bad-Space").gameObject.SetActive(true);
                 break;
         }
-        Invoke("TheEnd", 2.0f);
-    }
-
-    public void DisasterEnding(int endingCode)
-    {
-        ending();
-        switch(endingCode)
-        {
-            case 0: // J : Bad Ending (쓰나미)
-                Debug.Log("쓰나미");
-                DataController.Instance.endingData.storm = 1;
-                panel.transform.Find("Bad-Storm").gameObject.SetActive(true);
-                break;
-            case 1: // J : Bad Ending (운석충돌)
-                Debug.Log("운석 충돌");
-                DataController.Instance.endingData.space = 1;
-                panel.transform.Find("Bad-Space").gameObject.SetActive(true);
-                break;
-        }
+        effect.Play("BadEndingEffect");
+        panel.SetActive(true);
         Invoke("TheEnd", 2.0f);
     }
 

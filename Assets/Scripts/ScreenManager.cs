@@ -160,9 +160,9 @@ public class ScreenManager : MonoBehaviour
         if (day > 90) endingManager.timeOutEnding();
 
         // N : 엔딩 처리
-        if (hungerStat.fCurrValue <= 0) endingManager.failHungry();
-        else if (happyStat.fCurrValue <= 0) endingManager.failLonely();
-        else if (temperatureStat.fCurrValue <= 0) endingManager.failCold();
+        if (hungerStat.fCurrValue <= 0) endingManager.BadEnding(0);
+        else if (happyStat.fCurrValue <= 0) endingManager.BadEnding(1);
+        else if (temperatureStat.fCurrValue <= 0) endingManager.BadEnding(2);
 
         //N : AI와 대화 횟수 초기화
         gameManager.dayTalk = 0;
@@ -264,7 +264,7 @@ public class ScreenManager : MonoBehaviour
         HeartLevelUpAnimation();
 
         // N : 엔딩 처리
-        if (happyStat.fCurrValue < 0 || heartLv.fCurrValue < 0) endingManager.failLonely();
+        if (happyStat.fCurrValue < 0 || heartLv.fCurrValue < 0) endingManager.BadEnding(1);
         else if (heartLv.fCurrValue >= heartLv.maxValue)
         {
             if (engineerLv.fCurrValue > 13.0f) endingManager.successPeople(); // N : 공학 능력이 높은 경우

@@ -10,13 +10,11 @@ public class SpecialEventManager : MonoBehaviour
     public GameManager gameManager;     // J : 스페셜 이벤트 발동 조건을 체크하기 위해
     public ScreenManager screenManager; // N : 레벨 관리를 위해 호출
     public EndingManager endingManager; // N : 엔딩 처리를 위해 호출
-    public CameraShake cameraShake;     // J : 카메라를 흔들기 위해 호출
     public GameObject talkPanel;        // J : 대화창
     public TextMeshProUGUI talkText;    // J : 대화창의 text
     public int talkIndex;               // J : talkIndex를 저장하기 위한 변수
     public bool special = false;        // J : 스페셜 이벤트 진행중인지 여부
     public bool specialTalk = false;    // J : AI가 스페셜 이벤트 대화를 하는지 여부 (선택지 선택 전)
-    public bool disasterTalk = false;   // J : 위험도 엔딩 대화를 하는지 여부
     public bool resultTalk = false;     // J : 결과 텍스트 창을 보여주는지 여부 (선택지 선택 후)
     public TextMeshProUGUI selectText0, selectText1, selectText2;
     public Button selectButton0, selectButton1, selectButton2;
@@ -29,6 +27,7 @@ public class SpecialEventManager : MonoBehaviour
     int firstRandomNum;                 // J : 랜덤 스페셜 이벤트를 위한 변수1 (0 : 선택지 2개, 1: 선택지 3개)
     int secondRandomNum;                // J : 랜덤 스페셜 이벤트를 위한 변수2
     int select;
+    int endingCode;
 
 
     // C : 스페셜이벤트 발생 직전, 플레이어 머리 위에 '!' 오브젝트를 띄워주기 위한 변수
@@ -44,6 +43,7 @@ public class SpecialEventManager : MonoBehaviour
         int danger = (int)((10 - screenManager.houseLv.fCurrValue));   // J : 위험도 계산
         if (rand.Next(100) < danger)    // J : 위험도가 높아 재난 발생
         {
+            endingCode = (new System.Random()).Next(2) + 7;  // J : 각 재난은 50% 확률로 발생 (7 or 8)
             StartCoroutine("DisasterAfterAlarm");   // C : 스페셜이벤트 발생 알람 후 재난 발생
         }
         else 
@@ -72,38 +72,6 @@ public class SpecialEventManager : MonoBehaviour
             }
             yield return null;
         }
-    }
-
-    // J : 재난 발생
-    private void Disaster()
-    {
-        disasterTalk = true;    // J : AI가 위험도 엔딩 대화 시작
-        specialID = 11000 + (new System.Random()).Next(2);  // J : 각 재난은 50% 확률로 발생
-        DisasterTalk();
-    }
-
-    // J : 실행될 때마다 다음 문장으로 넘어감
-    public void DisasterTalk()
-    {
-        string talkData = talkManager.GetTalkData(specialID, talkIndex);   // J : TalkManager로부터 talkData를 가져오기
-        if (talkData == null)   // J : 해당 talkID의 talkData를 모두 가져왔다면
-        {
-            // J : 스페셜 이벤트 Flag 초기화
-            disasterTalk = false;
-            special = false;
-            talkIndex = 0;      // J : talk index 초기화
-            talkPanel.SetActive(false); // J : 대화창 비활성화
-            cameraShake.Shake(DisasterEnding);
-            return;
-        }
-        talkText.text = talkData;       // J : talkPanel의 text를 talkData로 설정
-        talkIndex++;                    // J : 해당 talkID의 다음 talkData string을 가져오기 위해
-    }
-
-    // J : 카메라 흔들기가 끝나면 엔딩
-    public void DisasterEnding()
-    {
-        endingManager.DisasterEnding(specialID - 11000);    // J : 위험도 엔딩
     }
         
 
@@ -166,13 +134,13 @@ public class SpecialEventManager : MonoBehaviour
                                 screenManager.HeartStudy(1); // N : 공감 1레벨 상승
                                 break;
                             case 2: // J : 박사님을 위해 새로운 열매를 따왔어요!
-                                endingManager.suddenEnding(1); // N : Bad Ending (독열매)
+                                endingManager.BadEnding(3); // N : Bad Ending (독열매)
                                 break;
                             case 3: // J : 저기 야생동물이 있는 것 같아요! 잡아서 구워먹을까요?
                                 screenManager.HeartStudy(1); // J : 공감 1레벨 상승
                                 break;
                             case 4: // J : 저기 야생동물이 있는 것 같아요! 잡아서 구워먹을까요?
-                                endingManager.suddenEnding(4);  // J : 멧돼지 사망
+                                endingManager.BadEnding(6);  // J : 멧돼지 사망
                                 break;
 
                         }
@@ -181,10 +149,10 @@ public class SpecialEventManager : MonoBehaviour
                         switch (secondRandomNum)
                         {
                             case 1: // J : 이 꽃 너무 이쁘지 않아요??
-                                endingManager.suddenEnding(2); // N : Bad Ending (AI가 이해하지 못함)
+                                endingManager.BadEnding(4); // N : Bad Ending (AI가 이해하지 못함)
                                 break;
                             case 2: // J : (AI가 물에 빠졌다)
-                                endingManager.suddenEnding(3);  // 감전사 사망
+                                endingManager.BadEnding(5);  // 감전사 사망
                                 break;
                             case 3: // J : (나무가 쓰러져서 AI가 다쳤다. 어떻게 할까?)
                                 screenManager.dayTime = 20;
@@ -232,7 +200,7 @@ public class SpecialEventManager : MonoBehaviour
                             // J : 구조 성공
                         break;
                     case 3: // J : (나무가 쓰러져서 AI가 다쳤다. 어떻게 할까?)
-                        endingManager.suddenEnding(3); // N : Bad Ending (AI 고장)
+                        endingManager.BadEnding(5); // N : Bad Ending (AI 고장)
                         break;
                     case 4: // C : 박사님 신기하게 생긴 생물을 발견했어요! 박사님께 드리려고 힘들게 잡았어요ㅎㅎ
                         screenManager.HeartStudy(1);    // C : 공감 1레벨 상승
@@ -293,13 +261,20 @@ public class SpecialEventManager : MonoBehaviour
     {
     }
 
+    private void EndSpecialEvent()
+    {
+        special = false;
+        talkIndex = 0;      // J : talk index 초기화
+        talkPanel.SetActive(false); // J : 대화창 비활성화
+    }
+
     // C : 스페셜이벤트 발생 알람 후 재난 발생
     IEnumerator DisasterAfterAlarm()
     {
         playerAction.StartCoroutine("OnAlarm");
         yield return new WaitForSeconds(3.3f);      // C : 알람 애니메이션 끝난 후
-        talkPanel.SetActive(true);
-        Disaster();
+        EndSpecialEvent();
+        endingManager.BadEnding(endingCode);
     }
 
     // C : 스페셜이벤트 발생 알람 후 대화창 활성화 및 대화 시작

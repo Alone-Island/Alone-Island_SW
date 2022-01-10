@@ -11,6 +11,7 @@ public class PlayerAction : MonoBehaviour
     public GameManager manager;         // C : player에서 GameManager의 함수를 호출할 수 있도록 manager 변수 생성
     public ScreenManager screenManager;         // J : 책을 주웠을 때 책 개수 증가를 위해 ScreenManager 변수 생성
     public SpecialEventManager specialManager;  // J : player에서 SpecialEventManager의 함수를 호출할 수 있도록 specialManager 변수 생성
+    public EndingManager endingManager;
     public SettingManager settingManager;       // J : 설정창 활성화 중에는 플레이어가 움직일 수 없게 settingManager 변수 생성
 
     private AIAction aiAction;
@@ -113,9 +114,9 @@ public class PlayerAction : MonoBehaviour
                     specialManager.Talk();  // J : specialManager의 Talk 함수 호출
                 else if (specialManager.resultTalk)     // J : 선택지 클릭한 후 (스페셜 이벤트 진행중)
                     specialManager.ResultTalk();    // J : 결과 텍스트 보여주기
-                else if (specialManager.disasterTalk)
-                    specialManager.DisasterTalk();
             }
+            if (manager.isEndingShow)
+                endingManager.BadEndingTalk();
             else if (scanObject != null)        // J : 스페셜 이벤트 진행 중이 아니고 scanObject가 있으면
                 manager.Action(scanObject);     // C : 맵의 대화창에 적절한 메세지가 뜰 수 있도록 Action()함수 실행
             else    // J : 아무 상태도 아니거나 책 찾았다는 대화창이 뜬 상태..

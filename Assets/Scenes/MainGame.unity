@@ -32005,7 +32005,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d016041f94fb834a805ddcaa92f7c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  book: {fileID: 2089972090860118588, guid: c7a0d716f5964f946b6ac78badbbb0d7, type: 3}
+  bookPrefab: {fileID: 2089972090860118588, guid: c7a0d716f5964f946b6ac78badbbb0d7,
+    type: 3}
+  bookAreaPrefab: {fileID: 7192654661712482092, guid: 85d704fc2585168428ce93d920317563,
+    type: 3}
   farmObject: {fileID: 1882242383}
   farmLearningObject: {fileID: 990543455}
   houseObject: {fileID: 1380803793}

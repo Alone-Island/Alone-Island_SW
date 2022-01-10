@@ -5,7 +5,8 @@ using UnityEngine;
 public class BookSpawnManager : MonoBehaviour
 {
     // J : https://angliss.cc/random-gameobject-created/ 참조
-    public GameObject book;
+    public GameObject bookPrefab;
+    public GameObject bookAreaPrefab;
 
     // C : 각 xxxxObject는 xxxxLearningObject의 부모 obejct
     // C : 책이 스폰될 때 농사 학습하기 장소에 스폰되는 것을 방지하기 위해 필요한 퍼블릭 변수 설정
@@ -48,11 +49,16 @@ public class BookSpawnManager : MonoBehaviour
         {
             Vector3 spawnPos = GetRandomPosition(); // J :랜덤 위치 return
 
-            // J : 원본, 위치, 회전값을 매개변수로 받아 오브젝트 복제
+            // J : 원본, 위치, 회전값을 매개변수로 받아 책 오브젝트 복제
             // J : Quaternion.identity <- 회전값 0
-            GameObject instance = Instantiate(book, spawnPos, Quaternion.identity);
-            instance.GetComponent<Renderer>().enabled = false;  // J : 오브젝트가 보이지 않도록
-            bookList.Add(instance); // J : 오브젝트 관리를 위해 리스트에 add
+            GameObject book = Instantiate(bookPrefab, spawnPos, Quaternion.identity);
+            book.GetComponent<Renderer>().enabled = false;  // J : 오브젝트가 보이지 않도록
+            bookList.Add(book); // J : 오브젝트 관리를 위해 리스트에 add
+                        
+            GameObject bookArea = Instantiate(bookAreaPrefab, spawnPos, Quaternion.identity);   // J : bookArea 오브젝트 복제
+            bookArea.transform.parent = book.transform;         // J : book Object의 자식 object로 생성
+            bookArea.GetComponent<Renderer>().enabled = false;  // J : 오브젝트가 보이지 않도록
+
         }
         area.enabled = false;       // J : BoxCollider2D 끄기
         yield return new WaitForSeconds(gameManager.day);   // J : 하루 지남

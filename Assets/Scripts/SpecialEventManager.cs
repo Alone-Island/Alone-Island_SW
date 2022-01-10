@@ -53,6 +53,7 @@ public class SpecialEventManager : MonoBehaviour
             secondRandomNum = rand.Next(1, 5);  // J : 1-4까지의 난수 생성
 
             specialID = 10000 + 10 * firstRandomNum + secondRandomNum; // J : talkData를 갖고 오기 위해 talkID 계산
+            Debug.Log("specialID : " + specialID);
 
             StartCoroutine("TalkAfterAlarm");   // C : 스페셜이벤트 발생 알람 후 대화창 활성화 및 대화 시작
         }

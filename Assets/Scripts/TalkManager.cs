@@ -123,6 +123,7 @@ public class TalkManager : MonoBehaviour
     // C : 필요한 TalkData를 return
     public string GetTalkData(int id, int talkIndex)
     {
+        Debug.Log("TalkID : " + id);
         if (talkIndex == talkData[id].Length)       // C : talkIndex가 talkData[id]의 마지막 index + 1이면
             return null;
 

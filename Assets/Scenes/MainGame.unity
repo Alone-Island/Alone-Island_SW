@@ -19532,7 +19532,7 @@ MonoBehaviour:
   talkManager: {fileID: 121161932}
   talkIndex: 0
   day: 10
-  specialEventCoolTimeDay: 10
+  specialEventCoolTimeDay: 0
   specialManager: {fileID: 488290411}
   learningManager: {fileID: 721096102}
   screenManager: {fileID: 1163355729}

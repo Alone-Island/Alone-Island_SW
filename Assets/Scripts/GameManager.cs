@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public TalkManager talkManager; // C : GameManager에서 TalkManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public int talkIndex;           // C : 필요한 talkIndex를 저장하기 위한 변수 생성
     public int day = 20;            // J : 하루는 20초
-    public int specialEventCoolTimeDay = 10;        // 스페셜 이벤트가 발생하기 위한 쿨타임 일수
+    public int specialEventCoolTimeDay;        // 스페셜 이벤트가 발생하기 위한 쿨타임 일수
 
     public SpecialEventManager specialManager; // J : GameManager에서 SpecialEventManager의 함수를 호출할 수 있도록 talkManager 변수 생성
     public LearningManager learningManager;     // C : 플레이어가 AI를 학습시키는 action을 시도했을 때, 적절한 학습을 시킬 수 있도록 learningManager 변수 생성
@@ -125,5 +125,10 @@ public class GameManager : MonoBehaviour
 
         isTPShow = true;                // C : talkPanel의 show 상태 true로 저장 (해당하는 id의 talkData string이 아직 남아있음)
         talkIndex++;                    // C : 해당하는 id의 다음 talkData string을 가져오기 위해
+    }
+
+    void Start()
+    {
+        specialEventCoolTimeDay = 3;
     }
 }

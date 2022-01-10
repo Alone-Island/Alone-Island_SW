@@ -201,9 +201,10 @@ public class PlayerAction : MonoBehaviour
 
         // C : Ray
         // C : 시작 위치는 rigid의 위치, 방향은 dirVec, 길이는 0.7f, 색깔은 green인 디버그라인을 설정(ray를 시각화)
-        Debug.DrawRay(rigid.position, dirVec * 0.7f, new Color(0, 1, 0));
+        // J : 위, 아래 방향에서 스캔 못해서 길이 1.0f로 변경
+        Debug.DrawRay(rigid.position, dirVec * 1.0f, new Color(0, 1, 0));
         // C : Object 레이어를 스캔하는 실제 RayCast 구현
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, dirVec, 0.7f, LayerMask.GetMask("Object"));
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, dirVec, 1.0f, LayerMask.GetMask("Object"));
 
         if (rayHit.collider != null)    // C : ray가 Object를 감지했을 때
         {

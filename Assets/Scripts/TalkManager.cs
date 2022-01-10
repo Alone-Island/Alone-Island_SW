@@ -101,6 +101,7 @@ public class TalkManager : MonoBehaviour
 
         // J : 선택지가 3개인 이벤트의 결과 텍스트
         resultData.Add(100110, new string[] { "AI가 이해하지 못해서 고장났다." });
+        resultData.Add(100110, new string[] {  });
         resultData.Add(100111, new string[] { "아무런 변화도 일어나지 않았다." });
         resultData.Add(100112, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
 

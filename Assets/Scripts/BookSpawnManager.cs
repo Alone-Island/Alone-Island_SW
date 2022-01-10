@@ -56,7 +56,7 @@ public class BookSpawnManager : MonoBehaviour
             bookList.Add(book); // J : 오브젝트 관리를 위해 리스트에 add
                         
             GameObject bookArea = Instantiate(bookAreaPrefab, spawnPos, Quaternion.identity);   // J : bookArea 오브젝트 복제
-            bookArea.transform.parent = book.transform;         // J : book Object의 자식 object로 생성
+            bookArea.transform.SetParent(book.transform);   // J : book Object의 자식 object로 생성
             bookArea.GetComponent<Renderer>().enabled = false;  // J : 오브젝트가 보이지 않도록
 
         }

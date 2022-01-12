@@ -163,7 +163,11 @@ public class AIAction : MonoBehaviour
                     anim.SetBool("up", true);
                 }
             }
-            
+
+
+            // C : AI 머리 위에 Talk(spacebar) 오브젝트 띄우기
+            GameObject talkObj = transform.Find("Talk").gameObject;
+            talkObj.SetActive(true);
         }        
     }
 
@@ -181,6 +185,10 @@ public class AIAction : MonoBehaviour
             anim.SetBool("right", false);
             anim.SetBool("up", false);
             anim.SetBool("down", false);
+
+            // C : AI 머리 위의 Talk(spacebar) 오브젝트 제거하기
+            GameObject talkObj = transform.Find("Talk").gameObject;
+            talkObj.SetActive(false);
         }
     }
 

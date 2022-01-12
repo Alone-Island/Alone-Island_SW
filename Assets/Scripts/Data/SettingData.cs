@@ -7,6 +7,7 @@ using UnityEngine;
 [Serializable]  // J : 직렬화된 Data
 public class SettingData
 {
-    public float BGMSound = 1;  // J : 음량
+    public float BackgroundSound = 1;  // J : 배경음악
+    public float EffectSound = 1;   // J : 효과음악
     public int firstGame = 1;   // J : 첫 게임 여부
 }

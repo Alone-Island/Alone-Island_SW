@@ -28,14 +28,19 @@ public class SettingManager : MonoBehaviour
         SoundSlider();
 
         // K : 세팅창이 켜져있을 때, esc키를 누르면 세팅창 꺼짐
-        if (nowSetting)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (nowSetting)
             {
                 setting.SetActive(false);
                 nowSetting = false;
             }
-        }        
+            else
+            {
+                setting.SetActive(true);
+                nowSetting = true;
+            }
+        }
     }
 
     // J : 설정 버튼 onclick

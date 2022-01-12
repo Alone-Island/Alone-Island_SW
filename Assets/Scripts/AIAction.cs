@@ -114,6 +114,7 @@ public class AIAction : MonoBehaviour
         if (coll.gameObject.name == "Dr.Kim")
         {
             isAICollisionToPlayer = true;   // K : AI가 플레이어와 충돌을 확인하기 위한 코드
+
             
             // C : 충돌 방향 감지
             Vector2 collisionDir = transform.position - coll.gameObject.transform.position;
@@ -168,6 +169,9 @@ public class AIAction : MonoBehaviour
             // C : AI 머리 위에 Talk(spacebar) 오브젝트 띄우기
             GameObject talkObj = transform.Find("Talk").gameObject;
             talkObj.SetActive(true);
+
+            // K : 충돌시 밀림현상 제거를 위해 body type을 dynamic에서 static으로 변경
+            rigid.bodyType = RigidbodyType2D.Static;
         }        
     }
 
@@ -189,6 +193,9 @@ public class AIAction : MonoBehaviour
             // C : AI 머리 위의 Talk(spacebar) 오브젝트 제거하기
             GameObject talkObj = transform.Find("Talk").gameObject;
             talkObj.SetActive(false);
+
+            // K : 충돌시 밀림현상 제거를 위해 변경했던 body type을 다시 dynamic으로 변경
+            rigid.bodyType = RigidbodyType2D.Dynamic;
         }
     }
 

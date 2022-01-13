@@ -138,7 +138,6 @@ public class SettingManager : MonoBehaviour
         SelectSettingQuit();    // J : 설정창 비활성화
 
         DataController.Instance.DeleteAllData();    // J : 모든 데이터 파일(.json) 삭제
-        ResetSetting(); // J : 파일 삭제해도 남는 설정 수동으로 초기화
     }
 
     // J : 게임 초기화 no 버튼 onclick
@@ -146,15 +145,6 @@ public class SettingManager : MonoBehaviour
     {
         Debug.Log("게임 초기화 X");
         GameObject.Find("Windows").transform.Find("ResetAlert").gameObject.SetActive(false);    // J : 게임 초기화 경고창 비활성화
-    }
-
-    // J : 설정 데이터 초기화
-    // J : SettingData를 삭제해도 설정창의 음량 조절 슬라이더값으로 인해 소리 데이터는 유지
-    // J : =>슬라이더값을 1로 세팅
-    private void ResetSetting()
-    {
-        backgroundSlider.value = 1;
-        effectSlider.value = 1;
     }
 
     // J : 슬라이더의 값으로 음량 조절+설정 데이터에 저장

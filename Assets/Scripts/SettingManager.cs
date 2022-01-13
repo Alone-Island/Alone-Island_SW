@@ -57,8 +57,15 @@ public class SettingManager : MonoBehaviour
     // J : 설정 버튼 onclick
     public void SelectSetting()
     {
-        setting.SetActive(true);// J : 설정창 활성화
-        nowSetting = true;      // J : 시간 멈추기
+        if (setting.activeSelf)
+        {
+            setting.SetActive(false);// J : 설정창 비활성화
+            nowSetting = false;      // J : 시간 멈추기
+        } else
+        {
+            setting.SetActive(true);// J : 설정창 활성화
+            nowSetting = true;      // J : 시간 재생
+        }            
     }
 
     // J : 설정창 나가기 버튼 onclick

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MenuScript : MonoBehaviour
 {
     public GameObject gameRule;     // J : 게임방법 창
+    public GameObject setting;  // J : 설정창
     public GameObject scrollView;   // J : 엔딩카드창
 
     public GameObject BGM;          // J : 배경음악 on/off를 위해 BGM object 가져옴
@@ -33,7 +34,15 @@ public class MenuScript : MonoBehaviour
     public void SelectRule()
     {
         Debug.Log("게임방법");
-        gameRule.SetActive(true);   // J : 게임방법창 활성화
+        if (gameRule.activeSelf)
+        {
+            gameRule.SetActive(false);   // J : 게임방법창 비활성화
+        } else
+        {
+            gameRule.SetActive(true);   // J : 게임방법창 활성화
+            SelectEndingCardQuit();
+            SelectSettingQuit();
+        }
     }
 
     // J : 게임방법 나가기 버튼 onclick
@@ -41,6 +50,28 @@ public class MenuScript : MonoBehaviour
     {
         Debug.Log("게임방법 나가기");
         gameRule.SetActive(false);  // J : 게임방법창 비활성화
+    }
+
+    // J : 설정창 나가기 버튼 onclick
+    public void SelectSetting()
+    {
+        if (setting.activeSelf)
+        {
+            setting.SetActive(false);// J : 설정창 비활성화
+        }
+        else
+        {
+            setting.SetActive(true);// J : 설정창 활성화
+            SelectEndingCardQuit();
+            SelectRuleQuit();
+        }
+    }
+
+    // J : 설정창 나가기 버튼 onclick
+    public void SelectSettingQuit()
+    {
+        setting.SetActive(false);   // J : 설정창 비활성화
+
     }
 
     // J : 게임종료 버튼 onclick
@@ -55,6 +86,8 @@ public class MenuScript : MonoBehaviour
     {
         Debug.Log("엔딩카드");
         scrollView.SetActive(true);
+        SelectRuleQuit();
+        SelectSettingQuit();
 
         Image card;
 

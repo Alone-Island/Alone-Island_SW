@@ -30,11 +30,10 @@ public class SettingManager : MonoBehaviour
         }
         
         float effectVolume = DataController.Instance.settingData.EffectSound;    // J : 설정 데이터의 효과음악 음량 가져오기
-        foreach (AudioSource effect in effects) // J : 모든 effect sound의 음량, 슬라이더 초기값 세팅
-        {
-            effect.volume = effectVolume;    // J : 설정 데이터로 게임 시작 시 효과음악 초기값 세팅
+        if (setting != null)    // J : 씬에 설정창이 있는 경우
             effectSlider.value = effectVolume;  // J : 설정 데이터로 효과음악 음량 조절 슬라이더의 초기값 세팅
-        }
+        foreach (AudioSource effect in effects) // J : 모든 effect sound의 음량, 슬라이더 초기값 세팅
+            effect.volume = effectVolume;    // J : 설정 데이터로 게임 시작 시 효과음악 초기값 세팅
 
         SetSoundImage(backgroundVolume, effectVolume);  // J : 초기값으로 소리 이미지 세팅
     }
@@ -150,16 +149,20 @@ public class SettingManager : MonoBehaviour
     // J : 슬라이더의 값으로 음량 조절+설정 데이터에 저장
     private void SoundSlider()
     {
-        float backgroundVolume = backgroundSlider.value;    // J : 배경음악 슬라이더의 값 가져오기
-        bgm.volume = backgroundVolume;  // J : 배경음악 음량을 슬라이더의 값으로 세팅
-        DataController.Instance.settingData.BackgroundSound = backgroundVolume;  // J : 설정 데이터에 저장
+        if (setting != null)    // J : 씬에 설정창이 있는 경우
+        {
+            float backgroundVolume = backgroundSlider.value;    // J : 배경음악 슬라이더의 값 가져오기
+            bgm.volume = backgroundVolume;  // J : 배경음악 음량을 슬라이더의 값으로 세팅
+            DataController.Instance.settingData.BackgroundSound = backgroundVolume;  // J : 설정 데이터에 저장
 
-        float effectVolume = effectSlider.value;    // J : 효과음악 슬라이더의 값 가져오기
-        foreach (AudioSource effect in effects) // J : 모든 effect sound의 음량 세팅
-            effect.volume = effectVolume;    // J : 설정 데이터로 게임 시작 시 효과음악 초기값 세팅
-        DataController.Instance.settingData.EffectSound = effectVolume;  // J : 설정 데이터에 저장
+            float effectVolume = effectSlider.value;    // J : 효과음악 슬라이더의 값 가져오기
+            foreach (AudioSource effect in effects) // J : 모든 effect sound의 음량 세팅
+                effect.volume = effectVolume;    // J : 설정 데이터로 게임 시작 시 효과음악 초기값 세팅
+            DataController.Instance.settingData.EffectSound = effectVolume;  // J : 설정 데이터에 저장
 
-        SetSoundImage(backgroundVolume, effectVolume);  // J : 음량에 맞게 소리 이미지 세팅
+            SetSoundImage(backgroundVolume, effectVolume);  // J : 음량에 맞게 소리 이미지 세팅
+        }
+            
     }
 
     // J : 음량에 맞게 소리 이미지 세팅

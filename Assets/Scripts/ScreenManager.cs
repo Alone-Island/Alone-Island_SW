@@ -172,7 +172,8 @@ public class ScreenManager : MonoBehaviour
 
     public void timeFly()
     {
-        if(!settingManager.nowSetting) dayTime++;
+        // J : 설정하는 중이나 스페셜 이벤트 중에는 시간이 흐르지 않음
+        if(!settingManager.nowSetting && !specialManager.special) dayTime++;
 
         if (dayTime >= gameManager.day) { dayTime = 0; dayAfter(); }
         else Invoke("timeFly", 1);

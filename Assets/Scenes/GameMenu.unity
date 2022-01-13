@@ -20986,7 +20986,8 @@ MonoBehaviour:
   backgroundSlider: {fileID: 933274362}
   effectSlider: {fileID: 2113337740}
   bgm: {fileID: 1817713682}
-  effect: {fileID: 0}
+  effects:
+  - {fileID: 160607883}
   backgroundOn: {fileID: 967718123}
   backgroundOff: {fileID: 451204350}
   effectOn: {fileID: 993580086}

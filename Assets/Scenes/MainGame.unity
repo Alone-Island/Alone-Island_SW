@@ -15077,7 +15077,12 @@ MonoBehaviour:
   backgroundSlider: {fileID: 517355824}
   effectSlider: {fileID: 1237777768}
   bgm: {fileID: 483869586}
-  effect: {fileID: 1615652202}
+  effects:
+  - {fileID: 1615652202}
+  - {fileID: 1069650995}
+  - {fileID: 1004000414}
+  - {fileID: 303331405}
+  - {fileID: 1892803373}
   backgroundOn: {fileID: 502949840}
   backgroundOff: {fileID: 778919268}
   effectOn: {fileID: 1424749432}

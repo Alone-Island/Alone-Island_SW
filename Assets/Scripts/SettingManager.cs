@@ -10,7 +10,7 @@ public class SettingManager : MonoBehaviour
     public Slider effectSlider;       // J : 효과음악 음량 조절 슬라이더
 
     public AudioSource bgm;         // J : 배경음악 component
-    public AudioSource effect;     // J : 효과음악 component
+    public List<AudioSource> effects;     // J : 효과음악 component
 
     public GameObject backgroundOn;       // J : 배경음악 on Image
     public GameObject backgroundOff;      // J : 배경음악 off Image
@@ -23,13 +23,18 @@ public class SettingManager : MonoBehaviour
     void Start()
     {
         float backgroundVolume = DataController.Instance.settingData.BackgroundSound;    // J : 설정 데이터의 배경음악 음량 가져오기
-        bgm.volume = backgroundVolume;    // J : 설정 데이터로 게임 시작 시 배경음악 초기값 세팅
-        backgroundSlider.value = backgroundVolume;  // J : 설정 데이터로 배경음악 음량 조절 슬라이더의 초기값 세팅
-
+        if (bgm != null)    // J : 씬에 BGM이 있는 경우
+        {
+            bgm.volume = backgroundVolume;    // J : 설정 데이터로 게임 시작 시 배경음악 초기값 세팅
+            backgroundSlider.value = backgroundVolume;  // J : 설정 데이터로 배경음악 음량 조절 슬라이더의 초기값 세팅
+        }
+        
         float effectVolume = DataController.Instance.settingData.EffectSound;    // J : 설정 데이터의 효과음악 음량 가져오기
-        if (effect != null)
+        foreach (AudioSource effect in effects) // J : 모든 effect sound의 음량, 슬라이더 초기값 세팅
+        {
             effect.volume = effectVolume;    // J : 설정 데이터로 게임 시작 시 효과음악 초기값 세팅
-        effectSlider.value = effectVolume;  // J : 설정 데이터로 효과음악 음량 조절 슬라이더의 초기값 세팅
+            effectSlider.value = effectVolume;  // J : 설정 데이터로 효과음악 음량 조절 슬라이더의 초기값 세팅
+        }
 
         SetSoundImage(backgroundVolume, effectVolume);  // J : 초기값으로 소리 이미지 세팅
     }
@@ -160,8 +165,8 @@ public class SettingManager : MonoBehaviour
         DataController.Instance.settingData.BackgroundSound = backgroundVolume;  // J : 설정 데이터에 저장
 
         float effectVolume = effectSlider.value;    // J : 효과음악 슬라이더의 값 가져오기
-        if (effect != null)
-            effect.volume = effectVolume;  // J : 효과음악 음량을 슬라이더의 값으로 세팅
+        foreach (AudioSource effect in effects) // J : 모든 effect sound의 음량 세팅
+            effect.volume = effectVolume;    // J : 설정 데이터로 게임 시작 시 효과음악 초기값 세팅
         DataController.Instance.settingData.EffectSound = effectVolume;  // J : 설정 데이터에 저장
 
         SetSoundImage(backgroundVolume, effectVolume);  // J : 음량에 맞게 소리 이미지 세팅
@@ -170,30 +175,33 @@ public class SettingManager : MonoBehaviour
     // J : 음량에 맞게 소리 이미지 세팅
     private void SetSoundImage(float backgroundVolume, float effectVolume)
     {
-        // J : 배경음악 음량이 0보다 크면 On 이미지가 보임
-        if (backgroundVolume > 0)
+        if (setting != null)    // J : 씬에 설정창이 있는 경우
         {
-            backgroundOn.SetActive(true);
-            backgroundOff.SetActive(false);
-        }
-        // J : 배경음악 음량이 0이면 Off 이미지가 보임
-        else
-        {
-            backgroundOn.SetActive(false);
-            backgroundOff.SetActive(true);
-        }
+            // J : 배경음악 음량이 0보다 크면 On 이미지가 보임
+            if (backgroundVolume > 0)
+            {
+                backgroundOn.SetActive(true);
+                backgroundOff.SetActive(false);
+            }
+            // J : 배경음악 음량이 0이면 Off 이미지가 보임
+            else
+            {
+                backgroundOn.SetActive(false);
+                backgroundOff.SetActive(true);
+            }
 
-        // J : 효과음악 음량이 0보다 크면 On 이미지가 보임
-        if (effectVolume > 0)
-        {
-            effectOn.SetActive(true);
-            effectOff.SetActive(false);
-        }
-        // J : 효과음악 음량이 0이면 Off 이미지가 보임
-        else
-        {
-            effectOn.SetActive(false);
-            effectOff.SetActive(true);
+            // J : 효과음악 음량이 0보다 크면 On 이미지가 보임
+            if (effectVolume > 0)
+            {
+                effectOn.SetActive(true);
+                effectOff.SetActive(false);
+            }
+            // J : 효과음악 음량이 0이면 Off 이미지가 보임
+            else
+            {
+                effectOn.SetActive(false);
+                effectOff.SetActive(true);
+            }
         }
     }
 }

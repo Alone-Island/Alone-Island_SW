@@ -291,6 +291,9 @@ public class SpecialEventManager : MonoBehaviour
     // C : 스페셜이벤트 발생 알람 후 재난 발생
     IEnumerator DisasterAfterAlarm()
     {
+        // K : 스페셜 이벤트 효과음 발생
+        effect.Play("SpecialEventEffect");
+
         playerAction.StartCoroutine("OnAlarm");
         yield return new WaitForSeconds(2.2f);      // C : 알람 애니메이션 끝난 후
         effect.Stop("SpecialEventEffect");

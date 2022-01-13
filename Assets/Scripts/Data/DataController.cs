@@ -120,9 +120,13 @@ public class DataController : MonoBehaviour
     // J : 게임의 모든 데이터 삭제
     public void DeleteAllData()
     {
-        // J : 모든 데이터 파일 삭제
-        File.Delete(Application.persistentDataPath + "/" + SettingDataFileName);
+        // J : 설정 데이터 파일 삭제 -> 바로 소리가 켜지는 문제로 인해 설정 데이터는 삭제 X
+        //File.Delete(Application.persistentDataPath + "/" + SettingDataFileName);
+        //_settingData = null;
+
+        // J : 엔딩 데이터 파일 삭제
         File.Delete(Application.persistentDataPath + "/" + EndingDataFileName);
+        _endingData = null;
     }
 
     private void OnApplicationQuit()    // J : 프로그램 종료 시 데이터 저장

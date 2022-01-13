@@ -22,8 +22,8 @@ public class TalkManager : MonoBehaviour
     void GenerateData()
     {
         // C : key가 1000~1009이면 AI와의 dialogue data (Dr.Kim이 AI에게 대화를 걸 때), 즉 공감 학습
-        talkData.Add(1001, new string[] { "제 생일은 언제일까요~?" });
-        talkData.Add(1002, new string[] { "박사님의 MBTI는 뭐에요?", "저는 ISTP에요!" });
+        talkData.Add(1001, new string[] { "제 생일은 언제일까요?" });
+        talkData.Add(1002, new string[] { "박사님의 고향은 어딘가요?", "제 고향은 저기 보이는 연구실이겠죠?" });
         talkData.Add(1003, new string[] { "친구가 더 있었으면 좋겠어요..", "물론 박사님이 최고의 친구랍니다." });
         talkData.Add(1004, new string[] { "박사님이 드시는 밥은 무슨 맛일 지 궁금해요! ", "저는 쌀을 못 먹거든요." });
         talkData.Add(1005, new string[] { "저에게 밥은 태양열 에너지에요.", "차가운 태양빛은 왜 없을까요?", "여름에 너무 덥단 말이에요ㅠㅠ" });
@@ -31,9 +31,12 @@ public class TalkManager : MonoBehaviour
         talkData.Add(1007, new string[] { "생명이란 무엇일까요?", "저도 생명일까요?" });
         talkData.Add(1008, new string[] { "AI가 너무 똑똑해지면 어떻게 될까요?" });
         talkData.Add(1009, new string[] { "박사님은 제페토보다 더 똑똑하고 멋있는 사람이에요!" });
-        talkData.Add(1010, new string[] { "죽음이란 무엇일까요? 죽으면 어디로 가는 걸까요?" });
+        talkData.Add(1010, new string[] { "죽음이란 무엇일까요?", "죽으면 어디로 가는 걸까요?" });
         talkData.Add(1011, new string[] { "왜 이 섬에는 박사님 말고는 아무도 살지 않는 걸까요?" });
         talkData.Add(1012, new string[] { "박사님은 혼자 외롭지 않아요?", "제가 있으니 괜찮나요?" });
+        talkData.Add(1013, new string[] { "박사님은 밤마다 왜 가만히 있어요?" });
+        talkData.Add(1014, new string[] { "저 바다 건너에는 무엇이 있을지 궁금해요!", "언젠가 바다를 건너 박사님과 여행이란 걸 떠나볼래요!" });
+        talkData.Add(1015, new string[] { "박사님은 가족이 있나요?", "어떤 분들일지 궁금해요.", "아마 박사님처럼 멋진 분들이겠지만요." });
 
         // N : 하루에 한번 이상 대화 시도
         talkData.Add(3000, new string[] { "충전 중이에요.. 오늘은 대화를 더 이상 할 수 없어요." });

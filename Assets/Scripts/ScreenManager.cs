@@ -145,7 +145,11 @@ public class ScreenManager : MonoBehaviour
         else calender.text = "day " + day.ToString();
 
         // N : 90일 이후
-        if (day > 90) endingManager.timeOutEnding();
+        if (day >= 90)
+        {
+            endingManager.timeOutEnding();
+            return;
+        }
 
         // J : 스페셜 이벤트 주기마다 스페셜 이벤트 발동
         if (day % gameManager.specialEventCoolTimeDay == 0)

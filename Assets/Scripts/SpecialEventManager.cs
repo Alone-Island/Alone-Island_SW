@@ -193,7 +193,7 @@ public class SpecialEventManager : MonoBehaviour
                         switch (secondRandomNum)
                         {
                             case 1: // J : 이 꽃 너무 이쁘지 않아요??
-                                    // J : 변화없음
+                                screenManager.HeartStudy(1); // J : 공감 1레벨 상승
                                 break;
                             case 2: // J : (AI가 물에 빠졌다)
                                 screenManager.HeartStudy(-1); // J : 공감 1레벨 하락

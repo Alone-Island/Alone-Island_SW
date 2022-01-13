@@ -97,15 +97,18 @@ public class AIAction : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
-        if (specialManager.special || learningManager.isAILearning || gameManager.isEndingShow || gameManager.playerTalk || isAICollisionToPlayer)    
+    {   
+        if (rigid.bodyType == RigidbodyType2D.Dynamic)
+        {
+            if (specialManager.special || learningManager.isAILearning || gameManager.isEndingShow || gameManager.playerTalk || isAICollisionToPlayer)
             // K : 스페셜 이벤트, 플레이어가 AI와 대화하는,  AI가 학습중일때 정지, 엔딩카드가 보여졌을 때, AI와 플레이어가 충돌중일때
-        {
-            rigid.velocity = new Vector2(0, 0); // K : AI 정지
-        }
-        else
-        {
-            rigid.velocity = new Vector2(nextAIMoveX, nextAIMoveY); // K : AI 이동
+            {
+                rigid.velocity = new Vector2(0, 0); // K : AI 정지
+            }
+            else
+            {
+                rigid.velocity = new Vector2(nextAIMoveX, nextAIMoveY); // K : AI 이동
+            }
         }
     }
 

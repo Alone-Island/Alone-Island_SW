@@ -18020,7 +18020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1114231204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20964,6 +20964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameRule: {fileID: 683037655}
+  setting: {fileID: 1114231203}
   scrollView: {fileID: 1723074334}
   BGM: {fileID: 1817713681}
   CardButton: {fileID: 392514559}
@@ -24419,8 +24420,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1447527459}
-        m_TargetAssemblyTypeName: SettingManager, Assembly-CSharp
+      - m_Target: {fileID: 1447527458}
+        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
         m_MethodName: SelectSetting
         m_Mode: 1
         m_Arguments:
@@ -24667,7 +24668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1770061709
 MonoBehaviour:
   m_ObjectHideFlags: 0

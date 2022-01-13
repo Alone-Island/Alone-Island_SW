@@ -7,11 +7,6 @@ public class EffectPlay : MonoBehaviour
     private AudioSource audioSource;
     private bool effectOn = false;
 
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     // Start is called before the first frame update
     void Start()
     {

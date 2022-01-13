@@ -109,7 +109,7 @@ public class TalkManager : MonoBehaviour
         // J : 선택지가 3개인 이벤트의 결과 텍스트
         //resultData.Add(100110, new string[] { "AI가 이해하지 못해서 고장났다." });
         resultData.Add(100110, new string[] {  });
-        resultData.Add(100111, new string[] { "박사의 말에 AI가 감동받았다.", "AI의 공감능력이 1레벨 상승했다!" });
+        resultData.Add(100111, new string[] { "박사의 말에 AI의 CPU가 뜨거워졌다.", "AI의 공감능력이 1레벨 상승했다!" });
         resultData.Add(100112, new string[] { "AI의 공감능력이 1레벨 하락했다!" });
 
         //resultData.Add(100120, new string[] { "나까지 덩달아 감전됐다!" });

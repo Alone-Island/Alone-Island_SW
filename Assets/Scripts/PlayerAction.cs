@@ -279,7 +279,7 @@ public class PlayerAction : MonoBehaviour
     IEnumerator OnAlarm()
     {
         alarm.SetActive(true);
-        yield return new WaitForSeconds(3.3f);
+        yield return new WaitForSeconds(2.2f);
         alarm.SetActive(false);
     }
 

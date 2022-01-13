@@ -9466,6 +9466,7 @@ GameObject:
   - component: {fileID: 326090258}
   - component: {fileID: 326090257}
   - component: {fileID: 326090256}
+  - component: {fileID: 326090259}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -9555,6 +9556,35 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &326090259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326090254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &327640585
 GameObject:
   m_ObjectHideFlags: 0
@@ -9865,6 +9895,7 @@ GameObject:
   - component: {fileID: 332600861}
   - component: {fileID: 332600860}
   - component: {fileID: 332600859}
+  - component: {fileID: 332600862}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -9954,6 +9985,35 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &332600862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332600857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &370512982
 GameObject:
   m_ObjectHideFlags: 0
@@ -10857,7 +10917,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1447527459}
         m_TargetAssemblyTypeName: SettingManager, Assembly-CSharp
-        m_MethodName: SetBackkgroundSoundCancelMute
+        m_MethodName: SetBackgroundSoundCancelMute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11013,6 +11073,7 @@ GameObject:
   - component: {fileID: 475917173}
   - component: {fileID: 475917175}
   - component: {fileID: 475917174}
+  - component: {fileID: 475917176}
   m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
@@ -11077,6 +11138,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 475917172}
   m_CullTransparentMesh: 1
+--- !u!114 &475917176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475917172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &499213495
 GameObject:
   m_ObjectHideFlags: 0
@@ -15679,7 +15769,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1447527459}
           m_TargetAssemblyTypeName: SettingManager, Assembly-CSharp
-          m_MethodName: SetBackkgroundSoundCancelMute
+          m_MethodName: SetBackgroundSoundCancelMute
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -16249,7 +16339,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1447527459}
         m_TargetAssemblyTypeName: SettingManager, Assembly-CSharp
-        m_MethodName: SetBackkgroundSoundMute
+        m_MethodName: SetBackgroundSoundMute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20940,6 +21030,7 @@ GameObject:
   - component: {fileID: 1436809650}
   - component: {fileID: 1436809652}
   - component: {fileID: 1436809651}
+  - component: {fileID: 1436809653}
   m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
@@ -21004,6 +21095,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436809649}
   m_CullTransparentMesh: 1
+--- !u!114 &1436809653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436809649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1446439038
 GameObject:
   m_ObjectHideFlags: 0

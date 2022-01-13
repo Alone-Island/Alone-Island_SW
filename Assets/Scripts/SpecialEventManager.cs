@@ -292,7 +292,8 @@ public class SpecialEventManager : MonoBehaviour
     IEnumerator DisasterAfterAlarm()
     {
         playerAction.StartCoroutine("OnAlarm");
-        yield return new WaitForSeconds(3.3f);      // C : 알람 애니메이션 끝난 후
+        yield return new WaitForSeconds(2.2f);      // C : 알람 애니메이션 끝난 후
+        effect.Stop("SpecialEventEffect");
         EndSpecialEvent();
         endingManager.BadEnding(endingCode);
     }
@@ -304,7 +305,8 @@ public class SpecialEventManager : MonoBehaviour
         effect.Play("SpecialEventEffect");
 
         playerAction.StartCoroutine("OnAlarm");
-        yield return new WaitForSeconds(3.3f);      // C : 알람 애니메이션 끝난 후
+        yield return new WaitForSeconds(2.2f);      // C : 알람 애니메이션 끝난 후
+        effect.Stop("SpecialEventEffect");
         talkPanel.SetActive(true);
         Talk();
     }

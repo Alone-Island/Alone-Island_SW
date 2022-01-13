@@ -5,7 +5,6 @@ using UnityEngine;
 public class EffectPlay : MonoBehaviour
 {
     private AudioSource audioSource;
-    private bool effectOn = false;
 
     // Start is called before the first frame update
     void Start()
@@ -16,15 +15,17 @@ public class EffectPlay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        effectOn = true;
     }
 
     public void Play(string objectName)
     {
-        if (effectOn)
-        {
-            audioSource = GameObject.Find(objectName).GetComponent<AudioSource>();
-            audioSource.Play();
-        }
+        audioSource = GameObject.Find(objectName).GetComponent<AudioSource>();
+        audioSource.Play();
+    }
+
+    public void Stop(string objectName)
+    {
+        audioSource = GameObject.Find(objectName).GetComponent<AudioSource>();
+        audioSource.Stop();
     }
 }

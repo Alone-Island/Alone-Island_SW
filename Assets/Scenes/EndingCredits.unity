@@ -306,9 +306,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<i><b>cast</b></i>\n\n\uBC15\uC0AC K\nAI NJ-C\n\n\n\n\n<i><b>director
-    / developer</b></i>\n\n\n\n\uAE40\uC11C\uC601(K)\n\uB098\uD61C\uC6D0(N)\n\uC7A5\uC608\uC6D0(J)\n\uCD5C\uC9C0\uBBFC(C)\n\n\n\n\n<i><b>design</b></i>\n\nassets
-    store\n\uAE40\uC11C\uC601(K)\n\n\n\n\n<i><b>sound</b></i>\n\n\uBB34\uB8CC \uC18C\uB9AC
+  m_text: "<i><b>CAST</b></i>\n\n\uBC15\uC0AC K\nAI NJ-C\n\n\n\n\n<i><b>DIRECT /
+    DEVELOP</b></i>\n\n\n\n\uAE40\uC11C\uC601(K)\n\uB098\uD61C\uC6D0(N)\n\uC7A5\uC608\uC6D0(J)\n\uCD5C\uC9C0\uBBFC(C)\n\n\n\n\n<i><b>DESIGN</b></i>\n\nassets
+    store\n\uAE40\uC11C\uC601(K)\n\n\n\n\n<i><b>SOUND</b></i>\n\n\uBB34\uB8CC \uC18C\uB9AC
     \uCC3D\uACE0\nfree sound\n\n\n\n\n<i><b>Thank You For Play Our Game</b></i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ed76735959c1c740848af3d4f619f7c, type: 2}
@@ -561,7 +561,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348426759}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -492, z: -2403}
+  m_LocalPosition: {x: 0, y: -492, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 26.7}
   m_Children: []
   m_Father: {fileID: 1398569855}
@@ -707,7 +707,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398569851}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.037453182, y: 0.037453182, z: 0.037453182}
   m_Children:
   - {fileID: 1348426760}

@@ -37,6 +37,8 @@ public class TalkManager : MonoBehaviour
         talkData.Add(1013, new string[] { "박사님은 밤마다 왜 가만히 있어요?" });
         talkData.Add(1014, new string[] { "저 바다 건너에는 무엇이 있을지 궁금해요!", "언젠가 바다를 건너 박사님과 여행이란 걸 떠나볼래요!" });
         talkData.Add(1015, new string[] { "박사님은 가족이 있나요?", "어떤 분들일지 궁금해요.", "아마 박사님처럼 멋진 분들이겠지만요." });
+        talkData.Add(1016, new string[] { "인간의 삶은 의식주만 해결되면 되는걸까요?", "마음을 나눌 친구가 없어도 살 수 있을까요?" });
+        talkData.Add(1017, new string[] { "옛날에는 위험한 질병만큼이나 외로워서 죽는 사람도 많았대요!" });
 
         // N : 하루에 한번 이상 대화 시도
         talkData.Add(3000, new string[] { "충전 중이에요.. 오늘은 대화를 더 이상 할 수 없어요." });

@@ -154,7 +154,7 @@ public class HappyEnding : MonoBehaviour
         isEndingCardShow = true;        // K : 엔딩 카드가 띄워졌음
 
         panel.SetActive(true);                                  // K : 배경을 어둡게 하기위한 패널을 띄웁니다
-        DataController.Instance.settingData.firstGame = 0;      // K : 첫번째 게임이 아님을 확인하기 위해 firstGame을 0으로 변경합니다.
+        DataController.Instance.endingData.firstGame = 0;      // K : 첫번째 게임이 아님을 확인하기 위해 firstGame을 0으로 변경합니다.
     }
 
 

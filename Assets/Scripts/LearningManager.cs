@@ -109,7 +109,7 @@ public class LearningManager : MonoBehaviour
                     screenManager.useBook();                // C : 책 사용에 따른 책 개수 줄이기
                     screenManager.HouseLevelUpAnimation();  // C : 건축 학습에 따른 건축 학습장소 맵 변화
                     learningTime = initLearningTime + screenManager.houseLv.fCurrValue; // C : 학습시간 조절
-                    aiAction.GoToLearningPlace(10, 9);      // C : AI를 학습장소로 이동시키기
+                    aiAction.GoToLearningPlace(7, 8);      // C : AI를 학습장소로 이동시키기
                     isAILearning = true;                    // C : AI 학습상태 true로 변환
                     Invoke("WaitingLearning", 1);           // C : 학습완료까지 기다리기
 

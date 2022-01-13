@@ -32,6 +32,8 @@ public class TalkManager : MonoBehaviour
         talkData.Add(1008, new string[] { "AI가 너무 똑똑해지면 어떻게 될까요?" });
         talkData.Add(1009, new string[] { "박사님은 제페토보다 더 똑똑하고 멋있는 사람이에요!" });
         talkData.Add(1010, new string[] { "죽음이란 무엇일까요? 죽으면 어디로 가는 걸까요?" });
+        talkData.Add(1011, new string[] { "왜 이 섬에는 박사님 말고는 아무도 살지 않는 걸까요?" });
+        talkData.Add(1012, new string[] { "박사님은 혼자 외롭지 않아요?", "제가 있으니 괜찮나요?" });
 
         // N : 하루에 한번 이상 대화 시도
         talkData.Add(3000, new string[] { "충전 중이에요.. 오늘은 대화를 더 이상 할 수 없어요." });

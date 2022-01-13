@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     System.Random rand = new System.Random();
-                    randomNum = rand.Next(1, 11);                  // C : 1~10까지의 난수를 대입
+                    randomNum = rand.Next(1, 13);                  // C : 1~10까지의 난수를 대입
                 }
             }
         }

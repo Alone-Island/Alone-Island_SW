@@ -16,6 +16,7 @@ public class MenuScript : MonoBehaviour
     public GameObject scrollEndingCards;  // J : Scroll View->Viewport->Content
     public Sprite badCard;
     public Sprite happyCard;
+    public Sprite unknownCard;
 
     private GameObject currentCard;
 
@@ -99,6 +100,14 @@ public class MenuScript : MonoBehaviour
             scrollEndingCards.transform.Find("BadLine0").transform.Find("hungry").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("BadLine0").transform.Find("hungry").transform.Find("hungry").gameObject.SetActive(true);
         }
+        else
+        {
+            card = scrollEndingCards.transform.Find("BadLine0").transform.Find("hungry").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("BadLine0").transform.Find("hungry").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("BadLine0").transform.Find("hungry").transform.Find("hungry").gameObject.SetActive(false);
+        }
+
         if (DataController.Instance.endingData.lonely == 1)
         {
             card = scrollEndingCards.transform.Find("BadLine0").transform.Find("lonely").GetComponent<Image>();
@@ -106,12 +115,27 @@ public class MenuScript : MonoBehaviour
             scrollEndingCards.transform.Find("BadLine0").transform.Find("lonely").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("BadLine0").transform.Find("lonely").transform.Find("lonely").gameObject.SetActive(true);
         }
+        else
+        {
+            card = scrollEndingCards.transform.Find("BadLine0").transform.Find("lonely").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("BadLine0").transform.Find("lonely").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("BadLine0").transform.Find("lonely").transform.Find("lonely").gameObject.SetActive(false);
+        }
+
         if (DataController.Instance.endingData.cold == 1)
         {
             card = scrollEndingCards.transform.Find("BadLine0").transform.Find("cold").GetComponent<Image>();
             card.sprite = badCard;
             scrollEndingCards.transform.Find("BadLine0").transform.Find("cold").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("BadLine0").transform.Find("cold").transform.Find("cold").gameObject.SetActive(true);
+        }
+        else
+        {
+            card = scrollEndingCards.transform.Find("BadLine0").transform.Find("cold").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("BadLine0").transform.Find("cold").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("BadLine0").transform.Find("cold").transform.Find("cold").gameObject.SetActive(false);
         }
 
         // J : BadLine1 엔딩카드
@@ -122,6 +146,14 @@ public class MenuScript : MonoBehaviour
             scrollEndingCards.transform.Find("BadLine1").transform.Find("poisonBerry").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("BadLine1").transform.Find("poisonBerry").transform.Find("poisonBerry").gameObject.SetActive(true);
         }
+        else
+        {
+            card = scrollEndingCards.transform.Find("BadLine1").transform.Find("poisonBerry").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("BadLine1").transform.Find("poisonBerry").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("BadLine1").transform.Find("poisonBerry").transform.Find("poisonBerry").gameObject.SetActive(false);
+        }
+
         if (DataController.Instance.endingData.error == 1)
         {
             card = scrollEndingCards.transform.Find("BadLine1").transform.Find("error").GetComponent<Image>();
@@ -129,6 +161,14 @@ public class MenuScript : MonoBehaviour
             scrollEndingCards.transform.Find("BadLine1").transform.Find("error").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("BadLine1").transform.Find("error").transform.Find("error").gameObject.SetActive(true);
         }
+        else
+        {
+            card = scrollEndingCards.transform.Find("BadLine1").transform.Find("error").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("BadLine1").transform.Find("error").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("BadLine1").transform.Find("error").transform.Find("error").gameObject.SetActive(false);
+        }
+
         if (DataController.Instance.endingData.electric == 1)
         {
             card = scrollEndingCards.transform.Find("BadLine1").transform.Find("electric").GetComponent<Image>();
@@ -136,6 +176,14 @@ public class MenuScript : MonoBehaviour
             scrollEndingCards.transform.Find("BadLine1").transform.Find("electric").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("BadLine1").transform.Find("electric").transform.Find("electric").gameObject.SetActive(true);
         }
+        else
+        {
+            card = scrollEndingCards.transform.Find("BadLine1").transform.Find("electric").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("BadLine1").transform.Find("electric").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("BadLine1").transform.Find("electric").transform.Find("electric").gameObject.SetActive(false);
+        }
+
         if (DataController.Instance.endingData.pig == 1)
         {
             card = scrollEndingCards.transform.Find("BadLine1").transform.Find("pig").GetComponent<Image>();
@@ -143,12 +191,27 @@ public class MenuScript : MonoBehaviour
             scrollEndingCards.transform.Find("BadLine1").transform.Find("pig").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("BadLine1").transform.Find("pig").transform.Find("pig").gameObject.SetActive(true);
         }
+        else
+        {
+            card = scrollEndingCards.transform.Find("BadLine1").transform.Find("pig").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("BadLine1").transform.Find("pig").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("BadLine1").transform.Find("pig").transform.Find("pig").gameObject.SetActive(false);
+        }
+
         if (DataController.Instance.endingData.storm == 1)
         {
             card = scrollEndingCards.transform.Find("BadLine1").transform.Find("storm").GetComponent<Image>();
             card.sprite = badCard;
             scrollEndingCards.transform.Find("BadLine1").transform.Find("storm").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("BadLine1").transform.Find("storm").transform.Find("storm").gameObject.SetActive(true);
+        }
+        else
+        {
+            card = scrollEndingCards.transform.Find("BadLine1").transform.Find("storm").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("BadLine1").transform.Find("storm").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("BadLine1").transform.Find("storm").transform.Find("storm").gameObject.SetActive(false);
         }
 
         // J : BadLine2 엔딩카드
@@ -159,6 +222,13 @@ public class MenuScript : MonoBehaviour
             scrollEndingCards.transform.Find("BadLine2").transform.Find("space").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("BadLine2").transform.Find("space").transform.Find("space").gameObject.SetActive(true);
         }
+        else
+        {
+            card = scrollEndingCards.transform.Find("BadLine2").transform.Find("space").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("BadLine2").transform.Find("space").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("BadLine2").transform.Find("space").transform.Find("space").gameObject.SetActive(false);
+        }
 
         // J : HappyLine0 엔딩카드
         if (DataController.Instance.endingData.timeOut == 1)
@@ -168,6 +238,14 @@ public class MenuScript : MonoBehaviour
             scrollEndingCards.transform.Find("HappyLine0").transform.Find("timeOut").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("HappyLine0").transform.Find("timeOut").transform.Find("timeOut").gameObject.SetActive(true);
         }
+        else
+        {
+            card = scrollEndingCards.transform.Find("HappyLine0").transform.Find("timeOut").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("HappyLine0").transform.Find("timeOut").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("HappyLine0").transform.Find("timeOut").transform.Find("timeOut").gameObject.SetActive(false);
+        }
+
         if (DataController.Instance.endingData.two == 1)
         {
             card = scrollEndingCards.transform.Find("HappyLine0").transform.Find("two").GetComponent<Image>();
@@ -175,6 +253,14 @@ public class MenuScript : MonoBehaviour
             scrollEndingCards.transform.Find("HappyLine0").transform.Find("two").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("HappyLine0").transform.Find("two").transform.Find("two").gameObject.SetActive(true);
         }
+        else
+        {
+            card = scrollEndingCards.transform.Find("HappyLine0").transform.Find("two").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("HappyLine0").transform.Find("two").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("HappyLine0").transform.Find("two").transform.Find("two").gameObject.SetActive(false);
+        }
+
         if (DataController.Instance.endingData.AITown == 1)
         {
             card = scrollEndingCards.transform.Find("HappyLine0").transform.Find("AITown").GetComponent<Image>();
@@ -182,12 +268,27 @@ public class MenuScript : MonoBehaviour
             scrollEndingCards.transform.Find("HappyLine0").transform.Find("AITown").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("HappyLine0").transform.Find("AITown").transform.Find("AITown").gameObject.SetActive(true);
         }
+        else
+        {
+            card = scrollEndingCards.transform.Find("HappyLine0").transform.Find("AITown").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("HappyLine0").transform.Find("AITown").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("HappyLine0").transform.Find("AITown").transform.Find("AITown").gameObject.SetActive(false);
+        }
+
         if (DataController.Instance.endingData.people == 1)
         {
             card = scrollEndingCards.transform.Find("HappyLine0").transform.Find("people").GetComponent<Image>();
             card.sprite = happyCard;
             scrollEndingCards.transform.Find("HappyLine0").transform.Find("people").transform.Find("Image").gameObject.SetActive(false);
             scrollEndingCards.transform.Find("HappyLine0").transform.Find("people").transform.Find("people").gameObject.SetActive(true);
+        }
+        else
+        {
+            card = scrollEndingCards.transform.Find("HappyLine0").transform.Find("people").GetComponent<Image>();
+            card.sprite = unknownCard;
+            scrollEndingCards.transform.Find("HappyLine0").transform.Find("people").transform.Find("Image").gameObject.SetActive(true);
+            scrollEndingCards.transform.Find("HappyLine0").transform.Find("people").transform.Find("people").gameObject.SetActive(false);
         }
     }
 

@@ -9,5 +9,4 @@ public class SettingData
 {
     public float BackgroundSound = 1;  // J : 배경음악
     public float EffectSound = 1;   // J : 효과음악
-    public int firstGame = 1;   // J : 첫 게임 여부
 }

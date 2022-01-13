@@ -11,5 +11,7 @@ public class EndingData
     public int poisonBerry, error, electric, pig, storm, space = 0;     // J : 스페셜 이벤트 엔딩
     public int timeOut, two, AITown, people = 0;                        // J : 해피엔딩
 
+    public int firstGame = 1;   // J : 첫 게임 여부
+
     public int currentEndingCode = 0;
 }

@@ -144,6 +144,9 @@ public class ScreenManager : MonoBehaviour
         if (day < 10) calender.text = "day " + "0" + day.ToString();
         else calender.text = "day " + day.ToString();
 
+        // N : 90일 이후
+        if (day > 90) endingManager.timeOutEnding();
+
         // J : 스페셜 이벤트 주기마다 스페셜 이벤트 발동
         if (day % gameManager.specialEventCoolTimeDay == 0)
             specialManager.StartCoroutine("Check");
@@ -154,10 +157,7 @@ public class ScreenManager : MonoBehaviour
             hungerStat.fCurrValue = hungerStat.fCurrValue + farmLv.fCurrValue - 10;
             happyStat.fCurrValue = happyStat.fCurrValue + heartLv.fCurrValue - 5;
             temperatureStat.fCurrValue = temperatureStat.fCurrValue + craftLv.fCurrValue - 10;
-        }
-
-        // N : 90일 이후
-        if (day > 90) endingManager.timeOutEnding();
+        }        
 
         // N : 엔딩 처리
         if (hungerStat.fCurrValue <= 0) endingManager.BadEnding(0);
@@ -172,7 +172,8 @@ public class ScreenManager : MonoBehaviour
 
     public void timeFly()
     {
-        if(!settingManager.nowSetting) dayTime++;
+        // J : 설정하는 중이나 스페셜 이벤트 중에는 시간이 흐르지 않음
+        if(!settingManager.nowSetting && !specialManager.special) dayTime++;
 
         if (dayTime >= gameManager.day) { dayTime = 0; dayAfter(); }
         else Invoke("timeFly", 1);

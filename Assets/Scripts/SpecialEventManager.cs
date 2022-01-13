@@ -26,8 +26,9 @@ public class SpecialEventManager : MonoBehaviour
     int specialID;                      // J : TalkManager로부터 talkData를 가져오기 위한 변수
     int firstRandomNum;                 // J : 랜덤 스페셜 이벤트를 위한 변수1 (0 : 선택지 2개, 1: 선택지 3개)
     int secondRandomNum;                // J : 랜덤 스페셜 이벤트를 위한 변수2
-    int select;
-    int endingCode;
+    int select;                         // J : 몇번째 선택지를 클릭했는지
+    int endingCode;                     // J : 배드엔딩 코드
+    List<int> beforeRandomNum;          // J : 지금까지 실행한 스페셜 이벤트 리스트
 
 
     // C : 스페셜이벤트 발생 직전, 플레이어 머리 위에 '!' 오브젝트를 띄워주기 위한 변수
@@ -49,11 +50,28 @@ public class SpecialEventManager : MonoBehaviour
         else 
         {
             specialTalk = true;  // J : Jump키를 눌렀을 때 object scan을 할 수 없게 함
-            firstRandomNum = rand.Next(2);      // J : 0-1까지의 난수 생성 (0 : 선택지 2개, 1: 선택지 3개)
-            secondRandomNum = rand.Next(1, 5);  // J : 1-4까지의 난수 생성
-
-            specialID = 10000 + 10 * firstRandomNum + secondRandomNum; // J : talkData를 갖고 오기 위해 talkID 계산
-            Debug.Log("specialID : " + specialID);
+            int currentID; bool different = true;
+            while (true)    // J : 이전에 발생했던 스페셜 이벤트는 발생하지 않음
+            {
+                firstRandomNum = rand.Next(2);      // J : 0-1까지의 난수 생성 (0 : 선택지 2개, 1: 선택지 3개)
+                secondRandomNum = rand.Next(1, 5);  // J : 1-4까지의 난수 생성
+                currentID = 10 * firstRandomNum + secondRandomNum;
+                foreach (int beforeID in beforeRandomNum)
+                {
+                    different = true;
+                    if (currentID == beforeID)  // J : 이전에 발생했던 스페셜 이벤트인 경우
+                    {
+                        different = false;
+                        break;
+                    }
+                }
+                if (!different) // J : 난수 다시 생성
+                    continue;
+                // J : 이전에 발생하지 않았던 스페셜 이벤트인 경우
+                beforeRandomNum.Add(currentID); // J : 지금까지 실행한 스페셜 이벤트 리스트에 추가
+                specialID = 10000 + currentID; // J : talkData를 갖고 오기 위해 specialID 계산
+                break;
+            }
 
             StartCoroutine("TalkAfterAlarm");   // C : 스페셜이벤트 발생 알람 후 대화창 활성화 및 대화 시작
         }
@@ -253,6 +271,8 @@ public class SpecialEventManager : MonoBehaviour
         selectButton.Add(selectButton0);
         selectButton.Add(selectButton1);
         selectButton.Add(selectButton2);
+
+        beforeRandomNum = new List<int>();
     }
 
     // Update is called once per frame
@@ -271,6 +291,9 @@ public class SpecialEventManager : MonoBehaviour
     // C : 스페셜이벤트 발생 알람 후 재난 발생
     IEnumerator DisasterAfterAlarm()
     {
+        // K : 스페셜 이벤트 효과음 발생
+        effect.Play("SpecialEventEffect");
+
         playerAction.StartCoroutine("OnAlarm");
         yield return new WaitForSeconds(2.2f);      // C : 알람 애니메이션 끝난 후
         effect.Stop("SpecialEventEffect");

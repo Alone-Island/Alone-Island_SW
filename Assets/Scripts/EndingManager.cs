@@ -39,7 +39,7 @@ public class EndingManager : MonoBehaviour
     {
         endingCode = code;
         manager.isEndingShow = true;    // J : ending 보여주는 중
-        DataController.Instance.settingData.firstGame = 0;
+        DataController.Instance.endingData.firstGame = 0;
         bgm.Stop();     // K : 배경음악 끄기 
         talkPanel.SetActive(true);  // J : 대화창 활성화
         BadEndingTalk();    // J : 배드엔딩 대화 시작
@@ -136,7 +136,7 @@ public class EndingManager : MonoBehaviour
         DataController.Instance.SaveSettingData();
         DataController.Instance.SaveEndingData();
 
-        fadeManager.GameFadeOut(LoadHaapyScene); // J : 페이드아웃
+        fadeManager.GameFadeOut(LoadHappyScene); // J : 페이드아웃
     }
 
     public void successTwo()
@@ -148,7 +148,7 @@ public class EndingManager : MonoBehaviour
         DataController.Instance.SaveSettingData();
         DataController.Instance.SaveEndingData();
 
-        fadeManager.GameFadeOut(LoadHaapyScene); // J : 페이드아웃
+        fadeManager.GameFadeOut(LoadHappyScene); // J : 페이드아웃
     }
 
     public void successAI()
@@ -160,7 +160,7 @@ public class EndingManager : MonoBehaviour
         DataController.Instance.SaveSettingData();
         DataController.Instance.SaveEndingData();
 
-        fadeManager.GameFadeOut(LoadHaapyScene); // J : 페이드아웃
+        fadeManager.GameFadeOut(LoadHappyScene); // J : 페이드아웃
     }
 
     public void successPeople()
@@ -172,11 +172,11 @@ public class EndingManager : MonoBehaviour
         DataController.Instance.SaveSettingData();
         DataController.Instance.SaveEndingData();
 
-        fadeManager.GameFadeOut(LoadHaapyScene); // J : 페이드아웃
+        fadeManager.GameFadeOut(LoadHappyScene); // J : 페이드아웃
     }
 
     // J : 페이드아웃 끝나면 호출
-    public void LoadHaapyScene()
+    public void LoadHappyScene()
     {
         SceneManager.LoadScene("HappyEnding");
     }
